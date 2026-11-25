@@ -126,7 +126,7 @@ footer{border-top:1px solid var(--ln);text-align:center;color:var(--mut);font-si
 @media(max-width:600px){.pmut{font-size:12.5px}.pmut th,.pmut td{padding:4px 4px}.pmut th.amb{width:30%}.pmut td.gr{font-size:11.5px}.pmut td{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}.pmut .lg{display:none}.pmut .shg{display:inline}}
 
 .intro{position:fixed;inset:0;z-index:200;background:radial-gradient(circle at 50% 38%,#1c2630 0,#0d1116 70%);color:#eef1f4;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;transition:opacity .45s}
-.intro[hidden]{display:none}.intro.out{opacity:0}
+.intro[hidden]{display:none}.intro{overflow:hidden}.intro.out{opacity:0}
 .intro svg{width:min(78vw,320px);height:auto;overflow:visible}
 .iw{fill:none;stroke:#33414e;stroke-width:5;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 1s .15s ease-out forwards}
 .ic{fill:none;stroke:#ffd23f;stroke-width:5;stroke-linecap:round;stroke-dasharray:22 140;stroke-dashoffset:0;opacity:0;animation:flow 1.1s 1s linear infinite,fade .3s 1s forwards;filter:drop-shadow(0 0 5px #ffd23f)}
@@ -136,6 +136,7 @@ footer{border-top:1px solid var(--ln);text-align:center;color:var(--mut);font-si
 .it{opacity:0;transform:translateY(10px);animation:rise .6s 1.35s ease-out forwards}
 .it h1{font-size:clamp(34px,9vw,52px);color:#fff;margin:18px 0 6px}
 .it p{margin:0;color:#9fb0c0;font-size:16px}
+.icp{position:absolute;left:0;right:0;bottom:max(22px,env(safe-area-inset-bottom));margin:0;font-size:14px;letter-spacing:.3px;color:#7f91a2;opacity:0;animation:fade .8s 1.6s forwards}
 .cta{opacity:0;transform:translateY(24px);margin-top:28px;width:min(92vw,380px);background:#151c23;border:1px solid #2a3540;border-radius:20px;padding:20px;animation:rise .6s 2s ease-out forwards}
 .cta>b{display:block;font:600 22px "Barlow Condensed",sans-serif;color:#fff}
 .cta p{color:#9fb0c0;font-size:15px;margin:6px 0 14px}
@@ -240,6 +241,7 @@ html{scroll-padding-top:72px}
   <path class="ib" d="M97,30 L76,65 L89,65 L82,93 L106,55 L93,55 Z"/></svg>
  <div class="it"><h1>Proyecto eléctrico</h1><p>Guía paso a paso · Categoría III · ERSeP Córdoba</p></div>
  <div class="cta" id="cta"></div>
+ <p class="icp">© Desarrollado por Jonás Silva</p>
 </div>
 <div class="ov" id="ov" hidden role="status" aria-live="polite"><div class="ovb">
  <svg viewBox="0 0 180 120" aria-hidden="true"><circle class="glow" cx="90" cy="60" r="34"/>
@@ -249,7 +251,7 @@ html{scroll-padding-top:72px}
  <b id="ovT">Preparando el PDF…</b><span id="ovS">Calculando el proyecto</span>
 </div></div>
 
-<footer class="band">Desarrollado por © Silva Jonás</footer>
+<footer class="band">© Desarrollado por Jonás Silva</footer>
 
 <script>
 {
@@ -906,7 +908,7 @@ function ctaHTML(){
  return `<b>Instalá la app en tu celular</b><p>Abrí el menú del navegador y elegí instalar:</p><ol><li>Tocá <span class="k">⋮</span> arriba a la derecha.</li><li>Elegí <b>Instalar app</b> o <b>Agregar a la pantalla principal</b>.</li></ol><button class="bn" id="noInst" style="color:#fff">Entendido</button>`}
 function closeIntro(){const el=$('intro');el.classList.add('out');document.body.style.overflow='';setTimeout(()=>{el.hidden=true;el.classList.remove('out')},450)}
 function showIntro(full){const el=$('intro');el.hidden=false;document.body.style.overflow='hidden';el.querySelector('svg').style.display=full?'':'none';el.querySelector('.it').style.display=full?'':'none';
- const cta=$('cta');cta.style.animationDelay=full?'2s':'0s';
+ const cta=$('cta');cta.style.display='';cta.style.animationDelay=full?'2s':'0s';
  const fill=()=>{cta.innerHTML=ctaHTML();const di=$('doInst');if(di)di.onclick=async()=>{const ev=window.__bip;if(!ev)return;ev.prompt();try{const r=await ev.userChoice;if(r&&r.outcome==='accepted'){window.__bip=null;closeIntro()}}catch(_){}};$('noInst').onclick=()=>{lss('instLater',Date.now());closeIntro()}};
  fill();if(!window.__bip&&!isIOS){const t=setTimeout(fill,2500);document.addEventListener('bipready',()=>{clearTimeout(t);fill()},{once:true})}}
 if(STANDALONE&&location.protocol!=='file:'){
@@ -914,7 +916,7 @@ if(STANDALONE&&location.protocol!=='file:'){
  $('bInst').addEventListener('click',()=>showIntro(false));
  window.addEventListener('appinstalled',()=>{window.__bip=null;refreshBtn();if(!$('intro').hidden)closeIntro();toast('¡Listo! La app quedó instalada.')});
  if(!isInstalled()&&!lsg('introSeen')){lss('introSeen','1');showIntro(true)}
- else if(isInstalled()&&!lsg('splashInst')){lss('splashInst','1');showIntro(true);$('cta').innerHTML='';setTimeout(closeIntro,2600)}
+ else{showIntro(true);$('cta').innerHTML='';$('cta').style.display='none';setTimeout(closeIntro,5000)}
 }
 renderIdx();all();openHash();setMode('sel');
 if(STANDALONE){const n=document.createElement('p');n.className='note';n.textContent='En esta instalación los clientes y sus PDF se guardan en este dispositivo y navegador. Para no perderlos, no borres los datos del navegador.';$('cliSt').after(n);if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('sw.js').catch(()=>{})}
