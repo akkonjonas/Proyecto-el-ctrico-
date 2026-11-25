@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#16191d">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Proyecto eléctrico paso a paso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: instructor de taller que explica en el pizarrón, claro y ordenado
+   IDEA: la carpeta del proyecto: índice de 19 pasos y cada paso es una solapa que se abre
+   PICTURE: esquema unifilar RDD → medidor → TPA → CS → TPU → circuitos + PAT, cada parte lleva a su paso
+   COLOUR and TYPE: blanco de plano, grafito, colores de conductores (fase marrón, neutro celeste, PE verde-amarillo); Barlow Condensed + Barlow
+   LAYOUT: cabecera con índice y unifilar; pasos desplegables con calculadora; trifásico, glosario y resumen al final */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#121518);--ink:light-dark(#16191d,#eef1f4);--mut:light-dark(#59626c,#a3adb8);--p2:light-dark(#f2f4f6,#1b2024);--ln:light-dark(#d8dde2,#2e353c);--fase:light-dark(#8b4a2b,#e09a6e);--neu:light-dark(#1f78bd,#6db5ee);--pe:light-dark(#2b8a3e,#69c47c);--pey:light-dark(#c99a00,#e8c13a);--ok:light-dark(#2b8a3e,#69c47c);--bad:light-dark(#c92a2a,#ff8787)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Barlow,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Barlow Condensed",Barlow,sans-serif;line-height:1.05;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,6vw,50px);font-weight:700}
+h2{font-size:26px;font-weight:600}
+h3{font-size:19px;font-weight:600;margin:18px 0 6px}
+.band{padding:clamp(22px,4vw,52px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+.hero{display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.hero{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:start}}
+.lead{font-size:17px;color:var(--mut);max-width:62ch;margin:12px 0 0}
+.uni{width:100%;max-height:440px;display:block}
+.uni a{cursor:pointer}.uni a:hover rect,.uni a:focus rect{stroke-width:3}
+.uni text{font:600 13px Barlow,sans-serif;fill:var(--ink)}.uni .s{font:500 11px Barlow,sans-serif;fill:var(--mut)}
+.idx{margin-top:22px;border:1px solid var(--ln);border-radius:14px;padding:6px 16px 14px}
+.idx h2{margin:12px 0 4px}
+.ph{font:600 13px Barlow,sans-serif;color:var(--fase);margin:12px 0 2px}
+.idx ol{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.idx a{display:flex;gap:10px;align-items:center;min-height:40px;padding:4px 0;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ln)}
+.idx a b{font:700 18px "Barlow Condensed",sans-serif;color:var(--neu);width:2em;flex:none}
+.idx a.done::after{content:"✓";margin-left:auto;color:var(--ok);font-weight:700}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0}
+.btn{font:600 15px Barlow,sans-serif;min-height:44px;padding:8px 16px;border-radius:8px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.l{background:transparent;color:var(--ink)}
+html{scroll-padding-top:12px;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+details.step{border:1px solid var(--ln);border-radius:14px;margin:0 0 12px;background:var(--bg)}
+details.step>summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:center;padding:14px 16px;min-height:56px}
+details.step>summary::-webkit-details-marker{display:none}
+summary .n{font:700 34px/1 "Barlow Condensed",sans-serif;color:var(--fase);width:1.5em;flex:none;text-align:center}
+summary .t{flex:1}
+summary .t h2{font-size:clamp(20px,4.5vw,24px)}
+summary .t small{display:block;color:var(--mut);font-size:14px}
+summary .ar{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--ln);display:grid;place-items:center;font-weight:700;transition:transform .2s}
+details[open]>summary .ar{transform:rotate(90deg)}
+@media(prefers-reduced-motion:reduce){summary .ar{transition:none}}
+details.step.done>summary .n{color:var(--ok)}
+.body{padding:0 16px 18px;border-top:1px solid var(--ln)}
+.cols{display:grid;gap:22px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.cols{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+.txt p,.txt li{max-width:68ch}.txt ol,.txt ul{padding-left:22px}
+.fx{background:var(--p2);border-left:4px solid var(--neu);border-radius:8px;padding:12px 16px;margin:12px 0}
+.fx .f{font:600 19px/1.4 "Barlow Condensed",sans-serif;overflow-wrap:anywhere}
+.fx dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:8px 0 0;font-size:15px}
+.fx dt{font-weight:600}.fx dd{margin:0;color:var(--mut)}
+.ex{font-size:15px;border:1px dashed var(--ln);border-radius:8px;padding:10px 14px;color:var(--mut)}
+.ex b{color:var(--ink)}.tag{font-weight:600;color:var(--neu)}
+.calc{background:var(--p2);border-radius:14px;padding:16px;align-self:start}
+.calc h3{margin-top:0}
+label{display:block;font-size:14px;font-weight:500;margin:8px 0 4px}
+input,select{font:16px Barlow,sans-serif;width:100%;min-height:44px;padding:8px 10px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--ink)}
+input:focus,select:focus,button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--neu);outline-offset:2px}
+.out{font:700 clamp(26px,5vw,38px)/1.1 "Barlow Condensed",sans-serif;margin:6px 0}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.kv{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--ln);padding:6px 0;font-size:15px}
+.kv span:last-child{font-weight:600;text-align:right}
+.okk{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}
+.crow{display:grid;grid-template-columns:repeat(auto-fit,minmax(84px,1fr));gap:8px;align-items:end;padding:10px 0;border-bottom:1px solid var(--ln)}
+.crow .w2{grid-column:span 2}
+.x{min-width:44px;padding:8px}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:15px}
+.chk input{width:22px;min-height:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--pe)}
+.chk label{margin:0;font-weight:400;font-size:15px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+th,td{border-bottom:1px solid var(--ln);padding:6px 8px;text-align:left;vertical-align:top}
+th{font-weight:600;background:var(--p2)}td.n,th.n{text-align:right;white-space:nowrap}
+pre{white-space:pre-wrap;background:var(--p2);padding:12px;border-radius:8px;font-size:14px}
+.note{font-size:14px;color:var(--mut)}
+.sec{margin-top:28px}
+footer{border-top:1px solid var(--ln);text-align:center;color:var(--mut);font-size:14px}
+.ed{display:flex;flex-direction:column;gap:8px}
+.ed.full{position:fixed;inset:0;z-index:50;background:var(--bg);padding:8px;overflow:auto}
+.tb{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tb button{font:600 14px Barlow,sans-serif;min-height:44px;min-width:44px;padding:6px 12px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);cursor:pointer}
+.tb button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tb select{width:auto;min-width:150px}
+.pal{display:flex;gap:6px;overflow-x:auto;padding:4px 0 8px;touch-action:pan-x}
+.pal .gl{flex:none;align-self:center;font:600 12px Barlow,sans-serif;color:var(--fase);writing-mode:vertical-rl;transform:rotate(180deg)}
+.pal button{flex:none;width:76px;min-height:72px;border:1px solid var(--ln);border-radius:10px;background:#fff;color:#222;font:500 11px/1.15 Barlow,sans-serif;padding:4px;cursor:grab;touch-action:pan-x;user-select:none;-webkit-user-select:none}
+.pal button svg{display:block;margin:0 auto 2px;width:40px;height:34px;pointer-events:none}
+.cv{width:100%;height:62vh;min-height:360px;border:1px solid var(--ln);border-radius:12px;background:#fff;touch-action:none;display:block;user-select:none;-webkit-user-select:none}
+.ed.full .cv{flex:1;height:auto;min-height:300px}
+.ed.full>*:not(.cv){flex:none}.ed.full .hint#hint{display:none}.pal button{flex-shrink:0}
+.hint{font-size:14px;color:var(--mut);margin:0}
+.props{background:var(--p2);border-radius:12px;padding:12px}
+.props:empty{display:none}
+.props .row{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
+.ghost{position:fixed;z-index:60;pointer-events:none;width:56px;height:56px;background:#fff;border:2px solid var(--neu);border-radius:10px;display:grid;place-items:center;transform:translate(-50%,-50%)}
+.pmu{margin:10px 0}.pmut .shg{display:none}.pmuh{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.pmuh b{font:700 20px "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.3px}
+.gsel{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:14px;color:var(--mut)}
+.gsel button{font:600 13px Barlow,sans-serif;min-height:36px;padding:4px 10px;border-radius:999px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);cursor:pointer}
+.gsel button[aria-pressed=true]{background:var(--neu);border-color:var(--neu);color:#fff}
+.pmug{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.pmut{border-collapse:collapse;width:100%;font-size:14px;line-height:1.3;margin:0}
+.pmut th,.pmut td{border:1px solid light-dark(#9aa4ae,#46505a);padding:5px 7px;text-align:center;vertical-align:middle}
+.pmut thead th{background:light-dark(#e6ebf0,#232a31);font-weight:700}
+.pmut th.amb{text-align:left;font-weight:500;background:transparent;width:34%}
+.pmut td.gr{white-space:nowrap;color:var(--mut)}
+.pmut .sm{font-size:12px;color:var(--mut)}.pmut .ip{font-size:12px;font-weight:700;color:#c92a2a}
+.pmut tr.hl td.gr{background:var(--neu);color:#fff;font-weight:600}
+.pmu.on .pmut tr:not(.hl) td.gr{opacity:.45}
+@media(min-width:1100px){.pmug{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}}
+@media(max-width:600px){.pmut{font-size:12.5px}.pmut th,.pmut td{padding:4px 4px}.pmut th.amb{width:30%}.pmut td.gr{font-size:11.5px}.pmut td{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}.pmut .lg{display:none}.pmut .shg{display:inline}}
+.big{font-size:18px;min-height:56px;padding:12px 24px;width:100%;max-width:420px}
+.tabs{position:sticky;top:0;z-index:20;display:flex;gap:4px;padding:8px max(5vw,16px);background:var(--bg);border-bottom:1px solid var(--ln)}
+.tabs button{flex:1;max-width:220px;font:600 16px Barlow,sans-serif;min-height:46px;border:0;border-radius:10px;background:transparent;color:var(--mut);cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--ink);color:var(--bg)}
+.tabs .cnt[hidden]{display:none}.tabs .cnt{display:inline-block;min-width:22px;margin-left:6px;padding:0 6px;border-radius:999px;background:var(--fase);color:#fff;font-size:13px;line-height:20px}
+html{scroll-padding-top:72px}
+.cli{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.card{border:1px solid var(--ln);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.card h3{margin:0;font-size:22px}
+.card .meta{font-size:14px;color:var(--mut)}
+.card .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.card .acts a,.card .acts button{font:600 14px Barlow,sans-serif;min-height:44px;padding:8px 12px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;cursor:pointer}
+.card .acts .pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.empty{border:1px dashed var(--ln);border-radius:14px;padding:28px;text-align:center;color:var(--mut)}
+.srch{font-size:17px;min-height:50px;max-width:520px}
+.dpad{display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:4px;justify-content:start}
+.dpad button{font:700 20px Barlow,sans-serif;border:1px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--ink);cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.dpad .c{font-size:12px;color:var(--mut);border:0;background:transparent}
+.mv{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;margin-top:10px}
+.ov{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:rgba(10,14,18,.72);backdrop-filter:blur(3px)}
+.ov[hidden]{display:none}
+.ovb{background:#0f1419;color:#eef1f4;border-radius:20px;padding:26px 30px;width:min(88vw,340px);text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.ovb svg{width:180px;height:120px;display:block;margin:0 auto 10px}
+.ovb b{font:600 22px "Barlow Condensed",sans-serif;display:block}
+.ovb span{font-size:14px;color:#9fb0c0}
+.wire{fill:none;stroke:#2a3540;stroke-width:4;stroke-linecap:round}
+.cur{fill:none;stroke:#ffd23f;stroke-width:4;stroke-linecap:round;stroke-dasharray:18 110;animation:flow 1.1s linear infinite;filter:drop-shadow(0 0 4px #ffd23f)}
+.cur.b{animation-delay:-.55s}
+.bolt{fill:#ffd23f;transform-origin:90px 60px;animation:pulse 1.1s ease-in-out infinite}
+.glow{fill:#ffd23f;opacity:.18;transform-origin:90px 60px;animation:halo 1.1s ease-in-out infinite}
+@keyframes flow{to{stroke-dashoffset:-128}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.12);opacity:1}}
+@keyframes halo{0%,100%{transform:scale(.7);opacity:.08}50%{transform:scale(1.25);opacity:.25}}
+@media(prefers-reduced-motion:reduce){.cur,.bolt,.glow{animation:none}}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;color:var(--mut)}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<nav class="tabs" role="tablist" aria-label="Secciones"><button role="tab" id="tProy" aria-selected="true" data-tab="proy">Proyecto</button><button role="tab" id="tCli" aria-selected="false" data-tab="cli">Clientes<span class="cnt" id="cliN" hidden></span></button></nav>
+<div id="vProy">
+<header class="band"><div class="wrap hero">
+ <div>
+  <h1>Proyecto eléctrico, paso a paso</h1>
+  <p class="lead">Método del curso de Electricidad Domiciliaria (Categoría III, ERSeP Córdoba), según la AEA 90364-7-770. Sigue los PDF 21 "Primer proyecto" y 22 "Segundo proyecto". Abrí cada paso, leé qué es, para qué sirve y cómo se hace, y cargá los datos de tu proyecto impreso.</p>
+  <nav class="idx" aria-label="Índice de pasos">
+   <h2>Índice</h2>
+   <div id="idx"></div>
+  </nav>
+  <div class="tools"><button class="btn l" id="openAll">Abrir todos</button><button class="btn l" id="closeAll">Cerrar todos</button></div>
+ </div>
+ <svg class="uni" viewBox="0 0 330 440" role="img" aria-label="Esquema unifilar de la vivienda del curso">
+  <line x1="90" y1="34" x2="90" y2="330" stroke="var(--fase)" stroke-width="4"/>
+  <line x1="96" y1="34" x2="96" y2="330" stroke="var(--neu)" stroke-width="3"/>
+  <a href="#p18"><rect x="45" y="8" width="96" height="28" rx="6" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/><text x="93" y="27" text-anchor="middle">RDD · red</text></a>
+  <a href="#p18"><rect x="45" y="56" width="96" height="40" rx="6" fill="var(--p2)" stroke="var(--ink)" stroke-width="2"/><text x="93" y="74" text-anchor="middle">Medidor</text><text class="s" x="93" y="89" text-anchor="middle">monofásico kWh</text></a>
+  <a href="#p15"><rect x="45" y="116" width="96" height="40" rx="6" fill="var(--p2)" stroke="var(--ink)" stroke-width="2"/><text x="93" y="134" text-anchor="middle">TPA</text><text class="s" x="93" y="149" text-anchor="middle">ITM C2×25 A</text></a>
+  <a href="#p15"><rect x="160" y="176" width="150" height="40" rx="6" fill="var(--bg)" stroke="var(--fase)" stroke-width="2"/><text x="235" y="194" text-anchor="middle">Circuito seccional</text><text class="s" x="235" y="209" text-anchor="middle">IRAM 2178 · 2×4 mm² enterrado</text></a>
+  <line x1="96" y1="196" x2="160" y2="196" stroke="var(--ln)" stroke-dasharray="3 3"/>
+  <a href="#p18"><rect x="30" y="236" width="126" height="56" rx="6" fill="var(--p2)" stroke="var(--ink)" stroke-width="2"/><text x="93" y="256" text-anchor="middle">TPU · IP41</text><text class="s" x="93" y="271" text-anchor="middle">ID 2×25 A 30 mA</text><text class="s" x="93" y="284" text-anchor="middle">PIA por circuito</text></a>
+  <line x1="40" y1="330" x2="300" y2="330" stroke="var(--fase)" stroke-width="4"/>
+  <line x1="70" y1="330" x2="70" y2="366" stroke="var(--fase)" stroke-width="3"/><line x1="150" y1="330" x2="150" y2="366" stroke="var(--fase)" stroke-width="3"/><line x1="230" y1="330" x2="230" y2="366" stroke="var(--fase)" stroke-width="3"/>
+  <a href="#p7"><rect x="40" y="366" width="60" height="30" rx="6" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/><text x="70" y="386" text-anchor="middle">IUG</text></a>
+  <a href="#p8"><rect x="120" y="366" width="60" height="30" rx="6" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/><text x="150" y="386" text-anchor="middle">TUG</text></a>
+  <a href="#p11"><rect x="200" y="366" width="60" height="30" rx="6" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/><text x="230" y="386" text-anchor="middle">ACU</text></a>
+  <text class="s" x="150" y="420" text-anchor="middle">Circuitos terminales</text>
+  <a href="#p15"><rect x="204" y="250" width="100" height="28" rx="6" fill="var(--bg)" stroke="var(--pe)" stroke-width="2"/><text x="254" y="269" text-anchor="middle">PAT · jabalina</text></a>
+  <line x1="156" y1="268" x2="204" y2="264" stroke="var(--pe)" stroke-width="3" stroke-dasharray="8 4"/>
+  <line x1="156" y1="268" x2="204" y2="264" stroke="var(--pey)" stroke-width="3" stroke-dasharray="4 8" stroke-dashoffset="-6"/>
+  <line x1="254" y1="278" x2="254" y2="300" stroke="var(--pe)" stroke-width="3"/>
+  <line x1="240" y1="300" x2="268" y2="300" stroke="var(--pe)" stroke-width="3"/><line x1="245" y1="307" x2="263" y2="307" stroke="var(--pe)" stroke-width="3"/><line x1="250" y1="314" x2="258" y2="314" stroke="var(--pe)" stroke-width="3"/>
+  <text class="s" x="200" y="40">Fase</text><line x1="240" y1="36" x2="300" y2="36" stroke="var(--fase)" stroke-width="4"/>
+  <text class="s" x="200" y="60">Neutro</text><line x1="240" y1="56" x2="300" y2="56" stroke="var(--neu)" stroke-width="3"/>
+  <text class="s" x="200" y="80">PE</text><line x1="240" y1="76" x2="300" y2="76" stroke="var(--pe)" stroke-width="3" stroke-dasharray="8 4"/>
+ </svg>
+</div></header>
+
+<main class="band" style="padding-top:0"><div class="wrap" id="steps"></div></main>
+</div>
+<section class="band" id="vCli" hidden><div class="wrap">
+ <h1>Clientes</h1>
+ <p class="lead">Cada proyecto que guardás queda acá con su PDF. Buscalo por nombre para volver a enviarlo, imprimirlo o seguir editándolo.</p>
+ <div class="row" style="margin:18px 0 6px;align-items:end"><div><label for="q">Buscar por nombre</label><input id="q" class="srch" type="search" placeholder="Nombre del cliente" autocomplete="off"></div><div><button class="btn l" id="bNew" style="width:100%">+ Proyecto nuevo</button></div></div>
+ <p class="note" id="cliSt"></p>
+ <div class="cli" id="cliL"></div>
+</div></section>
+<div class="ov" id="ov" hidden role="status" aria-live="polite"><div class="ovb">
+ <svg viewBox="0 0 180 120" aria-hidden="true"><circle class="glow" cx="90" cy="60" r="34"/>
+  <path class="wire" d="M8,60 C40,20 60,100 90,60 S140,20 172,60"/><path class="cur" d="M8,60 C40,20 60,100 90,60 S140,20 172,60"/><path class="cur b" d="M8,60 C40,20 60,100 90,60 S140,20 172,60"/>
+  <circle cx="8" cy="60" r="5" fill="#2a3540"/><circle cx="172" cy="60" r="5" fill="#2a3540"/>
+  <path class="bolt" d="M96,34 L78,64 L89,64 L83,88 L103,56 L92,56 Z"/></svg>
+ <b id="ovT">Preparando el PDF…</b><span id="ovS">Calculando el proyecto</span>
+</div></div>
+
+<footer class="band">Desarrollado por © Silva Jonás</footer>
+
+<script>
+{
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const f1=(n,d=1)=>Number.isFinite(n)?n.toLocaleString('es-AR',{maximumFractionDigits:d,minimumFractionDigits:d}):'—';
+const sx=s=>String(s).replace('.',',');
+
+/* ===== Datos de las tablas del curso ===== */
+const GE=[{n:'Mínimo',hasta:60,c:2,v:[[1,1,0]]},{n:'Medio',hasta:130,c:3,v:[[2,1,0],[1,2,0]]},{n:'Elevado',hasta:200,c:5,v:[[2,3,0],[3,2,0]]},{n:'Superior',hasta:Infinity,c:6,v:[[2,3,1],[3,2,1]]}];
+const AMB={est:'Estar, comedor, escritorio',dor:'Dormitorio',coc:'Cocina',ban:'Baño',ves:'Vestíbulo, garaje, hall cubierto',pas:'Pasillo cubierto',lav:'Lavadero',bal:'Balcón, galería, hall semicubierto'};
+const CIRC={IUG:{n:'Iluminación de uso general',sec:1.5,pe:2.5,In:10,max:15,curva:'B',icc:3000},IUGT:{n:'IUG con tomas (punto y toma)',sec:2.5,pe:2.5,In:15,max:15,curva:'C',icc:4500},TUG:{n:'Tomacorrientes de uso general',sec:2.5,pe:2.5,In:15,max:20,curva:'C',icc:4500},TUE:{n:'Tomacorrientes de uso especial',sec:2.5,pe:2.5,In:20,max:null,curva:'C',icc:4500},ACU:{n:'Alimentación a carga única',sec:2.5,pe:2.5,In:10,max:null,curva:'C',icc:4500}};
+const IZ22={1.5:15,2.5:21};
+const INS=[10,15,20,25,32,40];
+const CS2178={4:{aire:25,cano:20,ent:32},6:{aire:32,cano:25,ent:40}};
+const CAB={1:4.91,1.5:9.62,2.5:13.85,4:18.10,6:31.17,10:45.36,16:60.82};
+const CAN=[['CSP 16',98],['CL 16',102],['CSP 19',158],['CL 19',164],['CSP 22',213],['CL 22',223],['CSP 25',293],['CL 25',309],['CSP 32',509],['CL 32',527],['CSP 38',767],['CL 38',814]];
+const ksOf=n=>n<=2?1:n<=4?.8:n===5?.7:.6;
+
+/* ===== Estado (ejemplo: Segundo proyecto, PDF 22) ===== */
+let S={nom:'Vivienda curso (2.º proyecto)',
+ z:[{n:'Dormitorios 1 y 2',l:4,a:3,semi:0},{n:'Dormitorio 2',l:5,a:3,semi:0},{n:'Dorm. 3, pasillo, baño, cocina, estar',l:10.4,a:3.5,semi:0},{n:'Hall',l:3,a:1.4,semi:1}],
+ am:[{t:'est',n:'Estar comedor',m:10.24},{t:'dor',n:'Dormitorio 1',m:12},{t:'dor',n:'Dormitorio 2',m:15},{t:'dor',n:'Dormitorio 3',m:15.4},{t:'pas',n:'Pasillo',m:1.2},{t:'bal',n:'Hall semicubierto',m:3},{t:'coc',n:'Cocina',m:0},{t:'ban',n:'Baño',m:0}],
+ timbre:1,
+ c:[{t:'IUG',n:'C1 IUG',b:11,va:60},{t:'TUG',n:'C2 TUG 1',b:8,va:2200},{t:'TUG',n:'C3 TUG 2',b:7,va:2200},{t:'ACU',n:'C4 ACU estar',b:1,va:1250}],
+ can:'ent',r10:1,L:10,rho:.017,cn:'CL 22',k15:2,k25:3,k4:0,k6:0,tS:6000,tL:20,tSec:4,ck:{},op:{},
+ pProp:'',pUbic:'',pInst:'',pMat:'',pFecha:new Date().toLocaleDateString('es-AR'),
+ plan:{items:[],walls:[],cables:[],nid:1}};
+let R={};
+S.z[0]={n:'Dormitorio 1',l:4,a:3,semi:0};
+const DEF=JSON.stringify(S);
+try{const g=JSON.parse(localStorage.getItem('proyElec2'));if(g&&g.c)S=Object.assign(S,g)}catch(e){}
+const save=()=>{try{localStorage.setItem('proyElec2',JSON.stringify(S))}catch(e){}};
+
+/* ===== Helpers de contenido ===== */
+const inp=(k,l,type='number')=>`<label for="i_${k}">${l}</label><input id="i_${k}" data-k="${k}" type="${type}" ${type==='number'?'step="any" inputmode="decimal"':''}>`;
+const fx=(f,vars)=>`<div class="fx">${[].concat(f).map(x=>`<div class="f">${x}</div>`).join('')}${vars?`<dl>${vars.map(v=>`<dt>${v[0]}</dt><dd>${v[1]}</dd>`).join('')}</dl>`:''}</div>`;
+const chk=(id,t)=>`<div class="chk"><input type="checkbox" id="k_${id}" data-ck="${id}"><label for="k_${id}">${t}</label></div>`;
+const kv=(a,b)=>`<div class="kv"><span>${a}</span><span>${b}</span></div>`;
+const ok=(c,t1,t2)=>c?`<span class="okk">${t1}</span>`:`<span class="bad">${t2}</span>`;
+
+const PMU_HTML=`<div class="pmu"><div class="pmuh"><b>Planilla de PMU · viviendas unifamiliares</b><div class="gsel" role="group" aria-label="Resaltar grado"><span>Resaltar:</span><button data-hg="Mínimo">Mínimo</button><button data-hg="Medio">Medio</button><button data-hg="Elevado">Elevado</button><button data-hg="Superior">Superior</button><button data-hg="">Todos</button></div></div><div class="pmug"><div class="scroll"><table class="pmut"><thead><tr><th rowspan="2" scope="col">Ambiente</th><th rowspan="2" scope="col"><span class="lg">Grado de electrificación</span><span class="shg">Grado</span></th><th colspan="2" scope="colgroup">Puntos mínimos de utilización</th></tr><tr><th scope="col">IUG</th><th scope="col">TUG</th></tr></thead><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Sala de estar y comedor, escritorio, estudio, biblioteca o similares, en viviendas</th><td class="gr">Mínimo</td><td rowspan="4">Una boca cada 18 m² de superficie o fracción (mínimo una)</td><td rowspan="4">Una boca cada 6 m² de superficie o fracción (mínimo dos)</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Dormitorio (superficie menor a 10 m²)</th><td class="gr">Mínimo</td><td rowspan="4">Una boca</td><td rowspan="4">Dos bocas</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Dormitorio (superficie igual o mayor a 10 m² hasta 36 m²)</th><td class="gr">Mínimo</td><td rowspan="4">Una boca</td><td rowspan="4">Tres bocas</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Elevado"><th scope="rowgroup" rowspan="2" class="amb">Dormitorio (superficie mayor a 36 m²)</th><td class="gr">Elevado</td><td rowspan="2">Dos bocas</td><td rowspan="2">Tres bocas</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Cocina</th><td class="gr">Mínimo</td><td>Una boca</td><td>Tres bocas más dos tomacorrientes</td></tr><tr data-g="Medio"><td class="gr">Medio</td><td rowspan="3">Dos bocas</td><td>Tres bocas más dos tomacorrientes</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td><td>Tres bocas más tres tomacorrientes</td></tr><tr data-g="Superior"><td class="gr">Superior</td><td>Cuatro bocas más tres tomacorrientes</td></tr></tbody></table></div><div class="scroll"><table class="pmut"><thead><tr><th rowspan="2" scope="col">Ambiente</th><th rowspan="2" scope="col"><span class="lg">Grado de electrificación</span><span class="shg">Grado</span></th><th colspan="2" scope="colgroup">Puntos mínimos de utilización</th></tr><tr><th scope="col">IUG</th><th scope="col">TUG</th></tr></thead><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Baño <span class="sm">(para toilette ver 770.7.1.k)</span></th><td class="gr">Mínimo</td><td rowspan="4">Una boca</td><td rowspan="4">Una boca</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Vestíbulo, garaje, hall, vestidor o similares</th><td class="gr">Mínimo</td><td>Una boca</td><td>Una boca</td></tr><tr data-g="Medio"><td class="gr">Medio</td><td rowspan="3">Una boca cada 12 m² de superficie o fracción (mínimo una boca)</td><td rowspan="3">Una boca cada 12 m² de superficie o fracción (mínimo una boca)</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Pasillos cubiertos</th><td class="gr">Mínimo</td><td rowspan="4">Una boca por cada 5 m de longitud o fracción</td><td>—</td></tr><tr data-g="Medio"><td class="gr">Medio</td><td rowspan="3">Una boca por cada 5 m de longitud o fracción (para pasillos de L &gt; 2 m)</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Lavadero</th><td class="gr">Mínimo</td><td rowspan="4">Una boca</td><td>Una boca</td></tr><tr data-g="Medio"><td class="gr">Medio</td><td rowspan="3">Dos bocas</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Balcones, galerías, atrios o similares espacios y pasillos semicubiertos</th><td class="gr">Mínimo</td><td rowspan="4">Una boca por cada 5 m de longitud o fracción<br><span class="ip">Protección mínima IP44</span></td><td rowspan="4">—</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody></table></div></div><p class="note">Tabla de la AEA 90364-7-770 que dan en el examen. Elegí un grado para resaltar sus filas y practicar.</p></div>`;
+const PH=['Plano y superficie','Puntos de utilización y circuitos','Canalizaciones','Cálculos','Documentación final','Complementos'];
+const STEPS=[
+{id:'p1',ph:0,t:'Plano de la vivienda',s:'Vista en planta con mobiliario',
+ que:'Es dibujar la vivienda vista desde arriba (vista en planta), en proporción, con todo el mobiliario: camas, mesa, cocina, heladera, sillones, lavatorios. Si hay dirección de obra, se le pide el plano.',
+ para:'El trabajo apunta a la seguridad de las personas. Saber dónde va cada mueble permite ubicar bocas, tomas y llaves donde se van a usar, sin cables cruzando ni tomas detrás de un ropero.',
+ como:['Dibujá la planta a mano o pedila a la dirección de obra.','Ubicá todos los muebles y artefactos.','Marcá cuáles ambientes son cubiertos y cuáles semicubiertos (hall, galería, balcón).','Anotá los requerimientos del proyecto: vivienda nueva, cargas especiales (por ejemplo, una carga monofásica de 1250 VA en el estar), tipo de circuito seccional y distancia entre TPA y TPU.'],
+ ex:'Requerimientos del 2.º proyecto: vivienda unifamiliar nueva, <b>carga monofásica de 1250 VA en el estar</b>, circuito seccional <b>directamente enterrado</b> con <b>10 m</b> entre TPA y TPU.',
+ calc:()=>inp('nom','Nombre del proyecto','text')},
+{id:'p2',ph:0,t:'Superficie límite de aplicación (SLA)',s:'Cubierta + semicubierta ÷ 2',
+ que:'La SLA es la superficie que se usa para clasificar la vivienda. Se calcula por zonas: cada superficie cubierta se suma completa y cada semicubierta se suma por la mitad.',
+ para:'Es el dato de entrada del grado de electrificación (paso 3), que define todo lo mínimo del proyecto.',
+ como:['Dividí el plano en zonas rectangulares fáciles de medir.','Calculá cada zona: largo × ancho.','Las zonas semicubiertas se dividen por 2.','Sumá todas las zonas y redondeá a un número entero de m².'],
+ f:[fx('SLA = Σ zonas cubiertas + Σ zonas semicubiertas ÷ 2',[['Zona','largo (m) × ancho (m) = m²'],['Resultado','redondeado a número entero']])],
+ ex:'1.º proyecto: 12 + 23,8 + 4,2÷2 = 37,9 → <b>38 m²</b>. 2.º proyecto: 27 + 36,4 + 2,1 = 65,5 → <b>66 m²</b>.',
+ calc:()=>`<div id="zlist"></div><p><button class="btn l" id="addz">+ Agregar zona</button></p><div class="out" id="o_sla"></div>`},
+{id:'p3',ph:0,t:'Grado de electrificación (GE)',s:'Mínimo, medio, elevado o superior',
+ que:'Es la categoría de la vivienda según su SLA. La tabla de la AEA 770 fija la potencia activa en 10 kW para mínimo, medio y elevado.',
+ para:'El GE define tres cosas: la DPMS de la vivienda, la cantidad mínima de circuitos y los PMU (puntos mínimos de utilización).',
+ como:['Entrá a la tabla con la SLA.','SLA ≤ 60 m² → Mínimo. Más de 60 hasta 130 m² → Medio. Más de 130 hasta 200 m² → Elevado. Más de 200 m² → Superior.','Anotá la cantidad mínima de circuitos y sus variantes.'],
+ f:[fx('10 kW ÷ 0,85 = 11,76 kVA',[['10 kW','potencia activa de la tabla de GE y límite de trabajo del idóneo Cat. III'],['0,85','cos φ mínimo (Resolución 17 ERSeP)']]),
+  `<div class="scroll"><table><tr><th>GE</th><th class="n">Circuitos</th><th>Variantes (IUG – TUG – libre)</th></tr><tr><td>Mínimo</td><td class="n">2</td><td>Única: 1 – 1</td></tr><tr><td>Medio</td><td class="n">3</td><td>a) 2 – 1 · b) 1 – 2</td></tr><tr><td>Elevado</td><td class="n">5</td><td>a) 2 – 3 · b) 3 – 2</td></tr><tr><td>Superior</td><td class="n">6</td><td>a) 2 – 3 – 1 · b) 3 – 2 – 1</td></tr></table></div>`],
+ ex:'38 m² → <b>Mínimo</b>: 2 circuitos, sin variantes (1 IUG – 1 TUG). 66 m² → <b>Medio</b>: 3 circuitos, dos variantes.',
+ calc:()=>`<div class="out" id="o_ge"></div><div id="o_ge2"></div>`},
+{id:'p4',ph:1,t:'Puntos mínimos de utilización (PMU)',s:'Bocas IUG y TUG por ambiente',
+ que:'Son las bocas mínimas que tiene que tener cada ambiente: de iluminación (IUG), de tomacorrientes (TUG) y de uso especial (TUE, por ejemplo aire acondicionado).',
+ para:'Garantizan que la vivienda tenga luz y tomas suficientes en cada ambiente, así nadie usa zapatillas ni alargues.',
+ como:['Para cada ambiente anotá su superficie (m²) o, en pasillos y balcones, su largo (m lineales).','Buscá el ambiente en la planilla de PMU según el GE.','Anotá IUG y TUG en la planilla del proyecto, con observaciones.','En semicubiertos, el artefacto de IUG lleva protección mínima IP44.','El timbre se suma como una boca más de IUG.'],
+ f:[PMU_HTML],
+ ex:'2.º proyecto (GE medio): estar 10,24 m² → 1 IUG, 2 TUG. Dormitorios → 1 IUG, 3 TUG. Cocina → 2 IUG, 3 TUG. Total con timbre: <b>10 IUG y 15 TUG</b>.',
+ calc:()=>`<div id="alist"></div><p><button class="btn l" id="adda">+ Agregar ambiente</button></p>${chk('timbre_x','Lleva timbre (suma 1 IUG)')}<div id="o_pmu"></div>`},
+{id:'p5',ph:1,t:'Ubicar los PMU en el plano',s:'Simbología IRAM 2010',
+ que:'Es dibujar en la vista en planta cada boca, toma y llave, con la simbología eléctrica IRAM 2010.',
+ para:'El plano tiene que poder leerlo cualquiera: el que ejecuta la obra, el ERSeP y vos mismo más adelante.',
+ como:['Dibujá cada boca de techo o aplique, cada toma y cada llave con su símbolo IRAM 2010.','Respetá las ubicaciones permitidas en baños y cocina.','Revisá ambiente por ambiente que no falte ningún PMU.','Agregá el cuadro de referencias de la simbología.'],
+ ck:['Bocas IUG dibujadas','Tomas TUG dibujadas','Llaves de efecto dibujadas','Ubicaciones de baño y cocina revisadas','Cuadro de referencias']},
+{id:'p6',ph:1,t:'Contabilizar IUG, IUE, TUG y TUE',s:'Planilla de totales',
+ que:'Es hacer la planilla con cada ambiente, su superficie, la cantidad de IUG y TUG, y las observaciones.',
+ para:'Con los totales se arman los circuitos sin pasar el máximo de bocas por circuito.',
+ como:['Copiá la planilla del paso 4 con el nombre del proyecto, SLA, GE y DPMS.','Sumá el total general de IUG y TUG.','Compará con lo que pide la norma para el GE (paso 3).'],
+ ex:'1.º proyecto: total <b>7 IUG y 9 TUG</b>. 2.º proyecto: <b>10 IUG y 15 TUG</b>.',
+ calc:()=>`<div id="o_tot"></div>`},
+{id:'p7',ph:1,t:'Verificar circuitos de IUG',s:'Máximo 15 bocas por circuito',
+ que:'Es repartir las bocas de iluminación en circuitos IUG.',
+ para:'Cada circuito tiene un límite de bocas para que el cable y la protección no queden exigidos.',
+ como:['Sumá todas las bocas IUG (incluido el timbre).','Si son 15 o menos, alcanza con un circuito IUG (si el GE lo permite).','Si son más, o la variante del GE pide 2 IUG, dividilas en dos circuitos.'],
+ ex:'1.º proyecto: 7 bocas → 1 circuito IUG. 2.º proyecto: 10 bocas → 1 circuito IUG.',
+ calc:()=>`<div id="o_v7"></div>`},
+{id:'p8',ph:1,t:'Verificar circuitos de TUG',s:'Separar en TUG 1 y TUG 2 si hace falta',
+ que:'Es repartir los tomacorrientes en circuitos TUG.',
+ para:'Igual que en IUG, ningún circuito puede superar 15 bocas. Además el GE puede pedir dos circuitos TUG.',
+ como:['Sumá todas las bocas TUG.','Si pasan de 15 o el GE pide 2 TUG, separalas en TUG 1 y TUG 2.','Repartí por zonas para que los recorridos sean cortos.','Cargá los circuitos en la calculadora de abajo: se usan en todos los pasos de cálculo.'],
+ ex:'2.º proyecto: 15 TUG, GE medio variante b) → <b>TUG 1 con 8 bocas</b> y <b>TUG 2 con 7</b>.',
+ calc:()=>`<div id="clist"></div><p><button class="btn l" id="addc">+ Agregar circuito</button></p><div id="o_v8"></div>`},
+{id:'p9',ph:2,t:'Canalizaciones',s:'TPA, TPU, recorridos y alturas',
+ que:'Es dibujar los recorridos de caños desde el TPU a cada boca, y la canalización principal del TPA al TPU.',
+ para:'Define por dónde pasa cada circuito, qué cables van juntos y qué caño se necesita.',
+ como:['Ubicá el TPA (tablero de protección de la acometida) en el límite municipal.','Elegí el lugar del TPU (tablero del usuario) y su altura (1,50 m en el curso).','Mantené 50 cm de separación con los demás servicios (agua, gas, etc.).','Conviene canalizar IUG y TUG separados: el cable conduce mejor y la instalación es más segura.','Poné letra a cada boca IUG y a su llave. Llaves a 1,10 m, tomas a 0,40 m (baño y cocina según uso).','Dibujá el timbre con su pulsador.'],
+ f:[fx(['IUG: PIA máxima 2×15 A → se sugiere 2×10 A','TUG: PIA máxima 2×20 A → se sugiere 2×15 A'],[['Troncal IUG','F y N 1,5 mm² + PE 2,5 mm² (IRAM 247-3)'],['Bajada a llave','1 mm²; retorno de otro color (por ejemplo blanco)'],['PE a la llave','solo obligatorio si caja o caño son de chapa'],['Punto y toma','si la toma sale del IUG, pasa a 2,5 mm² y 2200 VA, y pierde el 2/3']])],
+ ck:['TPA ubicado en límite municipal','TPU ubicado y con altura','50 cm de otros servicios','IUG y TUG por caños separados','Letras en bocas y llaves','Alturas de llaves y tomas','Timbre y pulsador']},
+{id:'p10',ph:2,t:'Verificar cañerías',s:'Tabla 770.10.IX · ocupación máxima 35 %',
+ que:'Es comprobar que los cables entran en el caño elegido, según la tabla de la AEA de cantidad máxima de cables por caño.',
+ para:'Un caño muy lleno daña la aislación al pasar los cables y los hace trabajar más calientes.',
+ como:['Contá los cables de cada tramo, incluido el PE.','El PE es de igual sección que las fases, salvo en IUG puro: F y N de 1,5 mm² con PE de 2,5 mm².','Buscá en la tabla o calculá la ocupación: no puede pasar el 35 %.','Si el caño no es liso (corrugado), pasá a la medida siguiente.'],
+ f:[fx('Ocupación = Σ sección total de cables ÷ sección del caño × 100 ≤ 35 %',[['Sección total','1,5 mm² → 9,62 · 2,5 → 13,85 · 4 → 18,10 · 6 → 31,17 mm²'],['CL 19','164 mm²'],['CL 22','223 mm²']])],
+ ex:'Tramo con 2×1,5 + 2×2,5 + PE (2,5): no entra en CL 19, va en <b>Pf 22</b>.',
+ calc:()=>`<label for="i_cn">Caño</label><select id="i_cn" data-k="cn">${CAN.map(c=>`<option>${c[0]}</option>`).join('')}</select><div class="row"><div>${inp('k15','Cables 1,5 mm²')}</div><div>${inp('k25','Cables 2,5 mm²')}</div><div>${inp('k4','Cables 4 mm²')}</div><div>${inp('k6','Cables 6 mm²')}</div></div><div class="out" id="o_can"></div><div id="o_can2"></div>`},
+{id:'p11',ph:3,t:'Potencia aparente S de cada circuito',s:'IUG 60 VA por boca × 2/3 · TUG 2200 VA',
+ que:'Es calcular la potencia de cálculo de cada circuito terminal en VA.',
+ para:'Con esa potencia se calcula la corriente de cada circuito y la de toda la vivienda.',
+ como:['IUG puro: bocas × 60 VA, por 2/3 (0,66) de simultaneidad.','TUG: 2200 VA por circuito como mínimo, sin simultaneidad.','TUE: 3300 VA como mínimo, sin simultaneidad.','ACU (carga única): la potencia del aparato.','IUG con tomas: se toma como TUG, 2200 VA y sin 2/3.'],
+ f:[fx(['IUG: S = bocas × 60 VA × 2/3','TUG = 2200 VA · TUE = 3300 VA · ACU = potencia del aparato'],[['S','potencia aparente (VA)'],['2/3','simultaneidad de IUG: no se prenden todas las luces a la vez']])],
+ ex:'2.º proyecto: IUG = 11 × 60 = 660 VA × 2/3 = <b>440 VA</b>. TUG 1 y TUG 2 = <b>2200 VA</b> c/u. ACU = <b>1250 VA</b>. (La planilla del PDF cuenta 10 IUG, pero el cálculo usa 11 bocas.)',
+ calc:()=>`<div id="o_s"></div>`},
+{id:'p12',ph:3,t:'Corriente de trabajo I(B) de cada circuito',s:'I(B) = S ÷ V',
+ que:'Es la corriente que va a circular por cada circuito terminal.',
+ para:'Con I(B) se elige el cable y la protección (PIA) de cada circuito.',
+ como:['Dividí la potencia S de cada circuito por la tensión, 220 V en monofásico.','Buscá la corriente máxima del cable I(Z) en la tabla N.° 22 de la AEA: 1,5 mm² → 15 A, 2,5 mm² → 21 A.','Elegí la PIA con I(B) ≤ I(N) ≤ I(Z), sin pasar el máximo del tipo de circuito.'],
+ f:[fx(['I(B) = S ÷ V','I(B) ≤ I(N) ≤ I(Z)'],[['I(B)','corriente de trabajo (A)'],['V','tensión: 220 V'],['I(N)','corriente nominal de la PIA'],['I(Z)','corriente máxima del cable'],['Icc','poder de corte: IUG 3000 A, TUG 4500 A']])],
+ ex:'IUG: 440 ÷ 220 = <b>2 A</b> → PIA B2×10 A. TUG: 2200 ÷ 220 = <b>10 A</b> → C2×15 A. ACU: 1250 ÷ 220 = <b>5,68 A</b> → C2×10 A.',
+ calc:()=>`<div id="o_ib"></div>`},
+{id:'p13',ph:3,t:'Potencia aparente total',s:'Suma de todos los circuitos',
+ que:'Es sumar la potencia S de todos los circuitos de uso general y específico.',
+ para:'Es la base de la DPMS de la vivienda.',
+ como:['Sumá IUG (ya con 2/3) + todos los TUG + TUE + ACU.'],
+ f:[fx('S total = IUG + TUG 1 + TUG 2 + … + ACU')],
+ ex:'440 + 2200 + 2200 + 1250 = <b>6090 VA</b>.',
+ calc:()=>`<div class="out" id="o_st"></div>`},
+{id:'p14',ph:3,t:'Simultaneidad y DPMS',s:'Coeficiente según cantidad de circuitos',
+ que:'La DPMS (demanda de potencia máxima simultánea) es la potencia que pide la vivienda en el peor momento, sabiendo que no se usa todo a la vez.',
+ para:'Con la DPMS se calcula el circuito seccional, la protección general y la potencia a declarar.',
+ como:['Contá los circuitos.','2 circuitos: no se aplica (1). 3 o 4: 0,8. 5: 0,7. 6 o más: 0,6.','Multiplicá la S total por ese coeficiente.'],
+ f:[fx('DPMS = S total × coeficiente de simultaneidad')],
+ ex:'1.º proyecto: 2 circuitos → 2477,2 × 1 = <b>2477,2 VA</b>. 2.º proyecto: 4 circuitos → 6090 × 0,8 = <b>4872 VA</b>.',
+ calc:()=>`<div class="out" id="o_dp"></div><div id="o_dp2"></div>`},
+{id:'p15',ph:3,t:'Circuito seccional (CS) y puesta a tierra',s:'Cable TPA–TPU, caída de tensión y PAT',
+ que:'El circuito seccional es el cable que va del TPA (pilar) al TPU (tablero de la casa). Por norma se considera línea principal: sección mínima 4 mm².',
+ para:'Lleva toda la corriente de la vivienda. Hay que elegir su cable, verificar la caída de tensión, su protección y el cable de tierra.',
+ como:['Calculá I(B) del CS: DPMS ÷ 220 V.','Elegí el cable según la canalización (tabla IRAM 2178). Directamente enterrado, 4 mm² lleva 32 A.','Si sube y baja en caño (del TPA al suelo y del suelo al TPU), restale 10 %: 32 A → 28,8 A.','Verificá la caída de tensión con la distancia TPA–TPU: máximo 3 % iluminación, 5 % motores. Si no cumple, subí la sección.','Protección en el TPA: ITM C2×25 A, 6000 A de Icc.','Del medidor al TPA no puede haber más de 2 m; del TPA al TPU puede haber mucho más.','PAT: el PE del TPU a la jabalina es de igual sección que el CS (mínimo 4 mm², verde-amarillo IRAM 247-3). Jabalina de cobre IRAM 2309 con cámara de inspección. Sistema TT.'],
+ f:[fx(['I(B) = DPMS ÷ 220 V','ΔU = 2 × L × I × ρ ÷ S','ΔU % = ΔU ÷ 220 × 100'],[['L','distancia TPA–TPU (m)'],['ρ','resistividad: cobre 0,017 · aluminio 0,026 Ω·mm²/m'],['S','sección del cable (mm²)']]),
+  `<div class="scroll"><table><tr><th>IRAM 2178</th><th class="n">Bandeja / aire</th><th class="n">En caño</th><th class="n">Enterrado</th></tr><tr><td>4 mm²</td><td class="n">25 A</td><td class="n">20 A</td><td class="n">32 A</td></tr><tr><td>6 mm²</td><td class="n">32 A</td><td class="n">25 A</td><td class="n">40 A</td></tr></table></div>`],
+ ex:'2.º proyecto: 4872 ÷ 220 = <b>22,15 A</b>. Cable 2×4 mm² enterrado: 32 − 10 % = <b>28,8 A</b>. ITM <b>C2×25 A</b>. 1.º proyecto: caída <b>0,44 %</b> con 10 m.',
+ calc:()=>`<label for="i_can">Canalización del CS</label><select id="i_can" data-k="can"><option value="ent">Directamente enterrado</option><option value="cano">Dentro de cañería</option><option value="aire">Bandeja / al aire</option></select>${chk('r10_x','Tramos en caño en TPA y TPU (restar 10 %)')}<div class="row"><div>${inp('L','Distancia TPA–TPU (m)')}</div><div><label for="i_rho">Material</label><select id="i_rho" data-k="rho"><option value="0.017">Cobre (0,017)</option><option value="0.026">Aluminio (0,026)</option></select></div></div><div class="out" id="o_cs"></div><div id="o_cs2"></div>`},
+{id:'p16',ph:3,t:'Potencia activa P en kW',s:'P = S × 0,85',
+ que:'Es pasar la DPMS (potencia aparente, VA) a potencia activa (W y kW) con el factor de potencia.',
+ para:'Es la potencia que se declara. El idóneo Categoría III puede hacer instalaciones de hasta 10 kW.',
+ como:['Tomá el cos φ mínimo de 0,85 (Resolución 17 ERSeP).','Multiplicá la DPMS por 0,85 y dividí por 1000.','Verificá que no pase 10 kW.'],
+ f:[fx(['P (W) = S (VA) × cos φ','P (kW) = P (W) ÷ 1000'],[['cos φ','factor de potencia: 0,85 en viviendas y pequeños locales']])],
+ ex:'1.º proyecto: 2477,2 × 0,85 = <b>2,11 kW</b>. 2.º proyecto: 4872 × 0,85 = <b>4,14 kW</b>. Los dos dentro del límite de 10 kW.',
+ calc:()=>`<div class="out" id="o_p"></div><div id="o_p2"></div>`},
+{id:'p17',ph:4,t:'Terminar el plano',s:'ACU, CS, PAT y referencias',
+ que:'Es completar el plano con todo lo que falta para presentarlo.',
+ para:'El plano final es lo que se ejecuta en obra y lo que se presenta.',
+ como:['Canalización del circuito ACU con sus datos.','Canalización del circuito seccional con sus datos.','Canalización de puesta a tierra con su símbolo y datos.','Referencias de simbología IRAM 2010.','Altura de cada boca, salvo las de losa.'],
+ ck:['Circuito ACU dibujado','Circuito seccional con datos','PAT con símbolo y datos','Referencias','Alturas de cada boca']},
+{id:'p18',ph:4,t:'Diagramas unifilares',s:'RDD → TPA → CS → TPU',
+ que:'Es el esquema de la instalación dibujado con una sola línea: desde la red de distribución (RDD) hasta cada circuito.',
+ para:'Muestra de un vistazo todas las protecciones, cables y circuitos.',
+ como:['De RDD a TPA: red, fusible aéreo, medidor monofásico (2×4 mm² IRAM 247-3), TPA con ITM C2×25 A 6000 A.','CS: directamente enterrado 2×4 mm² IRAM 2178-1.','TPU (IP41): interruptor diferencial ID 2×25 A 30 mA; puente peine; una PIA por circuito.','DPS: ITM C2×25 A con descargador de sobretensiones transitorias 245 V – 40 kA.','Barra de PE y cable a la PAT (IRAM 2309).','Dejá reserva no equipada del 50 %.'],
+ f:[fx('Protecciones obligatorias (770.13.1): fallas a tierra · contactos directos · contactos indirectos · sobrecorrientes',[['Recomendadas','sobretensiones transitorias, permanentes y subtensiones'],['DPS (tabla 770.15.III)','obligatorio con red aérea en zonas de más de 25 días de tormenta al año (AQ2), salvo análisis de riesgo']])],
+ ex:'TPU del 2.º proyecto: ID 2×25 A 30 mA; PIA 01 <b>B2×10 A</b> (IUG); PIA 02 y 03 <b>C2×15 A</b> (TUG); PIA 04 <b>C2×10 A</b> (ACU).',
+ calc:()=>`<div id="o_uni"></div>`},
+{id:'p19',ph:4,t:'Listado de materiales',s:'Sello S y normas IRAM / IEC',
+ que:'Es la lista ordenada de todo lo que necesita la obra eléctrica: cantidades, unidades y descripción clara.',
+ para:'Sirve para presupuestar y comprar, y garantiza que todo cumpla las normas.',
+ como:['Todos los materiales con sello "S" de seguridad eléctrica y norma IRAM o IEC.','Ordená por grupos: circuito seccional y acometida, TPU, PAT, canalizaciones, elementos de conexión final, cableado.','Para cada ítem: cantidad, unidad y descripción.'],
+ ck:['Pilar, ITM del TPA y cable 2178','Cinta de peligro, ladrillos y arena (enterrado)','Tablero, ID, PIAs, bornera PE','Jabalina, tomacable y cámara','Caños, cajas y conectores','Portalámparas, tomas, llaves, timbre','Cables por sección y color','Cartel de riesgo eléctrico e identificadores']}
+];
+
+const PLANO_HTML=`
+<section class="sec" id="plano"><details class="step" id="dplano"><summary><span class="n">✎</span><span class="t"><h2>Dibujar el plano</h2><small>Paredes, muebles y simbología IRAM 2010 · arrastrar y soltar</small></span><span class="ar">›</span></summary><div class="body">
+<div class="ed" id="ed">
+ <div class="tb" role="toolbar" aria-label="Herramientas del plano">
+  <button data-mode="sel" aria-pressed="true">Mover</button><button data-mode="wall" aria-pressed="false">Pared</button><button data-mode="cable" aria-pressed="false">Cable</button><button data-mode="text" aria-pressed="false">Texto</button>
+  <select id="ctype" aria-label="Tipo de cable"></select>
+  <button id="bUndo" aria-label="Deshacer">↶ Deshacer</button><button id="bZo" aria-label="Alejar">−</button><button id="bZi" aria-label="Acercar">+</button><button id="bFit">Ajustar</button><button id="bFull">Pantalla completa</button>
+ </div>
+ <p class="hint" id="hint"></p>
+ <div class="pal" id="pal" aria-label="Componentes"></div>
+ <svg class="cv" id="pl" preserveAspectRatio="none" aria-label="Plano de la vivienda"></svg>
+ <p class="hint" id="plcount"></p>
+ <div class="props" id="props"></div>
+ <div class="tb"><button id="bSample">Cargar plano de ejemplo</button><button id="bClear">Vaciar plano</button></div>
+</div>
+<p class="note">La grilla clara es de 20 cm y la oscura de 1 m. Las paredes se dibujan a 15 cm de espesor. Todo se guarda solo en este celular o navegador.</p>
+</div></details></section>`;
+const PDF_HTML=`
+<section class="sec" id="pdfsec"><details class="step" id="dpdf" open><summary><span class="n">PDF</span><span class="t"><h2>Descargar proyecto en PDF</h2><small>Carátula, memoria de cálculo, plano, unifilar y materiales</small></span><span class="ar">›</span></summary><div class="body">
+<p>Completá los datos de la carátula. El PDF junta todo lo que cargaste en la app: planilla de PMU, cálculos de los pasos 11 a 16, plano dibujado con referencias y rótulo, diagrama unifilar y listado de materiales.</p>
+<div class="row">${inp('pProp','Propietario','text')}${inp('pUbic','Ubicación (calle, n.°, localidad)','text')}</div>
+<div class="row">${inp('pInst','Instalador','text')}${inp('pMat','Matrícula / categoría','text')}${inp('pFecha','Fecha','text')}</div>
+<div class="chk" style="margin-top:12px"><input type="checkbox" id="saveCli" checked><label for="saveCli">Guardar también en <b>Clientes</b> (con el PDF adjunto)</label></div>
+<p class="note" style="margin:0">En Clientes se usa el nombre del propietario. Si ya lo guardaste antes, se actualiza.</p>
+<p style="margin-top:16px"><button class="btn big" id="dlpdf">Descargar proyecto en PDF</button></p>
+<p><button class="btn l" id="onlyCli">Solo guardar en Clientes</button></p>
+<p class="note" id="pdfst"></p>
+</div></details></section>`;
+const EXTRA=PLANO_HTML+`
+<section class="sec" id="tri"><details class="step" id="dtri"><summary><span class="n">3~</span><span class="t"><h2>Trifásico</h2><small>Complemento: no está en los PDF 21 y 22</small></span><span class="ar">›</span></summary><div class="body"><div class="cols"><div class="txt">
+<h3>Qué es</h3><p>Un suministro con 3 fases (R, S, T) y neutro. Entre dos fases hay 380 V y entre cada fase y el neutro 220 V.</p>
+<h3>Para qué sirve</h3><p>Para viviendas o locales con mucha potencia o con motores trifásicos. Repartiendo la carga en tres fases, cada cable lleva menos corriente.</p>
+<h3>Cómo se hace</h3><ol><li>Los circuitos terminales siguen siendo monofásicos (220 V), pero se reparten entre R, S y T.</li><li>Buscá que las tres fases queden con potencias parecidas (balanceo).</li><li>El circuito seccional lleva 4 cables cargados (3 fases + neutro) y se calcula con la fórmula trifásica.</li><li>Las protecciones generales son tetrapolares.</li><li>Confirmá con el curso y con la distribuidora cuándo corresponde trifásico.</li></ol>
+${fx(['Monofásico: I = S ÷ 220','Trifásico: I = S ÷ (√3 × 380)','P = √3 × U × I × cos φ','ΔU = √3 × L × I × ρ ÷ S'],[['√3','1,732'],['U','380 V entre fases']])}
+</div><div class="calc"><h3>Calculá</h3><div class="row"><div>${inp('tS','Potencia S (VA)')}</div><div>${inp('tL','Distancia (m)')}</div><div>${inp('tSec','Sección (mm²)')}</div></div><div id="o_tri"></div></div></div></div></details></section>
+<section class="sec" id="glos"><details class="step"><summary><span class="n">A–Z</span><span class="t"><h2>Glosario</h2><small>Siglas del curso</small></span><span class="ar">›</span></summary><div class="body"><div class="scroll"><table class="stack"><thead><tr><th>Sigla</th><th>Significado</th></tr></thead><tbody>
+${[['SLA','Superficie límite de aplicación'],['GE','Grado de electrificación'],['PMU','Puntos mínimos de utilización'],['DPMS','Demanda de potencia máxima simultánea'],['IUG / IUE','Iluminación de uso general / especial'],['TUG / TUE','Tomacorrientes de uso general / especial'],['ACU','Alimentación a carga única'],['RDD','Red de distribución'],['TPA','Tablero de protección de la acometida'],['TPU','Tablero de protección del usuario'],['CS','Circuito seccional (TPA → TPU)'],['ITM / PIA','Interruptor termomagnético / pequeño interruptor automático'],['ID','Interruptor diferencial (30 mA)'],['DPS','Dispositivo de protección contra sobretensiones'],['PAT / PE','Puesta a tierra / conductor de protección (verde-amarillo)'],['I(B)','Corriente de trabajo'],['I(N)','Corriente nominal de la protección'],['I(Z)','Corriente máxima admisible del cable'],['Icc','Poder de corte en cortocircuito'],['S / P','Potencia aparente (VA) / activa (W)']].map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`).join('')}
+</tbody></table></div></div></details></section>
+<section class="sec" id="res"><details class="step" open><summary><span class="n">✓</span><span class="t"><h2>Planilla resumen de tu proyecto</h2><small>Para pasar a la carpeta</small></span><span class="ar">›</span></summary><div class="body">
+<div class="scroll"><table id="sumT"></table></div>
+<p><button class="btn" id="copy">Copiar resumen</button> <span id="copied" class="note"></span></p><pre id="sumTxt" hidden></pre>
+<p class="note">Basado en los PDF 21 y 22 del curso y la AEA 90364-7-770. La app ayuda a calcular; revisá cada valor antes de firmar.</p>
+</div></details></section>`+PDF_HTML;
+
+/* ===== Render ===== */
+$('steps').innerHTML=PH.slice(0,5).map((p,pi)=>`<h2 class="ph" style="font-size:15px;margin:22px 0 10px">${p}</h2>`+STEPS.filter(s=>s.ph===pi).map(s=>`<details class="step" id="${s.id}"><summary><span class="n">${s.id.slice(1)}</span><span class="t"><h2>${s.t}</h2><small>${s.s}</small></span><span class="ar">›</span></summary><div class="body"><div class="cols"><div class="txt">
+<h3>Qué es</h3><p>${s.que}</p><h3>Para qué sirve</h3><p>${s.para}</p>
+<h3>Cómo se hace</h3><ol>${s.como.map(c=>`<li>${c}</li>`).join('')}</ol>
+${s.f?`<h3>Fórmula y tabla</h3>${s.f.join('')}`:''}
+${s.ex?`<p class="ex"><span class="tag">Ejemplo del curso · </span>${s.ex}</p>`:''}
+</div><div class="calc"><h3>${s.ck?'Lista de control':'Tu proyecto'}</h3>${s.calc?s.calc():''}${s.ck?s.ck.map((c,j)=>chk(s.id+'_'+j,c)).join(''):''}
+<div style="margin-top:12px;font-weight:600">${chk('done_'+s.id,'Paso terminado')}</div></div></div></div></details>`).join('')).join('')+EXTRA;
+
+const renderIdx=()=>{$('idx').innerHTML=PH.slice(0,5).map((p,pi)=>`<div class="ph">${p}</div><ol>${STEPS.filter(s=>s.ph===pi).map(s=>`<li><a href="#${s.id}" class="${S.ck['done_'+s.id]?'done':''}"><b>${s.id.slice(1)}</b>${s.t}</a></li>`).join('')}</ol>`).join('')+`<div class="ph">Plano y entrega</div><ol><li><a href="#dplano"><b>✎</b>Dibujar el plano</a></li><li><a href="#dpdf"><b>PDF</b>Descargar proyecto en PDF</a></li></ol><div class="ph">${PH[5]}</div><ol><li><a href="#dtri"><b>3~</b>Trifásico</a></li><li><a href="#glos"><b>A–Z</b>Glosario</a></li><li><a href="#res"><b>✓</b>Planilla resumen</a></li></ol>`;
+ STEPS.forEach(s=>$(s.id).classList.toggle('done',!!S.ck['done_'+s.id]))};
+
+const sel=(opts,v,attr)=>`<select ${attr}>${opts.map(o=>`<option value="${o[0]}" ${String(o[0])===String(v)?'selected':''}>${o[1]}</option>`).join('')}</select>`;
+function renderZ(){$('zlist').innerHTML=S.z.map((z,i)=>`<div class="crow" data-g="z" data-i="${i}"><div class="w2"><label>Zona</label><input data-f="n" type="text" value="${esc(z.n)}"></div><div><label>Largo m</label><input data-f="l" type="number" step="any" inputmode="decimal" value="${z.l}"></div><div><label>Ancho m</label><input data-f="a" type="number" step="any" inputmode="decimal" value="${z.a}"></div><div><label>Tipo</label>${sel([[0,'Cubierta'],[1,'Semicub.']],z.semi,'data-f="semi"')}</div><div><button class="btn l x" data-del="z" data-i="${i}" aria-label="Quitar zona">✕</button></div></div>`).join('')}
+function renderA(){$('alist').innerHTML=S.am.map((a,i)=>`<div class="crow" data-g="am" data-i="${i}"><div class="w2"><label>Tipo de ambiente</label>${sel(Object.entries(AMB),a.t,'data-f="t"')}</div><div class="w2"><label>Nombre</label><input data-f="n" type="text" value="${esc(a.n)}"></div><div><label>${a.t==='pas'||a.t==='bal'?'m lineales':'m²'}</label><input data-f="m" type="number" step="any" inputmode="decimal" value="${a.m}"></div><div><button class="btn l x" data-del="am" data-i="${i}" aria-label="Quitar ambiente">✕</button></div></div>`).join('')}
+function renderC(){$('clist').innerHTML=S.c.map((c,i)=>`<div class="crow" data-g="c" data-i="${i}"><div class="w2"><label>Tipo</label>${sel(Object.entries(CIRC).map(([k,v])=>[k,k==='IUGT'?'IUG c/ tomas':k]),c.t,'data-f="t"')}</div><div class="w2"><label>Nombre</label><input data-f="n" type="text" value="${esc(c.n)}"></div><div><label>Bocas</label><input data-f="b" type="number" inputmode="decimal" value="${c.b}"></div><div><label>${c.t==='IUG'?'VA/boca':'VA'}</label><input data-f="va" type="number" inputmode="decimal" value="${c.va}"></div><div><button class="btn l x" data-del="c" data-i="${i}" aria-label="Quitar circuito">✕</button></div></div>`).join('')}
+
+/* ===== Cálculo ===== */
+function pmu(a,g){const m=+a.m||0,gi=GE.indexOf(g),c6=x=>Math.max(1,Math.ceil(x));
+ switch(a.t){
+ case'est':return[c6(m/18),Math.max(2,Math.ceil(m/6))];
+ case'dor':return m>36?[2,3]:m>=10?[1,3]:[1,2];
+ case'coc':return[gi===0?1:2,gi===3?4:3];
+ case'ban':return[1,1];
+ case'ves':return gi===0?[1,1]:[c6(m/12),c6(m/12)];
+ case'pas':return[c6(m/5),gi===0?0:(m>2?c6(m/5):0)];
+ case'lav':return[1,gi===0?1:2];
+ case'bal':return[c6(m/5),0];}return[0,0]}
+const cocNote=g=>({0:'3 bocas + 2 tomas',1:'3 bocas + 2 tomas',2:'3 bocas + 3 tomas',3:'4 bocas + 3 tomas'})[GE.indexOf(g)];
+
+function calc(){
+ const zs=S.z.map(z=>(+z.l||0)*(+z.a||0)*(z.semi==1?.5:1));
+ const slaR=zs.reduce((a,b)=>a+b,0), sla=Math.round(slaR);
+ const g=GE.find(x=>sla<=x.hasta);
+ $('o_sla').innerHTML=`SLA = ${sla} m²<div class="note" style="font:15px Barlow">${S.z.map((z,i)=>`${esc(z.n)}: ${f1(zs[i],2)} m²${z.semi==1?' (÷2)':''}`).join(' · ')} → ${f1(slaR,2)} m²</div>`;
+ $('o_ge').textContent='GE '+g.n;
+ $('o_ge2').innerHTML=kv('SLA',sla+' m²')+kv('Circuitos mínimos',g.c)+kv('Variantes (IUG – TUG – libre)',g.v.map(v=>v.filter((x,j)=>j<2||x).join(' – ')).join(' · '))+kv('Potencia activa','10 kW (11,76 kVA)');
+ const P=S.am.map(a=>pmu(a,g));
+ const tI=P.reduce((s,p)=>s+p[0],0)+(S.timbre?1:0), tT=P.reduce((s,p)=>s+p[1],0);
+ const tab=`<div class="scroll"><table class="stack"><thead><tr><th>Ambiente</th><th>Superficie</th><th class="n">IUG</th><th class="n">TUG</th><th>Observaciones</th></tr></thead><tbody>${S.am.map((a,i)=>`<tr><td>${esc(a.n)}</td><td>${a.t==='coc'||a.t==='ban'?'—':f1(+a.m,2)+(a.t==='pas'||a.t==='bal'?' mL':' m²')}</td><td class="n">${P[i][0]}</td><td class="n">${P[i][1]}</td><td>${a.t==='coc'?cocNote(g):a.t==='bal'?'IUG IP44 mínimo':''}</td></tr>`).join('')}${S.timbre?`<tr><td>Timbre</td><td>—</td><td class="n">1</td><td class="n">0</td><td>Se suma a IUG</td></tr>`:''}<tr><td><b>Total general</b></td><td></td><td class="n"><b>${tI}</b></td><td class="n"><b>${tT}</b></td><td></td></tr></tbody></table></div>`;
+ $('o_pmu').innerHTML=tab;
+ $('o_tot').innerHTML=kv('Proyecto',esc(S.nom||'—'))+kv('SLA · GE',`${sla} m² · ${g.n}`)+kv('Total IUG',tI)+kv('Total TUG',tT)+kv('Circuitos mínimos del GE',g.c);
+ const nI=Math.ceil(tI/15)||0,nT=Math.ceil(tT/15)||0;
+ $('o_v7').innerHTML=kv('Bocas IUG',tI)+kv('Circuitos IUG necesarios por cantidad',nI)+`<p class="note">Variantes del GE ${g.n}: ${g.v.map(v=>v[0]+' IUG').join(' o ')}.</p>`;
+
+ const C=S.c.map(c=>{const d=CIRC[c.t];let s;if(c.t==='IUG')s=c.b*c.va*2/3;else if(c.t==='IUGT'||c.t==='TUG')s=Math.max(2200,+c.va||0);else if(c.t==='TUE')s=Math.max(3300,+c.va||0);else s=+c.va||0;
+  const ib=s/220,iz=IZ22[d.sec];let In=Math.max(d.In,INS.find(v=>v>=ib)||40);const okc=ib<=In&&In<=iz&&(!d.max||In<=d.max);return{...c,d,s,ib,iz,In,okc}});
+ const nIUG=C.filter(c=>c.t==='IUG'||c.t==='IUGT').length,nTUG=C.filter(c=>c.t==='TUG').length;
+ $('o_v8').innerHTML=kv('Bocas TUG del paso 4',tT)+kv('Circuitos TUG necesarios por cantidad',nT)+C.map(c=>kv(esc(c.n),`${c.b} bocas `+ok(c.b<=15||c.t==='ACU'||c.t==='TUE','✓','más de 15'))).join('')+kv('Total de circuitos',`${C.length} (mín. ${g.c}) `+ok(C.length>=g.c,'✓','faltan'))+kv('Variante usada',`${nIUG} IUG – ${nTUG} TUG `+ok(g.v.some(v=>nIUG>=v[0]&&nTUG>=v[1]),'cumple','no coincide con una variante'));
+ $('o_s').innerHTML=C.map(c=>kv(esc(c.n),(c.t==='IUG'?`${c.b} × ${c.va} × 2/3 = `:'')+f1(c.s,1)+' VA')).join('');
+ $('o_ib').innerHTML=`<div class="scroll"><table class="stack"><thead><tr><th>Circuito</th><th class="n">I(B)</th><th>Cable F+N / PE</th><th class="n">I(Z)</th><th>PIA</th></tr></thead><tbody>${C.map(c=>`<tr><td>${esc(c.n)}</td><td class="n">${f1(c.ib,2)} A</td><td>${sx(c.d.sec)} / ${sx(c.d.pe)} mm²</td><td class="n">${c.iz} A</td><td>${c.d.curva}2×${c.In} A · ${c.d.icc} A ${ok(c.okc,'✓','revisar')}</td></tr>`).join('')}</tbody></table></div>`;
+ const St=C.reduce((a,c)=>a+c.s,0), ks=ksOf(C.length), dp=St*ks;
+ $('o_st').textContent=f1(St,1)+' VA';
+ $('o_dp').textContent='DPMS = '+f1(dp,1)+' VA';
+ $('o_dp2').innerHTML=kv('Circuitos',C.length)+kv('Coeficiente',ks===1?'no aplica (1)':sx(ks))+kv('Cálculo',`${f1(St,1)} × ${sx(ks)}`);
+
+ const ibCS=dp/220, red=S.r10?0.9:1, Lm=+S.L||0, rho=+S.rho||.017;
+ let sec=null;for(const s of[4,6]){const iz=CS2178[s][S.can]*red,du=2*Lm*ibCS*rho/s;if(iz>=ibCS&&du/220*100<=3){sec=s;break}}
+ const sU=sec||6, izCS=CS2178[sU][S.can]*red, du=2*Lm*ibCS*rho/sU, duP=du/220*100;
+ const InCS=[...INS].reverse().find(v=>v>=ibCS&&v<=izCS)||INS.find(v=>v>=ibCS), ID=[25,40,63].find(v=>v>=InCS)||63;
+ $('o_cs').textContent=`2×${sU} mm² · ITM C2×${InCS} A`;
+ $('o_cs2').innerHTML=kv('I(B) CS',`${f1(dp,1)} ÷ 220 = ${f1(ibCS,2)} A`)+kv('I(Z) cable IRAM 2178',`${CS2178[sU][S.can]} A${S.r10?' − 10 % = '+f1(izCS,1)+' A':''}`)+kv('I(B) ≤ I(N) ≤ I(Z)',`${f1(ibCS,2)} ≤ ${InCS} ≤ ${f1(izCS,1)} `+ok(ibCS<=InCS&&InCS<=izCS,'✓','✗'))+kv('Caída de tensión',`${f1(du,2)} V · ${f1(duP,2)} % `+ok(duP<=3,'≤ 3 %','> 3 %'))+kv('Icc ITM','6000 A')+kv('Diferencial TPU',`ID 2×${ID} A · 30 mA`)+kv('PE a jabalina',`${sU} mm² verde-amarillo`)+(sec?'':`<p class="bad">Con 6 mm² no alcanza: consultá secciones mayores.</p>`);
+ const kw=dp*.85/1000;
+ $('o_p').textContent='P = '+f1(kw,2)+' kW';
+ $('o_p2').innerHTML=kv('Cálculo',`${f1(dp,1)} VA × 0,85 = ${f1(dp*.85,1)} W`)+kv('Límite idóneo Cat. III','10 kW '+ok(kw<=10,'✓ dentro','✗ supera'));
+ $('o_uni').innerHTML=kv('TPA',`ITM C2×${InCS} A · 6000 A`)+kv('CS',`2×${sU} mm² IRAM 2178-1`)+kv('TPU',`ID 2×${ID} A 30 mA · IP41`)+C.map((c,i)=>kv(`PIA 0${i+1} · ${esc(c.n)}`,`${c.d.curva}2×${c.In} A · ${c.d.icc} · 2×${sx(c.d.sec)} mm² + PE`)).join('')+kv('Reserva','50 % no equipada');
+
+ const cn=CAN.find(c=>c[0]===S.cn)||CAN[3], area=(+S.k15||0)*CAB[1.5]+(+S.k25||0)*CAB[2.5]+(+S.k4||0)*CAB[4]+(+S.k6||0)*CAB[6], occ=area/cn[1]*100;
+ const fit=CAN.find(c=>area/c[1]*100<=35);
+ $('o_can').innerHTML=`${f1(occ,0)} % `+ok(occ<=35,'entra','no entra');
+ $('o_can2').innerHTML=kv('Sección de cables',f1(area,2)+' mm²')+kv(cn[0],cn[1]+' mm² · 35 % = '+f1(cn[1]*.35,1)+' mm²')+kv('Caño mínimo que entra',fit?fit[0]:'más de CL 38')+`<p class="note">Si el caño es corrugado, pasá a la medida siguiente.</p>`;
+ const tI3=(+S.tS||0)/(Math.sqrt(3)*380), tI1=(+S.tS||0)/220, tdu=Math.sqrt(3)*(+S.tL||0)*tI3*.017/((+S.tSec)||4);
+ $('o_tri').innerHTML=`<div class="out">${f1(tI3,2)} A por fase</div>`+kv('En monofásico serían',f1(tI1,2)+' A')+kv('Caída trifásica',`${f1(tdu,2)} V · ${f1(tdu/380*100,2)} %`);
+
+ const rows=[['Proyecto',S.nom||'—'],['SLA',sla+' m²'],['GE',g.n],['PMU totales',`${tI} IUG · ${tT} TUG`],['S total',f1(St,1)+' VA'],['Simultaneidad',sx(ks)],['DPMS',f1(dp,1)+' VA'],['Potencia activa',f1(kw,2)+' kW'],['I(B) CS',f1(ibCS,2)+' A'],['Cable CS',`2×${sU} mm² IRAM 2178-1 · I(Z) ${f1(izCS,1)} A`],['Caída de tensión CS',f1(duP,2)+' %'],['ITM TPA',`C2×${InCS} A 6000 A`],['ID TPU',`2×${ID} A 30 mA`],['PE a PAT',sU+' mm²']].concat(C.map(c=>[c.n,`${c.b} bocas · ${f1(c.s,1)} VA · I(B) ${f1(c.ib,2)} A · ${sx(c.d.sec)} mm² · ${c.d.curva}2×${c.In} A`]));
+ R={sla,slaR,zs,g,P,tI,tT,C,St,ks,dp,ibCS,sU,izCS,du,duP,InCS,ID,kw,rows};
+ $('sumT').innerHTML=rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('');
+ $('sumTxt').textContent=rows.map(r=>r[0]+': '+r[1]).join('\n');
+ save();
+}
+
+function fill(){
+ document.querySelectorAll('[data-k]').forEach(el=>{el.value=S[el.dataset.k]});
+ document.querySelectorAll('[data-ck]').forEach(el=>{el.checked=!!S.ck[el.dataset.ck]});
+ $('k_timbre_x').checked=!!S.timbre;$('k_r10_x').checked=!!S.r10;
+}
+const all=()=>{renderZ();renderA();renderC();fill();calc()};
+
+/* ===== Eventos ===== */
+document.addEventListener('input',e=>{const el=e.target;
+ if(el.dataset.k){S[el.dataset.k]=el.type==='text'?el.value:(el.tagName==='SELECT'&&isNaN(+el.value)?el.value:parseFloat(String(el.value).replace(',','.'))||0);calc();return}
+ const r=el.closest('[data-g]');if(r&&el.dataset.f){const L=S[r.dataset.g],i=+r.dataset.i,f=el.dataset.f;
+  L[i][f]=(f==='n'||f==='t')?el.value:parseFloat(el.value)||0;
+  if(f==='t'&&r.dataset.g==='c'){L[i].va={IUG:60,IUGT:2200,TUG:2200,TUE:3300,ACU:1000}[el.value];renderC()}
+  if(f==='t'&&r.dataset.g==='am')renderA();
+  calc()}});
+document.addEventListener('change',e=>{const el=e.target;if(el.dataset.ck){
+ if(el.dataset.ck==='timbre_x')S.timbre=el.checked?1:0;else if(el.dataset.ck==='r10_x')S.r10=el.checked?1:0;else S.ck[el.dataset.ck]=el.checked;
+ renderIdx();calc()}});
+document.addEventListener('click',e=>{
+ const d=e.target.closest('[data-del]');if(d){S[d.dataset.del].splice(+d.dataset.i,1);all();return}
+ const a=e.target.closest('a[href^="#"]');if(a){const t=document.querySelector(a.getAttribute('href'));if(t){const det=t.tagName==='DETAILS'?t:t.querySelector('details');if(det)det.open=true}}
+});
+$('addz').addEventListener('click',()=>{S.z.push({n:'Zona',l:0,a:0,semi:0});all()});
+$('adda').addEventListener('click',()=>{S.am.push({t:'dor',n:'Ambiente',m:0});all()});
+$('addc').addEventListener('click',()=>{S.c.push({t:'TUG',n:'Nuevo circuito',b:5,va:2200});all()});
+$('openAll').addEventListener('click',()=>document.querySelectorAll('details.step').forEach(d=>d.open=true));
+$('closeAll').addEventListener('click',()=>document.querySelectorAll('details.step').forEach(d=>d.open=false));
+$('copy').addEventListener('click',async()=>{const t=$('sumTxt').textContent;try{await navigator.clipboard.writeText(t);$('copied').textContent='Copiado'}catch(err){const p=$('sumTxt');p.hidden=false;const r=document.createRange();r.selectNodeContents(p);const s=getSelection();s.removeAllRanges();s.addRange(r);$('copied').textContent='Seleccionado: copialo con el menú'}});
+const openHash=()=>{if(location.hash){const t=document.querySelector(location.hash);if(t&&t.tagName==='DETAILS')t.open=true}};
+window.addEventListener('hashchange',openHash);
+
+/* ===================== EDITOR DE PLANO ===================== */
+const COL={ink:'#1a1a1a',iug:'#1f5fd1',tug:'#c2188f',acu:'#d1342b',pe:'#2b8a3e',cs:'#e8742a',tim:'#555555',fur:'#8a8a8a'};
+const CT={IUG:{n:'IUG',c:COL.iug,l:'2x1,5+Pe CL19'},RET:{n:'Retorno a llave',c:COL.iug,l:'1x1+1x1,5 CL19'},TUG:{n:'TUG',c:COL.tug,l:'2x2,5+Pe CL19'},ACU:{n:'TUE / ACU',c:COL.acu,l:'2x2,5+Pe CL19'},TIM:{n:'Timbre',c:COL.tim,l:'2x1 CL16'},PAT:{n:'Puesta a tierra',c:COL.pe,l:'1x4 Pe'},CS:{n:'Circuito seccional',c:COL.cs,l:'2x4 IRAM 2178'}};
+const FONT='Arial, Helvetica, sans-serif';
+const TX=(x,y,s,t,c,a='start',w=400,extra='')=>`<text x="${x}" y="${y}" font-size="${s}" fill="${c}" text-anchor="${a}" font-family="${FONT}" font-weight="${w}" ${extra}>${esc(t)}</text>`;
+const SYM={
+ puerta:{n:'Puerta',g:'arq',d:{w:80},f:it=>{const w=it.w||80;return `<g fill="none" stroke="${COL.ink}"><line x1="0" y1="0" x2="${w}" y2="0" stroke="#fff" stroke-width="19"/><line x1="0" y1="0" x2="0" y2="${-w}" stroke-width="3"/><path d="M0,${-w} A${w},${w} 0 0 1 ${w},0" stroke-dasharray="6 4" stroke-width="1.5"/></g>`}},
+ ventana:{n:'Ventana',g:'arq',d:{w:120},f:it=>{const w=it.w||120;return `<g stroke="${COL.ink}" stroke-width="1.5"><rect x="${-w/2}" y="-8" width="${w}" height="16" fill="#fff"/><line x1="${-w/2}" y1="0" x2="${w/2}" y2="0"/></g>`}},
+ mueble:{n:'Mueble',g:'arq',d:{w:100,hh:60,lab:'Mueble'},f:it=>`<rect x="${-it.w/2}" y="${-it.hh/2}" width="${it.w}" height="${it.hh}" rx="4" fill="#f7f7f7" stroke="${COL.fur}" stroke-width="1.5"/>`+TX(0,5,Math.max(10,Math.min(16,it.w/6)),it.lab,COL.fur,'middle')},
+ texto:{n:'Texto',g:'arq',d:{lab:'Ambiente',fs:28},f:it=>TX(0,0,it.fs||28,it.lab,COL.ink,'middle',600)},
+ pilar:{n:'Pilar de medidor',g:'ele',d:{},f:()=>`<rect x="-16" y="-20" width="32" height="40" fill="#fff" stroke="${COL.cs}" stroke-width="2"/>`+TX(0,1,18,'M','#111','middle',700)+TX(0,15,9,'kWh','#111','middle')},
+ tpa:{n:'TPA (tablero de acometida)',g:'ele',d:{},f:()=>`<path d="M-16,-10 L0,0 L-16,10Z M16,-10 L0,0 L16,10Z" fill="${COL.cs}" stroke="${COL.cs}" stroke-width="1.5"/>`},
+ tpu:{n:'TPU (tablero del usuario)',g:'ele',d:{h:'1,50'},f:()=>`<rect x="-16" y="-8" width="32" height="16" fill="#fff" stroke="${COL.cs}" stroke-width="2"/><path d="M-16,8 L16,-8 L16,8Z" fill="${COL.cs}"/>`},
+ bocaT:{n:'Boca de techo',g:'ele',d:{lab:'a'},f:()=>`<circle r="12" fill="#fff" stroke="${COL.iug}" stroke-width="2"/>`},
+ bocaP:{n:'Boca de pared (aplique)',g:'ele',d:{lab:'a',h:'1,90'},f:()=>`<g stroke="${COL.iug}" stroke-width="2" fill="#fff"><line x1="-16" y1="-8" x2="-16" y2="8"/><line x1="-16" y1="0" x2="-6" y2="0"/><circle cx="4" r="10"/></g>`},
+ ll1:{n:'Llave de 1 efecto',g:'ele',d:{lab:'a',h:'1,10'},f:()=>`<g stroke="${COL.iug}" stroke-width="2" fill="none"><circle r="4" fill="#fff"/><line x1="3" y1="-3" x2="12" y2="-14"/><line x1="12" y1="-14" x2="17" y2="-10"/></g>`},
+ ll2:{n:'Llave de 2 efectos',g:'ele',d:{lab:'ab',h:'1,10'},f:()=>`<g stroke="${COL.iug}" stroke-width="2" fill="none"><circle r="4" fill="#fff"/><line x1="3" y1="-3" x2="12" y2="-14"/><line x1="12" y1="-14" x2="17" y2="-10"/><line x1="8" y1="-9" x2="13" y2="-5"/></g>`},
+ tomaS:{n:'Toma simple',g:'ele',hc:COL.tug,d:{h:'0,40'},f:()=>`<g stroke="${COL.tug}" stroke-width="2" fill="none"><line x1="-14" y1="0" x2="14" y2="0"/><path d="M-10,0 A10,10 0 0 1 10,0"/><line x1="0" y1="-10" x2="0" y2="-19"/></g>`},
+ tomaD:{n:'Toma doble',g:'ele',hc:COL.tug,d:{h:'0,40'},f:()=>`<g stroke="${COL.tug}" stroke-width="2" fill="none"><line x1="-14" y1="0" x2="14" y2="0"/><path d="M-10,0 A10,10 0 0 1 10,0"/><line x1="-3" y1="-10" x2="-3" y2="-19"/><line x1="3" y1="-10" x2="3" y2="-19"/></g>`},
+ tomaE:{n:'Toma especial (TUE / ACU)',g:'ele',hc:COL.acu,d:{h:'2,20'},f:()=>`<g stroke="${COL.acu}" stroke-width="2"><line x1="-14" y1="0" x2="14" y2="0"/><path d="M-10,0 A10,10 0 0 1 10,0Z" fill="${COL.acu}"/><line x1="0" y1="-10" x2="0" y2="-19"/></g>`},
+ timbre:{n:'Timbre',g:'ele',d:{},f:()=>`<circle cx="-15" r="5" fill="${COL.iug}"/><rect x="-8" y="-9" width="22" height="18" fill="#fff" stroke="${COL.iug}" stroke-width="2"/>`+TX(3,5,13,'T',COL.iug,'middle',700)},
+ puls:{n:'Pulsador de timbre',g:'ele',d:{h:'1,10'},f:()=>`<circle r="5" fill="${COL.iug}"/><line x1="0" y1="0" x2="10" y2="-12" stroke="${COL.iug}" stroke-width="2"/>`+TX(12,-12,11,'T',COL.iug,'start',700)},
+ caja:{n:'Caja de paso',g:'ele',d:{},f:()=>`<g stroke="${COL.ink}" stroke-width="2" fill="#fff"><rect x="-9" y="-9" width="18" height="18"/><line x1="-9" y1="-9" x2="9" y2="9"/><line x1="9" y1="-9" x2="-9" y2="9"/></g>`},
+ pat:{n:'Sistema de PAT (jabalina)',g:'ele',d:{},f:()=>`<g stroke="${COL.pe}" stroke-width="2.5"><line x1="0" y1="-14" x2="0" y2="0"/><line x1="-12" y1="0" x2="12" y2="0"/><line x1="-8" y1="5" x2="8" y2="5"/><line x1="-4" y1="10" x2="4" y2="10"/></g>`}
+};
+const FURN=[['Cama 2 pl.',160,200],['Cama 1 pl.',90,190],['Mesa',120,80],['Sillón',180,80],['Mesada',200,60],['Heladera',70,70],['Cocina',60,60],['Inodoro',40,60],['Lavatorio',50,40],['Ducha',80,80],['Placard',150,60]];
+const PL=()=>S.plan||(S.plan={items:[],walls:[],cables:[],nid:1});
+const svg=$('pl');let VB={x:-120,y:-120,w:1300,h:900},selId=null,mode='sel',cFrom=null,draft=null,drag=null,cType='IUG';const UNDO=[];const ptrs=new Map();let pinch=null;
+const snap=(v,g=10)=>Math.round(v/g)*g;
+const fi=id=>PL().items.find(o=>o.id===id),fw=id=>PL().walls.find(o=>o.id===id),fc=id=>PL().cables.find(o=>o.id===id);
+const push=()=>{UNDO.push(JSON.stringify(PL()));if(UNDO.length>60)UNDO.shift()};
+const setVB=()=>{const r=svg.getBoundingClientRect();if(r.width>0&&r.height>0)VB.h=VB.w*r.height/r.width;svg.setAttribute('viewBox',`${VB.x} ${VB.y} ${VB.w} ${VB.h}`)};
+const wpt=e=>{const r=svg.getBoundingClientRect();return{x:VB.x+(e.clientX-r.left)/r.width*VB.w,y:VB.y+(e.clientY-r.top)/r.height*VB.h}};
+function snapPt(p){let x=snap(p.x),y=snap(p.y);for(const w of PL().walls)for(const q of[[w.x1,w.y1],[w.x2,w.y2]])if(Math.hypot(q[0]-p.x,q[1]-p.y)<18){x=q[0];y=q[1]}return{x,y}}
+function addItem(k,x,y,ex={}){const it=Object.assign({id:PL().nid++,k,x,y,r:0},JSON.parse(JSON.stringify(SYM[k].d)),ex);PL().items.push(it);return it}
+function qb(c){const A=fi(c.a),B=fi(c.b);if(!A||!B)return null;const mx=(A.x+B.x)/2,my=(A.y+B.y)/2,dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L;const cx=mx+nx*c.bend*L,cy=my+ny*c.bend*L;return{A,B,cx,cy,mx,my,nx,ny,L,px:.25*A.x+.5*cx+.25*B.x,py:.25*A.y+.5*cy+.25*B.y}}
+const qlen=q=>{let s=0,px=q.A.x,py=q.A.y;for(let i=1;i<=16;i++){const t=i/16,x=(1-t)*(1-t)*q.A.x+2*(1-t)*t*q.cx+t*t*q.B.x,y=(1-t)*(1-t)*q.A.y+2*(1-t)*t*q.cy+t*t*q.B.y;s+=Math.hypot(x-px,y-py);px=x;py=y}return s};
+function bboxIt(it){const s=SYM[it.k];let w=44,h=44,ox=0,oy=0;if(it.k==='mueble'){w=it.w;h=it.hh}else if(it.k==='ventana'){w=it.w;h=20}else if(it.k==='puerta'){w=it.w;h=it.w;ox=it.w/2;oy=-it.w/2}else if(it.k==='texto'){const fs=it.fs||28;w=Math.max(40,String(it.lab).length*fs*.58);h=fs*1.3;oy=-fs*.35}
+ const a=(it.r||0)*Math.PI/180,c=Math.cos(a),sn=Math.sin(a);const cx=it.x+ox*c-oy*sn,cy=it.y+ox*sn+oy*c;const W=Math.abs(w*c)+Math.abs(h*sn),H=Math.abs(w*sn)+Math.abs(h*c);return{x:cx-W/2,y:cy-H/2,w:W,h:H}}
+function cableSVG(c,scr){const q=qb(c);if(!q)return'';const t=CT[c.t]||CT.IUG;const d=`M${q.A.x},${q.A.y} Q${q.cx},${q.cy} ${q.B.x},${q.B.y}`;let ang=Math.atan2(q.B.y-q.A.y,q.B.x-q.A.x)*180/Math.PI;if(ang>90)ang-=180;if(ang<-90)ang+=180;
+ const off=c.bend>=0?-6:14;const lab=c.l?`<g transform="translate(${q.px} ${q.py}) rotate(${ang})">${TX(0,off,12,c.l,t.c,'middle')}</g>`:'';
+ return `<g data-t="c" data-id="${c.id}">${scr?`<path d="${d}" stroke="transparent" stroke-width="18" fill="none"/>`:''}<path d="${d}" fill="none" stroke="${t.c}" stroke-width="${c.id===selId?3.5:2}" ${c.t==='PAT'?'stroke-dasharray="10 5"':''}/>${lab}</g>`}
+function itemSVG(it,scr){const s=SYM[it.k];if(!s)return'';const b=bboxIt(it);
+ let ex='';if(s.g==='ele'){if(it.lab)ex+=TX(it.x+15,it.y-15,14,it.lab,COL.iug,'start',700);if(it.h)ex+=TX(it.x+15,it.y+26,11,'h='+it.h,s.hc||COL.iug)}
+ return `<g data-t="i" data-id="${it.id}">${scr?`<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" fill="transparent"/>`:''}<g transform="translate(${it.x} ${it.y}) rotate(${it.r||0})">${s.f(it)}</g>${ex}${scr&&it.id===selId?`<rect x="${b.x-4}" y="${b.y-4}" width="${b.w+8}" height="${b.h+8}" fill="none" stroke="#1f78bd" stroke-width="2" stroke-dasharray="6 4" vector-effect="non-scaling-stroke"/>`:''}${scr&&it.id===cFrom?`<circle cx="${it.x}" cy="${it.y}" r="24" fill="rgba(31,120,189,.15)" stroke="#1f78bd" stroke-width="2"/>`:''}</g>`}
+function wallSVG(w,scr){const sel=w.id===selId;return `<g data-t="w" data-id="${w.id}">${scr?`<line x1="${w.x1}" y1="${w.y1}" x2="${w.x2}" y2="${w.y2}" stroke="transparent" stroke-width="${(w.th||15)+22}"/>`:''}<line x1="${w.x1}" y1="${w.y1}" x2="${w.x2}" y2="${w.y2}" stroke="${sel&&scr?'#1f78bd':COL.ink}" stroke-width="${w.th||15}" stroke-linecap="square"/>${sel&&scr?TX((w.x1+w.x2)/2,(w.y1+w.y2)/2-16,16,f1(Math.hypot(w.x2-w.x1,w.y2-w.y1)/100,2)+' m','#1f78bd','middle',700):''}</g>`}
+function planInner(scr){const p=PL();const arqI=p.items.filter(i=>SYM[i.k]&&SYM[i.k].g==='arq'),eleI=p.items.filter(i=>SYM[i.k]&&SYM[i.k].g==='ele');
+ return p.walls.map(w=>wallSVG(w,scr)).join('')+arqI.map(i=>itemSVG(i,scr)).join('')+p.cables.map(c=>cableSVG(c,scr)).join('')+eleI.map(i=>itemSVG(i,scr)).join('')}
+function draw(){const sel=fc(selId);const q=sel?qb(sel):null;
+ svg.innerHTML=`<defs><pattern id="gs" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#eef1f4" stroke-width="1"/></pattern><pattern id="gm" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M100 0H0V100" fill="none" stroke="#d3dae1" stroke-width="1.5"/></pattern></defs><rect data-t="bg" x="-20000" y="-20000" width="40000" height="40000" fill="#fff"/><rect x="-20000" y="-20000" width="40000" height="40000" fill="url(#gs)" pointer-events="none"/><rect x="-20000" y="-20000" width="40000" height="40000" fill="url(#gm)" pointer-events="none"/>`+planInner(true)+(draft?`<line x1="${draft.x1}" y1="${draft.y1}" x2="${draft.x2}" y2="${draft.y2}" stroke="#1f78bd" stroke-width="15" stroke-linecap="square" opacity=".6"/>${TX((draft.x1+draft.x2)/2,(draft.y1+draft.y2)/2-18,18,f1(Math.hypot(draft.x2-draft.x1,draft.y2-draft.y1)/100,2)+' m','#1f78bd','middle',700)}`:'')+moveHandle()+(q?`<circle data-t="h" cx="${q.px}" cy="${q.py}" r="13" fill="#fff" stroke="#1f78bd" stroke-width="3"/>`:'');
+ setVB();counts()}
+const HIC=(hx,hy,u,fill)=>{const R_=22*u,a=9*u,k=4*u;return `<circle cx="${hx}" cy="${hy}" r="${R_*1.9}" fill="transparent"/><circle cx="${hx}" cy="${hy}" r="${R_}" fill="${fill}" stroke="#fff" stroke-width="${3*u}"/><path d="M${hx-a},${hy} H${hx+a} M${hx},${hy-a} V${hy+a} M${hx-a+k},${hy-k} L${hx-a},${hy} L${hx-a+k},${hy+k} M${hx+a-k},${hy-k} L${hx+a},${hy} L${hx+a-k},${hy+k} M${hx-k},${hy-a+k} L${hx},${hy-a} L${hx+k},${hy-a+k} M${hx-k},${hy+a-k} L${hx},${hy+a} L${hx+k},${hy+a-k}" stroke="#fff" stroke-width="${2.2*u}" fill="none" stroke-linecap="round"/>`};
+function wallHandles(w){const r=svg.getBoundingClientRect(),u=VB.w/(r.width||600),L=Math.hypot(w.x2-w.x1,w.y2-w.y1)||1,dx=(w.x2-w.x1)/L,dy=(w.y2-w.y1)/L,nx=-dy,ny=dx,mx=(w.x1+w.x2)/2,my=(w.y1+w.y2)/2,o=46*u;
+ const mh=`<g data-t="m"><line x1="${mx}" y1="${my}" x2="${mx+nx*o}" y2="${my+ny*o}" stroke="#1f78bd" stroke-width="${2*u}" stroke-dasharray="${5*u} ${4*u}"/>${HIC(mx+nx*o,my+ny*o,u,'#1f78bd')}</g>`;
+ const eh=(t,x,y,sx,sy)=>{const hx=x+sx*o,hy=y+sy*o;return `<g data-t="${t}"><line x1="${x}" y1="${y}" x2="${hx}" y2="${hy}" stroke="#e8742a" stroke-width="${2*u}" stroke-dasharray="${5*u} ${4*u}"/><circle cx="${x}" cy="${y}" r="${6*u}" fill="#e8742a"/><circle cx="${hx}" cy="${hy}" r="${22*1.9*u}" fill="transparent"/><circle cx="${hx}" cy="${hy}" r="${18*u}" fill="#e8742a" stroke="#fff" stroke-width="${3*u}"/><path d="M${hx-dx*8*u},${hy-dy*8*u} L${hx+dx*8*u},${hy+dy*8*u}" stroke="#fff" stroke-width="${3*u}" stroke-linecap="round"/></g>`};
+ return eh('e1',w.x1,w.y1,-dx,-dy)+eh('e2',w.x2,w.y2,dx,dy)+mh}
+function moveHandle(){const wl=fw(selId);if(wl&&mode==='sel')return wallHandles(wl);const it=fi(selId);if(!it||mode!=='sel')return'';const r=svg.getBoundingClientRect(),u=VB.w/(r.width||600),b=bboxIt(it),hx=b.x+b.w+34*u,hy=b.y+b.h+34*u,R_=22*u,a=9*u,k=4*u;
+ return `<g data-t="m"><line x1="${it.x}" y1="${it.y}" x2="${hx}" y2="${hy}" stroke="#1f78bd" stroke-width="${2*u}" stroke-dasharray="${5*u} ${4*u}"/><circle cx="${hx}" cy="${hy}" r="${R_*1.9}" fill="transparent"/><circle cx="${hx}" cy="${hy}" r="${R_}" fill="#1f78bd" stroke="#fff" stroke-width="${3*u}"/><path d="M${hx-a},${hy} H${hx+a} M${hx},${hy-a} V${hy+a} M${hx-a+k},${hy-k} L${hx-a},${hy} L${hx-a+k},${hy+k} M${hx+a-k},${hy-k} L${hx+a},${hy} L${hx+a-k},${hy+k} M${hx-k},${hy-a+k} L${hx},${hy-a} L${hx+k},${hy-a+k} M${hx-k},${hy+a-k} L${hx},${hy+a} L${hx+k},${hy+a-k}" stroke="#fff" stroke-width="${2.2*u}" fill="none" stroke-linecap="round"/></g>`}
+function counts(){const it=PL().items,n=k=>it.filter(i=>i.k===k).length;const iug=n('bocaT')+n('bocaP')+n('timbre'),tug=n('tomaS')+n('tomaD'),tue=n('tomaE');
+ $('plcount').innerHTML=`En el plano: <b>${iug} IUG</b> (bocas + timbre) · <b>${tug} TUG</b> · <b>${tue} TUE/ACU</b>`+(R.tI!=null?` — Paso 4 pide ${R.tI} IUG y ${R.tT} TUG `+ok(iug>=R.tI&&tug>=R.tT,'✓','faltan bocas'):'')}
+const HINT={sel:'Arrastrá un componente desde la barra hasta el plano (o tocalo y aparece en el centro). Tocá algo para editarlo; arrastralo para moverlo. Arrastrá el fondo para desplazarte; con dos dedos hacés zoom.',wall:'Apoyá el dedo donde empieza la pared y arrastrá hasta donde termina. Se alinea sola en horizontal o vertical y se engancha a las puntas de otras paredes.',cable:'Elegí el tipo de cable. Tocá un componente y después otro: se dibuja la canalización. Seguí tocando para encadenar. Tocá el fondo para cortar. Para curvarlo, en Mover tocá el cable y arrastrá el punto blanco.',text:'Tocá el plano donde va el nombre del ambiente.'};
+function setMode(m){mode=m;cFrom=null;document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===m));$('ctype').style.display=m==='cable'?'':'none';$('hint').textContent=HINT[m];draw()}
+$('ctype').innerHTML=Object.entries(CT).map(([k,v])=>`<option value="${k}">${v.n}</option>`).join('');
+$('ctype').addEventListener('change',e=>{cType=e.target.value});
+const ico=(k,ex)=>{const it=Object.assign({k,x:0,y:0,r:0},JSON.parse(JSON.stringify(SYM[k].d)),ex||{});let sc=1,vb='-24 -24 48 42';if(k==='mueble'){sc=34/Math.max(it.w,it.hh);it.lab=''}if(k==='puerta')vb='-10 -90 100 100';if(k==='ventana')vb='-70 -40 140 80';return `<svg viewBox="${vb}"><g transform="scale(${sc})">${SYM[k].f(it)}</g></svg>`};
+$('pal').innerHTML=`<span class="gl">Arquitectura</span>`+['puerta','ventana'].map(k=>`<button data-add="${k}">${ico(k)}${SYM[k].n}</button>`).join('')+FURN.map((f,i)=>`<button data-furn="${i}">${ico('mueble',{w:f[1],hh:f[2]})}${f[0]}</button>`).join('')+`<span class="gl">Eléctrico</span>`+Object.keys(SYM).filter(k=>SYM[k].g==='ele').map(k=>`<button data-add="${k}">${ico(k)}${SYM[k].n.replace(/ \(.*\)/,'')}</button>`).join('');
+function placeFromPal(btn,p){push();let it;if(btn.dataset.furn!=null){const f=FURN[+btn.dataset.furn];it=addItem('mueble',snap(p.x,5),snap(p.y,5),{w:f[1],hh:f[2],lab:f[0]})}else it=addItem(btn.dataset.add,snap(p.x,5),snap(p.y,5));selId=it.id;if(mode!=='sel')setMode('sel');draw();props();save()}
+let pd=null;
+$('pal').addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b)return;pd={b,sx:e.clientX,sy:e.clientY,moved:false,g:null}});
+document.addEventListener('pointermove',e=>{if(!pd)return;if(!pd.moved&&Math.hypot(e.clientX-pd.sx,e.clientY-pd.sy)>12){pd.moved=true;pd.g=document.createElement('div');pd.g.className='ghost';pd.g.innerHTML=pd.b.querySelector('svg').outerHTML;document.body.appendChild(pd.g)}if(pd.g){pd.g.style.left=e.clientX+'px';pd.g.style.top=e.clientY+'px'}});
+const palUp=e=>{if(!pd)return;const d=pd;pd=null;if(d.g)d.g.remove();if(e.type==='pointercancel')return;const r=svg.getBoundingClientRect();
+ if(d.moved){if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom)placeFromPal(d.b,wpt(e))}else placeFromPal(d.b,{x:VB.x+VB.w/2,y:VB.y+VB.h/2})};
+document.addEventListener('pointerup',palUp);document.addEventListener('pointercancel',palUp);
+
+svg.addEventListener('pointerdown',e=>{try{svg.setPointerCapture(e.pointerId)}catch(_){}ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+ if(ptrs.size===2){const[a,b]=[...ptrs.values()];pinch={d:Math.hypot(a.x-b.x,a.y-b.y)||1,vb:{...VB},c:{x:(a.x+b.x)/2,y:(a.y+b.y)/2}};drag=null;draft=null;return}
+ const p=wpt(e),tg=e.target.closest('[data-t]'),t=tg?tg.dataset.t:'bg',id=tg&&tg.dataset.id?+tg.dataset.id:null;
+ if(mode==='wall'){const s=snapPt(p);draft={x1:s.x,y1:s.y,x2:s.x,y2:s.y};draw();return}
+ if(mode==='text'){push();const it=addItem('texto',snap(p.x),snap(p.y));selId=it.id;setMode('sel');props();save();return}
+ if(mode==='cable'){if(t==='i'){if(cFrom==null)cFrom=id;else if(cFrom!==id){push();PL().cables.push({id:PL().nid++,a:cFrom,b:id,t:cType,bend:.25,l:CT[cType].l});cFrom=id;save()}}else cFrom=null;draw();return}
+ if(t==='h'&&fc(selId)){drag={k:'bend',id:selId};return}
+ if(t==='m'&&fw(selId)){const w=fw(selId);drag={k:'wall',id:selId,p0:p,o:{...w},arm:true};return}
+ if((t==='e1'||t==='e2')&&fw(selId)){const w=fw(selId),ex=t==='e1'?w.x1:w.x2,ey=t==='e1'?w.y1:w.y2;drag={k:'end',id:selId,which:t,ox:p.x-ex,oy:p.y-ey};return}
+ if(t==='m'&&fi(selId)){const it=fi(selId);drag={k:'item',id:selId,dx:p.x-it.x,dy:p.y-it.y,arm:true};return}
+ if(t==='i'){const same=selId===id;selId=id;const it=fi(id);drag={k:'item',id,dx:p.x-it.x,dy:p.y-it.y,sx:e.clientX,sy:e.clientY,arm:false};if(!same){draw();props()}return}
+ if(t==='w'){const same=selId===id;selId=id;const w=fw(id);drag={k:'wall',id,p0:p,o:{...w},sx:e.clientX,sy:e.clientY,arm:false};if(!same){draw();props()}return}
+ if(t==='c'){selId=id;drag=null;draw();props();return}
+ if(selId!=null){selId=null;props();draw()}drag={k:'pan',sx:e.clientX,sy:e.clientY,vb:{...VB}}});
+svg.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+ if(pinch&&ptrs.size===2){const[a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y)||1,r=svg.getBoundingClientRect(),fx_=(pinch.c.x-r.left)/r.width,fy_=(pinch.c.y-r.top)/r.height;const cx=pinch.vb.x+fx_*pinch.vb.w,cy=pinch.vb.y+fy_*pinch.vb.h;VB.w=Math.min(8000,Math.max(150,pinch.vb.w*pinch.d/d));VB.h=pinch.vb.h*VB.w/pinch.vb.w;VB.x=cx-fx_*VB.w;VB.y=cy-fy_*VB.h;setVB();return}
+ const p=wpt(e);
+ if(draft){const s=snapPt(p);let x2=s.x,y2=s.y;const dx=x2-draft.x1,dy=y2-draft.y1;if(Math.abs(dy)<Math.abs(dx)*.15)y2=draft.y1;else if(Math.abs(dx)<Math.abs(dy)*.15)x2=draft.x1;draft.x2=x2;draft.y2=y2;draw();return}
+ if(!drag)return;
+ if(drag.k==='pan'){const r=svg.getBoundingClientRect();VB.x=drag.vb.x-(e.clientX-drag.sx)/r.width*VB.w;VB.y=drag.vb.y-(e.clientY-drag.sy)/r.height*VB.h;setVB();return}
+ if((drag.k==='item'||drag.k==='wall')&&!drag.arm){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<9)return;drag.arm=true}
+ if(!drag.pushed){push();drag.pushed=true}
+ if(drag.k==='item'){const it=fi(drag.id);it.x=snap(p.x-drag.dx,5);it.y=snap(p.y-drag.dy,5)}
+ else if(drag.k==='end'){const w=fw(drag.id),a=drag.which==='e1';const s=snapPt({x:p.x-drag.ox,y:p.y-drag.oy});let x=s.x,y=s.y;const ox=a?w.x2:w.x1,oy=a?w.y2:w.y1,dx=x-ox,dy=y-oy;if(Math.abs(dy)<Math.abs(dx)*.15)y=oy;else if(Math.abs(dx)<Math.abs(dy)*.15)x=ox;if(Math.hypot(x-ox,y-oy)>=10){if(a){w.x1=x;w.y1=y}else{w.x2=x;w.y2=y}}}
+ else if(drag.k==='wall'){const w=fw(drag.id),dx=snap(p.x-drag.p0.x),dy=snap(p.y-drag.p0.y);Object.assign(w,{x1:drag.o.x1+dx,y1:drag.o.y1+dy,x2:drag.o.x2+dx,y2:drag.o.y2+dy})}
+ else if(drag.k==='bend'){const c=fc(drag.id),q=qb(c);if(q)c.bend=Math.max(-1.5,Math.min(1.5,2*((p.x-q.mx)*q.nx+(p.y-q.my)*q.ny)/q.L))}
+ draw()});
+const svUp=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pinch=null;
+ if(draft){const d=draft;draft=null;if(Math.hypot(d.x2-d.x1,d.y2-d.y1)>=10){push();PL().walls.push({id:PL().nid++,x1:d.x1,y1:d.y1,x2:d.x2,y2:d.y2,th:15});save()}draw()}
+ if(drag){const was=drag;drag=null;if(was.pushed){save();props()}}};
+svg.addEventListener('pointerup',svUp);svg.addEventListener('pointercancel',svUp);
+svg.addEventListener('wheel',e=>{e.preventDefault();const p=wpt(e),f=e.deltaY>0?1.15:1/1.15;const nw=Math.min(8000,Math.max(150,VB.w*f)),k=nw/VB.w;VB.x=p.x-(p.x-VB.x)*k;VB.y=p.y-(p.y-VB.y)*k;VB.w=nw;setVB()},{passive:false});
+const zoom=f=>{const cx=VB.x+VB.w/2,cy=VB.y+VB.h/2;VB.w=Math.min(8000,Math.max(150,VB.w*f));VB.h*=f;VB.x=cx-VB.w/2;VB.y=cy-VB.h/2;setVB()};
+function pbox(){const p=PL();let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;const add=(x,y)=>{x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y)};
+ p.walls.forEach(w=>{add(w.x1,w.y1);add(w.x2,w.y2)});p.items.forEach(i=>{const b=bboxIt(i);add(b.x,b.y);add(b.x+b.w,b.y+b.h+30)});p.cables.forEach(c=>{const q=qb(c);if(q)add(q.px,q.py)});return x0===Infinity?null:{x:x0,y:y0,w:x1-x0,h:y1-y0}}
+function fit(){const b=pbox();if(!b){VB={x:-120,y:-120,w:1300,h:900};setVB();return}const r=svg.getBoundingClientRect(),asp=r.width&&r.height?r.height/r.width:.7;const m=80;let w=b.w+2*m,h=b.h+2*m;if(h/w>asp)w=h/asp;VB.w=w;VB.x=b.x+b.w/2-w/2;VB.h=w*asp;VB.y=b.y+b.h/2-VB.h/2;setVB()}
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+$('bUndo').addEventListener('click',()=>{const s=UNDO.pop();if(s){S.plan=JSON.parse(s);selId=null;draw();props();save()}});
+$('bZo').addEventListener('click',()=>zoom(1.25));$('bZi').addEventListener('click',()=>zoom(.8));$('bFit').addEventListener('click',fit);
+$('bFull').addEventListener('click',()=>{const f=$('ed').classList.toggle('full');$('bFull').textContent=f?'Salir de pantalla completa':'Pantalla completa';document.body.style.overflow=f?'hidden':'';requestAnimationFrame(()=>{setVB();draw()})});
+let clr=0;$('bClear').addEventListener('click',()=>{if(!clr){clr=1;$('bClear').textContent='¿Seguro? Tocá otra vez';setTimeout(()=>{clr=0;$('bClear').textContent='Vaciar plano'},3500);return}clr=0;$('bClear').textContent='Vaciar plano';push();S.plan={items:[],walls:[],cables:[],nid:1};selId=null;draw();props();save()});
+$('bSample').addEventListener('click',()=>{push();S.plan=samplePlan();selId=null;draw();fit();props();save()});
+function samplePlan(){const p={items:[],walls:[],cables:[],nid:1};const old=S.plan;S.plan=p;
+ const W=(x1,y1,x2,y2)=>p.walls.push({id:p.nid++,x1,y1,x2,y2,th:15});
+ W(0,0,1000,0);W(1000,0,1000,700);W(1000,700,0,700);W(0,700,0,0);W(560,0,560,700);
+ addItem('texto',280,330,{lab:'Estar comedor'});addItem('texto',780,330,{lab:'Dormitorio'});
+ addItem('puerta',560,560,{r:90,w:80});addItem('puerta',120,700,{w:90});addItem('ventana',280,0);addItem('ventana',780,700);
+ addItem('mueble',780,180,{w:160,hh:200,lab:'Cama 2 pl.'});addItem('mueble',240,460,{w:120,hh:80,lab:'Mesa'});addItem('mueble',100,120,{w:180,hh:80,lab:'Sillón'});
+ const pil=addItem('pilar',-160,520),tpa=addItem('tpa',-160,600),tpu=addItem('tpu',40,600,{r:90}),pat=addItem('pat',-90,660);
+ const b1=addItem('bocaT',280,250,{lab:'a'}),b2=addItem('bocaT',780,420,{lab:'b'}),l1=addItem('ll1',220,690,{lab:'a'}),l2=addItem('ll1',600,620,{lab:'b',r:90});
+ const t1=addItem('tomaS',15,300,{r:-90}),t2=addItem('tomaD',420,10,{r:180}),t3=addItem('tomaS',985,200,{r:90}),t4=addItem('tomaS',985,520,{r:90});
+ const C=(a,b,t,bend=.25)=>p.cables.push({id:p.nid++,a:a.id,b:b.id,t,bend,l:CT[t].l});
+ C(tpa,tpu,'CS',.1);C(tpu,pat,'PAT',-.2);C(tpu,b1,'IUG');C(b1,b2,'IUG',-.15);C(b1,l1,'RET',.2);C(b2,l2,'RET',.2);C(tpu,t1,'TUG',-.2);C(t1,t2,'TUG',-.25);C(t2,t3,'TUG',.15);C(t3,t4,'TUG',.2);
+ S.plan=old;return p}
+function props(){const el=$('props');const it=fi(selId),w=fw(selId),c=fc(selId);let h='';
+ const pi=(f,l,v,type='text')=>`<div><label for="pp_${f}">${l}</label><input id="pp_${f}" data-pp="${f}" type="${type}" ${type==='number'?'inputmode="decimal"':''} value="${esc(v==null?'':v)}"></div>`;
+ if(it){const s=SYM[it.k];h=`<h3 style="margin:0 0 6px">${s.n}</h3><div class="row">`;
+  if(it.k==='texto')h+=pi('lab','Texto',it.lab)+pi('fs','Tamaño',it.fs||28,'number');
+  else if(it.k==='mueble')h+=pi('lab','Nombre',it.lab)+pi('w','Ancho (cm)',it.w,'number')+pi('hh','Largo (cm)',it.hh,'number');
+  else if(it.k==='puerta'||it.k==='ventana')h+=pi('w','Ancho (cm)',it.w,'number');
+  else h+=pi('lab','Letra / efecto',it.lab||'')+pi('h','Altura h (m)',it.h||'');
+  h+=`</div><div class="mv"><div class="dpad" aria-label="Mover con flechas"><span></span><button data-nudge="0,-1" aria-label="Arriba">↑</button><span></span><button data-nudge="-1,0" aria-label="Izquierda">←</button><span class="c" style="display:grid;place-items:center;text-align:center">mover</span><button data-nudge="1,0" aria-label="Derecha">→</button><span></span><button data-nudge="0,1" aria-label="Abajo">↓</button><span></span></div><div><label for="nstep">Paso de cada toque</label><select id="nstep">${[1,5,10,50].map(v=>`<option value="${v}" ${v===nStep?'selected':''}>${v} cm</option>`).join('')}</select><p class="note" style="margin:6px 0 0">También podés arrastrar el círculo azul que aparece al lado del componente: tu dedo no lo tapa.</p></div></div><div class="tb" style="margin-top:8px"><button data-act="rot">Girar 90°</button><button data-act="dup">Duplicar</button><button data-act="del">Borrar</button></div>`}
+ else if(w){const Lm=Math.hypot(w.x2-w.x1,w.y2-w.y1)/100;h=`<h3 style="margin:0 0 6px">Pared · <span id="wLen">${f1(Lm,2)}</span> m</h3>
+ <div class="row"><div><label for="pp_len">Largo exacto (m)</label><input id="pp_len" data-pp="len" type="number" step="0.01" inputmode="decimal" value="${Math.round(Lm*100)/100}"></div><div><label for="wAnc">Al cambiar el largo, queda fijo</label><select id="wAnc">${[['a','El inicio'],['c','El centro'],['b','El final']].map(o=>`<option value="${o[0]}" ${o[0]===wAnc?'selected':''}>${o[1]}</option>`).join('')}</select></div>${pi('th','Espesor (cm)',w.th||15,'number')}</div>
+ <div class="tb" style="margin-top:8px"><button data-act="shrink">− Acortar</button><button data-act="grow">+ Alargar</button><span class="note">según el paso elegido abajo</span></div>
+ <div class="mv"><div class="dpad" aria-label="Mover la pared"><span></span><button data-nudge="0,-1" aria-label="Arriba">↑</button><span></span><button data-nudge="-1,0" aria-label="Izquierda">←</button><span class="c" style="display:grid;place-items:center;text-align:center">mover</span><button data-nudge="1,0" aria-label="Derecha">→</button><span></span><button data-nudge="0,1" aria-label="Abajo">↓</button><span></span></div><div><label for="nstep">Paso de cada toque</label><select id="nstep">${[1,5,10,50].map(v=>`<option value="${v}" ${v===nStep?'selected':''}>${v} cm</option>`).join('')}</select><p class="note" style="margin:6px 0 0">Círculo azul: mueve la pared entera. Círculos naranjas de las puntas: alargan o acortan ese extremo.</p></div></div>
+ <div class="tb" style="margin-top:8px"><button data-act="wrot">Girar 90°</button><button data-act="dup">Duplicar</button><button data-act="del">Borrar</button></div>`}
+ else if(c){h=`<h3 style="margin:0 0 6px">Cable · ${f1(qlen(qb(c)||{A:{x:0,y:0},B:{x:0,y:0},cx:0,cy:0})/100,2)} m aprox.</h3><div class="row"><div><label for="pp_t">Tipo</label><select id="pp_t" data-pp="t">${Object.entries(CT).map(([k,v])=>`<option value="${k}" ${k===c.t?'selected':''}>${v.n}</option>`).join('')}</select></div>${pi('l','Leyenda',c.l)}</div><div class="tb" style="margin-top:8px"><button data-act="flip">Curvar al otro lado</button><button data-act="del">Borrar</button></div>`}
+ el.innerHTML=h}
+let ppPushed=false,nStep=5,nT=null,wAnc='a';
+function setLen(w,Lcm){const L0=Math.hypot(w.x2-w.x1,w.y2-w.y1)||1,dx=(w.x2-w.x1)/L0,dy=(w.y2-w.y1)/L0;Lcm=Math.max(10,Math.round(Lcm));if(wAnc==='a'){w.x2=w.x1+dx*Lcm;w.y2=w.y1+dy*Lcm}else if(wAnc==='b'){w.x1=w.x2-dx*Lcm;w.y1=w.y2-dy*Lcm}else{const mx=(w.x1+w.x2)/2,my=(w.y1+w.y2)/2;w.x1=mx-dx*Lcm/2;w.y1=my-dy*Lcm/2;w.x2=mx+dx*Lcm/2;w.y2=my+dy*Lcm/2}['x1','y1','x2','y2'].forEach(k=>w[k]=Math.round(w[k]*10)/10)}
+const nudge=(dx,dy)=>{const it=fi(selId),w=fw(selId);if(it){it.x+=dx*nStep;it.y+=dy*nStep}else if(w){w.x1+=dx*nStep;w.x2+=dx*nStep;w.y1+=dy*nStep;w.y2+=dy*nStep}else return;draw()};
+$('props').addEventListener('pointerdown',e=>{const b=e.target.closest('[data-nudge]');if(!b)return;e.preventDefault();push();const[dx,dy]=b.dataset.nudge.split(',').map(Number);nudge(dx,dy);clearTimeout(nT);nT=setTimeout(function rep_(){nudge(dx,dy);nT=setTimeout(rep_,90)},380)});
+const stopN=()=>{if(nT){clearTimeout(nT);nT=null;save()}};['pointerup','pointercancel','pointerleave'].forEach(ev=>$('props').addEventListener(ev,stopN));
+$('props').addEventListener('change',e=>{if(e.target.id==='nstep')nStep=+e.target.value;if(e.target.id==='wAnc')wAnc=e.target.value});
+$('props').addEventListener('focusin',()=>{ppPushed=false});
+$('props').addEventListener('input',e=>{const f=e.target.dataset.pp;if(!f)return;if(!ppPushed){push();ppPushed=true}const o=fi(selId)||fw(selId)||fc(selId);if(!o)return;if(f==='len'){const v=parseFloat(String(e.target.value).replace(',','.'));if(v>0){setLen(o,v*100);$('wLen').textContent=f1(v,2);draw();save()}return}const num=['fs','w','hh','th'].includes(f);o[f]=num?(parseFloat(e.target.value)||0):e.target.value;if(f==='t'&&fc(selId)){o.l=CT[o.t].l;$('pp_l').value=o.l}draw();save()});
+$('props').addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;push();const p=PL(),it=fi(selId);
+ if(a.dataset.act==='del'){p.items=p.items.filter(o=>o.id!==selId);p.walls=p.walls.filter(o=>o.id!==selId);p.cables=p.cables.filter(o=>o.id!==selId&&o.a!==selId&&o.b!==selId);selId=null}
+ else if(a.dataset.act==='rot'&&it)it.r=((it.r||0)+90)%360;
+ else if(a.dataset.act==='dup'&&it){const n=JSON.parse(JSON.stringify(it));n.id=p.nid++;n.x+=40;n.y+=40;p.items.push(n);selId=n.id}
+ else if((a.dataset.act==='grow'||a.dataset.act==='shrink')&&fw(selId)){const w=fw(selId);setLen(w,Math.hypot(w.x2-w.x1,w.y2-w.y1)+(a.dataset.act==='grow'?1:-1)*nStep)}
+ else if(a.dataset.act==='wrot'&&fw(selId)){const w=fw(selId),mx=(w.x1+w.x2)/2,my=(w.y1+w.y2)/2,r=(x,y)=>[mx-(y-my),my+(x-mx)];[w.x1,w.y1]=r(w.x1,w.y1);[w.x2,w.y2]=r(w.x2,w.y2)}
+ else if(a.dataset.act==='dup'&&fw(selId)){const n=JSON.parse(JSON.stringify(fw(selId)));n.id=p.nid++;n.x1+=40;n.x2+=40;n.y1+=40;n.y2+=40;p.walls.push(n);selId=n.id}
+ else if(a.dataset.act==='flip'){const c=fc(selId);if(c)c.bend=-c.bend}
+ draw();props();save()});
+new ResizeObserver(()=>{setVB()}).observe(svg);
+$('dplano').addEventListener('toggle',()=>{if($('dplano').open){draw();if(!pbox())fit()}});
+
+/* ===================== PDF ===================== */
+function printSVG(maxW,maxH){const b=pbox();if(!b)return null;const m=40,bw=b.w+2*m,bh=b.h+2*m,sc=Math.min(maxW/bw,maxH/bh);const W=Math.round(bw*sc),H=Math.round(bh*sc);
+ return{s:`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="${b.x-m} ${b.y-m} ${bw} ${bh}"><rect x="${b.x-m}" y="${b.y-m}" width="${bw}" height="${bh}" fill="#fff"/>${planInner(false)}</svg>`,W,H,sc}}
+function legendSVG(W){const p=PL();const used=Object.keys(SYM).filter(k=>SYM[k].g==='ele'&&p.items.some(i=>i.k===k));const ct=Object.keys(CT).filter(k=>p.cables.some(c=>c.t===k));
+ const rows=used.map(k=>({ic:`<g transform="translate(26 0)">${SYM[k].f(Object.assign({k},JSON.parse(JSON.stringify(SYM[k].d))))}</g>`,t:SYM[k].n})).concat(ct.map(k=>({ic:`<line x1="4" y1="0" x2="48" y2="0" stroke="${CT[k].c}" stroke-width="3" ${k==='PAT'?'stroke-dasharray="8 4"':''}/>`,t:`${CT[k].n}: ${CT[k].l}`})));
+ rows.push({ic:TX(26,5,14,'h=','#1f5fd1','middle',700),t:'Altura de boca (m)'});
+ const rh=40,H=rows.length*rh+10;return{s:`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="#fff"/>${rows.map((r,i)=>`<g transform="translate(0 ${i*rh+26})">${r.ic}${TX(62,6,16,r.t,'#222')}</g>`).join('')}</svg>`,W,H}}
+function uniSVG(){const C=R.C||[],n=Math.max(1,C.length),sp=Math.min(190,Math.max(150,700/n)),W=Math.max(1060,140+n*sp+260),x0=300,L=(x1,y1,x2,y2,c='#111',w=2.5)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}"/>`,
+ SW=(x,y)=>L(x,y,x,y+16)+L(x,y+16,x+16,y+40)+L(x,y+46,x,y+62)+L(x-6,y+10,x+6,y+22,'#111',2),T=(x,y,t,s=17,a='start',c='#111',w=400)=>TX(x,y,s,t,c,a,w),BX=(x,y,w,h)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="10 6"/>`;
+ let s='';s+=`<rect x="${x0-50}" y="10" width="100" height="40" fill="#fff" stroke="#111" stroke-width="2.5"/>`+T(x0,38,'RDD',20,'middle','#111',700)+L(x0,50,x0,80)+`<rect x="${x0-10}" y="80" width="20" height="50" fill="#fff" stroke="#111" stroke-width="2.5"/>`+T(x0+24,110,'Fusible aéreo')+L(x0,130,x0,160)+`<rect x="${x0-44}" y="160" width="88" height="60" fill="#fff" stroke="#111" stroke-width="2.5"/>`+T(x0,185,'MEDIDOR',14,'middle','#111',700)+T(x0,208,'kWh',16,'middle')+L(x0,220,x0,270)+T(x0+16,250,'2x4 mm² IRAM 247-3',16);
+ s+=BX(x0-230,270,460,110)+T(x0-220,295,'TPA',17,'start','#111',700)+SW(x0,285)+T(x0+30,315,`ITM 01  C2x${R.InCS||25} A`,17)+T(x0+30,338,'Icc 6000 A',15)+L(x0,347,x0,440)+T(x0+16,410,`CS  2x${R.sU||4} mm² IRAM 2178-1`,16);
+ const yb=440,top=yb,bus=600,busL=120,busR=busL+(n-1)*sp;
+ s+=T(x0-220,top+25,'TPU · IP41',17,'start','#111',700)+SW(x0,top+20)+`<rect x="${x0+20}" y="${top+30}" width="16" height="16" fill="none" stroke="#111" stroke-width="2"/>`+T(x0+46,top+48,`ID 01  2x${R.ID||25} A  30 mA`,17)+L(x0,top+82,x0,bus)+L(Math.min(busL,x0),bus,Math.max(busR,x0),bus,'#111',3)+T(Math.min(busL,x0),bus-10,'Puente peine',14);
+ C.forEach((c,i)=>{const x=busL+i*sp;s+=L(x,bus,x,bus+30)+SW(x,bus+30)+T(x+10,bus+118,`PIA 0${i+1}`,15,'start','#111',700)+T(x+10,bus+138,`${c.d.curva}2x${c.In} A`,15)+T(x+10,bus+158,`Icc ${c.d.icc}`,14)+L(x,bus+92,x,bus+250)+T(x+8,bus+200,`2x${sx(c.d.sec)}+Pe`,14)+`<path d="M${x-7},${bus+238} L${x},${bus+252} L${x+7},${bus+238}" fill="none" stroke="#111" stroke-width="2"/>`+T(x,bus+278,c.n,15,'middle','#111',700)});
+ const xd=Math.max(busR,x0)+180;s+=L(x0,top+10,xd,top+10)+L(xd,top+10,xd,top+30)+SW(xd,top+30)+T(xd+20,top+62,'ITM 02  C2x25 A',15)+T(xd+20,top+82,'Icc 6000 A',14)+L(xd,top+92,xd,top+130)+`<rect x="${xd-12}" y="${top+130}" width="24" height="60" fill="#fff" stroke="#111" stroke-width="2.5"/>`+L(xd-12,top+180,xd+12,top+140)+T(xd+22,top+150,'DPS',15,'start','#111',700)+T(xd+22,top+170,'245 V – 40 kA',14)+L(xd,top+190,xd,bus+150,COL.pe,3)+`<rect x="${xd-50}" y="${bus+150}" width="100" height="16" fill="#fff" stroke="${COL.pe}" stroke-width="3"/>`+T(xd,bus+186,'Barra PE',14,'middle',COL.pe)+L(xd+50,bus+158,xd+120,bus+158,COL.pe,3)+L(xd+120,bus+158,xd+120,bus+200,COL.pe,3)+L(xd+100,bus+200,xd+140,bus+200,COL.pe,3)+L(xd+107,bus+208,xd+133,bus+208,COL.pe,3)+L(xd+114,bus+216,xd+126,bus+216,COL.pe,3)+T(xd+120,bus+242,'PAT IRAM 2309',14,'middle',COL.pe)+T(xd+120,bus+262,`PE ${R.sU||4} mm²`,14,'middle',COL.pe)+T(xd-40,bus+300,'Reserva no equipada 50 %',14,'middle');
+ s+=BX(Math.min(busL,x0)-60,top,Math.max(busR,xd+150)-Math.min(busL,x0)+120,bus+330-top);
+ const H=bus+350;return{s:`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="#fff"/>${s}</svg>`,W,H}}
+const svgImg=s=>new Promise((res,rej)=>{const u=URL.createObjectURL(new Blob([s],{type:'image/svg+xml'}));const im=new Image();im.onload=()=>{res(im);setTimeout(()=>URL.revokeObjectURL(u),1000)};im.onerror=()=>rej(new Error('svg'));im.src=u});
+const PX=1240,PY=1754,MG=90;
+class Doc{constructor(){this.pages=[];this.np()}
+ np(land){const c=document.createElement('canvas');c.width=land?PY:PX;c.height=land?PX:PY;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);this.c=c;this.x=x;this.y=MG;this.pages.push({c,land:!!land});return this}
+ font(s,w=400){this.x.font=`${w} ${s}px ${FONT}`}
+ need(h){if(this.y+h>this.c.height-MG-30)this.np()}
+ wrap(t,mw){const out=[];String(t).split('\n').forEach(par=>{const ws=par.split(' ');let l='';for(const w of ws){const tt=l?l+' '+w:w;if(this.x.measureText(tt).width>mw&&l){out.push(l);l=w}else l=tt}out.push(l)});return out}
+ h1(t){this.need(80);this.font(40,700);this.x.fillStyle='#111';this.x.fillText(t,MG,this.y+40);this.y+=58;this.x.fillStyle=COL.cs;this.x.fillRect(MG,this.y,this.c.width-2*MG,5);this.y+=26}
+ h2(t){this.need(70);this.y+=8;this.font(27,700);this.x.fillStyle='#1f3b57';this.x.fillText(t,MG,this.y+27);this.y+=44}
+ p(t,s=20,col='#222',w=400){this.font(s,w);for(const l of this.wrap(t,this.c.width-2*MG)){this.need(s*1.45);this.font(s,w);this.x.fillStyle=col;this.x.fillText(l,MG,this.y+s);this.y+=s*1.45}this.y+=6}
+ table(cols,rows){const Wt=this.c.width-2*MG,s=18,pad=8,ws=cols.map(c=>c.w*Wt);
+  const rh=(r,b)=>{this.font(s,b?700:400);let mx=1;r.forEach((v,i)=>{mx=Math.max(mx,this.wrap(String(v),ws[i]-2*pad).length)});return mx*s*1.35+2*pad};
+  const dr=(r,head)=>{const b=head||r._b,h=rh(r,b);let xx=MG;if(head){this.x.fillStyle='#e9eef3';this.x.fillRect(MG,this.y,Wt,h)}else if(r._b){this.x.fillStyle='#f6f3ee';this.x.fillRect(MG,this.y,Wt,h)}
+   r.forEach((v,i)=>{this.font(s,b?700:400);this.x.fillStyle='#111';this.wrap(String(v),ws[i]-2*pad).forEach((l,j)=>{const tw=this.x.measureText(l).width;this.x.fillText(l,cols[i].al==='r'?xx+ws[i]-pad-tw:xx+pad,this.y+pad+s+j*s*1.35)});xx+=ws[i]});
+   this.x.strokeStyle='#c4ccd4';this.x.lineWidth=1.5;this.x.strokeRect(MG,this.y,Wt,h);let x2=MG;ws.slice(0,-1).forEach(w=>{x2+=w;this.x.beginPath();this.x.moveTo(x2,this.y);this.x.lineTo(x2,this.y+h);this.x.stroke()});this.y+=h};
+  const hd=cols.map(c=>c.t);this.need(rh(hd,1)+(rows[0]?rh(rows[0]):0));dr(hd,1);for(const r of rows){if(this.y+rh(r)>this.c.height-MG-30){this.np();dr(hd,1)}dr(r)}this.y+=20}
+ img(im,w,h){if(this.y+h>this.c.height-MG-30)this.np();this.x.drawImage(im,MG+(this.c.width-2*MG-w)/2,this.y,w,h);this.y+=h+16}
+}
+const bold=a=>(a._b=1,a);
+function materials(){const p=PL(),n=k=>p.items.filter(i=>i.k===k).length,C=R.C||[],L={};p.cables.forEach(c=>{const q=qb(c);if(q)L[c.t]=(L[c.t]||0)+qlen(q)/100});const m=v=>Math.ceil((v||0)*1.1);
+ const rows=[];const a=(q,u,d)=>{if(q>0)rows.push([String(q),u,d])};
+ rows.push(bold(['','','Circuito seccional y acometida']));a(1,'u.','Pilar / gabinete TPA según distribuidora');a(1,'u.',`ITM C2x${R.InCS} A Icc 6000 A (TPA)`);a(Math.ceil((+S.L||0)*1.1)+2,'m',`Cable subterráneo IRAM 2178-1 2x${R.sU} mm²`);if(S.can==='ent'){a(1,'u.','Cinta de peligro, ladrillos y arena para zanja')}
+ rows.push(bold(['','','Tablero del usuario (TPU)']));a(1,'u.',`Gabinete TPU IP41 para ${Math.ceil((C.length+4)*1.5)} módulos (reserva 50 %)`);a(1,'u.',`Interruptor diferencial 2x${R.ID} A 30 mA`);C.forEach((c,i)=>a(1,'u.',`PIA 0${i+1} ${c.d.curva}2x${c.In} A Icc ${c.d.icc} A (${c.n})`));a(1,'u.','ITM C2x25 A + descargador de sobretensiones 245 V 40 kA');a(1,'u.','Bornera / barra de PE');
+ rows.push(bold(['','','Puesta a tierra']));a(1,'u.','Jabalina de cobre IRAM 2309 con tomacable');a(1,'u.','Cámara de inspección');a(m(L.PAT)||3,'m',`Cable verde-amarillo IRAM NM 247-3 ${R.sU} mm²`);
+ rows.push(bold(['','','Bocas y elementos de conexión final (según plano)']));a(n('bocaT'),'u.','Boca de techo: caja octogonal + portalámparas');a(n('bocaP'),'u.','Boca de pared (aplique): caja + portalámparas');a(n('ll1'),'u.','Llave de 1 efecto (módulo + caja rectangular)');a(n('ll2'),'u.','Llave de 2 efectos');a(n('tomaS'),'u.','Tomacorriente simple 10 A 2P+T');a(n('tomaD'),'u.','Tomacorriente doble 10 A 2P+T');a(n('tomaE'),'u.','Tomacorriente especial 20 A 2P+T');a(n('timbre'),'u.','Timbre');a(n('puls'),'u.','Pulsador de timbre');a(n('caja'),'u.','Caja de paso');
+ const cab={};const ad=(s,v)=>{if(v>0)cab[s]=(cab[s]||0)+v};ad('1,5 mm² (F y N)',2*(L.IUG||0));ad('2,5 mm² verde-amarillo (PE)',(L.IUG||0)+(L.TUG||0)+(L.ACU||0));ad('2,5 mm² (F y N)',2*((L.TUG||0)+(L.ACU||0)));ad('1 mm² (retornos)',L.RET||0);ad('1,5 mm² (retornos)',L.RET||0);ad('1 mm² (timbre)',2*(L.TIM||0));
+ const canM=(L.IUG||0)+(L.TUG||0)+(L.ACU||0)+(L.RET||0)+(L.TIM||0);
+ rows.push(bold(['','','Canalizaciones y cables (medido sobre el plano + 10 %)']));a(m(canM),'m','Caño corrugado / rígido (ver paso 10 para el diámetro)');Object.entries(cab).forEach(([k,v])=>a(m(v),'m','Cable IRAM NM 247-3 '+k));
+ rows.push(bold(['','','Varios']));a(1,'u.','Cartel de riesgo eléctrico e identificadores de circuitos');
+ return rows}
+async function buildPDF(){calc();await prog('Escribiendo la memoria de cálculo');const d=new Doc(),x=()=>d.x,g=R.g;
+ const field=(l,v)=>d.table([{t:l,w:.35},{t:v||'—',w:.65}],[]);
+ d.y=MG+40;d.font(54,700);d.x.fillStyle='#111';d.x.fillText('Proyecto de instalación eléctrica',MG,d.y+54);d.y+=80;d.font(30,400);d.x.fillStyle='#555';d.x.fillText('Vivienda unifamiliar · AEA 90364-7-770 · ERSeP Córdoba',MG,d.y+30);d.y+=60;d.x.fillStyle=COL.cs;d.x.fillRect(MG,d.y,PX-2*MG,6);d.y+=50;
+ d.table([{t:'Dato',w:.35},{t:'Valor',w:.65}],[['Proyecto',S.nom||'—'],['Propietario',S.pProp||'—'],['Ubicación',S.pUbic||'—'],['Instalador',S.pInst||'—'],['Matrícula / categoría',S.pMat||'—'],['Fecha',S.pFecha||'—']]);
+ d.h2('Datos principales');d.table([{t:'Concepto',w:.5},{t:'Valor',w:.5,al:'r'}],[['Superficie límite de aplicación (SLA)',R.sla+' m²'],['Grado de electrificación',g.n],['Cantidad de circuitos',String(R.C.length)],['DPMS',f1(R.dp,1)+' VA'],['Potencia activa (cos φ 0,85)',f1(R.kw,2)+' kW'],['Suministro','Monofásico 220 V'],['Protección general','ITM C2x'+R.InCS+' A · ID 2x'+R.ID+' A 30 mA']]);
+ d.np();d.h1('1. Memoria de cálculo');
+ d.h2('1.1 Superficie límite de aplicación');d.table([{t:'Zona',w:.5},{t:'Medidas',w:.25},{t:'m²',w:.25,al:'r'}],S.z.map((z,i)=>[z.n,`${sx(z.l)} x ${sx(z.a)}${z.semi==1?' ÷ 2 (semicub.)':''}`,f1(R.zs[i],2)]).concat([bold(['Total (redondeado)','',R.sla+' m²'])]));
+ d.h2('1.2 Grado de electrificación');d.p(`SLA ${R.sla} m² → grado ${g.n}. Circuitos mínimos: ${g.c}. Potencia activa de tabla: 10 kW (11,76 kVA).`);
+ d.h2('1.3 Puntos mínimos de utilización');d.table([{t:'Ambiente',w:.34},{t:'Superficie',w:.18,al:'r'},{t:'IUG',w:.1,al:'r'},{t:'TUG',w:.1,al:'r'},{t:'Observaciones',w:.28}],S.am.map((a,i)=>[a.n,a.t==='coc'||a.t==='ban'?'—':f1(+a.m,2)+(a.t==='pas'||a.t==='bal'?' mL':' m²'),String(R.P[i][0]),String(R.P[i][1]),a.t==='coc'?cocNote(g):a.t==='bal'?'IUG IP44 mínimo':'']).concat(S.timbre?[['Timbre','—','1','0','Se suma a IUG']]:[]).concat([bold(['Total general','',String(R.tI),String(R.tT),''])]));
+ d.h2('1.4 Circuitos, potencia y corriente');d.table([{t:'Circuito',w:.2},{t:'Bocas',w:.09,al:'r'},{t:'S (VA)',w:.13,al:'r'},{t:'I(B) A',w:.11,al:'r'},{t:'Cable F+N / PE',w:.17},{t:'I(Z) A',w:.1,al:'r'},{t:'PIA',w:.2}],R.C.map(c=>[c.n,String(c.b),f1(c.s,1),f1(c.ib,2),`${sx(c.d.sec)} / ${sx(c.d.pe)} mm²`,String(c.iz),`${c.d.curva}2x${c.In} A ${c.d.icc}`]));
+ d.p('IUG: bocas × 60 VA × 2/3. TUG: 2200 VA. TUE: 3300 VA. ACU: potencia del aparato. I(B) = S ÷ 220 V. Se verifica I(B) ≤ I(N) ≤ I(Z).',17,'#555');
+ d.h2('1.5 DPMS y potencia activa');d.table([{t:'Concepto',w:.6},{t:'Valor',w:.4,al:'r'}],[['S total',f1(R.St,1)+' VA'],['Coeficiente de simultaneidad ('+R.C.length+' circuitos)',sx(R.ks)],bold(['DPMS',f1(R.dp,1)+' VA']),['Potencia activa P = DPMS × 0,85',f1(R.kw,2)+' kW'],['Límite idóneo Categoría III','10 kW']]);
+ d.h2('1.6 Circuito seccional, protecciones y PAT');const cn={ent:'directamente enterrado',cano:'dentro de cañería',aire:'bandeja / al aire'}[S.can];
+ d.table([{t:'Concepto',w:.55},{t:'Valor',w:.45,al:'r'}],[['I(B) = DPMS ÷ 220 V',f1(R.ibCS,2)+' A'],['Cable IRAM 2178-1 ('+cn+')','2x'+R.sU+' mm²'],['I(Z)'+(S.r10?' (−10 % por tramos en caño)':''),f1(R.izCS,1)+' A'],['Caída de tensión (L = '+sx(+S.L)+' m)',f1(R.du,2)+' V · '+f1(R.duP,2)+' %'],['ITM en TPA','C2x'+R.InCS+' A · 6000 A'],['Interruptor diferencial en TPU','2x'+R.ID+' A · 30 mA'],['Conductor PE TPU – jabalina',R.sU+' mm² verde-amarillo'],['Jabalina','Cobre IRAM 2309 con cámara de inspección']]);
+ d.p('ΔU = 2 × L × I × ρ ÷ S con ρ = '+sx(+S.rho)+' Ω·mm²/m. Máximo 3 % para iluminación y 5 % para motores.',17,'#555');
+ await prog('Dibujando el plano');const pr=printSVG(PY-2*60-400,PX-60-170);
+ if(pr){d.np(true);d.x.fillStyle='#111';d.font(32,700);d.x.fillText('2. Plano de instalación eléctrica · vista en planta',60,70);d.x.fillStyle=COL.cs;d.x.fillRect(60,86,PY-120,4);
+  const im=await svgImg(pr.s);d.x.drawImage(im,60,110,pr.W,pr.H);d.x.strokeStyle='#999';d.x.lineWidth=1.5;d.x.strokeRect(60,110,pr.W,pr.H);
+  const sb=100*pr.sc;d.x.fillStyle='#111';d.x.fillRect(80,110+pr.H-40,sb,8);d.x.font=`400 16px ${FONT}`;d.x.fillText('0',76,110+pr.H-48);d.x.fillText('1 m',80+sb-10,110+pr.H-48);
+  const lx=PY-60-380;const lg=legendSVG(380);d.x.font=`700 22px ${FONT}`;d.x.fillText('REFERENCIAS (IRAM 2010)',lx,130);const li=await svgImg(lg.s);const lh=Math.min(lg.H,PX-130-60-330);d.x.drawImage(li,0,0,lg.W,Math.min(lg.H,lh),lx,145,lg.W,Math.min(lg.H,lh));
+  const ry=PX-60-300;d.x.strokeStyle='#111';d.x.lineWidth=2;d.x.strokeRect(lx,ry,380,300);const rr=[['Proyecto',S.nom],['Propietario',S.pProp],['Ubicación',S.pUbic],['Instalador',S.pInst+(S.pMat?' · '+S.pMat:'')],['SLA / GE',R.sla+' m² · '+g.n],['Potencia',f1(R.kw,2)+' kW · '+f1(R.dp,0)+' VA'],['Fecha',S.pFecha],['Escala','Gráfica (barra = 1 m)']];
+  rr.forEach((r,i)=>{const yy=ry+i*37.5;if(i)d.x.beginPath(),d.x.moveTo(lx,yy),d.x.lineTo(lx+380,yy),d.x.stroke();d.x.font=`700 14px ${FONT}`;d.x.fillText(r[0],lx+10,yy+24);d.x.font=`400 15px ${FONT}`;let v=String(r[1]||'—');while(d.x.measureText(v).width>255&&v.length>3)v=v.slice(0,-2);d.x.fillText(v,lx+115,yy+24)})}
+ await prog('Armando el diagrama unifilar');d.np();d.h1('3. Diagrama unifilar');const u=uniSVG();const ui=await svgImg(u.s);const uw=PX-2*MG,uh=Math.min(PY-2*MG-160,u.H*uw/u.W);d.img(ui,uh*u.W/u.H,uh);
+ await prog('Listando materiales');d.np();d.h1('4. Listado de materiales');d.p('Todos los materiales con sello "S" de seguridad eléctrica y norma IRAM o IEC. Las cantidades de caños y cables se calculan sobre el plano dibujado más 10 %: verificalas en obra.',17,'#555');
+ d.table([{t:'Cant.',w:.12,al:'r'},{t:'Unidad',w:.12},{t:'Descripción',w:.76}],materials());
+ const N=d.pages.length;d.pages.forEach((pg,i)=>{const x=pg.c.getContext('2d');x.font=`400 15px ${FONT}`;x.fillStyle='#777';const t=`${S.nom||'Proyecto eléctrico'} · Página ${i+1} de ${N}`;x.fillText(t,pg.c.width-60-x.measureText(t).width,pg.c.height-30)});
+ await prog('Uniendo las páginas');return pdfBytes(d.pages)}
+async function pdfBytes(pages){const enc=new TextEncoder(),parts=[];let off=0;const offs=[];const put=b=>{if(typeof b==='string')b=enc.encode(b);parts.push(b);off+=b.length};
+ put('%PDF-1.4\n%âãÏÓ\n');const N=2+pages.length*3;
+ const obj=(n,s)=>{offs[n]=off;put(`${n} 0 obj\n${s}\nendobj\n`)};
+ obj(1,'<< /Type /Catalog /Pages 2 0 R >>');obj(2,`<< /Type /Pages /Count ${pages.length} /Kids [${pages.map((_,i)=>`${3+i*3} 0 R`).join(' ')}] >>`);
+ for(let i=0;i<pages.length;i++){const pg=pages[i],W=pg.land?841.89:595.28,H=pg.land?595.28:841.89,pn=3+i*3;
+  const blob=await new Promise(r=>pg.c.toBlob(r,'image/jpeg',.9));const jb=new Uint8Array(await blob.arrayBuffer());
+  obj(pn,`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /XObject << /Im0 ${pn+2} 0 R >> >> /Contents ${pn+1} 0 R >>`);
+  const cs=`q ${W} 0 0 ${H} 0 0 cm /Im0 Do Q`;obj(pn+1,`<< /Length ${cs.length} >>\nstream\n${cs}\nendstream`);
+  offs[pn+2]=off;put(`${pn+2} 0 obj\n<< /Type /XObject /Subtype /Image /Width ${pg.c.width} /Height ${pg.c.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jb.length} >>\nstream\n`);put(jb);put('\nendstream\nendobj\n')}
+ const xr=off;let x=`xref\n0 ${N+1}\n0000000000 65535 f \n`;for(let n=1;n<=N;n++)x+=String(offs[n]).padStart(10,'0')+' 00000 n \n';put(x+`trailer\n<< /Size ${N+1} /Root 1 0 R >>\nstartxref\n${xr}\n%%EOF\n`);
+ return new Blob(parts,{type:'application/pdf'})}
+window.__pdfTest=buildPDF;
+let DL=null;(async()=>{try{if(window.claude&&claude.use)DL=await claude.use('downloads')}catch(_){}})();
+const prog=async t=>{$('ovS').textContent=t;await new Promise(r=>requestAnimationFrame(()=>setTimeout(r,60)))};
+const ovOn=t=>{$('ovT').textContent=t;$('ov').hidden=false};const ovOff=()=>{$('ov').hidden=true};
+const pdfName=()=>('Proyecto electrico '+(S.pProp||S.nom||'')).trim().replace(/[\\/:*?"<>|]+/g,'').slice(0,80)+'.pdf';
+async function runPDF(download){const st=$('pdfst'),bs=[$('dlpdf'),$('onlyCli')];const wantCli=!download||$('saveCli').checked;
+ if(wantCli&&!(S.pProp||'').trim()){st.innerHTML='<span class="bad">Completá el nombre del propietario para guardarlo en Clientes.</span>';$('i_pProp').focus();return}
+ bs.forEach(b=>b.disabled=true);st.textContent='';ovOn(download?'Preparando el PDF…':'Guardando en Clientes…');const t0=Date.now();let blob,msg=[];
+ try{blob=await buildPDF();
+  if(wantCli){await prog('Guardando en Clientes');try{await saveClient(blob);msg.push('Guardado en Clientes.')}catch(err){msg.push('No se pudo guardar en Clientes ('+(err&&err.code||err&&err.message||'error')+').')}}
+  const w=1400-(Date.now()-t0);if(w>0)await new Promise(r=>setTimeout(r,w));ovOff();
+  if(download){if(!DL&&window.claude&&claude.use){try{DL=await claude.use('downloads')}catch(_){}}
+   if(STANDALONE){localSaveFile(pdfName(),blob);msg.unshift('Listo: PDF descargado.')}
+   else if(!DL)msg.unshift('La descarga no está disponible en esta vista: abrí la app en claude.ai desde el navegador.');
+   else{try{await DL.save({filename:pdfName(),data:blob});msg.unshift('Listo: PDF guardado.')}catch(err){const c=err&&err.code;msg.unshift(c==='declined'?'Descarga cancelada.':c==='host_unavailable'?'Esta app del celular no puede guardar archivos: abrí la app en un navegador.':c==='rate_limited'?'Esperá unos segundos y probá de nuevo.':'No se pudo descargar ('+(c||'error')+').')}}}
+  st.textContent=msg.join(' ')}
+ catch(err){ovOff();st.textContent='No se pudo generar el PDF ('+(err&&(err.code||err.message)||'error')+').'}
+ finally{ovOff();bs.forEach(b=>b.disabled=false)}}
+$('dlpdf').addEventListener('click',()=>runPDF(true));$('onlyCli').addEventListener('click',()=>runPDF(false));
+
+
+/* ===== Modo servidor propio (fuera de claude.ai): IndexedDB + descarga directa ===== */
+const STANDALONE=!(window.claude&&window.claude.use);
+const BURL={};
+const idb=()=>new Promise((res,rej)=>{const r=indexedDB.open('proyElecClientes',1);r.onupgradeneeded=()=>{r.result.createObjectStore('docs');r.result.createObjectStore('blobs')};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+const tx=async(st,mode,fn)=>{const d=await idb();return new Promise((res,rej)=>{const t=d.transaction(st,mode),s=t.objectStore(st);let out;Promise.resolve(fn(s)).then(v=>{out=v});t.oncomplete=()=>res(out);t.onerror=()=>rej(t.error)})};
+const req=r=>new Promise((res,rej)=>{r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+const getBlob=async id=>{const d=await idb();return req(d.transaction('blobs').objectStore('blobs').get(id))};
+function localSaveFile(name,blob){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}
+const LDB=(()=>{const subs=[];const fire=async()=>{const d=await idb();const keys=await req(d.transaction('docs').objectStore('docs').getAllKeys());const vals=await req(d.transaction('docs').objectStore('docs').getAll());
+  for(const v of vals){if(v.pdf&&!BURL[v.pdf]){const b=await getBlob(v.pdf);if(b)BURL[v.pdf]=URL.createObjectURL(b)}}
+  const snap={metadata:{fromCache:false},docs:keys.map((k,i)=>({id:String(k),data:()=>vals[i]}))};subs.forEach(f=>f(snap))};
+ const col={doc:id=>{id=id||('c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6));return{id,set:async v=>{const d=await idb();await req(d.transaction('docs','readwrite').objectStore('docs').put(v,id));fire()},delete:async()=>{const d=await idb();await req(d.transaction('docs','readwrite').objectStore('docs').delete(id));fire()}}},onSnapshot:(f,err)=>{subs.push(f);fire().catch(e=>err&&err({code:'indexeddb'}));return()=>{}}};
+ return{collection:()=>col}})();
+const LAS={upload:async b=>{const id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);const d=await idb();await req(d.transaction('blobs','readwrite').objectStore('blobs').put(b,id));BURL[id]=URL.createObjectURL(b);return{id,sizeBytes:b.size}},delete:async id=>{const d=await idb();await req(d.transaction('blobs','readwrite').objectStore('blobs').delete(id));if(BURL[id]){URL.revokeObjectURL(BURL[id]);delete BURL[id]}return{deleted:true}}};
+const pdfHref=id=>STANDALONE?(BURL[id]||'#'):'/_blob/'+id;
+/* ===================== CLIENTES ===================== */
+let DB=null,AS=null,CL=[],cliLoaded=false;
+const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function tab(n){$('vProy').hidden=n!=='proy';$('vCli').hidden=n!=='cli';$('tProy').setAttribute('aria-selected',n==='proy');$('tCli').setAttribute('aria-selected',n==='cli');window.scrollTo(0,0);if(n==='proy'&&$('dplano').open)requestAnimationFrame(draw);if(n==='cli')renderCli()}
+$('tProy').addEventListener('click',()=>tab('proy'));$('tCli').addEventListener('click',()=>tab('cli'));
+(async()=>{try{if(STANDALONE){if(window.indexedDB){DB=LDB;AS=LAS}}else{const r=await Promise.all([claude.use('db'),claude.use('assets')]);DB=r[0];AS=r[1]}}catch(_){}
+ if(!DB){$('cliSt').textContent='Clientes funciona con la app abierta en claude.ai (guarda los datos en tu cuenta). En esta vista no está disponible.';renderCli();return}
+ $('cliSt').textContent='Cargando clientes…';const tm=setTimeout(()=>{if(!cliLoaded)$('cliSt').textContent='Todavía no se pudo conectar con la base de clientes.'},10000);
+ DB.collection('clientes').onSnapshot(s=>{if(!s.metadata.fromCache){cliLoaded=true;clearTimeout(tm)}CL=s.docs.map(d=>Object.assign({id:d.id},d.data()));$('cliSt').textContent=AS?'':'Podés ver tus clientes, pero para adjuntar PDF necesitás ser dueño o editor de la app.';renderCli()},err=>{clearTimeout(tm);$('cliSt').textContent='No se pudo leer la base de clientes ('+err.code+').'})})();
+async function saveClient(blob){if(!DB)throw{code:'Clientes no disponible en esta vista'};if(!AS)throw{code:'sin permiso para adjuntar archivos'};
+ const up=await AS.upload(blob,{type:'application/pdf'});let est=JSON.stringify(S);if(est.length>200000)est='';
+ const col=DB.collection('clientes'),ref=S.cliId?col.doc(S.cliId):col.doc(),old=(CL.find(c=>c.id===ref.id)||{}).pdf;
+ const nm=S.pProp.trim();await ref.set({nombre:nm,nlc:norm(nm),proyecto:S.nom||'',ubic:S.pUbic||'',fecha:S.pFecha||'',ts:Date.now(),kw:Math.round(R.kw*100)/100,ge:R.g.n,sla:R.sla,pdf:up.id,size:up.sizeBytes,estado:est});
+ S.cliId=ref.id;save();if(old&&old!==up.id){try{await AS.delete(old)}catch(_){}}}
+function renderCli(){const n=CL.length;$('cliN').hidden=!n;$('cliN').textContent=n;const q=norm($('q').value).trim();
+ const L=CL.filter(c=>!q||norm(c.nombre).includes(q)||norm(c.proyecto).includes(q)).sort((a,b)=>(b.ts||0)-(a.ts||0));
+ if(!DB){$('cliL').innerHTML='';return}
+ if(!L.length){$('cliL').innerHTML=`<div class="empty">${n?'Ningún cliente coincide con la búsqueda.':'Todavía no hay clientes. Generá el PDF de un proyecto con "Guardar también en Clientes" marcado.'}</div>`;return}
+ $('cliL').innerHTML=L.map(c=>{const pdf=/^[A-Za-z0-9_-]{8,64}$/.test(c.pdf||'')?c.pdf:'';return `<article class="card"><h3>${esc(c.nombre)}</h3>
+ <div class="meta">${esc(c.proyecto||'')}${c.ubic?' · '+esc(c.ubic):''}</div>
+ <div class="meta">${esc(c.fecha||'')} · ${esc(c.sla)} m² · GE ${esc(c.ge||'')} · ${esc(f1(+c.kw,2))} kW${c.id===S.cliId?' · <b>abierto ahora</b>':''}</div>
+ <div class="acts">${pdf?`<a class="pri" href="${pdfHref(pdf)}" target="_blank" rel="noopener">Ver PDF</a><button data-cdl="${esc(c.id)}">Descargar</button>`:'<span class="meta">Sin PDF</span>'}${c.estado?`<button data-copen="${esc(c.id)}">Abrir en la app</button>`:''}<button data-cdel="${esc(c.id)}">Borrar</button></div></article>`}).join('')}
+$('q').addEventListener('input',renderCli);
+const blank=()=>Object.assign(JSON.parse(DEF),{nom:'',z:[{n:'Zona 1',l:0,a:0,semi:0}],am:[],timbre:0,c:[{t:'IUG',n:'C1 IUG',b:0,va:60},{t:'TUG',n:'C2 TUG',b:0,va:2200}],L:0,pProp:'',pUbic:'',pInst:S.pInst||'',pMat:S.pMat||'',pFecha:new Date().toLocaleDateString('es-AR'),plan:{items:[],walls:[],cables:[],nid:1},ck:{},cliId:null});
+function loadState(ns){S=ns;UNDO.length=0;selId=null;cFrom=null;all();renderIdx();props();draw();if($('dplano').open)fit();save()}
+$('bNew').addEventListener('click',()=>{loadState(blank());tab('proy');$('pdfst').textContent=''});
+let delArm=null;
+$('cliL').addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;const id=b.dataset.cdl||b.dataset.copen||b.dataset.cdel,c=CL.find(x=>x.id===id);if(!c)return;
+ if(b.dataset.copen){try{const ns=Object.assign(JSON.parse(DEF),JSON.parse(c.estado));ns.cliId=c.id;loadState(ns);tab('proy')}catch(_){b.textContent='No se pudo abrir'}return}
+ if(b.dataset.cdl){b.disabled=true;b.textContent='Bajando…';try{let bl;if(STANDALONE){bl=await getBlob(c.pdf);if(!bl)throw 0;localSaveFile(('Proyecto electrico '+c.nombre).replace(/[\\/:*?"<>|]+/g,'').slice(0,80)+'.pdf',bl);b.textContent='Descargado';setTimeout(()=>{b.disabled=false;b.textContent='Descargar'},2500);return}const r=await fetch('/_blob/'+c.pdf);if(!r.ok)throw 0;bl=await r.blob();if(!DL&&window.claude&&claude.use)DL=await claude.use('downloads');if(!DL)throw 0;await DL.save({filename:('Proyecto electrico '+c.nombre).replace(/[\\/:*?"<>|]+/g,'').slice(0,80)+'.pdf',data:bl});b.textContent='Descargado'}catch(err){b.textContent=err&&err.code==='declined'?'Cancelado':'Usá "Ver PDF"'}setTimeout(()=>{b.disabled=false;b.textContent='Descargar'},2500);return}
+ if(b.dataset.cdel){if(delArm!==id){delArm=id;b.textContent='¿Seguro? Tocá otra vez';setTimeout(()=>{if(delArm===id){delArm=null;b.textContent='Borrar'}},3500);return}
+  delArm=null;b.disabled=true;b.textContent='Borrando…';try{await DB.collection('clientes').doc(id).delete();if(c.pdf&&AS){try{await AS.delete(c.pdf)}catch(_){}}if(S.cliId===id){S.cliId=null;save()}}catch(err){b.disabled=false;b.textContent='No se pudo borrar'}}});
+
+document.addEventListener('click',e=>{const b=e.target.closest('[data-hg]');if(!b)return;const g=b.dataset.hg,box=b.closest('.pmu');box.classList.toggle('on',!!g);box.querySelectorAll('[data-hg]').forEach(x=>x.setAttribute('aria-pressed',x===b&&!!g));box.querySelectorAll('tr[data-g]').forEach(r=>r.classList.toggle('hl',!!g&&r.dataset.g===g))});
+renderIdx();all();openHash();setMode('sel');
+if(STANDALONE){const n=document.createElement('p');n.className='note';n.textContent='En esta instalación los clientes y sus PDF se guardan en este dispositivo y navegador. Para no perderlos, no borres los datos del navegador.';$('cliSt').after(n);if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('sw.js').catch(()=>{})}
+}
+</script>
+</body>
+</html>
