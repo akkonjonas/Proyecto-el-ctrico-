@@ -149,9 +149,78 @@ footer{border-top:1px solid var(--ln);text-align:center;color:var(--mut);font-si
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:210;background:#16191d;color:#fff;padding:12px 18px;border-radius:12px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.3)}
 @keyframes draw{to{stroke-dashoffset:0}}@keyframes fade{to{opacity:1}}@keyframes pop{to{transform:scale(1)}}@keyframes rise{to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.iw,.ic,.ib,.ih,.it,.cta{animation:none!important;opacity:1!important;transform:none!important;stroke-dashoffset:0!important}}
+.refs{margin-top:22px;border-top:2px solid var(--ln);padding-top:6px}
+.refs>h3{display:flex;align-items:center;gap:8px}.refs>h3::before{content:"";width:12px;height:12px;border-radius:3px;background:var(--fase)}
+.refg{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:1000px){.refg{grid-template-columns:repeat(2,minmax(0,1fr))}.refg .wide{grid-column:1/-1}}
+.rt{margin:0;border:1px solid var(--ln);border-radius:12px;padding:10px 12px;background:var(--bg)}
+.rt figcaption{display:flex;flex-wrap:wrap;gap:2px 10px;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.rt figcaption b{font:600 17px/1.2 "Barlow Condensed",sans-serif}
+.rt figcaption span{font-size:12px;color:var(--mut);background:var(--p2);border-radius:999px;padding:2px 8px}
+.rt table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.3;margin:0}
+.rt th,.rt td{border:1px solid light-dark(#a9b2bb,#46505a);padding:5px 7px;text-align:center;vertical-align:middle}
+.rt thead th,.rt tbody th{background:light-dark(#e6ebf0,#232a31);font-weight:700}
+.rt td:first-child{text-align:left}
+.rt .t10 td:first-child{text-align:center}
+.rt .t10{font-size:13px;white-space:nowrap}.rt .t10 tbody th,.rt .t10 thead th:first-child{position:sticky;left:0;z-index:1}
+.rt tr.hl>td,.rt tr.hl>th,.rt td.hl{background:light-dark(#dbeafb,#17324a);font-weight:600}
+.rt .t10 td.sel{background:var(--neu);color:#fff}.rt td.sel{outline:3px solid var(--neu);outline-offset:-3px;font-weight:700}
+.rt td.okc{background:light-dark(#dff3e3,#173a22)}.rt td.noc{background:light-dark(#fbe3e3,#3d1d1d);color:var(--bad)}
+.rt .tip{font-size:13px;color:var(--neu);font-weight:600;margin:6px 0 0}
+@media(max-width:600px){.rt table{font-size:12px}.rt th,.rt td{padding:4px 4px}.rt{padding:8px}}
+.tlinks{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 10px;padding:8px 10px;border-radius:10px;background:light-dark(#fff,#151a1f);border:1px dashed var(--ln)}
+.tlinks span{font-size:13px;color:var(--mut);width:100%}
+.tlink{font:600 13px Barlow,sans-serif;min-height:38px;padding:6px 12px;border-radius:999px;border:1px solid var(--neu);background:transparent;color:var(--neu);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.tlink::before{content:"";width:12px;height:10px;border:2px solid currentColor;border-radius:2px;box-shadow:inset 0 3px 0 -1px currentColor}
+.sheet{position:fixed;inset:0;z-index:120}.sheet[hidden]{display:none}
+.shbg{position:absolute;inset:0;background:rgba(10,14,18,.55)}
+.shp{position:absolute;left:0;right:0;bottom:0;max-height:88vh;display:flex;flex-direction:column;background:var(--bg);border-radius:18px 18px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.3);animation:shup .25s ease-out}
+@media(min-width:760px){.shp{left:50%;right:auto;bottom:auto;top:50%;transform:translate(-50%,-50%);width:min(92vw,900px);max-height:86vh;border-radius:18px;animation:none}}
+.shh{display:flex;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--ln)}
+.shh b{flex:1;font:600 20px/1.1 "Barlow Condensed",sans-serif}
+.shh .btn{min-height:40px;padding:6px 12px;font-size:14px}
+.shc{overflow:auto;padding:12px 14px calc(16px + env(safe-area-inset-bottom));overscroll-behavior:contain}
+.shc .rt{border:0;padding:0}
+@keyframes shup{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){.shp{animation:none}}
+.matnav{display:flex;gap:6px;margin:16px 0 8px;padding-bottom:6px}
+.matnav a{flex:none;text-decoration:none;color:var(--ink);border:1px solid var(--ln);border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;min-height:40px;display:flex;align-items:center}
+.matg{margin-top:26px}.matg>h2{margin-bottom:12px;font-size:26px}
+.glot tr[hidden]{display:none}.glot td:first-child{white-space:nowrap;font-weight:700}.glot{font-size:16px}
+.modo{display:inline-flex;border:2px solid var(--ink);border-radius:12px;overflow:hidden;margin-top:18px}.modo button{font:600 16px Barlow,sans-serif;min-height:46px;padding:8px 18px;border:0;background:transparent;color:var(--ink);cursor:pointer}.modo button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.symp{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:6px;padding:10px;border:1px solid var(--ln);border-radius:12px;background:var(--p2)}
+.symp[hidden]{display:none}
+.symp .sgt{grid-column:1/-1;margin:4px 2px 0;font-size:13px;color:var(--mut);font-weight:600}
+.symp button{display:flex;align-items:center;gap:10px;min-height:50px;padding:4px 10px;border:1px solid var(--ln);border-radius:10px;background:#fff;color:#222;font:500 14px/1.2 Barlow,sans-serif;text-align:left;cursor:pointer}
+.symp button svg{flex:none;width:42px;height:36px}
+.symp button[aria-pressed=true]{border:2px solid var(--neu);background:light-dark(#e6f1fb,#e6f1fb);box-shadow:0 0 0 3px rgba(31,120,189,.2)}
+.vbar{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.vbar button,.vbar a{font:600 14px Barlow,sans-serif;min-height:44px;min-width:44px;padding:6px 12px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.vbar.full{position:fixed;top:8px;left:8px;right:8px;z-index:61;background:var(--bg);padding:6px;border-radius:12px}
+.viewer{max-height:75vh;overflow:auto;border:1px solid var(--ln);border-radius:12px;background:#fff;cursor:grab;-webkit-overflow-scrolling:touch}
+.viewer img{display:block;width:100%;height:auto;max-width:none;user-select:none;-webkit-user-select:none}
+.viewer.full{position:fixed;inset:64px 0 0 0;z-index:60;height:auto;border-radius:0}
+.gbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0}
+.gbar .btn{min-height:44px;padding:6px 14px;font-size:14px}
+.seg{display:inline-flex;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.seg button{font:600 14px Barlow,sans-serif;min-height:40px;padding:4px 14px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.gstat{font-size:14px;color:var(--mut);margin:4px 0 8px}
+.gwrap{overflow:auto;overscroll-behavior:contain;border:1px solid var(--ln);border-radius:12px;background:#fff;max-height:72vh}
+#gStage{position:relative;transition:box-shadow .3s}
+#gStage.win{box-shadow:inset 0 0 0 4px #ffd23f,0 0 30px rgba(255,210,63,.6)}
+.gin{position:absolute;left:0;top:0;transform-origin:0 0}
+.gin svg{position:absolute;left:0;top:0}
+.gs{position:absolute;border:2px dashed #8a96a3;border-radius:8px;background:#f7f9fb;color:#8a96a3;font:700 13.5px/1.15 Arial,sans-serif;padding:2px 4px;cursor:pointer;display:flex;align-items:center;justify-content:center;text-align:center}
+.gs.full{border:2px solid #1f5fd1;background:#fff;color:#111}
+.gs.ok{border-color:#2b8a3e;background:#e3f6e7}.gs.bad{border-color:#c92a2a;background:#fde4e4}
+.gtray{position:sticky;bottom:0;z-index:4;display:flex;gap:6px;overflow-x:auto;padding:10px 4px;margin-top:8px;background:var(--bg);border-top:1px solid var(--ln);box-shadow:0 -6px 14px rgba(0,0,0,.06)}
+.gp{flex:none;max-width:200px;min-height:46px;padding:6px 12px;border-radius:10px;border:1px solid var(--ln);background:#fff;color:#111;font:600 13px/1.2 Barlow,sans-serif;cursor:pointer;text-align:left}
+.gp[aria-pressed=true]{border:2px solid var(--neu);background:#e6f1fb;box-shadow:0 0 0 3px rgba(31,120,189,.25)}
+.gmsg{min-height:1.5em;font-size:15px}
 .big{font-size:18px;min-height:56px;padding:12px 24px;width:100%;max-width:420px}
 .tabs{position:sticky;top:0;z-index:20;display:flex;gap:4px;padding:8px max(5vw,16px);background:var(--bg);border-bottom:1px solid var(--ln)}
-.tabs button{flex:1;max-width:220px;font:600 16px Barlow,sans-serif;min-height:46px;border:0;border-radius:10px;background:transparent;color:var(--mut);cursor:pointer}
+.tabs{overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs button{flex:1 0 auto;max-width:220px;padding:0 12px;font:600 16px Barlow,sans-serif;min-height:46px;border:0;border-radius:10px;background:transparent;color:var(--mut);cursor:pointer}
 .tabs button[aria-selected=true]{background:var(--ink);color:var(--bg)}
 .tabs .cnt[hidden]{display:none}.tabs .cnt{display:inline-block;min-width:22px;margin-left:6px;padding:0 6px;border-radius:999px;background:var(--fase);color:#fff;font-size:13px;line-height:20px}
 html{scroll-padding-top:72px}
@@ -188,16 +257,12 @@ html{scroll-padding-top:72px}
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head>
 <body>
-<nav class="tabs" role="tablist" aria-label="Secciones"><button role="tab" id="tProy" aria-selected="true" data-tab="proy">Proyecto</button><button id="bInst" class="instb" hidden>⤓ Instalar</button><button role="tab" id="tCli" aria-selected="false" data-tab="cli">Clientes<span class="cnt" id="cliN" hidden></span></button></nav>
+<nav class="tabs" role="tablist" aria-label="Secciones"><button role="tab" id="tProy" aria-selected="true" data-tab="proy">Proyecto</button><button id="bInst" class="instb" hidden>⤓ Instalar</button><button role="tab" id="tMat" aria-selected="false" data-tab="mat">Material</button><button role="tab" id="tGlo" aria-selected="false" data-tab="glo">Glosario</button><button role="tab" id="tCli" aria-selected="false" data-tab="cli">Clientes<span class="cnt" id="cliN" hidden></span></button></nav>
 <div id="vProy">
 <header class="band"><div class="wrap hero">
  <div>
   <h1>Proyecto eléctrico, paso a paso</h1>
   <p class="lead">Método del curso de Electricidad Domiciliaria (Categoría III, ERSeP Córdoba), según la AEA 90364-7-770. Sigue los PDF 21 "Primer proyecto" y 22 "Segundo proyecto". Abrí cada paso, leé qué es, para qué sirve y cómo se hace, y cargá los datos de tu proyecto impreso.</p>
-  <nav class="idx" aria-label="Índice de pasos">
-   <h2>Índice</h2>
-   <div id="idx"></div>
-  </nav>
   <div class="tools"><button class="btn l" id="openAll">Abrir todos</button><button class="btn l" id="closeAll">Cerrar todos</button></div>
  </div>
  <svg class="uni" viewBox="0 0 330 440" role="img" aria-label="Esquema unifilar de la vivienda del curso">
@@ -228,6 +293,19 @@ html{scroll-padding-top:72px}
 
 <main class="band" style="padding-top:0"><div class="wrap" id="steps"></div></main>
 </div>
+<section class="band" id="vMat" hidden><div class="wrap">
+ <h1>Material de estudio</h1>
+ <p class="lead">Todas las tablas de los PDF 21 y 22 del curso, para consultar o practicar. Las filas que coinciden con tu proyecto se marcan solas.</p>
+ <nav class="matnav scroll" id="matNav" aria-label="Temas"></nav>
+ <div id="matL"></div>
+</div></section>
+<div class="sheet" id="sheet" hidden><div class="shbg" id="shbg"></div><div class="shp" role="dialog" aria-modal="true" aria-labelledby="shT"><div class="shh"><b id="shT"></b><button id="shGo" class="btn l">Ver en Material</button><button id="shX" class="btn" aria-label="Cerrar">Cerrar ✕</button></div><div class="shc" id="shC"></div></div></div>
+<section class="band" id="vGlo" hidden><div class="wrap">
+ <h1>Glosario</h1>
+ <p class="lead">Siglas y términos del curso.</p>
+ <div class="row" style="margin:16px 0 8px"><div><label for="gq">Buscar sigla o palabra</label><input id="gq" class="srch" type="search" autocomplete="off"></div></div>
+ <div class="scroll"><table class="glot" id="gloT"><thead><tr><th>Sigla</th><th>Significado</th></tr></thead><tbody></tbody></table></div>
+</div></section>
 <section class="band" id="vCli" hidden><div class="wrap">
  <h1>Clientes</h1>
  <p class="lead">Cada proyecto que guardás queda acá con su PDF. Buscalo por nombre para volver a enviarlo, imprimirlo o seguir editándolo.</p>
@@ -255,7 +333,7 @@ html{scroll-padding-top:72px}
 
 <script>
 {
-const $=id=>document.getElementById(id);
+const $=id=>document.getElementById(id)||document.createElement('div');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const f1=(n,d=1)=>Number.isFinite(n)?n.toLocaleString('es-AR',{maximumFractionDigits:d,minimumFractionDigits:d}):'—';
 const sx=s=>String(s).replace('.',',');
@@ -279,7 +357,9 @@ let S={nom:'Vivienda curso (2.º proyecto)',
  c:[{t:'IUG',n:'C1 IUG',b:11,va:60},{t:'TUG',n:'C2 TUG 1',b:8,va:2200},{t:'TUG',n:'C3 TUG 2',b:7,va:2200},{t:'ACU',n:'C4 ACU estar',b:1,va:1250}],
  can:'ent',r10:1,L:10,rho:.017,cn:'CL 22',k15:2,k25:3,k4:0,k6:0,tS:6000,tL:20,tSec:4,ck:{},op:{},
  pProp:'',pUbic:'',pInst:'',pMat:'',pFecha:new Date().toLocaleDateString('es-AR'),
- plan:{items:[],walls:[],cables:[],nid:1}};
+ plan:{items:[],walls:[],cables:[],nid:1},
+ modo:'mono',tIn:20,hpConv:1,
+ ct:[{t:'IUGT',n:'C1 IUG c/ toma',b:14,va:2200,ln:'L1'},{t:'TUG',n:'C2 TUG 1',b:5,va:2200,ln:'L2'},{t:'TUG',n:'C3 TUG 2',b:9,va:2200,ln:'L3'},{t:'ACU3',n:'C4 ACU bomba 1 HP',b:1,va:746,cos:1}]};
 let R={};
 S.z[0]={n:'Dormitorio 1',l:4,a:3,semi:0};
 const DEF=JSON.stringify(S);
@@ -293,7 +373,13 @@ const chk=(id,t)=>`<div class="chk"><input type="checkbox" id="k_${id}" data-ck=
 const kv=(a,b)=>`<div class="kv"><span>${a}</span><span>${b}</span></div>`;
 const ok=(c,t1,t2)=>c?`<span class="okk">${t1}</span>`:`<span class="bad">${t2}</span>`;
 
+const REF={"ge": "<figure class=\"rt \"><figcaption><b>Grados de electrificación de viviendas</b><span>PDF 21 · Paso 3</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">SLA</th><th scope=\"col\">Grado</th><th scope=\"col\">Potencia activa P</th></tr></thead><tbody><tr data-ge=\"Mínimo\"><td>SLA ≤ 60 m²</td><td>Mínimo</td><td>10 kW</td></tr><tr data-ge=\"Medio\"><td>60 m² &lt; SLA ≤ 130 m²</td><td>Medio</td><td>10 kW</td></tr><tr data-ge=\"Elevado\"><td>130 m² &lt; SLA ≤ 200 m²</td><td>Elevado</td><td>10 kW</td></tr><tr data-ge=\"Superior\"><td>SLA &gt; 200 m²</td><td>Superior</td><td>—</td></tr></tbody></table></div><p class=\"note\">Con cos φ 0,85: 10 kW ÷ 0,85 = hasta 11,76 kVA. El grado superior no figura en el gráfico del curso; se agrega desde la tabla de circuitos mínimos.</p></figure>", "circmin": "<figure class=\"rt \"><figcaption><b>Cantidad mínima de circuitos y variantes</b><span>PDF 21 · Paso 3 (AEA 770)</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Grado</th><th scope=\"col\">Cant. mín.</th><th scope=\"col\">Variante</th><th scope=\"col\">IUG</th><th scope=\"col\">TUG</th><th scope=\"col\">Libre</th></tr></thead><tbody><tr data-ge=\"Mínimo\"><td rowspan=\"1\">Mínimo</td><td rowspan=\"1\">2</td><td>Única</td><td>1</td><td>1</td><td>—</td></tr><tr data-ge=\"Medio\"><td rowspan=\"2\">Medio</td><td rowspan=\"2\">3</td><td>a)</td><td>2</td><td>1</td><td>—</td></tr><tr data-ge=\"Medio\"><td>b)</td><td>1</td><td>2</td><td>—</td></tr><tr data-ge=\"Elevado\"><td rowspan=\"2\">Elevado</td><td rowspan=\"2\">5</td><td>a)</td><td>2</td><td>3</td><td>—</td></tr><tr data-ge=\"Elevado\"><td>b)</td><td>3</td><td>2</td><td>—</td></tr><tr data-ge=\"Superior\"><td rowspan=\"2\">Superior</td><td rowspan=\"2\">6</td><td>a)</td><td>2</td><td>3</td><td>1</td></tr><tr data-ge=\"Superior\"><td>b)</td><td>3</td><td>2</td><td>1</td></tr></tbody></table></div></figure>", "cocina": "<figure class=\"rt \"><figcaption><b>Cocina: puntos mínimos con TUE</b><span>PDF 22 · PMU cocina</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Grado</th><th scope=\"col\">IUG</th><th scope=\"col\">TUG</th><th scope=\"col\">TUE</th></tr></thead><tbody><tr data-ge=\"Mínimo\"><td>Mínimo</td><td>1 boca</td><td>3 bocas + 2 tomas</td><td>No exigible</td></tr><tr data-ge=\"Medio\"><td>Medio</td><td>2 bocas</td><td>3 bocas + 2 tomas</td><td>No exigible</td></tr><tr data-ge=\"Elevado\"><td>Elevado</td><td>2 bocas</td><td>3 bocas + 3 tomas</td><td>1 boca</td></tr></tbody></table></div><p class=\"note\">\"Tres bocas más dos tomacorrientes\" equivale a instalar cinco tomas en tres o más cajas.</p></figure>", "pasillo": "<figure class=\"rt\"><figcaption><b>Pasillos: casos especiales</b><span>PDF 22 · PMU pasillo</span></figcaption><ul class=\"note\" style=\"margin:4px 0 0;padding-left:20px\"><li><b>Pasillo en forma de \"L\":</b> se suman las longitudes de los dos tramos para calcular las bocas de iluminación y de tomas.</li><li><b>Pasillo de más de 3 m:</b> llevar interruptores de efecto combinado (uno en cada extremo) y, si hace falta, intermedios: entre interruptores no más de 6 m.</li><li><b>Ejemplos IUG (1 cada 5 m):</b> 3 m → 1 boca · 5 m → 1 · 5,5 m → 2 · 10 m → 2.</li></ul></figure>", "secmin": "<figure class=\"rt \"><figcaption><b>Secciones nominales mínimas de cables</b><span>PDF 21 · Tabla N.° 23 AEA</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Línea o circuito</th><th scope=\"col\">Sección mínima</th></tr></thead><tbody><tr data-sm=\"lp\"><td>Líneas principales</td><td>4,00 mm²</td></tr><tr data-sm=\"cs\"><td>Circuitos seccionales</td><td>2,50 mm²</td></tr><tr data-sm=\"iug\"><td>Circuitos terminales de iluminación de usos generales (conexión fija o por tomacorrientes)</td><td>1,50 mm²</td></tr><tr data-sm=\"tug\"><td>Circuitos terminales de tomacorrientes de usos generales</td><td>2,50 mm²</td></tr><tr data-sm=\"iugt\"><td>Iluminación de usos generales que incluyen tomacorrientes de usos generales</td><td>2,50 mm²</td></tr><tr data-sm=\"esp\"><td>Líneas de circuito para usos especiales</td><td>2,50 mm²</td></tr><tr data-sm=\"acu\"><td>Líneas de circuito para uso específico (excepto MBTF)</td><td>2,50 mm²</td></tr><tr data-sm=\"mbtf\"><td>Uso específico (alimentación a MBTF)</td><td>1,50 mm²</td></tr><tr data-sm=\"ali\"><td>Alimentaciones a interruptores de efecto</td><td>1,00 mm²</td></tr><tr data-sm=\"ret\"><td>Retornos de los interruptores de efecto</td><td>1,00 mm²</td></tr><tr data-sm=\"pe\"><td>Conductor de protección</td><td>2,50 mm²</td></tr></tbody></table></div><p class=\"note\">En el curso el circuito seccional TPA–TPU se toma como línea principal (mínimo 4 mm²), y también el Pe del TPU a la jabalina.</p></figure>", "colores": "<figure class=\"rt \"><figcaption><b>Colores de los conductores (IRAM NM 247-3)</b><span>PDF 21 · Pasos 13 y 19</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Conductor</th><th scope=\"col\">Color</th></tr></thead><tbody><tr><td>Fase</td><td>Marrón, negro o rojo</td></tr><tr><td>Neutro</td><td>Celeste</td></tr><tr><td>Protección (Pe)</td><td>Verde-amarillo</td></tr><tr><td>Retorno de llave</td><td>Otro color que la fase (por ejemplo blanco)</td></tr></tbody></table></div></figure>", "pot": "<figure class=\"rt \"><figcaption><b>Potencia de cálculo por tipo de circuito</b><span>PDF 21 y 22 · Paso 11</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Circuito</th><th scope=\"col\">Potencia S</th><th scope=\"col\">Simultaneidad del circuito</th></tr></thead><tbody><tr data-ct=\"IUG\"><td>IUG (iluminación de uso general)</td><td>60 VA por boca</td><td>2/3 (0,66)</td></tr><tr data-ct=\"IUGT\"><td>IUG con tomas (punto y toma)</td><td>2200 VA</td><td>No aplica</td></tr><tr data-ct=\"TUG\"><td>TUG (tomacorrientes de uso general)</td><td>2200 VA por circuito</td><td>No aplica</td></tr><tr data-ct=\"TUE\"><td>TUE (tomacorrientes de uso especial)</td><td>3300 VA</td><td>No aplica</td></tr><tr data-ct=\"ACU\"><td>ACU (alimentación a carga única)</td><td>Potencia del aparato</td><td>No aplica</td></tr></tbody></table></div><p class=\"note\">Si no se conoce la potencia de los artefactos de iluminación, se toman 60 VA por boca.</p></figure>", "iz22": "<figure class=\"rt \"><figcaption><b>Corriente máxima admisible I(Z) · circuito monofásico</b><span>PDF 21 · Tabla N.° 22 AEA (cable IRAM NM 247-3 en cañería)</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Sección F y N</th><th scope=\"col\">I(Z) máxima</th><th scope=\"col\">Se usa en</th></tr></thead><tbody><tr data-iz=\"1.5\"><td>1,5 mm²</td><td>15 A</td><td>IUG</td></tr><tr data-iz=\"2.5\"><td>2,5 mm²</td><td>21 A</td><td>TUG, IUG con tomas, TUE, ACU</td></tr></tbody></table></div><p class=\"note\">Regla para elegir: I(B) ≤ I(N) ≤ I(Z). La corriente de trabajo no puede superar la de la PIA, y la PIA no puede superar lo que aguanta el cable.</p></figure>", "prot": "<figure class=\"rt \"><figcaption><b>Protecciones de los circuitos</b><span>PDF 21 y 22 · Pasos 12, 15 y 18</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Dónde</th><th scope=\"col\">Protección</th><th scope=\"col\">Corriente</th><th scope=\"col\">Icc</th></tr></thead><tbody><tr data-pr=\"IUG\"><td>Circuito IUG</td><td>PIA curva B</td><td>2×10 A (máximo 15 A)</td><td>3000 A</td></tr><tr data-pr=\"TUG\"><td>Circuito TUG</td><td>PIA curva C</td><td>2×15 A (máximo 20 A)</td><td>4500 A</td></tr><tr data-pr=\"ACU\"><td>Circuito ACU</td><td>PIA curva C</td><td>Según I(B) (curso: 2×10 A)</td><td>4500 A</td></tr><tr data-pr=\"TPA\"><td>TPA (pilar)</td><td>ITM curva C</td><td>2×25 A</td><td>6000 A</td></tr><tr data-pr=\"ID\"><td>TPU (entrada)</td><td>Interruptor diferencial</td><td>2×25 A · 30 mA</td><td>—</td></tr><tr data-pr=\"DPS\"><td>TPU (sobretensiones)</td><td>ITM C2×25 A + DPS</td><td>245 V · 40 kA</td><td>6000 A</td></tr></tbody></table></div><p class=\"note\">Valores normalizados de PIA: 10 · 15/16 · 20 · 25 · 32 · 40 A. Curva B para iluminación, curva C para tomas y motores. El diferencial debe ser de igual o mayor corriente que la protección general.</p></figure>", "sim": "<figure class=\"rt \"><figcaption><b>Simultaneidad por cantidad de circuitos</b><span>PDF 21 y 22 · Paso 14</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Cantidad de circuitos</th><th scope=\"col\">Coeficiente</th></tr></thead><tbody><tr data-sim=\"2\"><td>2 circuitos</td><td>No aplica (1)</td></tr><tr data-sim=\"3\"><td>3 o 4 circuitos</td><td>0,8</td></tr><tr data-sim=\"5\"><td>5 circuitos</td><td>0,7</td></tr><tr data-sim=\"6\"><td>6 o más circuitos</td><td>0,6</td></tr></tbody></table></div></figure>", "c2178": "<figure class=\"rt\"><figcaption><b>Tipo de canalización de circuitos seccionales · cable IRAM 2178</b><span>PDF 21 · Paso 15 (tablas para acometida)</span></figcaption><div class=\"scroll\"><table><thead><tr><th>Sección (cobre)</th><th>Sobre bandejas / al aire</th><th>Dentro de cañerías</th><th>Directamente enterrado</th></tr></thead><tbody><tr><td>4 mm²</td><td data-c=\"4-aire\" data-a=\"25\">≤ 25 A</td><td data-c=\"4-cano\" data-a=\"20\">≤ 20 A</td><td data-c=\"4-ent\" data-a=\"32\">≤ 32 A</td></tr><tr><td>6 mm²</td><td data-c=\"6-aire\" data-a=\"32\">≤ 32 A</td><td data-c=\"6-cano\" data-a=\"25\">≤ 25 A</td><td data-c=\"6-ent\" data-a=\"40\">≤ 40 A</td></tr></tbody></table></div><p class=\"note\" id=\"c2178n\">Si el cable sube en caño del TPA al suelo y del suelo al TPU, se resta 10 %: 32 A → 28,8 A.</p></figure>", "c2473": "<figure class=\"rt \"><figcaption><b>Cable unipolar IRAM 247-3 (solo dentro de cañería)</b><span>PDF 21 · Paso 15 (tablas para acometida)</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Sección</th><th scope=\"col\">Corriente</th><th scope=\"col\">Sección</th><th scope=\"col\">Corriente</th></tr></thead><tbody><tr><td>4 mm²</td><td>≤ 25 A</td><td>10 mm²</td><td>≤ 42 A</td></tr><tr><td>6 mm²</td><td>≤ 32 A</td><td>16 mm²</td><td>≤ 52 A</td></tr></tbody></table></div></figure>", "cdt": "<figure class=\"rt \"><figcaption><b>Caída de tensión: valores a usar</b><span>PDF 21 · Paso 16</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Dato</th><th scope=\"col\">Valor</th></tr></thead><tbody><tr><td>Resistividad ρ del cobre</td><td>0,017 Ω·mm²/m</td></tr><tr><td>Resistividad ρ del aluminio</td><td>0,026 Ω·mm²/m</td></tr><tr><td>Caída máxima en iluminación</td><td>3 %</td></tr><tr><td>Caída máxima en motores</td><td>5 %</td></tr><tr><td>Medidor → TPA</td><td>No más de 2 m</td></tr></tbody></table></div><p class=\"note\">ΔU = 2 × L × I × ρ ÷ S · ΔU % = ΔU ÷ 220 × 100</p></figure>", "pact": "<figure class=\"rt \"><figcaption><b>Potencia activa</b><span>PDF 21 · Paso 16 (Resolución 17 ERSeP)</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Dato</th><th scope=\"col\">Valor</th></tr></thead><tbody><tr><td>cos φ estándar de viviendas y pequeños locales</td><td>0,85</td></tr><tr><td>P (W) = S (VA) × 0,85</td><td>P (kW) = P (W) ÷ 1000</td></tr><tr><td>Límite del idóneo Categoría III</td><td>10 kW</td></tr></tbody></table></div></figure>", "c10": "<figure class=\"rt wide\"><figcaption><b>Tabla 770.10.IX · Máxima cantidad de cables por canalización aislante curvable (corrugado)</b><span>PDF 21 · Paso 10</span></figcaption><div class=\"scroll\"><table class=\"t10\"><thead><tr><th>Sección cable</th><th>mm²</th><th data-s=\"1\">1</th><th data-s=\"1.5\">1,5</th><th data-s=\"2.5\">2,5</th><th data-s=\"4\">4</th><th data-s=\"6\">6</th><th data-s=\"10\">10</th><th data-s=\"16\">16</th><th data-s=\"25\">25</th><th data-s=\"35\">35</th><th data-s=\"50\">50</th></tr><tr><th>Ø exterior máx.</th><th>mm</th><td data-s=\"1\">2,5</td><td data-s=\"1.5\">3,50</td><td data-s=\"2.5\">4,20</td><td data-s=\"4\">4,80</td><td data-s=\"6\">6,30</td><td data-s=\"10\">7,60</td><td data-s=\"16\">8,80</td><td data-s=\"25\">11,00</td><td data-s=\"35\">12,50</td><td data-s=\"50\">14,50</td></tr><tr><th>Sección total</th><th>mm²</th><td data-s=\"1\">4,91</td><td data-s=\"1.5\">9,62</td><td data-s=\"2.5\">13,85</td><td data-s=\"4\">18,10</td><td data-s=\"6\">31,17</td><td data-s=\"10\">45,36</td><td data-s=\"16\">60,82</td><td data-s=\"25\">95,03</td><td data-s=\"35\">122,72</td><td data-s=\"50\">165,13</td></tr><tr><th>Caño</th><th>mm²</th><th colspan=\"10\">Cantidad de cables</th></tr></thead><tbody><tr data-cano=\"CSP 16\"><th scope=\"row\">CSP 16</th><td>98</td><td data-s=\"1\">1+PE</td><td data-s=\"1.5\">3+PE</td><td data-s=\"2.5\">—</td><td data-s=\"4\">—</td><td data-s=\"6\">—</td><td data-s=\"10\">—</td><td data-s=\"16\">—</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CL 16\"><th scope=\"row\">CL 16</th><td>102</td><td data-s=\"1\">1+PE</td><td data-s=\"1.5\">3+PE</td><td data-s=\"2.5\">2+PE</td><td data-s=\"4\">—</td><td data-s=\"6\">—</td><td data-s=\"10\">—</td><td data-s=\"16\">—</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CSP 19\"><th scope=\"row\">CSP 19</th><td>158</td><td data-s=\"1\">4+PE</td><td data-s=\"1.5\">5+PE</td><td data-s=\"2.5\">3+PE</td><td data-s=\"4\">2+PE</td><td data-s=\"6\">—</td><td data-s=\"10\">—</td><td data-s=\"16\">—</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CL 19\"><th scope=\"row\">CL 19</th><td>164</td><td data-s=\"1\">4+PE</td><td data-s=\"1.5\">5+PE</td><td data-s=\"2.5\">3+PE</td><td data-s=\"4\">2+PE</td><td data-s=\"6\">—</td><td data-s=\"10\">—</td><td data-s=\"16\">—</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CSP 22\"><th scope=\"row\">CSP 22</th><td>213</td><td data-s=\"1\">8+PE</td><td data-s=\"1.5\">7+PE</td><td data-s=\"2.5\">4+PE</td><td data-s=\"4\">3+PE</td><td data-s=\"6\">—</td><td data-s=\"10\">—</td><td data-s=\"16\">—</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CL 22\"><th scope=\"row\">CL 22</th><td>223</td><td data-s=\"1\">9+PE</td><td data-s=\"1.5\">7+PE</td><td data-s=\"2.5\">5+PE</td><td data-s=\"4\">3+PE</td><td data-s=\"6\">2+PE</td><td data-s=\"10\">—</td><td data-s=\"16\">—</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CSP 25\"><th scope=\"row\">CSP 25</th><td>293</td><td data-s=\"1\">—</td><td data-s=\"1.5\">10+PE</td><td data-s=\"2.5\">6+PE</td><td data-s=\"4\">5+PE</td><td data-s=\"6\">2+PE</td><td data-s=\"10\">—</td><td data-s=\"16\">—</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CL 25\"><th scope=\"row\">CL 25</th><td>309</td><td data-s=\"1\">—</td><td data-s=\"1.5\">10+PE</td><td data-s=\"2.5\">7+PE</td><td data-s=\"4\">5+PE</td><td data-s=\"6\">2+PE</td><td data-s=\"10\">—</td><td data-s=\"16\">—</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CSP 32\"><th scope=\"row\">CSP 32</th><td>509</td><td data-s=\"1\">—</td><td data-s=\"1.5\">—</td><td data-s=\"2.5\">12+PE</td><td data-s=\"4\">9+PE</td><td data-s=\"6\">5+PE</td><td data-s=\"10\">3+PE</td><td data-s=\"16\">2+PE</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CL 32\"><th scope=\"row\">CL 32</th><td>527</td><td data-s=\"1\">—</td><td data-s=\"1.5\">—</td><td data-s=\"2.5\">12+PE</td><td data-s=\"4\">9+PE</td><td data-s=\"6\">5+PE</td><td data-s=\"10\">3+PE</td><td data-s=\"16\">2+PE</td><td data-s=\"25\">—</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CSP 38\"><th scope=\"row\">CSP 38</th><td>767</td><td data-s=\"1\">—</td><td data-s=\"1.5\">—</td><td data-s=\"2.5\">—</td><td data-s=\"4\">—</td><td data-s=\"6\">8+PE</td><td data-s=\"10\">5+PE</td><td data-s=\"16\">3+PE</td><td data-s=\"25\">2+PE</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CL 38\"><th scope=\"row\">CL 38</th><td>814</td><td data-s=\"1\">—</td><td data-s=\"1.5\">—</td><td data-s=\"2.5\">—</td><td data-s=\"4\">—</td><td data-s=\"6\">8+PE</td><td data-s=\"10\">5+PE</td><td data-s=\"16\">4+PE</td><td data-s=\"25\">2+PE</td><td data-s=\"35\">—</td><td data-s=\"50\">—</td></tr><tr data-cano=\"CSP 51\"><th scope=\"row\">CSP 51</th><td>1507</td><td data-s=\"1\">—</td><td data-s=\"1.5\">—</td><td data-s=\"2.5\">—</td><td data-s=\"4\">—</td><td data-s=\"6\">16+PE</td><td data-s=\"10\">11+PE</td><td data-s=\"16\">8+PE</td><td data-s=\"25\">5+PE</td><td data-s=\"35\">3+PE</td><td data-s=\"50\">2+PE</td></tr><tr data-cano=\"CL 51\"><th scope=\"row\">CL 51</th><td>1545</td><td data-s=\"1\">—</td><td data-s=\"1.5\">—</td><td data-s=\"2.5\">—</td><td data-s=\"4\">—</td><td data-s=\"6\">16+PE</td><td data-s=\"10\">11+PE</td><td data-s=\"16\">8+PE</td><td data-s=\"25\">5+PE</td><td data-s=\"35\">3+PE</td><td data-s=\"50\">2+PE</td></tr></tbody></table></div><p class=\"tip\">Deslizá la tabla hacia la derecha para ver todas las secciones. Se marcan tu caño y las secciones que cargaste en la calculadora.</p><p class=\"note\">CSP: curvable semipesado (33XX) · CL: curvable liviano (23XX). Las secciones internas libres de los caños son orientativas. Ocupación máxima 35 %. Si el caño no es liso, pasá a la medida siguiente.</p></figure>", "regla": "<figure class=\"rt\"><figcaption><b>Regla para elegir cable y protección</b><span>PDF 21 · Pasos 13 y 15</span></figcaption><div class=\"fx\" style=\"margin:6px 0\"><div class=\"f\">I(B) ≤ I(N) ≤ I(Z)</div><dl><dt>I(B)</dt><dd>corriente de trabajo = S ÷ 220 V</dd><dt>I(N)</dt><dd>corriente nominal de la PIA o ITM</dd><dt>I(Z)</dt><dd>corriente máxima que soporta el cable (tablas)</dd></dl></div></figure>"};
 const PMU_HTML=`<div class="pmu"><div class="pmuh"><b>Planilla de PMU · viviendas unifamiliares</b><div class="gsel" role="group" aria-label="Resaltar grado"><span>Resaltar:</span><button data-hg="Mínimo">Mínimo</button><button data-hg="Medio">Medio</button><button data-hg="Elevado">Elevado</button><button data-hg="Superior">Superior</button><button data-hg="">Todos</button></div></div><div class="pmug"><div class="scroll"><table class="pmut"><thead><tr><th rowspan="2" scope="col">Ambiente</th><th rowspan="2" scope="col"><span class="lg">Grado de electrificación</span><span class="shg">Grado</span></th><th colspan="2" scope="colgroup">Puntos mínimos de utilización</th></tr><tr><th scope="col">IUG</th><th scope="col">TUG</th></tr></thead><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Sala de estar y comedor, escritorio, estudio, biblioteca o similares, en viviendas</th><td class="gr">Mínimo</td><td rowspan="4">Una boca cada 18 m² de superficie o fracción (mínimo una)</td><td rowspan="4">Una boca cada 6 m² de superficie o fracción (mínimo dos)</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Dormitorio (superficie menor a 10 m²)</th><td class="gr">Mínimo</td><td rowspan="4">Una boca</td><td rowspan="4">Dos bocas</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Dormitorio (superficie igual o mayor a 10 m² hasta 36 m²)</th><td class="gr">Mínimo</td><td rowspan="4">Una boca</td><td rowspan="4">Tres bocas</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Elevado"><th scope="rowgroup" rowspan="2" class="amb">Dormitorio (superficie mayor a 36 m²)</th><td class="gr">Elevado</td><td rowspan="2">Dos bocas</td><td rowspan="2">Tres bocas</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Cocina</th><td class="gr">Mínimo</td><td>Una boca</td><td>Tres bocas más dos tomacorrientes</td></tr><tr data-g="Medio"><td class="gr">Medio</td><td rowspan="3">Dos bocas</td><td>Tres bocas más dos tomacorrientes</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td><td>Tres bocas más tres tomacorrientes</td></tr><tr data-g="Superior"><td class="gr">Superior</td><td>Cuatro bocas más tres tomacorrientes</td></tr></tbody></table></div><div class="scroll"><table class="pmut"><thead><tr><th rowspan="2" scope="col">Ambiente</th><th rowspan="2" scope="col"><span class="lg">Grado de electrificación</span><span class="shg">Grado</span></th><th colspan="2" scope="colgroup">Puntos mínimos de utilización</th></tr><tr><th scope="col">IUG</th><th scope="col">TUG</th></tr></thead><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Baño <span class="sm">(para toilette ver 770.7.1.k)</span></th><td class="gr">Mínimo</td><td rowspan="4">Una boca</td><td rowspan="4">Una boca</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Vestíbulo, garaje, hall, vestidor o similares</th><td class="gr">Mínimo</td><td>Una boca</td><td>Una boca</td></tr><tr data-g="Medio"><td class="gr">Medio</td><td rowspan="3">Una boca cada 12 m² de superficie o fracción (mínimo una boca)</td><td rowspan="3">Una boca cada 12 m² de superficie o fracción (mínimo una boca)</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Pasillos cubiertos</th><td class="gr">Mínimo</td><td rowspan="4">Una boca por cada 5 m de longitud o fracción</td><td>—</td></tr><tr data-g="Medio"><td class="gr">Medio</td><td rowspan="3">Una boca por cada 5 m de longitud o fracción (para pasillos de L &gt; 2 m)</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Lavadero</th><td class="gr">Mínimo</td><td rowspan="4">Una boca</td><td>Una boca</td></tr><tr data-g="Medio"><td class="gr">Medio</td><td rowspan="3">Dos bocas</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody><tbody><tr data-g="Mínimo"><th scope="rowgroup" rowspan="4" class="amb">Balcones, galerías, atrios o similares espacios y pasillos semicubiertos</th><td class="gr">Mínimo</td><td rowspan="4">Una boca por cada 5 m de longitud o fracción<br><span class="ip">Protección mínima IP44</span></td><td rowspan="4">—</td></tr><tr data-g="Medio"><td class="gr">Medio</td></tr><tr data-g="Elevado"><td class="gr">Elevado</td></tr><tr data-g="Superior"><td class="gr">Superior</td></tr></tbody></table></div></div><p class="note">Tabla de la AEA 90364-7-770 que dan en el examen. Elegí un grado para resaltar sus filas y practicar.</p></div>`;
+REF.pmu=`<figure class="rt wide">${PMU_HTML}</figure>`;
+Object.assign(REF,{"equil": "<figure class=\"rt \"><figcaption><b>Equilibrio de fases</b><span>PDF 23 · Pasos 3, 11 y 13</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Regla</th><th scope=\"col\">Detalle</th></tr></thead><tbody><tr><td>Un circuito de uso general por línea</td><td>IUG c/ toma → L1 · TUG 1 → L2 · TUG 2 → L3</td></tr><tr><td>Carga trifásica (ACU)</td><td>Suma su I(B) en L1, L2 y L3</td></tr><tr><td>Desfasaje máximo entre fases</td><td>30 %</td></tr><tr><td>Si hay desfasaje</td><td>El CS se calcula con la mayor corriente de línea</td></tr><tr><td>Canalizaciones</td><td>Obligatorio: una por circuito; no mezclar fases en una caja, boca o caño</td></tr></tbody></table></div></figure>", "motor": "<figure class=\"rt \"><figcaption><b>Datos para motores trifásicos</b><span>PDF 23 · Paso 9</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Dato</th><th scope=\"col\">Valor</th></tr></thead><tbody><tr><td>1 HP</td><td>746 W</td></tr><tr><td>Sin cos φ del motor</td><td>cos φ = 1 → S = P</td></tr><tr><td>Corriente por fase</td><td>I(B) = S ÷ (1,73 × 380 V)</td></tr><tr><td>Cable ACU</td><td>4x2,5 mm² + Pe IRAM 247-3 en cañería</td></tr><tr><td>Guardamotor (GM)</td><td>Trifásico, rango adecuado, regulado algo por encima de I(B) (curso: 1,13 A → 1,4 A, rango 1 a 2 A)</td></tr></tbody></table></div></figure>", "iz3f": "<figure class=\"rt \"><figcaption><b>Corriente máxima I(Z) · circuito trifásico</b><span>PDF 23 · Paso 9</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Sección F y N</th><th scope=\"col\">I(Z) máxima</th><th scope=\"col\">Comparado con monofásico</th></tr></thead><tbody><tr><td>2,5 mm²</td><td>18 A</td><td>21 A en monofásico</td></tr></tbody></table></div><p class=\"note\">En trifásico hay más conductores cargados en el caño, por eso el cable admite menos corriente.</p></figure>", "protTri": "<figure class=\"rt \"><figcaption><b>Protecciones de la instalación trifásica</b><span>PDF 23 · Pasos 9, 12 y 15</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Dónde</th><th scope=\"col\">Protección</th><th scope=\"col\">Corriente</th><th scope=\"col\">Icc</th></tr></thead><tbody><tr><td>TPA</td><td>ITM tetrapolar curva C (o D)</td><td>C4x20 A</td><td>6000 A</td></tr><tr><td>TPU (entrada)</td><td>Interruptor diferencial</td><td>4x25 A · 30 mA</td><td>—</td></tr><tr><td>TPU</td><td>Barras de distribución</td><td>4x63 A</td><td>—</td></tr><tr><td>Uso general (cada línea)</td><td>PIA curva C bipolar</td><td>C2x15 A</td><td>4500 A</td></tr><tr><td>ACU trifásico</td><td>PIA curva C tetrapolar + guardamotor</td><td>C4x6 A · GM 1–2 A</td><td>4500 A</td></tr><tr><td>Sobretensiones</td><td>ITM 02 + descargador DPS</td><td>C4x25 A · 420 V 40 kA</td><td>6000 A</td></tr><tr><td>Pe TPU – jabalina</td><td>Cable verde-amarillo IRAM 247-3</td><td>10 mm²</td><td>—</td></tr></tbody></table></div></figure>", "circesp": "<figure class=\"rt wide\"><figcaption><b>Circuitos específicos</b><span>PDF 23 · Paso 9 (AEA 770)</span></figcaption><div class=\"scroll\"><table><thead><tr><th scope=\"col\">Circuito (sigla)</th><th scope=\"col\">Alimentación</th><th scope=\"col\">Protección máx.</th><th scope=\"col\">Bocas máx.</th><th scope=\"col\">Usos típicos</th></tr></thead><tbody><tr><td>Muy baja tensión funcional (MBTF)</td><td>Monofásica</td><td>20 A</td><td>15</td><td>Porteros, alarmas, centrales telefónicas</td></tr><tr><td>Pequeños motores (APM)</td><td>Monofásica</td><td>25 A</td><td>15</td><td>Ventiladores, portones, cortinas</td></tr><tr><td>Tensión estabilizada (ATE)</td><td>Monofásica</td><td>Del proyectista</td><td>15</td><td>PC, equipos de informática (UPS)</td></tr><tr><td>Muy baja tensión sin PAT (MBTS)</td><td>Mono o trifásica</td><td>Del proyectista</td><td>Sin límite</td><td>Iluminación de piletas o hidromasajes (12 V máx.)</td></tr><tr><td>Iluminación trifásica específica (ITE)</td><td>Trifásica</td><td>Del proyectista</td><td>12 por fase</td><td>Iluminación de oficinas y locales</td></tr><tr><td>Alimentación de carga única (ACU)</td><td>Mono o trifásica</td><td>Del proyectista</td><td>No corresponde</td><td>Bombas de agua, ascensores, aire acondicionado</td></tr><tr><td>Otros circuitos específicos (OCE)</td><td>Mono o trifásica</td><td>Del proyectista</td><td>Sin límite</td><td>Cargas no comprendidas en las anteriores</td></tr></tbody></table></div></figure>"});
+
+const REFT={ge:'Grados de electrificación',circmin:'Circuitos mínimos',pmu:'Planilla de PMU',cocina:'Cocina con TUE',pasillo:'Pasillos',pot:'Potencia por circuito',sim:'Simultaneidad',pact:'Potencia activa',secmin:'Secciones mínimas',iz22:'Tabla 22: I(Z) cables',c2178:'Cable IRAM 2178',c2473:'Cable IRAM 247-3',colores:'Colores de cables',cdt:'Caída de tensión',c10:'Tabla de cañerías',regla:'Regla I(B) ≤ I(N) ≤ I(Z)',prot:'Protecciones (PIA, ITM, ID)',equil:'Equilibrio de fases',motor:'Motores trifásicos',iz3f:'I(Z) trifásico',protTri:'Protecciones trifásicas',circesp:'Circuitos específicos'};
+const MATG=[['Superficie y grado',['ge','circmin']],['Puntos mínimos (PMU)',['pmu','cocina','pasillo']],['Potencia y simultaneidad',['pot','sim','pact']],['Cables',['secmin','iz22','c2178','c2473','colores','cdt']],['Cañerías',['c10']],['Protecciones',['regla','prot']],['Trifásico',['equil','motor','iz3f','protTri','circesp']]];
 const PH=['Plano y superficie','Puntos de utilización y circuitos','Canalizaciones','Cálculos','Documentación final','Complementos'];
 const STEPS=[
 {id:'p1',ph:0,t:'Plano de la vivienda',s:'Vista en planta con mobiliario',
@@ -309,19 +395,17 @@ const STEPS=[
  f:[fx('SLA = Σ zonas cubiertas + Σ zonas semicubiertas ÷ 2',[['Zona','largo (m) × ancho (m) = m²'],['Resultado','redondeado a número entero']])],
  ex:'1.º proyecto: 12 + 23,8 + 4,2÷2 = 37,9 → <b>38 m²</b>. 2.º proyecto: 27 + 36,4 + 2,1 = 65,5 → <b>66 m²</b>.',
  calc:()=>`<div id="zlist"></div><p><button class="btn l" id="addz">+ Agregar zona</button></p><div class="out" id="o_sla"></div>`},
-{id:'p3',ph:0,t:'Grado de electrificación (GE)',s:'Mínimo, medio, elevado o superior',
+{id:'p3',refs:["ge", "circmin"],ph:0,t:'Grado de electrificación (GE)',s:'Mínimo, medio, elevado o superior',
  que:'Es la categoría de la vivienda según su SLA. La tabla de la AEA 770 fija la potencia activa en 10 kW para mínimo, medio y elevado.',
  para:'El GE define tres cosas: la DPMS de la vivienda, la cantidad mínima de circuitos y los PMU (puntos mínimos de utilización).',
  como:['Entrá a la tabla con la SLA.','SLA ≤ 60 m² → Mínimo. Más de 60 hasta 130 m² → Medio. Más de 130 hasta 200 m² → Elevado. Más de 200 m² → Superior.','Anotá la cantidad mínima de circuitos y sus variantes.'],
- f:[fx('10 kW ÷ 0,85 = 11,76 kVA',[['10 kW','potencia activa de la tabla de GE y límite de trabajo del idóneo Cat. III'],['0,85','cos φ mínimo (Resolución 17 ERSeP)']]),
-  `<div class="scroll"><table><tr><th>GE</th><th class="n">Circuitos</th><th>Variantes (IUG – TUG – libre)</th></tr><tr><td>Mínimo</td><td class="n">2</td><td>Única: 1 – 1</td></tr><tr><td>Medio</td><td class="n">3</td><td>a) 2 – 1 · b) 1 – 2</td></tr><tr><td>Elevado</td><td class="n">5</td><td>a) 2 – 3 · b) 3 – 2</td></tr><tr><td>Superior</td><td class="n">6</td><td>a) 2 – 3 – 1 · b) 3 – 2 – 1</td></tr></table></div>`],
+ f:[fx('10 kW ÷ 0,85 = 11,76 kVA',[['10 kW','potencia activa de la tabla de GE y límite de trabajo del idóneo Cat. III'],['0,85','cos φ mínimo (Resolución 17 ERSeP)']])],
  ex:'38 m² → <b>Mínimo</b>: 2 circuitos, sin variantes (1 IUG – 1 TUG). 66 m² → <b>Medio</b>: 3 circuitos, dos variantes.',
  calc:()=>`<div class="out" id="o_ge"></div><div id="o_ge2"></div>`},
-{id:'p4',ph:1,t:'Puntos mínimos de utilización (PMU)',s:'Bocas IUG y TUG por ambiente',
+{id:'p4',refs:["pmu", "cocina", "pasillo"],ph:1,t:'Puntos mínimos de utilización (PMU)',s:'Bocas IUG y TUG por ambiente',
  que:'Son las bocas mínimas que tiene que tener cada ambiente: de iluminación (IUG), de tomacorrientes (TUG) y de uso especial (TUE, por ejemplo aire acondicionado).',
  para:'Garantizan que la vivienda tenga luz y tomas suficientes en cada ambiente, así nadie usa zapatillas ni alargues.',
  como:['Para cada ambiente anotá su superficie (m²) o, en pasillos y balcones, su largo (m lineales).','Buscá el ambiente en la planilla de PMU según el GE.','Anotá IUG y TUG en la planilla del proyecto, con observaciones.','En semicubiertos, el artefacto de IUG lleva protección mínima IP44.','El timbre se suma como una boca más de IUG.'],
- f:[PMU_HTML],
  ex:'2.º proyecto (GE medio): estar 10,24 m² → 1 IUG, 2 TUG. Dormitorios → 1 IUG, 3 TUG. Cocina → 2 IUG, 3 TUG. Total con timbre: <b>10 IUG y 15 TUG</b>.',
  calc:()=>`<div id="alist"></div><p><button class="btn l" id="adda">+ Agregar ambiente</button></p>${chk('timbre_x','Lleva timbre (suma 1 IUG)')}<div id="o_pmu"></div>`},
 {id:'p5',ph:1,t:'Ubicar los PMU en el plano',s:'Simbología IRAM 2010',
@@ -329,74 +413,73 @@ const STEPS=[
  para:'El plano tiene que poder leerlo cualquiera: el que ejecuta la obra, el ERSeP y vos mismo más adelante.',
  como:['Dibujá cada boca de techo o aplique, cada toma y cada llave con su símbolo IRAM 2010.','Respetá las ubicaciones permitidas en baños y cocina.','Revisá ambiente por ambiente que no falte ningún PMU.','Agregá el cuadro de referencias de la simbología.'],
  ck:['Bocas IUG dibujadas','Tomas TUG dibujadas','Llaves de efecto dibujadas','Ubicaciones de baño y cocina revisadas','Cuadro de referencias']},
-{id:'p6',ph:1,t:'Contabilizar IUG, IUE, TUG y TUE',s:'Planilla de totales',
+{id:'p6',refs:["circmin"],ph:1,t:'Contabilizar IUG, IUE, TUG y TUE',s:'Planilla de totales',
  que:'Es hacer la planilla con cada ambiente, su superficie, la cantidad de IUG y TUG, y las observaciones.',
  para:'Con los totales se arman los circuitos sin pasar el máximo de bocas por circuito.',
  como:['Copiá la planilla del paso 4 con el nombre del proyecto, SLA, GE y DPMS.','Sumá el total general de IUG y TUG.','Compará con lo que pide la norma para el GE (paso 3).'],
  ex:'1.º proyecto: total <b>7 IUG y 9 TUG</b>. 2.º proyecto: <b>10 IUG y 15 TUG</b>.',
  calc:()=>`<div id="o_tot"></div>`},
-{id:'p7',ph:1,t:'Verificar circuitos de IUG',s:'Máximo 15 bocas por circuito',
+{id:'p7',refs:["circmin", "secmin"],ph:1,t:'Verificar circuitos de IUG',s:'Máximo 15 bocas por circuito',
  que:'Es repartir las bocas de iluminación en circuitos IUG.',
  para:'Cada circuito tiene un límite de bocas para que el cable y la protección no queden exigidos.',
  como:['Sumá todas las bocas IUG (incluido el timbre).','Si son 15 o menos, alcanza con un circuito IUG (si el GE lo permite).','Si son más, o la variante del GE pide 2 IUG, dividilas en dos circuitos.'],
  ex:'1.º proyecto: 7 bocas → 1 circuito IUG. 2.º proyecto: 10 bocas → 1 circuito IUG.',
  calc:()=>`<div id="o_v7"></div>`},
-{id:'p8',ph:1,t:'Verificar circuitos de TUG',s:'Separar en TUG 1 y TUG 2 si hace falta',
+{id:'p8',refs:["circmin"],ph:1,t:'Verificar circuitos de TUG',s:'Separar en TUG 1 y TUG 2 si hace falta',
  que:'Es repartir los tomacorrientes en circuitos TUG.',
  para:'Igual que en IUG, ningún circuito puede superar 15 bocas. Además el GE puede pedir dos circuitos TUG.',
  como:['Sumá todas las bocas TUG.','Si pasan de 15 o el GE pide 2 TUG, separalas en TUG 1 y TUG 2.','Repartí por zonas para que los recorridos sean cortos.','Cargá los circuitos en la calculadora de abajo: se usan en todos los pasos de cálculo.'],
  ex:'2.º proyecto: 15 TUG, GE medio variante b) → <b>TUG 1 con 8 bocas</b> y <b>TUG 2 con 7</b>.',
  calc:()=>`<div id="clist"></div><p><button class="btn l" id="addc">+ Agregar circuito</button></p><div id="o_v8"></div>`},
-{id:'p9',ph:2,t:'Canalizaciones',s:'TPA, TPU, recorridos y alturas',
+{id:'p9',refs:["secmin", "colores", "prot"],ph:2,t:'Canalizaciones',s:'TPA, TPU, recorridos y alturas',
  que:'Es dibujar los recorridos de caños desde el TPU a cada boca, y la canalización principal del TPA al TPU.',
  para:'Define por dónde pasa cada circuito, qué cables van juntos y qué caño se necesita.',
  como:['Ubicá el TPA (tablero de protección de la acometida) en el límite municipal.','Elegí el lugar del TPU (tablero del usuario) y su altura (1,50 m en el curso).','Mantené 50 cm de separación con los demás servicios (agua, gas, etc.).','Conviene canalizar IUG y TUG separados: el cable conduce mejor y la instalación es más segura.','Poné letra a cada boca IUG y a su llave. Llaves a 1,10 m, tomas a 0,40 m (baño y cocina según uso).','Dibujá el timbre con su pulsador.'],
  f:[fx(['IUG: PIA máxima 2×15 A → se sugiere 2×10 A','TUG: PIA máxima 2×20 A → se sugiere 2×15 A'],[['Troncal IUG','F y N 1,5 mm² + PE 2,5 mm² (IRAM 247-3)'],['Bajada a llave','1 mm²; retorno de otro color (por ejemplo blanco)'],['PE a la llave','solo obligatorio si caja o caño son de chapa'],['Punto y toma','si la toma sale del IUG, pasa a 2,5 mm² y 2200 VA, y pierde el 2/3']])],
  ck:['TPA ubicado en límite municipal','TPU ubicado y con altura','50 cm de otros servicios','IUG y TUG por caños separados','Letras en bocas y llaves','Alturas de llaves y tomas','Timbre y pulsador']},
-{id:'p10',ph:2,t:'Verificar cañerías',s:'Tabla 770.10.IX · ocupación máxima 35 %',
+{id:'p10',refs:["c10"],ph:2,t:'Verificar cañerías',s:'Tabla 770.10.IX · ocupación máxima 35 %',
  que:'Es comprobar que los cables entran en el caño elegido, según la tabla de la AEA de cantidad máxima de cables por caño.',
  para:'Un caño muy lleno daña la aislación al pasar los cables y los hace trabajar más calientes.',
  como:['Contá los cables de cada tramo, incluido el PE.','El PE es de igual sección que las fases, salvo en IUG puro: F y N de 1,5 mm² con PE de 2,5 mm².','Buscá en la tabla o calculá la ocupación: no puede pasar el 35 %.','Si el caño no es liso (corrugado), pasá a la medida siguiente.'],
  f:[fx('Ocupación = Σ sección total de cables ÷ sección del caño × 100 ≤ 35 %',[['Sección total','1,5 mm² → 9,62 · 2,5 → 13,85 · 4 → 18,10 · 6 → 31,17 mm²'],['CL 19','164 mm²'],['CL 22','223 mm²']])],
  ex:'Tramo con 2×1,5 + 2×2,5 + PE (2,5): no entra en CL 19, va en <b>Pf 22</b>.',
  calc:()=>`<label for="i_cn">Caño</label><select id="i_cn" data-k="cn">${CAN.map(c=>`<option>${c[0]}</option>`).join('')}</select><div class="row"><div>${inp('k15','Cables 1,5 mm²')}</div><div>${inp('k25','Cables 2,5 mm²')}</div><div>${inp('k4','Cables 4 mm²')}</div><div>${inp('k6','Cables 6 mm²')}</div></div><div class="out" id="o_can"></div><div id="o_can2"></div>`},
-{id:'p11',ph:3,t:'Potencia aparente S de cada circuito',s:'IUG 60 VA por boca × 2/3 · TUG 2200 VA',
+{id:'p11',refs:["pot"],ph:3,t:'Potencia aparente S de cada circuito',s:'IUG 60 VA por boca × 2/3 · TUG 2200 VA',
  que:'Es calcular la potencia de cálculo de cada circuito terminal en VA.',
  para:'Con esa potencia se calcula la corriente de cada circuito y la de toda la vivienda.',
  como:['IUG puro: bocas × 60 VA, por 2/3 (0,66) de simultaneidad.','TUG: 2200 VA por circuito como mínimo, sin simultaneidad.','TUE: 3300 VA como mínimo, sin simultaneidad.','ACU (carga única): la potencia del aparato.','IUG con tomas: se toma como TUG, 2200 VA y sin 2/3.'],
  f:[fx(['IUG: S = bocas × 60 VA × 2/3','TUG = 2200 VA · TUE = 3300 VA · ACU = potencia del aparato'],[['S','potencia aparente (VA)'],['2/3','simultaneidad de IUG: no se prenden todas las luces a la vez']])],
  ex:'2.º proyecto: IUG = 11 × 60 = 660 VA × 2/3 = <b>440 VA</b>. TUG 1 y TUG 2 = <b>2200 VA</b> c/u. ACU = <b>1250 VA</b>. (La planilla del PDF cuenta 10 IUG, pero el cálculo usa 11 bocas.)',
  calc:()=>`<div id="o_s"></div>`},
-{id:'p12',ph:3,t:'Corriente de trabajo I(B) de cada circuito',s:'I(B) = S ÷ V',
+{id:'p12',refs:["regla", "iz22", "prot", "secmin"],ph:3,t:'Corriente de trabajo I(B) de cada circuito',s:'I(B) = S ÷ V',
  que:'Es la corriente que va a circular por cada circuito terminal.',
  para:'Con I(B) se elige el cable y la protección (PIA) de cada circuito.',
  como:['Dividí la potencia S de cada circuito por la tensión, 220 V en monofásico.','Buscá la corriente máxima del cable I(Z) en la tabla N.° 22 de la AEA: 1,5 mm² → 15 A, 2,5 mm² → 21 A.','Elegí la PIA con I(B) ≤ I(N) ≤ I(Z), sin pasar el máximo del tipo de circuito.'],
  f:[fx(['I(B) = S ÷ V','I(B) ≤ I(N) ≤ I(Z)'],[['I(B)','corriente de trabajo (A)'],['V','tensión: 220 V'],['I(N)','corriente nominal de la PIA'],['I(Z)','corriente máxima del cable'],['Icc','poder de corte: IUG 3000 A, TUG 4500 A']])],
  ex:'IUG: 440 ÷ 220 = <b>2 A</b> → PIA B2×10 A. TUG: 2200 ÷ 220 = <b>10 A</b> → C2×15 A. ACU: 1250 ÷ 220 = <b>5,68 A</b> → C2×10 A.',
  calc:()=>`<div id="o_ib"></div>`},
-{id:'p13',ph:3,t:'Potencia aparente total',s:'Suma de todos los circuitos',
+{id:'p13',refs:["pot"],ph:3,t:'Potencia aparente total',s:'Suma de todos los circuitos',
  que:'Es sumar la potencia S de todos los circuitos de uso general y específico.',
  para:'Es la base de la DPMS de la vivienda.',
  como:['Sumá IUG (ya con 2/3) + todos los TUG + TUE + ACU.'],
  f:[fx('S total = IUG + TUG 1 + TUG 2 + … + ACU')],
  ex:'440 + 2200 + 2200 + 1250 = <b>6090 VA</b>.',
  calc:()=>`<div class="out" id="o_st"></div>`},
-{id:'p14',ph:3,t:'Simultaneidad y DPMS',s:'Coeficiente según cantidad de circuitos',
+{id:'p14',refs:["sim"],ph:3,t:'Simultaneidad y DPMS',s:'Coeficiente según cantidad de circuitos',
  que:'La DPMS (demanda de potencia máxima simultánea) es la potencia que pide la vivienda en el peor momento, sabiendo que no se usa todo a la vez.',
  para:'Con la DPMS se calcula el circuito seccional, la protección general y la potencia a declarar.',
  como:['Contá los circuitos.','2 circuitos: no se aplica (1). 3 o 4: 0,8. 5: 0,7. 6 o más: 0,6.','Multiplicá la S total por ese coeficiente.'],
  f:[fx('DPMS = S total × coeficiente de simultaneidad')],
  ex:'1.º proyecto: 2 circuitos → 2477,2 × 1 = <b>2477,2 VA</b>. 2.º proyecto: 4 circuitos → 6090 × 0,8 = <b>4872 VA</b>.',
  calc:()=>`<div class="out" id="o_dp"></div><div id="o_dp2"></div>`},
-{id:'p15',ph:3,t:'Circuito seccional (CS) y puesta a tierra',s:'Cable TPA–TPU, caída de tensión y PAT',
+{id:'p15',refs:["c2178", "secmin", "cdt", "c2473", "prot"],ph:3,t:'Circuito seccional (CS) y puesta a tierra',s:'Cable TPA–TPU, caída de tensión y PAT',
  que:'El circuito seccional es el cable que va del TPA (pilar) al TPU (tablero de la casa). Por norma se considera línea principal: sección mínima 4 mm².',
  para:'Lleva toda la corriente de la vivienda. Hay que elegir su cable, verificar la caída de tensión, su protección y el cable de tierra.',
  como:['Calculá I(B) del CS: DPMS ÷ 220 V.','Elegí el cable según la canalización (tabla IRAM 2178). Directamente enterrado, 4 mm² lleva 32 A.','Si sube y baja en caño (del TPA al suelo y del suelo al TPU), restale 10 %: 32 A → 28,8 A.','Verificá la caída de tensión con la distancia TPA–TPU: máximo 3 % iluminación, 5 % motores. Si no cumple, subí la sección.','Protección en el TPA: ITM C2×25 A, 6000 A de Icc.','Del medidor al TPA no puede haber más de 2 m; del TPA al TPU puede haber mucho más.','PAT: el PE del TPU a la jabalina es de igual sección que el CS (mínimo 4 mm², verde-amarillo IRAM 247-3). Jabalina de cobre IRAM 2309 con cámara de inspección. Sistema TT.'],
- f:[fx(['I(B) = DPMS ÷ 220 V','ΔU = 2 × L × I × ρ ÷ S','ΔU % = ΔU ÷ 220 × 100'],[['L','distancia TPA–TPU (m)'],['ρ','resistividad: cobre 0,017 · aluminio 0,026 Ω·mm²/m'],['S','sección del cable (mm²)']]),
-  `<div class="scroll"><table><tr><th>IRAM 2178</th><th class="n">Bandeja / aire</th><th class="n">En caño</th><th class="n">Enterrado</th></tr><tr><td>4 mm²</td><td class="n">25 A</td><td class="n">20 A</td><td class="n">32 A</td></tr><tr><td>6 mm²</td><td class="n">32 A</td><td class="n">25 A</td><td class="n">40 A</td></tr></table></div>`],
+ f:[fx(['I(B) = DPMS ÷ 220 V','ΔU = 2 × L × I × ρ ÷ S','ΔU % = ΔU ÷ 220 × 100'],[['L','distancia TPA–TPU (m)'],['ρ','resistividad: cobre 0,017 · aluminio 0,026 Ω·mm²/m'],['S','sección del cable (mm²)']])],
  ex:'2.º proyecto: 4872 ÷ 220 = <b>22,15 A</b>. Cable 2×4 mm² enterrado: 32 − 10 % = <b>28,8 A</b>. ITM <b>C2×25 A</b>. 1.º proyecto: caída <b>0,44 %</b> con 10 m.',
  calc:()=>`<label for="i_can">Canalización del CS</label><select id="i_can" data-k="can"><option value="ent">Directamente enterrado</option><option value="cano">Dentro de cañería</option><option value="aire">Bandeja / al aire</option></select>${chk('r10_x','Tramos en caño en TPA y TPU (restar 10 %)')}<div class="row"><div>${inp('L','Distancia TPA–TPU (m)')}</div><div><label for="i_rho">Material</label><select id="i_rho" data-k="rho"><option value="0.017">Cobre (0,017)</option><option value="0.026">Aluminio (0,026)</option></select></div></div><div class="out" id="o_cs"></div><div id="o_cs2"></div>`},
-{id:'p16',ph:3,t:'Potencia activa P en kW',s:'P = S × 0,85',
+{id:'p16',refs:["pact"],ph:3,t:'Potencia activa P en kW',s:'P = S × 0,85',
  que:'Es pasar la DPMS (potencia aparente, VA) a potencia activa (W y kW) con el factor de potencia.',
  para:'Es la potencia que se declara. El idóneo Categoría III puede hacer instalaciones de hasta 10 kW.',
  como:['Tomá el cos φ mínimo de 0,85 (Resolución 17 ERSeP).','Multiplicá la DPMS por 0,85 y dividí por 1000.','Verificá que no pase 10 kW.'],
@@ -408,14 +491,14 @@ const STEPS=[
  para:'El plano final es lo que se ejecuta en obra y lo que se presenta.',
  como:['Canalización del circuito ACU con sus datos.','Canalización del circuito seccional con sus datos.','Canalización de puesta a tierra con su símbolo y datos.','Referencias de simbología IRAM 2010.','Altura de cada boca, salvo las de losa.'],
  ck:['Circuito ACU dibujado','Circuito seccional con datos','PAT con símbolo y datos','Referencias','Alturas de cada boca']},
-{id:'p18',ph:4,t:'Diagramas unifilares',s:'RDD → TPA → CS → TPU',
+{id:'p18',refs:["prot"],ph:4,t:'Diagramas unifilares',s:'RDD → TPA → CS → TPU',
  que:'Es el esquema de la instalación dibujado con una sola línea: desde la red de distribución (RDD) hasta cada circuito.',
  para:'Muestra de un vistazo todas las protecciones, cables y circuitos.',
  como:['De RDD a TPA: red, fusible aéreo, medidor monofásico (2×4 mm² IRAM 247-3), TPA con ITM C2×25 A 6000 A.','CS: directamente enterrado 2×4 mm² IRAM 2178-1.','TPU (IP41): interruptor diferencial ID 2×25 A 30 mA; puente peine; una PIA por circuito.','DPS: ITM C2×25 A con descargador de sobretensiones transitorias 245 V – 40 kA.','Barra de PE y cable a la PAT (IRAM 2309).','Dejá reserva no equipada del 50 %.'],
  f:[fx('Protecciones obligatorias (770.13.1): fallas a tierra · contactos directos · contactos indirectos · sobrecorrientes',[['Recomendadas','sobretensiones transitorias, permanentes y subtensiones'],['DPS (tabla 770.15.III)','obligatorio con red aérea en zonas de más de 25 días de tormenta al año (AQ2), salvo análisis de riesgo']])],
  ex:'TPU del 2.º proyecto: ID 2×25 A 30 mA; PIA 01 <b>B2×10 A</b> (IUG); PIA 02 y 03 <b>C2×15 A</b> (TUG); PIA 04 <b>C2×10 A</b> (ACU).',
  calc:()=>`<div id="o_uni"></div>`},
-{id:'p19',ph:4,t:'Listado de materiales',s:'Sello S y normas IRAM / IEC',
+{id:'p19',refs:["colores"],ph:4,t:'Listado de materiales',s:'Sello S y normas IRAM / IEC',
  que:'Es la lista ordenada de todo lo que necesita la obra eléctrica: cantidades, unidades y descripción clara.',
  para:'Sirve para presupuestar y comprar, y garantiza que todo cumpla las normas.',
  como:['Todos los materiales con sello "S" de seguridad eléctrica y norma IRAM o IEC.','Ordená por grupos: circuito seccional y acometida, TPU, PAT, canalizaciones, elementos de conexión final, cableado.','Para cada ítem: cantidad, unidad y descripción.'],
@@ -426,12 +509,13 @@ const PLANO_HTML=`
 <section class="sec" id="plano"><details class="step" id="dplano"><summary><span class="n">✎</span><span class="t"><h2>Dibujar el plano</h2><small>Paredes, muebles y simbología IRAM 2010 · arrastrar y soltar</small></span><span class="ar">›</span></summary><div class="body">
 <div class="ed" id="ed">
  <div class="tb" role="toolbar" aria-label="Herramientas del plano">
-  <button data-mode="sel" aria-pressed="true">Mover</button><button data-mode="wall" aria-pressed="false">Pared</button><button data-mode="cable" aria-pressed="false">Cable</button><button data-mode="text" aria-pressed="false">Texto</button>
+  <button data-mode="sel" aria-pressed="true">Mover</button><button data-mode="wall" aria-pressed="false">Pared</button><button data-mode="cable" aria-pressed="false">Cable</button><button data-mode="text" aria-pressed="false">Texto</button><button data-mode="sym" aria-pressed="false">Símbolos</button>
   <select id="ctype" aria-label="Tipo de cable"></select>
   <button id="bUndo" aria-label="Deshacer">↶ Deshacer</button><button id="bZo" aria-label="Alejar">−</button><button id="bZi" aria-label="Acercar">+</button><button id="bFit">Ajustar</button><button id="bFull">Pantalla completa</button>
  </div>
  <p class="hint" id="hint"></p>
- <div class="pal" id="pal" aria-label="Componentes"></div>
+ <div class="pal" id="pal" aria-label="Arquitectura"></div>
+ <div class="symp" id="symp" hidden aria-label="Símbolos IRAM 2010"></div>
  <svg class="cv" id="pl" preserveAspectRatio="none" aria-label="Plano de la vivienda"></svg>
  <p class="hint" id="plcount"></p>
  <div class="props" id="props"></div>
@@ -440,7 +524,7 @@ const PLANO_HTML=`
 <p class="note">La grilla clara es de 20 cm y la oscura de 1 m. Las paredes se dibujan a 15 cm de espesor. Todo se guarda solo en este celular o navegador.</p>
 </div></details></section>`;
 const PDF_HTML=`
-<section class="sec" id="pdfsec"><details class="step" id="dpdf" open><summary><span class="n">PDF</span><span class="t"><h2>Descargar proyecto en PDF</h2><small>Carátula, memoria de cálculo, plano, unifilar y materiales</small></span><span class="ar">›</span></summary><div class="body">
+<section class="sec" id="pdfsec"><details class="step" id="dpdf"><summary><span class="n">PDF</span><span class="t"><h2>Descargar proyecto en PDF</h2><small>Carátula, memoria de cálculo, plano, unifilar y materiales</small></span><span class="ar">›</span></summary><div class="body">
 <p>Completá los datos de la carátula. El PDF junta todo lo que cargaste en la app: planilla de PMU, cálculos de los pasos 11 a 16, plano dibujado con referencias y rótulo, diagrama unifilar y listado de materiales.</p>
 <div class="row">${inp('pProp','Propietario','text')}${inp('pUbic','Ubicación (calle, n.°, localidad)','text')}</div>
 <div class="row">${inp('pInst','Instalador','text')}${inp('pMat','Matrícula / categoría','text')}${inp('pFecha','Fecha','text')}</div>
@@ -450,33 +534,183 @@ const PDF_HTML=`
 <p><button class="btn l" id="onlyCli">Solo guardar en Clientes</button></p>
 <p class="note" id="pdfst"></p>
 </div></details></section>`;
-const EXTRA=PLANO_HTML+`
-<section class="sec" id="tri"><details class="step" id="dtri"><summary><span class="n">3~</span><span class="t"><h2>Trifásico</h2><small>Complemento: no está en los PDF 21 y 22</small></span><span class="ar">›</span></summary><div class="body"><div class="cols"><div class="txt">
-<h3>Qué es</h3><p>Un suministro con 3 fases (R, S, T) y neutro. Entre dos fases hay 380 V y entre cada fase y el neutro 220 V.</p>
-<h3>Para qué sirve</h3><p>Para viviendas o locales con mucha potencia o con motores trifásicos. Repartiendo la carga en tres fases, cada cable lleva menos corriente.</p>
-<h3>Cómo se hace</h3><ol><li>Los circuitos terminales siguen siendo monofásicos (220 V), pero se reparten entre R, S y T.</li><li>Buscá que las tres fases queden con potencias parecidas (balanceo).</li><li>El circuito seccional lleva 4 cables cargados (3 fases + neutro) y se calcula con la fórmula trifásica.</li><li>Las protecciones generales son tetrapolares.</li><li>Confirmá con el curso y con la distribuidora cuándo corresponde trifásico.</li></ol>
-${fx(['Monofásico: I = S ÷ 220','Trifásico: I = S ÷ (√3 × 380)','P = √3 × U × I × cos φ','ΔU = √3 × L × I × ρ ÷ S'],[['√3','1,732'],['U','380 V entre fases']])}
-</div><div class="calc"><h3>Calculá</h3><div class="row"><div>${inp('tS','Potencia S (VA)')}</div><div>${inp('tL','Distancia (m)')}</div><div>${inp('tSec','Sección (mm²)')}</div></div><div id="o_tri"></div></div></div></div></details></section>
-<section class="sec" id="glos"><details class="step"><summary><span class="n">A–Z</span><span class="t"><h2>Glosario</h2><small>Siglas del curso</small></span><span class="ar">›</span></summary><div class="body"><div class="scroll"><table class="stack"><thead><tr><th>Sigla</th><th>Significado</th></tr></thead><tbody>
-${[['SLA','Superficie límite de aplicación'],['GE','Grado de electrificación'],['PMU','Puntos mínimos de utilización'],['DPMS','Demanda de potencia máxima simultánea'],['IUG / IUE','Iluminación de uso general / especial'],['TUG / TUE','Tomacorrientes de uso general / especial'],['ACU','Alimentación a carga única'],['RDD','Red de distribución'],['TPA','Tablero de protección de la acometida'],['TPU','Tablero de protección del usuario'],['CS','Circuito seccional (TPA → TPU)'],['ITM / PIA','Interruptor termomagnético / pequeño interruptor automático'],['ID','Interruptor diferencial (30 mA)'],['DPS','Dispositivo de protección contra sobretensiones'],['PAT / PE','Puesta a tierra / conductor de protección (verde-amarillo)'],['I(B)','Corriente de trabajo'],['I(N)','Corriente nominal de la protección'],['I(Z)','Corriente máxima admisible del cable'],['Icc','Poder de corte en cortocircuito'],['S / P','Potencia aparente (VA) / activa (W)']].map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`).join('')}
-</tbody></table></div></div></details></section>
-<section class="sec" id="res"><details class="step" open><summary><span class="n">✓</span><span class="t"><h2>Planilla resumen de tu proyecto</h2><small>Para pasar a la carpeta</small></span><span class="ar">›</span></summary><div class="body">
+const GLOS_ROWS=`${[['SLA','Superficie límite de aplicación'],['GE','Grado de electrificación'],['PMU','Puntos mínimos de utilización'],['DPMS','Demanda de potencia máxima simultánea'],['IUG / IUE','Iluminación de uso general / especial'],['TUG / TUE','Tomacorrientes de uso general / especial'],['ACU','Alimentación a carga única'],['RDD','Red de distribución'],['TPA','Tablero de protección de la acometida'],['TPU','Tablero de protección del usuario'],['CS','Circuito seccional (TPA → TPU)'],['ITM / PIA','Interruptor termomagnético / pequeño interruptor automático'],['ID','Interruptor diferencial (30 mA)'],['DPS','Dispositivo de protección contra sobretensiones'],['PAT / PE','Puesta a tierra / conductor de protección (verde-amarillo)'],['I(B)','Corriente de trabajo'],['I(N)','Corriente nominal de la protección'],['I(Z)','Corriente máxima admisible del cable'],['Icc','Poder de corte en cortocircuito'],['S / P','Potencia aparente (VA) / activa (W)']].map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`).join('')}
+`;
+/* ===================== UNIFILAR: VISOR Y JUEGO ===================== */
+const UNI_HTML=`
+<section class="sec" id="unisec"><details class="step" id="duni"><summary><span class="n">UF</span><span class="t"><h2>Unifilar de ejemplo</h2><small id="uniSub">Documento original del curso</small></span><span class="ar">›</span></summary><div class="body">
+<p class="note" style="margin-top:12px">Esquema original del curso, sin cambios. Usalo de guía para armar el unifilar de tu proyecto.</p>
+<div class="vbar"><button id="vZo" aria-label="Alejar">−</button><button id="vZi" aria-label="Acercar">+</button><button id="vFit">Ajustar</button><button id="vFull">Pantalla completa</button><a id="vOpen" target="_blank" rel="noopener">Abrir original</a></div>
+<div class="viewer" id="viewer"><img id="vImg" alt="Diagrama unifilar de ejemplo del curso" draggable="false"></div>
+</div></details></section>
+<section class="sec" id="juegosec"><details class="step" id="djuego"><summary><span class="n">▦</span><span class="t"><h2>Armá tu unifilar</h2><small>Juego para practicar: completá el esquema con las piezas correctas</small></span><span class="ar">›</span></summary><div class="body">
+<p style="margin-top:12px">Deslizá el esquema para recorrerlo. Tocá una pieza de la bandeja de abajo y después el casillero donde va. Tocá un casillero ocupado para devolver la pieza. Cuando termines, tocá <b>Verificar</b>.</p>
+<div class="gbar"><div class="seg" role="group" aria-label="Nivel"><button data-lvl="0" aria-pressed="true">Fácil</button><button data-lvl="1" aria-pressed="false">Difícil</button></div>
+<button class="btn" id="gChk">Verificar</button><button class="btn l" id="gSol">Ver solución</button><button class="btn l" id="gNew">Reiniciar</button><button class="btn l" id="gZo" aria-label="Alejar">−</button><button class="btn l" id="gZi" aria-label="Acercar">+</button></div>
+<div class="gstat" id="gStat"></div>
+<div class="gwrap" id="gWrap"><div id="gStage"></div></div>
+<div class="gtray" id="gTray" aria-label="Piezas"></div>
+<p class="gmsg" id="gMsg" role="status" aria-live="polite"></p>
+</div></details></section>`;
+const EXTRA=`
+<section class="sec" id="res"><details class="step"><summary><span class="n">✓</span><span class="t"><h2>Planilla resumen de tu proyecto</h2><small>Para pasar a la carpeta</small></span><span class="ar">›</span></summary><div class="body">
 <div class="scroll"><table id="sumT"></table></div>
 <p><button class="btn" id="copy">Copiar resumen</button> <span id="copied" class="note"></span></p><pre id="sumTxt" hidden></pre>
 <p class="note">Basado en los PDF 21 y 22 del curso y la AEA 90364-7-770. La app ayuda a calcular; revisá cada valor antes de firmar.</p>
-</div></details></section>`+PDF_HTML;
+</div></details></section>`+UNI_HTML+PDF_HTML;
 
 /* ===== Render ===== */
-$('steps').innerHTML=PH.slice(0,5).map((p,pi)=>`<h2 class="ph" style="font-size:15px;margin:22px 0 10px">${p}</h2>`+STEPS.filter(s=>s.ph===pi).map(s=>`<details class="step" id="${s.id}"><summary><span class="n">${s.id.slice(1)}</span><span class="t"><h2>${s.t}</h2><small>${s.s}</small></span><span class="ar">›</span></summary><div class="body"><div class="cols"><div class="txt">
+/* ===================== MODO TRIFÁSICO (PDF 23 · Cuarto proyecto) ===================== */
+const PHT=['Plano y superficie','Puntos de utilización y circuitos','Cálculos y equilibrio de fases','Canalizaciones y documentación'];
+const SPx=id=>STEPS.find(x=>x.id===id);
+const STEPS_TRI=[
+{id:'t1',ph:0,t:'Plano y requerimientos',s:'Vista en planta con mobiliario y cargas especiales',
+ que:'Es el plano de la vivienda en planta, con todo el mobiliario, más la lista de requerimientos del proyecto: qué cargas especiales hay y a qué distancia están.',
+ para:'En un proyecto trifásico los requerimientos definen todo: la carga trifásica (por ejemplo una bomba) obliga a que la alimentación de la vivienda sea trifásica y a equilibrar las fases.',
+ como:['Dibujá o pedí el plano con camas, mesa, cocina, heladera, sillones, lavatorios, etc.','Anotá los requerimientos: cargas trifásicas (bomba, motor), ventilador de techo, timbre.','Anotá las distancias: TPU a la carga trifásica y TPA a TPU.','Anotá el tipo de canalización del circuito seccional (por ejemplo subterránea, directamente enterrado).'],
+ ex:'4.º proyecto: ventilador de techo en el estar-comedor, timbre, <b>bomba trifásica de 1 HP</b> en la pileta a <b>20 m</b> del TPU, circuito seccional <b>directamente enterrado</b> de <b>15 m</b> entre TPA y TPU.',
+ calc:()=>SPx('p1').calc()},
+{id:'t2',ph:0,t:'Superficie límite de aplicación (SLA)',s:'Cubierta + semicubierta ÷ 2',
+ que:'Es la superficie que clasifica la vivienda. Las zonas cubiertas se suman completas y las semicubiertas por la mitad.',
+ para:'Con la SLA se define el grado de electrificación.',
+ como:['Dividí el plano en zonas rectangulares.','Calculá cada zona: largo × ancho.','Las semicubiertas (galería) se dividen por 2.','Sumá y redondeá a un número entero de m².'],
+ f:[fx('SLA = Σ zonas cubiertas + Σ zonas semicubiertas ÷ 2')],
+ ex:'Cubierta 8 × 7,5 = 60 m². Galería semicubierta 7,5 × 2 = 15 m² ÷ 2 = 7,5 m². SLA = 67,5 → <b>68 m²</b>.',
+ calc:()=>SPx('p2').calc()},
+{id:'t3',ph:0,t:'Grado de electrificación y circuitos',s:'Con carga trifásica hay que equilibrar fases',refs:['ge','circmin','equil'],
+ que:'Es la categoría de la vivienda según su SLA, que fija la DPMS, la cantidad mínima de circuitos y los PMU.',
+ para:'En trifásico, además, la cantidad de circuitos se piensa para poder repartirlos uno por línea (L1, L2 y L3) y que las fases queden equilibradas.',
+ como:['Buscá la SLA en la tabla de grados de electrificación.','Anotá la cantidad mínima de circuitos y sus variantes.','Con una carga trifásica, armá los circuitos de uso general para que haya uno por línea.','Con GE medio (3 circuitos) el curso arma <b>IUG con toma + TUG 1 + TUG 2</b>: el toma del baño pasa al IUG, así los tres circuitos son de 2200 VA y quedan equilibrados.'],
+ f:[fx('10 kW ÷ 0,85 = 11,76 kVA',[['IUG c/ toma','2200 VA, cable F y N de 2,5 mm², pierde la simultaneidad de 2/3']])],
+ ex:'68 m² → <b>GE medio</b>: 3 circuitos mínimos. Se arman 1 IUG c/ toma (L1), TUG 1 (L2) y TUG 2 (L3).',
+ calc:()=>SPx('p3').calc()},
+{id:'t4',ph:1,t:'Puntos mínimos de utilización (PMU)',s:'Bocas IUG y TUG por ambiente',refs:['pmu','cocina','pasillo'],
+ que:'Son las bocas mínimas de iluminación (IUG) y tomas (TUG) de cada ambiente según el grado.',
+ para:'Garantizan luz y tomas suficientes; con ellas se arman los circuitos de cada línea.',
+ como:['Para cada ambiente anotá su superficie o, en pasillos y galerías, su largo.','Buscá el ambiente en la planilla de PMU con el grado de la vivienda.','El ventilador de techo suma una boca de IUG.','El timbre suma una boca de IUG.','El toma del baño se pasa al IUG para formar el IUG con toma.','En la galería semicubierta, IUG con protección mínima IP44.'],
+ ex:'Estar 22,5 m²: 3 IUG (1 ventilador) y 4 TUG. Dormitorios de 9 m²: 1 IUG y 2 TUG. Dormitorio de 10,5 m²: 1 IUG y 3 TUG. Pasillo 1,5 mL: 1 IUG. Cocina: 2 IUG y 3 TUG. Baño: 1 IUG y 1 TUG (pasa a IUG). Galería 7,5 mL: 2 IUG IP44.',
+ calc:()=>SPx('p4').calc()},
+{id:'t5',ph:1,t:'Ubicar los PMU en el plano',s:'Simbología IRAM 2010',
+ que:'Es dibujar cada boca, toma y llave en el plano con la simbología IRAM 2010.',
+ para:'El plano tiene que poder leerlo el que ejecuta la obra y el ERSeP.',
+ como:['Dibujá cada boca, toma y llave con su símbolo.','Respetá las ubicaciones permitidas en baño y cocina.','Agregá el ventilador de techo y el timbre.','Revisá ambiente por ambiente que no falte ningún PMU.'],
+ ck:['Bocas IUG dibujadas (con ventilador)','Tomas TUG dibujadas','Llaves de efecto','Ubicaciones de baño y cocina','Timbre y pulsador','Cuadro de referencias']},
+{id:'t6',ph:1,t:'Armar los circuitos y su línea',s:'IUG c/ toma, TUG 1, TUG 2 y ACU',refs:['circmin','equil','circesp'],
+ que:'Es repartir las bocas del paso 4 en circuitos y asignar cada circuito monofásico a una línea: L1, L2 o L3. La carga trifásica va como circuito ACU en las tres líneas.',
+ para:'Así cada fase lleva una parte parecida de la carga. Es la base del equilibrio de fases.',
+ como:['Contá el total de bocas IUG (con ventilador, timbre y toma del baño) y TUG.','Armá los circuitos sin pasar 15 bocas por circuito.','Asigná un circuito de uso general a cada línea: IUG c/ toma → L1, TUG 1 → L2, TUG 2 → L3.','Agregá la carga trifásica como ACU trifásico con su potencia en W.','Cada circuito va por su propia canalización: no se mezclan fases.'],
+ ex:'Totales del curso: <b>IUG c/ toma 14 bocas</b> (L1), <b>TUG 1 5 bocas</b> (L2), <b>TUG 2 9 bocas</b> (L3) y ACU bomba (L1+L2+L3).',
+ calc:()=>`<div id="ctlist"></div><p><button class="btn l" id="addct">+ Agregar circuito</button></p><div id="o_t6"></div>`},
+{id:'t7',ph:2,t:'Cálculo de los circuitos de uso general',s:'S, I(B), cable y PIA de cada circuito',refs:['regla','pot','iz22','prot'],
+ que:'Es calcular cada circuito de uso general como en monofásico: potencia, corriente, cable y protección.',
+ para:'Cada circuito de uso general es monofásico (fase + neutro a 220 V), aunque la vivienda sea trifásica.',
+ como:['IUG c/ toma y TUG: 2200 VA cada uno, sin simultaneidad.','I(B) = S ÷ 220 V.','Cable F y N de 2,5 mm² y Pe de 2,5 mm² (IRAM 247-3).','I(Z) de la tabla para circuito monofásico: 21 A.','PIA C2x15 A, Icc 4500 A.','Sumá la potencia de los circuitos de uso general.'],
+ f:[fx(['I(B) = S ÷ 220 V','I(B) ≤ I(N) ≤ I(Z)'])],
+ ex:'Tres circuitos de 2200 VA: I(B) = 10 A cada uno, PIA <b>C2x15 A 4500 A</b>, I(Z) 21 A. Potencia total parcial = <b>6600 VA</b>.',
+ calc:()=>`<div id="o_t7"></div>`},
+{id:'t8',ph:2,t:'Simultaneidad de los circuitos de uso general',s:'DPMS de uso general',refs:['sim'],
+ que:'Es aplicar el coeficiente de simultaneidad a la suma de los circuitos de uso general.',
+ para:'Da la demanda real de los circuitos de uso general. El ACU no entra en este coeficiente: se suma después completo.',
+ como:['Contá los circuitos de uso general (sin el ACU).','2 circuitos: no aplica. 3 o 4: 0,8. 5: 0,7. 6 o más: 0,6.','Multiplicá la potencia total parcial por el coeficiente.'],
+ f:[fx('DPMS uso general = potencia total parcial × simultaneidad')],
+ ex:'6600 VA × 0,8 = <b>5280 VA</b>.',
+ calc:()=>`<div id="o_t8"></div>`},
+{id:'t9',ph:2,t:'Circuito ACU trifásico (motor)',s:'Bomba o motor trifásico',refs:['motor','iz3f','protTri','circesp'],
+ que:'Es el circuito de uso específico que alimenta una carga única trifásica, como la bomba de la pileta.',
+ para:'Se calcula aparte porque es trifásico (380 V entre fases) y porque necesita su propia protección y un guardamotor.',
+ como:['Pasá la potencia del motor a W: 1 HP = 746 W.','Si no hay cos φ del motor, tomá cos φ = 1: S = P.','Calculá la corriente por fase: I(B) = S ÷ (1,73 × 380 V).','Cable 4x2,5 mm² + Pe (IRAM 247-3 en cañería).','I(Z) trifásico de 2,5 mm²: 18 A (en vez de 21 A).','PIA C4x6 A, Icc 4500 A (I(B) ≤ I(N) ≤ I(Z)).','Muy importante: guardamotor (GM) trifásico con rango adecuado, regulado un poco por encima de I(B).'],
+ f:[fx(['S = P ÷ cos φ','I(B) = S ÷ (1,73 × 380 V)'],[['1,73','raíz de 3 (√3)'],['380 V','tensión entre fases'],['I(B)','corriente de cada fase (L1, L2 y L3)']])],
+ ex:'1 HP = 746 W, cos φ 1 → 746 VA. I(B) = 746 ÷ 657,4 = <b>1,13 A por fase</b>. Cable 4x2,5 + Pe, I(Z) 18 A, PIA <b>C4x6 A</b>, guardamotor de rango 1 a 2 A <b>regulado a 1,4 A</b>.',
+ calc:()=>`<div class="row"><div>${inp('hpConv','Conversor: potencia en HP')}</div></div><div id="o_hp" class="note"></div><div id="o_t9"></div>`},
+{id:'t10',ph:2,t:'Potencia activa P',s:'DPMS final = uso general + ACU',refs:['pact'],
+ que:'Es sumar la DPMS de uso general y la potencia del ACU, y pasarla a potencia activa.',
+ para:'Es la potencia a declarar. El idóneo Categoría III trabaja hasta 10 kW.',
+ como:['DPMS final = DPMS de uso general + S del ACU.','P = DPMS final × 0,85.','Pasala a kW (÷ 1000) y verificá que no pase 10 kW.'],
+ f:[fx(['DPMS final = DPMS uso general + S ACU','P = DPMS × 0,85'])],
+ ex:'5280 + 746 = <b>6026 VA</b>. P = 6026 × 0,85 = 5122,1 W = <b>5,12 kW</b>.',
+ calc:()=>`<div class="out" id="o_t10a"></div><div id="o_t10"></div>`},
+{id:'t11',ph:2,t:'Equilibrio de fases',s:'Corriente de cada línea · desfasaje máximo 30 %',refs:['equil'],
+ que:'Es sumar la corriente de trabajo que lleva cada línea (L1, L2 y L3).',
+ para:'Las fases tienen que quedar parejas: entre ellas no puede haber más de 30 % de desfasaje. La línea más cargada define el circuito seccional.',
+ como:['Para cada línea, sumá la I(B) de los circuitos monofásicos conectados a ella.','Sumale a las tres la I(B) del ACU trifásico.','Compará la mayor con la menor: el desfasaje no puede pasar el 30 %.','Si no cumple, cambiá circuitos de línea o reorganizá bocas.'],
+ f:[fx(['I línea = Σ I(B) de sus circuitos + I(B) del ACU','Desfasaje = (I mayor − I menor) ÷ I mayor × 100 ≤ 30 %'])],
+ ex:'L1 = 10 + 1,13 = 11,13 A · L2 = 11,13 A · L3 = 11,13 A → <b>equilibrio</b>.',
+ calc:()=>`<div id="o_t11"></div>`},
+{id:'t12',ph:2,t:'Circuito seccional trifásico (CS)',s:'4 conductores TPA–TPU, ITM tetrapolar y PAT',refs:['c2178','secmin','protTri'],
+ que:'Es el cable trifásico que va del TPA (pilar) al TPU: tres fases y neutro.',
+ para:'Lleva toda la corriente de la vivienda por fase. Si hay desfasaje, se calcula con la mayor corriente de línea.',
+ como:['I(B) del CS = la mayor corriente de línea del paso 11.','Elegí el cable IRAM 2178-1 según la canalización: 4 mm² directamente enterrado lleva 32 A.','Si sube y baja en caño en el TPA y el TPU, restale 10 %: 28,8 A.','Elegí el ITM tetrapolar con I(B) ≤ I(N) ≤ I(Z): el curso usa C4x20 A 6000 A (también podría ser curva D).','Pe a la jabalina: 10 mm² verde-amarillo IRAM 247-3, PAT IRAM 2309, sistema TT con descargador de sobretensiones.'],
+ f:[fx(['I(B) CS = mayor I de línea','I(B) ≤ I(N) ≤ I(Z)'])],
+ ex:'I(B) = <b>11,13 A</b>. Cable <b>4x4 mm² IRAM 2178-1</b> enterrado: 32 − 10 % = 28,8 A. ITM <b>C4x20 A 6000 A</b>. Pe <b>10 mm²</b>.',
+ calc:()=>`<label for="i_can">Canalización del CS</label><select id="i_can" data-k="can"><option value="ent">Directamente enterrado</option><option value="cano">Dentro de cañería</option><option value="aire">Bandeja / al aire</option></select>${chk('r10_x','Tramos en caño en TPA y TPU (restar 10 %)')}<div class="row"><div>${inp('L','Distancia TPA–TPU (m)')}</div><div><label for="i_tIn">ITM tetrapolar (A)</label><select id="i_tIn" data-k="tIn"></select></div></div><div class="out" id="o_t12a"></div><div id="o_t12"></div>`},
+{id:'t13',ph:3,t:'Canalizaciones',s:'Un circuito por caño · no mezclar fases',refs:['c10'],
+ que:'Es dibujar los recorridos de caños de cada circuito y verificar los diámetros.',
+ para:'Con alimentación trifásica es obligatorio canalizar cada circuito por separado: no se pueden mezclar fases distintas en una misma caja, boca o caño.',
+ como:['Canalización independiente para cada circuito (IUG c/ toma, TUG 1, TUG 2 y ACU).','Mantené 50 cm con los otros servicios.','Verificá la ocupación de cada caño con la tabla (máximo 35 %).','Ventilador de techo con luz: dejá la conexión prevista desde la boca.','IUG c/ toma puede llevar retornos de 1 mm².'],
+ ex:'Como los tres circuitos de uso general tienen las mismas secciones, usan los mismos diámetros de caño.',
+ calc:()=>SPx('p10').calc(),
+ ck:['Cada circuito por su propia canalización','Sin fases mezcladas en cajas ni bocas','50 cm de otros servicios','Caño del ACU hasta la bomba','Ventilador de techo conectado']},
+{id:'t14',ph:3,t:'Completar cableados, PAT y CS',s:'Cables de cada circuito, jabalina y circuito seccional',
+ que:'Es terminar de dibujar en el plano los cableados, la puesta a tierra y el circuito seccional.',
+ para:'El plano final tiene que mostrar todo lo que se va a ejecutar.',
+ como:['Leyenda de cables en cada tramo (2x2,5 + Pe, 4x2,5 + Pe para el ACU).','PAT: jabalina de cobre 1/2" × 1,5 m con cámara de inspección.','Circuito seccional trifásico 4x4 mm² con su canalización.','Referencias y alturas de cada boca.'],
+ ck:['Leyendas de cables','ACU trifásico 4x2,5 + Pe','Jabalina Cu 1/2" × 1,5 m','CS 4x4 mm² dibujado','Referencias y alturas']},
+{id:'t15',ph:3,t:'Diagrama unifilar trifásico',s:'RDD → TPA → CS → TPU',refs:['protTri'],
+ que:'Es el esquema de una línea de toda la instalación trifásica, indicando qué línea alimenta cada circuito.',
+ para:'Muestra todas las protecciones, cables y circuitos, y cómo se reparten las fases.',
+ como:['RDD, fusible aéreo y medidor trifásico (4x4 mm² IRAM 247-3).','TPA con ITM 01 C4x20 A 6000 A.','CS directamente enterrado 4x4 mm² IRAM 2178-1.','TPU IP41: ID 4x25 A 30 mA y barras 4x63 A.','Una PIA por circuito, indicando la línea: C1 IUG c/ toma L1+N, C2 TUG 1 L2+N, C3 TUG 2 L3+N, C4 ACU L1+L2+L3+N con guardamotor.','ITM 02 C4x25 A con descargador de sobretensiones 420 V – 40 kA, barra PE y PAT.','Reserva no equipada del 50 %.'],
+ calc:()=>`<div id="o_t15"></div>`},
+{id:'t16',ph:3,t:'Listado de materiales',s:'Sello S y normas IRAM / IEC',refs:['colores'],
+ que:'Es la lista ordenada de todos los materiales de la obra, con cantidad, unidad y descripción.',
+ para:'Sirve para presupuestar y comprar, y garantiza que todo cumpla las normas.',
+ como:['Todos los materiales con sello "S" y norma IRAM o IEC.','Ordená por acometida, TSG (tablero), canalizaciones, elementos de conexión final y cableado.','Incluí lo trifásico: ITM e ID tetrapolares, barras, guardamotor, cable 4x4 y 4x2,5.'],
+ ck:SPx('p19').ck}
+];
+const CT3T={IUG:'IUG',IUGT:'IUG c/ toma',TUG:'TUG',TUE:'TUE',ACU:'ACU monofásico',ACU3:'ACU trifásico'};
+function renderCT(){$('ctlist').innerHTML=(S.ct||[]).map((c,i)=>`<div class="crow" data-g="ct" data-i="${i}"><div class="w2"><label>Tipo</label>${sel(Object.entries(CT3T),c.t,'data-f="t"')}</div><div class="w2"><label>Nombre</label><input data-f="n" type="text" value="${esc(c.n)}"></div>${c.t==='ACU3'?`<div><label>Potencia W</label><input data-f="va" type="number" inputmode="decimal" value="${c.va}"></div><div><label>cos φ</label><input data-f="cos" type="number" step="0.01" inputmode="decimal" value="${c.cos==null?1:c.cos}"></div><div><label>Línea</label><input disabled value="L1+L2+L3"></div>`:`<div><label>Bocas</label><input data-f="b" type="number" inputmode="decimal" value="${c.b}"></div><div><label>${c.t==='IUG'?'VA/boca':'VA'}</label><input data-f="va" type="number" inputmode="decimal" value="${c.va}"></div><div><label>Línea</label>${sel([['L1','L1'],['L2','L2'],['L3','L3']],c.ln||'L1','data-f="ln"')}</div>`}<div><button class="btn l x" data-del="ct" data-i="${i}" aria-label="Quitar circuito">✕</button></div></div>`).join('')}
+let RT={};
+function calcTri(){const g=R.g,K=1.73,ln=c=>c.tri?'L1+L2+L3':(c.ln||'L1');
+ const C=(S.ct||[]).map(c=>{if(c.t==='ACU3'){const P=+c.va||0,cos=+c.cos||1,s=P/cos,ib=s/(K*380),iz=18,In=[6,10,16,20,25,32].find(v=>v>=ib)||32;return{...c,tri:1,P,cos,s,ib,iz,In,sec:2.5,pe:2.5,curva:'C',icc:4500,okc:ib<=In&&In<=iz,gm:ib*1.24}}
+  const d=CIRC[c.t]||CIRC.TUG;let s;if(c.t==='IUG')s=c.b*c.va*2/3;else if(c.t==='IUGT'||c.t==='TUG')s=Math.max(2200,+c.va||0);else if(c.t==='TUE')s=Math.max(3300,+c.va||0);else s=+c.va||0;const ib=s/220,iz=IZ22[d.sec],In=Math.max(d.In,INS.find(v=>v>=ib)||40);return{...c,d,s,ib,iz,In,sec:d.sec,pe:d.pe,curva:d.curva,icc:d.icc,okc:ib<=In&&In<=iz&&(!d.max||In<=d.max)}});
+ const UG=C.filter(c=>c.t!=='ACU'&&c.t!=='ACU3'),AC=C.filter(c=>c.t==='ACU'||c.t==='ACU3');
+ const par=UG.reduce((a,c)=>a+c.s,0),ks=ksOf(UG.length),dpUG=par*ks,sAC=AC.reduce((a,c)=>a+c.s,0),dpF=dpUG+sAC,kw=dpF*.85/1000;
+ const Lc={L1:0,L2:0,L3:0};C.forEach(c=>{if(c.tri){Lc.L1+=c.ib;Lc.L2+=c.ib;Lc.L3+=c.ib}else Lc[c.ln||'L1']+=c.ib});
+ const lv=[Lc.L1,Lc.L2,Lc.L3],mx=Math.max(...lv),mn=Math.min(...lv),des=mx?(mx-mn)/mx*100:0;
+ const red=S.r10?0.9:1,ib=mx,sec=[4,6].find(x=>CS2178[x][S.can]*red>=ib)||6,iz=CS2178[sec][S.can]*red;
+ const all_=[16,20,25,32,40],opts=all_.filter(v=>v>=ib&&v<=iz),In=opts.includes(+S.tIn)?+S.tIn:(opts.includes(20)?20:(opts[0]||all_.find(v=>v>=ib)||40)),ID=[25,40,63].find(v=>v>=In)||63;
+ RT={C,UG,AC,par,ks,dpUG,sAC,dpF,kw,Lc,des,ib,sec,iz,In,opts,ID};
+ const nb=t=>C.filter(c=>c.t===t).reduce((a,c)=>a+(+c.b||0),0),bI=nb('IUG')+nb('IUGT'),bT=nb('TUG');
+ $('o_t6').innerHTML=kv('PMU del paso 4',`${R.tI} IUG + ${R.tT} TUG = ${R.tI+R.tT} bocas`)+kv('Bocas en circuitos de uso general',`${bI+bT} `+ok(bI+bT>=R.tI+R.tT,'✓','faltan bocas'))+C.map(c=>kv(esc(c.n)+' · '+ln(c),c.tri?'carga trifásica':`${c.b} bocas `+ok((+c.b||0)<=15,'✓','más de 15'))).join('')+kv('Circuitos de uso general',`${UG.length} (mín. ${g.c}) `+ok(UG.length>=g.c,'✓','faltan'))+`<p class="note">El toma del baño pasa al IUG: por eso el IUG c/ toma suma bocas de iluminación y ese toma.</p>`;
+ $('o_t7').innerHTML=`<div class="scroll"><table class="stack"><thead><tr><th>Circuito</th><th>Línea</th><th class="n">S (VA)</th><th class="n">I(B)</th><th>Cable F+N / Pe</th><th class="n">I(Z)</th><th>PIA</th></tr></thead><tbody>${UG.map(c=>`<tr><td>${esc(c.n)}</td><td>${ln(c)}</td><td class="n">${f1(c.s,0)}</td><td class="n">${f1(c.ib,2)} A</td><td>${sx(c.sec)} / ${sx(c.pe)} mm²</td><td class="n">${c.iz} A</td><td>${c.curva}2x${c.In} A · ${c.icc} ${ok(c.okc,'✓','revisar')}</td></tr>`).join('')}</tbody></table></div>`+kv('Potencia total parcial',f1(par,0)+' VA');
+ $('o_t8').innerHTML=kv('Potencia total parcial',f1(par,0)+' VA')+kv(`Simultaneidad (${UG.length} circuitos de uso general)`,ks===1?'no aplica (1)':sx(ks))+kv('<b>DPMS uso general</b>',`<b>${f1(dpUG,1)} VA</b>`);
+ $('o_hp').textContent=(+S.hpConv>0)?`${sx(+S.hpConv)} HP = ${f1(+S.hpConv*746,0)} W (1 HP = 746 W)`:'';
+ $('o_t9').innerHTML=AC.length?AC.map(c=>c.tri?`<h3 style="margin:12px 0 4px">${esc(c.n)}</h3>`+kv('Potencia activa P',f1(c.P,0)+' W')+kv('cos φ',sx(c.cos))+kv('S = P ÷ cos φ',f1(c.s,1)+' VA')+kv('I(B) = S ÷ (1,73 × 380)',`<b>${f1(c.ib,2)} A por fase</b>`)+kv('Cable','4x2,5 mm² + Pe IRAM 247-3 (en caño)')+kv('I(Z) trifásico 2,5 mm²','18 A')+kv('PIA',`C4x${c.In} A · Icc 4500 A `+ok(c.okc,'✓','revisar'))+kv('Guardamotor',`regulado ≈ ${f1(c.gm,1)} A (rango que incluya ese valor)`):`<h3 style="margin:12px 0 4px">${esc(c.n)} (monofásico, ${ln(c)})</h3>`+kv('S',f1(c.s,0)+' VA')+kv('I(B) = S ÷ 220',f1(c.ib,2)+' A')+kv('PIA',`${c.curva}2x${c.In} A`)).join(''):'<p class="note">No cargaste circuitos ACU en el paso 6.</p>';
+ $('o_t10a').textContent=`P = ${f1(kw,2)} kW`;
+ $('o_t10').innerHTML=kv('DPMS uso general',f1(dpUG,1)+' VA')+kv('S de los ACU',f1(sAC,1)+' VA')+kv('<b>DPMS final</b>',`<b>${f1(dpF,1)} VA</b>`)+kv('P = DPMS × 0,85',f1(dpF*.85,1)+' W')+kv('Límite idóneo Cat. III','10 kW '+ok(kw<=10,'✓ dentro','✗ supera'));
+ const bar=v=>`<div style="height:10px;border-radius:5px;background:var(--p2);margin-top:4px"><div style="height:10px;border-radius:5px;width:${mx?v/mx*100:0}%;background:var(--neu)"></div></div>`;
+ $('o_t11').innerHTML=`<div class="scroll"><table><thead><tr><th>Circuito</th><th class="n">L1</th><th class="n">L2</th><th class="n">L3</th></tr></thead><tbody>${C.map(c=>`<tr><td>${esc(c.n)}</td>${['L1','L2','L3'].map(l=>`<td class="n">${c.tri||c.ln===l||(!c.ln&&l==='L1')?f1(c.ib,2):'0'}</td>`).join('')}</tr>`).join('')}<tr><td><b>Total por línea</b></td>${lv.map(v=>`<td class="n"><b>${f1(v,2)} A</b></td>`).join('')}</tr></tbody></table></div>`+['L1','L2','L3'].map((l,i)=>`<div style="margin:8px 0"><div class="kv" style="border:0;padding:0"><span>${l}</span><span>${f1(lv[i],2)} A</span></div>${bar(lv[i])}</div>`).join('')+kv('Desfasaje',`${f1(des,1)} % `+ok(des<=30,'≤ 30 % ✓','supera 30 %'))+kv('I(B) del CS (mayor línea)',f1(mx,2)+' A');
+ const s_=$('i_tIn');if(s_.tagName==='SELECT'){const h_=(opts.length?opts:[In]).map(v=>`<option value="${v}">C4x${v} A</option>`).join('');if(s_.dataset.h!==h_){s_.innerHTML=h_;s_.dataset.h=h_}s_.value=String(In)}
+ $('o_t12a').textContent=`4x${sec} mm² · ITM C4x${In} A`;
+ $('o_t12').innerHTML=kv('I(B) del CS',f1(ib,2)+' A')+kv('I(Z) cable IRAM 2178-1',`${CS2178[sec][S.can]} A${S.r10?' − 10 % = '+f1(iz,1)+' A':''}`)+kv('I(B) ≤ I(N) ≤ I(Z)',`${f1(ib,2)} ≤ ${In} ≤ ${f1(iz,1)} `+ok(ib<=In&&In<=iz,'✓','✗'))+kv('Opciones válidas de ITM',opts.length?opts.map(v=>'C4x'+v).join(' · '):'ninguna: subí la sección')+kv('Icc ITM','6000 A (curva C o D)')+kv('Diferencial TPU',`ID 4x${ID} A · 30 mA`)+kv('Barras TPU','4x63 A')+kv('Pe TPU – jabalina','10 mm² verde-amarillo');
+ $('o_t15').innerHTML=kv('TPA',`ITM 01 C4x${In} A · 6000 A`)+kv('CS',`4x${sec} mm² IRAM 2178-1`)+kv('TPU',`ID 4x${ID} A 30 mA · barras 4x63 A · IP41`)+C.map((c,i)=>kv(`PIA 0${i+1} · ${esc(c.n)}`,c.tri?`C4x${c.In} A · 4500 · 4x2,5+Pe · GM ${f1(c.gm,1)} A · L1+L2+L3+N`:`${c.curva}2x${c.In} A · ${c.icc} · 2x${sx(c.sec)}+Pe · ${ln(c)}+N`)).join('')+kv('Sobretensiones','ITM 02 C4x25 A + DPS 420 V – 40 kA')+kv('Reserva','50 % no equipada');
+ const rows=[['Proyecto',S.nom||'—'],['Suministro','Trifásico 3x380/220 V'],['SLA',R.sla+' m²'],['GE',g.n],['PMU totales',`${R.tI} IUG · ${R.tT} TUG`],['Potencia total parcial',f1(par,0)+' VA'],['Simultaneidad uso general',sx(ks)],['DPMS uso general',f1(dpUG,1)+' VA'],['S de los ACU',f1(sAC,1)+' VA'],['DPMS final',f1(dpF,1)+' VA'],['Potencia activa',f1(kw,2)+' kW'],['Corrientes de línea',`L1 ${f1(lv[0],2)} · L2 ${f1(lv[1],2)} · L3 ${f1(lv[2],2)} A`],['Desfasaje',f1(des,1)+' %'],['Cable CS',`4x${sec} mm² IRAM 2178-1 · I(Z) ${f1(iz,1)} A`],['ITM TPA',`C4x${In} A 6000 A`],['ID TPU',`4x${ID} A 30 mA`],['Pe a PAT','10 mm²']].concat(C.map(c=>[c.n,c.tri?`ACU trifásico · ${f1(c.s,0)} VA · I(B) ${f1(c.ib,2)} A/fase · 4x2,5 mm² · C4x${c.In} A · GM ${f1(c.gm,1)} A`:`${ln(c)} · ${c.b} bocas · ${f1(c.s,0)} VA · I(B) ${f1(c.ib,2)} A · ${sx(c.sec)} mm² · ${c.curva}2x${c.In} A`]));
+ RT.rows=rows;$('sumT').innerHTML=rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('');$('sumTxt').textContent=rows.map(r=>r[0]+': '+r[1]).join('\n');
+}
+const stepHTML=s=>`<details class="step" id="${s.id}"><summary><span class="n">${s.id.slice(1)}</span><span class="t"><h2>${s.t}</h2><small>${s.s}</small></span><span class="ar">›</span></summary><div class="body"><div class="cols"><div class="txt">
 <h3>Qué es</h3><p>${s.que}</p><h3>Para qué sirve</h3><p>${s.para}</p>
 <h3>Cómo se hace</h3><ol>${s.como.map(c=>`<li>${c}</li>`).join('')}</ol>
-${s.f?`<h3>Fórmula y tabla</h3>${s.f.join('')}`:''}
+${s.f?`<h3>Fórmula</h3>${s.f.join('')}`:''}
 ${s.ex?`<p class="ex"><span class="tag">Ejemplo del curso · </span>${s.ex}</p>`:''}
-</div><div class="calc"><h3>${s.ck?'Lista de control':'Tu proyecto'}</h3>${s.calc?s.calc():''}${s.ck?s.ck.map((c,j)=>chk(s.id+'_'+j,c)).join(''):''}
-<div style="margin-top:12px;font-weight:600">${chk('done_'+s.id,'Paso terminado')}</div></div></div></div></details>`).join('')).join('')+EXTRA;
+</div><div class="calc"><h3>${s.ck?'Lista de control':'Tu proyecto'}</h3>${s.refs?`<div class="tlinks"><span>Consultá la tabla:</span>${s.refs.map(k=>`<button class="tlink" data-ref="${k}">${REFT[k]}</button>`).join('')}</div>`:''}${s.calc?s.calc():''}${s.ck?s.ck.map((c,j)=>chk(s.id+'_'+j,c)).join(''):''}
+<div style="margin-top:12px;font-weight:600">${chk('done_'+s.id,'Paso terminado')}</div></div></div></div></details>`;
+const MODE_HTML=`<div class="modo" role="group" aria-label="Tipo de proyecto"><button data-modo="mono">Monofásico</button><button data-modo="tri">Trifásico</button></div><p class="note" id="modoN" style="margin:6px 0 0"></p>`;
+$('steps').innerHTML=MODE_HTML+'<h2 class="ph" style="font-size:15px;margin:22px 0 10px">Primero: el plano</h2>'+PLANO_HTML+'<div id="stepsList"></div>'+EXTRA;
+function curSteps(){return S.modo==='tri'?STEPS_TRI:STEPS}
+function renderSteps(){const T=S.modo==='tri',L=curSteps(),P_=T?PHT:PH.slice(0,5);$('stepsList').innerHTML=P_.map((p,pi)=>`<h2 class="ph" style="font-size:15px;margin:22px 0 10px">${p}</h2>`+L.filter(s=>s.ph===pi).map(stepHTML).join('')).join('');
+ document.querySelectorAll('[data-modo]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.modo===(S.modo||'mono')));if(typeof updUni==='function')updUni();$('modoN').textContent=T?'Pasos del 4.º proyecto (PDF 23): vivienda trifásica con carga trifásica y equilibrio de fases.':'Pasos de los proyectos 1 y 2 (PDF 21 y 22): vivienda monofásica.'}
 
-const renderIdx=()=>{$('idx').innerHTML=PH.slice(0,5).map((p,pi)=>`<div class="ph">${p}</div><ol>${STEPS.filter(s=>s.ph===pi).map(s=>`<li><a href="#${s.id}" class="${S.ck['done_'+s.id]?'done':''}"><b>${s.id.slice(1)}</b>${s.t}</a></li>`).join('')}</ol>`).join('')+`<div class="ph">Plano y entrega</div><ol><li><a href="#dplano"><b>✎</b>Dibujar el plano</a></li><li><a href="#dpdf"><b>PDF</b>Descargar proyecto en PDF</a></li></ol><div class="ph">${PH[5]}</div><ol><li><a href="#dtri"><b>3~</b>Trifásico</a></li><li><a href="#glos"><b>A–Z</b>Glosario</a></li><li><a href="#res"><b>✓</b>Planilla resumen</a></li></ol>`;
- STEPS.forEach(s=>$(s.id).classList.toggle('done',!!S.ck['done_'+s.id]))};
+
+const renderIdx=()=>{ curSteps().forEach(s=>$(s.id).classList.toggle('done',!!S.ck['done_'+s.id]))};
 
 const sel=(opts,v,attr)=>`<select ${attr}>${opts.map(o=>`<option value="${o[0]}" ${String(o[0])===String(v)?'selected':''}>${o[1]}</option>`).join('')}</select>`;
 function renderZ(){$('zlist').innerHTML=S.z.map((z,i)=>`<div class="crow" data-g="z" data-i="${i}"><div class="w2"><label>Zona</label><input data-f="n" type="text" value="${esc(z.n)}"></div><div><label>Largo m</label><input data-f="l" type="number" step="any" inputmode="decimal" value="${z.l}"></div><div><label>Ancho m</label><input data-f="a" type="number" step="any" inputmode="decimal" value="${z.a}"></div><div><label>Tipo</label>${sel([[0,'Cubierta'],[1,'Semicub.']],z.semi,'data-f="semi"')}</div><div><button class="btn l x" data-del="z" data-i="${i}" aria-label="Quitar zona">✕</button></div></div>`).join('')}
@@ -538,12 +772,22 @@ function calc(){
  $('o_can').innerHTML=`${f1(occ,0)} % `+ok(occ<=35,'entra','no entra');
  $('o_can2').innerHTML=kv('Sección de cables',f1(area,2)+' mm²')+kv(cn[0],cn[1]+' mm² · 35 % = '+f1(cn[1]*.35,1)+' mm²')+kv('Caño mínimo que entra',fit?fit[0]:'más de CL 38')+`<p class="note">Si el caño es corrugado, pasá a la medida siguiente.</p>`;
  const tI3=(+S.tS||0)/(Math.sqrt(3)*380), tI1=(+S.tS||0)/220, tdu=Math.sqrt(3)*(+S.tL||0)*tI3*.017/((+S.tSec)||4);
- $('o_tri').innerHTML=`<div class="out">${f1(tI3,2)} A por fase</div>`+kv('En monofásico serían',f1(tI1,2)+' A')+kv('Caída trifásica',`${f1(tdu,2)} V · ${f1(tdu/380*100,2)} %`);
 
  const rows=[['Proyecto',S.nom||'—'],['SLA',sla+' m²'],['GE',g.n],['PMU totales',`${tI} IUG · ${tT} TUG`],['S total',f1(St,1)+' VA'],['Simultaneidad',sx(ks)],['DPMS',f1(dp,1)+' VA'],['Potencia activa',f1(kw,2)+' kW'],['I(B) CS',f1(ibCS,2)+' A'],['Cable CS',`2×${sU} mm² IRAM 2178-1 · I(Z) ${f1(izCS,1)} A`],['Caída de tensión CS',f1(duP,2)+' %'],['ITM TPA',`C2×${InCS} A 6000 A`],['ID TPU',`2×${ID} A 30 mA`],['PE a PAT',sU+' mm²']].concat(C.map(c=>[c.n,`${c.b} bocas · ${f1(c.s,1)} VA · I(B) ${f1(c.ib,2)} A · ${sx(c.d.sec)} mm² · ${c.d.curva}2×${c.In} A`]));
+ {const q=(s,f)=>document.querySelectorAll(s).forEach(f);
+ q('.rt tr[data-ge]',r=>r.classList.toggle('hl',r.dataset.ge===g.n));
+ const nC=C.length;q('.rt tr[data-sim]',r=>{const v=+r.dataset.sim;r.classList.toggle('hl',v===2?nC<=2:v===3?(nC===3||nC===4):v===5?nC===5:nC>=6)});
+ const usedSec=new Set(C.map(c=>String(c.d.sec)));q('.rt tr[data-iz]',r=>r.classList.toggle('hl',usedSec.has(r.dataset.iz)));
+ const usedT=new Set(C.map(c=>c.t));q('.rt tr[data-ct]',r=>r.classList.toggle('hl',usedT.has(r.dataset.ct)));
+ q('.rt tr[data-pr]',r=>r.classList.toggle('hl',r.dataset.pr==='TPA'||r.dataset.pr==='ID'||usedT.has(r.dataset.pr)||(r.dataset.pr==='IUG'&&usedT.has('IUGT'))||(r.dataset.pr==='TUG'&&usedT.has('TUE'))));
+ q('.rt td[data-c]',c=>{const[s,k]=c.dataset.c.split('-');c.classList.remove('okc','noc','sel');if(k===S.can){c.classList.add((+c.dataset.a*red)>=ibCS?'okc':'noc')}if(k===S.can&&+s===sU)c.classList.add('sel')});
+ q('#c2178n',n=>n.innerHTML=`Tu I(B) es <b>${f1(ibCS,2)} A</b>. En la columna de tu canalización, verde = alcanza${S.r10?' (ya con −10 %)':''}, rojo = no alcanza. Recuadro = cable elegido: <b>2×${sU} mm²</b>.`);
+ const used=[[1.5,+S.k15],[2.5,+S.k25],[4,+S.k4],[6,+S.k6]].filter(x=>x[1]>0).map(x=>String(x[0]));
+ q('.rt tr[data-cano]',r=>r.classList.toggle('hl',r.dataset.cano===S.cn));q('.rt .t10 [data-s]',c=>{c.classList.toggle('hl',used.includes(c.dataset.s));c.classList.toggle('sel',used.includes(c.dataset.s)&&c.parentElement.dataset.cano===S.cn)});q('.rt .t10',t=>{const c=t.querySelector('td.sel'),sc=t.parentElement;if(c&&sc.clientWidth&&sc.scrollWidth>sc.clientWidth)sc.scrollLeft=Math.max(0,c.offsetLeft-140)});}
  R={sla,slaR,zs,g,P,tI,tT,C,St,ks,dp,ibCS,sU,izCS,du,duP,InCS,ID,kw,rows};
  $('sumT').innerHTML=rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('');
  $('sumTxt').textContent=rows.map(r=>r[0]+': '+r[1]).join('\n');
+ if(S.modo==='tri')calcTri();
  save();
 }
 
@@ -552,26 +796,30 @@ function fill(){
  document.querySelectorAll('[data-ck]').forEach(el=>{el.checked=!!S.ck[el.dataset.ck]});
  $('k_timbre_x').checked=!!S.timbre;$('k_r10_x').checked=!!S.r10;
 }
-const all=()=>{renderZ();renderA();renderC();fill();calc()};
+const all=()=>{renderZ();renderA();renderC();renderCT();fill();calc()};
 
 /* ===== Eventos ===== */
 document.addEventListener('input',e=>{const el=e.target;
  if(el.dataset.k){S[el.dataset.k]=el.type==='text'?el.value:(el.tagName==='SELECT'&&isNaN(+el.value)?el.value:parseFloat(String(el.value).replace(',','.'))||0);calc();return}
  const r=el.closest('[data-g]');if(r&&el.dataset.f){const L=S[r.dataset.g],i=+r.dataset.i,f=el.dataset.f;
-  L[i][f]=(f==='n'||f==='t')?el.value:parseFloat(el.value)||0;
+  L[i][f]=(f==='n'||f==='t'||f==='ln')?el.value:parseFloat(el.value)||0;
+  if(f==='t'&&r.dataset.g==='ct'){Object.assign(L[i],el.value==='ACU3'?{va:746,cos:1}:{va:{IUG:60,IUGT:2200,TUG:2200,TUE:3300,ACU:1000}[el.value]});if(el.value!=='ACU3'&&!L[i].ln)L[i].ln='L1';renderCT()}
   if(f==='t'&&r.dataset.g==='c'){L[i].va={IUG:60,IUGT:2200,TUG:2200,TUE:3300,ACU:1000}[el.value];renderC()}
   if(f==='t'&&r.dataset.g==='am')renderA();
   calc()}});
 document.addEventListener('change',e=>{const el=e.target;if(el.dataset.ck){
  if(el.dataset.ck==='timbre_x')S.timbre=el.checked?1:0;else if(el.dataset.ck==='r10_x')S.r10=el.checked?1:0;else S.ck[el.dataset.ck]=el.checked;
- renderIdx();calc()}});
+ renderIdx();calc();
+ if(el.checked&&el.dataset.ck.startsWith('done_')){const d=el.closest('details.step');if(d){setTimeout(()=>{d.open=false;const r=d.getBoundingClientRect();if(r.top<0)d.scrollIntoView({block:'start'})},250)}}}});
 document.addEventListener('click',e=>{
  const d=e.target.closest('[data-del]');if(d){S[d.dataset.del].splice(+d.dataset.i,1);all();return}
- const a=e.target.closest('a[href^="#"]');if(a){const t=document.querySelector(a.getAttribute('href'));if(t){const det=t.tagName==='DETAILS'?t:t.querySelector('details');if(det)det.open=true}}
+ const a=e.target.closest('a[href^="#"]');if(a){let hr=a.getAttribute('href');if(S.modo==='tri'){const M={'#p18':'#t15','#p15':'#t12','#p7':'#t6','#p8':'#t6','#p11':'#t9'};if(M[hr]){hr=M[hr];e.preventDefault();const tt=document.querySelector(hr);if(tt){tt.open=true;tt.scrollIntoView()}return}}const t=document.querySelector(hr);if(t){const det=t.tagName==='DETAILS'?t:t.querySelector('details');if(det)det.open=true}}
 });
-$('addz').addEventListener('click',()=>{S.z.push({n:'Zona',l:0,a:0,semi:0});all()});
-$('adda').addEventListener('click',()=>{S.am.push({t:'dor',n:'Ambiente',m:0});all()});
-$('addc').addEventListener('click',()=>{S.c.push({t:'TUG',n:'Nuevo circuito',b:5,va:2200});all()});
+
+
+document.addEventListener('click',e=>{const b=e.target.closest('#addz,#adda,#addc,#addct');if(!b)return;
+ if(b.id==='addz')S.z.push({n:'Zona',l:0,a:0,semi:0});else if(b.id==='adda')S.am.push({t:'dor',n:'Ambiente',m:0});else if(b.id==='addc')S.c.push({t:'TUG',n:'Nuevo circuito',b:5,va:2200});else{S.ct=S.ct||[];S.ct.push({t:'TUG',n:'C'+(S.ct.length+1)+' TUG',b:5,va:2200,ln:['L1','L2','L3'][S.ct.length%3]})}all()});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-modo]');if(!b||S.modo===b.dataset.modo)return;S.modo=b.dataset.modo;renderSteps();all();renderIdx();save()});
 $('openAll').addEventListener('click',()=>document.querySelectorAll('details.step').forEach(d=>d.open=true));
 $('closeAll').addEventListener('click',()=>document.querySelectorAll('details.step').forEach(d=>d.open=false));
 $('copy').addEventListener('click',async()=>{const t=$('sumTxt').textContent;try{await navigator.clipboard.writeText(t);$('copied').textContent='Copiado'}catch(err){const p=$('sumTxt');p.hidden=false;const r=document.createRange();r.selectNodeContents(p);const s=getSelection();s.removeAllRanges();s.addRange(r);$('copied').textContent='Seleccionado: copialo con el menú'}});
@@ -588,20 +836,23 @@ const SYM={
  ventana:{n:'Ventana',g:'arq',d:{w:120},f:it=>{const w=it.w||120;return `<g stroke="${COL.ink}" stroke-width="1.5"><rect x="${-w/2}" y="-8" width="${w}" height="16" fill="#fff"/><line x1="${-w/2}" y1="0" x2="${w/2}" y2="0"/></g>`}},
  mueble:{n:'Mueble',g:'arq',d:{w:100,hh:60,lab:'Mueble'},f:it=>`<rect x="${-it.w/2}" y="${-it.hh/2}" width="${it.w}" height="${it.hh}" rx="4" fill="#f7f7f7" stroke="${COL.fur}" stroke-width="1.5"/>`+TX(0,5,Math.max(10,Math.min(16,it.w/6)),it.lab,COL.fur,'middle')},
  texto:{n:'Texto',g:'arq',d:{lab:'Ambiente',fs:28},f:it=>TX(0,0,it.fs||28,it.lab,COL.ink,'middle',600)},
- pilar:{n:'Pilar de medidor',g:'ele',d:{},f:()=>`<rect x="-16" y="-20" width="32" height="40" fill="#fff" stroke="${COL.cs}" stroke-width="2"/>`+TX(0,1,18,'M','#111','middle',700)+TX(0,15,9,'kWh','#111','middle')},
- tpa:{n:'TPA (tablero de acometida)',g:'ele',d:{},f:()=>`<path d="M-16,-10 L0,0 L-16,10Z M16,-10 L0,0 L16,10Z" fill="${COL.cs}" stroke="${COL.cs}" stroke-width="1.5"/>`},
+ pilar:{n:'Pilar de medidor',g:'ele',d:{},f:()=>`<rect x="-16" y="-20" width="32" height="40" fill="#fff" stroke="${COL.cs}" stroke-width="2"/><line x1="-16" y1="4" x2="16" y2="4" stroke="${COL.cs}" stroke-width="1.5"/>`+TX(0,0,18,'M','#111','middle',700)+TX(0,16,9,'kWh','#111','middle')},
+ tpa:{n:'Tablero de protección de la acometida',g:'ele',d:{},f:()=>`<path d="M-16,-10 L0,0 L-16,10Z M16,-10 L0,0 L16,10Z" fill="${COL.cs}" stroke="${COL.cs}" stroke-width="1.5"/>`},
  tpu:{n:'TPU (tablero del usuario)',g:'ele',d:{h:'1,50'},f:()=>`<rect x="-16" y="-8" width="32" height="16" fill="#fff" stroke="${COL.cs}" stroke-width="2"/><path d="M-16,8 L16,-8 L16,8Z" fill="${COL.cs}"/>`},
- bocaT:{n:'Boca de techo',g:'ele',d:{lab:'a'},f:()=>`<circle r="12" fill="#fff" stroke="${COL.iug}" stroke-width="2"/>`},
- bocaP:{n:'Boca de pared (aplique)',g:'ele',d:{lab:'a',h:'1,90'},f:()=>`<g stroke="${COL.iug}" stroke-width="2" fill="#fff"><line x1="-16" y1="-8" x2="-16" y2="8"/><line x1="-16" y1="0" x2="-6" y2="0"/><circle cx="4" r="10"/></g>`},
+ bocaT:{n:'Boca de techo',g:'ele',d:{lab:'a'},f:()=>`<g stroke="${COL.iug}" stroke-width="2"><circle r="12" fill="#fff"/><path d="M-8.5,-8.5 L8.5,8.5 M8.5,-8.5 L-8.5,8.5"/></g>`},
+ bocaP:{n:'Boca de pared',g:'ele',d:{lab:'a',h:'1,90'},f:()=>`<g stroke="${COL.iug}" stroke-width="2" fill="#fff"><line x1="-18" y1="-8" x2="-18" y2="8"/><line x1="-18" y1="0" x2="-11" y2="0"/><circle cx="-1" r="10"/><path d="M-8,-7 L6,7 M6,-7 L-8,7"/></g>`},
  ll1:{n:'Llave de 1 efecto',g:'ele',d:{lab:'a',h:'1,10'},f:()=>`<g stroke="${COL.iug}" stroke-width="2" fill="none"><circle r="4" fill="#fff"/><line x1="3" y1="-3" x2="12" y2="-14"/><line x1="12" y1="-14" x2="17" y2="-10"/></g>`},
- ll2:{n:'Llave de 2 efectos',g:'ele',d:{lab:'ab',h:'1,10'},f:()=>`<g stroke="${COL.iug}" stroke-width="2" fill="none"><circle r="4" fill="#fff"/><line x1="3" y1="-3" x2="12" y2="-14"/><line x1="12" y1="-14" x2="17" y2="-10"/><line x1="8" y1="-9" x2="13" y2="-5"/></g>`},
- tomaS:{n:'Toma simple',g:'ele',hc:COL.tug,d:{h:'0,40'},f:()=>`<g stroke="${COL.tug}" stroke-width="2" fill="none"><line x1="-14" y1="0" x2="14" y2="0"/><path d="M-10,0 A10,10 0 0 1 10,0"/><line x1="0" y1="-10" x2="0" y2="-19"/></g>`},
- tomaD:{n:'Toma doble',g:'ele',hc:COL.tug,d:{h:'0,40'},f:()=>`<g stroke="${COL.tug}" stroke-width="2" fill="none"><line x1="-14" y1="0" x2="14" y2="0"/><path d="M-10,0 A10,10 0 0 1 10,0"/><line x1="-3" y1="-10" x2="-3" y2="-19"/><line x1="3" y1="-10" x2="3" y2="-19"/></g>`},
+ ll2:{n:'Llave de 2 efectos',g:'ele',d:{lab:'ab',h:'1,10'},f:()=>`<g stroke="${COL.iug}" stroke-width="2" fill="none"><circle r="4" fill="#fff"/><line x1="2.5" y1="-3" x2="10" y2="-15"/><line x1="10" y1="-15" x2="15" y2="-12"/><line x1="-2.5" y1="-3" x2="-10" y2="-15"/><line x1="-10" y1="-15" x2="-15" y2="-12"/></g>`},
+ tomaS:{n:'Toma simple',g:'ele',hc:COL.acu,d:{h:'0,40'},f:()=>`<g stroke="${COL.acu}" stroke-width="2" fill="none" stroke-linejoin="round"><line x1="-14" y1="0" x2="14" y2="0"/><path d="M-10,0 A10,10 0 0 1 10,0"/><line x1="0" y1="-10" x2="0" y2="-17"/><path d="M-4.5,-14 L0,-19.5 L4.5,-14"/></g>`},
+ tomaD:{n:'Toma doble',g:'ele',hc:COL.acu,d:{h:'0,40'},f:()=>`<g stroke="${COL.tug}" stroke-width="2" fill="none" stroke-linejoin="round"><line x1="-14" y1="0" x2="14" y2="0"/><path d="M-10,0 A10,10 0 0 1 10,0"/><line x1="-4" y1="-10" x2="-4" y2="-16"/><line x1="4" y1="-10" x2="4" y2="-16"/><path d="M-7.5,-13.5 L-4,-19 L-0.5,-13.5 M0.5,-13.5 L4,-19 L7.5,-13.5"/></g>`},
  tomaE:{n:'Toma especial (TUE / ACU)',g:'ele',hc:COL.acu,d:{h:'2,20'},f:()=>`<g stroke="${COL.acu}" stroke-width="2"><line x1="-14" y1="0" x2="14" y2="0"/><path d="M-10,0 A10,10 0 0 1 10,0Z" fill="${COL.acu}"/><line x1="0" y1="-10" x2="0" y2="-19"/></g>`},
  timbre:{n:'Timbre',g:'ele',d:{},f:()=>`<circle cx="-15" r="5" fill="${COL.iug}"/><rect x="-8" y="-9" width="22" height="18" fill="#fff" stroke="${COL.iug}" stroke-width="2"/>`+TX(3,5,13,'T',COL.iug,'middle',700)},
  puls:{n:'Pulsador de timbre',g:'ele',d:{h:'1,10'},f:()=>`<circle r="5" fill="${COL.iug}"/><line x1="0" y1="0" x2="10" y2="-12" stroke="${COL.iug}" stroke-width="2"/>`+TX(12,-12,11,'T',COL.iug,'start',700)},
  caja:{n:'Caja de paso',g:'ele',d:{},f:()=>`<g stroke="${COL.ink}" stroke-width="2" fill="#fff"><rect x="-9" y="-9" width="18" height="18"/><line x1="-9" y1="-9" x2="9" y2="9"/><line x1="9" y1="-9" x2="-9" y2="9"/></g>`},
- pat:{n:'Sistema de PAT (jabalina)',g:'ele',d:{},f:()=>`<g stroke="${COL.pe}" stroke-width="2.5"><line x1="0" y1="-14" x2="0" y2="0"/><line x1="-12" y1="0" x2="12" y2="0"/><line x1="-8" y1="5" x2="8" y2="5"/><line x1="-4" y1="10" x2="4" y2="10"/></g>`}
+ pat:{n:'Sistema de PAT (jabalina)',g:'ele',d:{},f:()=>`<g stroke="${COL.pe}" stroke-width="2.5"><line x1="0" y1="-18" x2="0" y2="-7"/><line x1="-13" y1="-7" x2="13" y2="-7"/><line x1="-10" y1="-3" x2="10" y2="-3"/><path d="M-10,1 L10,1 L0,17 Z" fill="${COL.pe}"/></g>`},
+ cajaACU:{n:'Caja conexión ACU',g:'ele',d:{},f:()=>`<g stroke="${COL.cs}" stroke-width="2" fill="#fff"><rect x="-10" y="-10" width="20" height="20"/><path d="M-10,-10 L10,10 M10,-10 L-10,10"/></g>`},
+ bomba:{n:'Bomba',g:'ele',d:{},f:()=>`<circle r="17" fill="#fff" stroke="${COL.cs}" stroke-width="2"/>`+TX(0,4,17,'M',COL.cs,'middle',700)+`<path d="M-6,10 q3,-4 6,0 t6,0" fill="none" stroke="${COL.cs}" stroke-width="1.8"/>`},
+ clase2:{n:'Doble aislación - Clase II',g:'ele',d:{},f:()=>`<g fill="#fff" stroke="${COL.pe}" stroke-width="2"><rect x="-14" y="-14" width="28" height="28"/><rect x="-8" y="-8" width="16" height="16"/></g>`}
 };
 const FURN=[['Cama 2 pl.',160,200],['Cama 1 pl.',90,190],['Mesa',120,80],['Sillón',180,80],['Mesada',200,60],['Heladera',70,70],['Cocina',60,60],['Inodoro',40,60],['Lavatorio',50,40],['Ducha',80,80],['Placard',150,60]];
 const PL=()=>S.plan||(S.plan={items:[],walls:[],cables:[],nid:1});
@@ -638,12 +889,15 @@ function moveHandle(){const wl=fw(selId);if(wl&&mode==='sel')return wallHandles(
  return `<g data-t="m"><line x1="${it.x}" y1="${it.y}" x2="${hx}" y2="${hy}" stroke="#1f78bd" stroke-width="${2*u}" stroke-dasharray="${5*u} ${4*u}"/><circle cx="${hx}" cy="${hy}" r="${R_*1.9}" fill="transparent"/><circle cx="${hx}" cy="${hy}" r="${R_}" fill="#1f78bd" stroke="#fff" stroke-width="${3*u}"/><path d="M${hx-a},${hy} H${hx+a} M${hx},${hy-a} V${hy+a} M${hx-a+k},${hy-k} L${hx-a},${hy} L${hx-a+k},${hy+k} M${hx+a-k},${hy-k} L${hx+a},${hy} L${hx+a-k},${hy+k} M${hx-k},${hy-a+k} L${hx},${hy-a} L${hx+k},${hy-a+k} M${hx-k},${hy+a-k} L${hx},${hy+a} L${hx+k},${hy+a-k}" stroke="#fff" stroke-width="${2.2*u}" fill="none" stroke-linecap="round"/></g>`}
 function counts(){const it=PL().items,n=k=>it.filter(i=>i.k===k).length;const iug=n('bocaT')+n('bocaP')+n('timbre'),tug=n('tomaS')+n('tomaD'),tue=n('tomaE');
  $('plcount').innerHTML=`En el plano: <b>${iug} IUG</b> (bocas + timbre) · <b>${tug} TUG</b> · <b>${tue} TUE/ACU</b>`+(R.tI!=null?` — Paso 4 pide ${R.tI} IUG y ${R.tT} TUG `+ok(iug>=R.tI&&tug>=R.tT,'✓','faltan bocas'):'')}
-const HINT={sel:'Arrastrá un componente desde la barra hasta el plano (o tocalo y aparece en el centro). Tocá algo para editarlo; arrastralo para moverlo. Arrastrá el fondo para desplazarte; con dos dedos hacés zoom.',wall:'Apoyá el dedo donde empieza la pared y arrastrá hasta donde termina. Se alinea sola en horizontal o vertical y se engancha a las puntas de otras paredes.',cable:'Elegí el tipo de cable. Tocá un componente y después otro: se dibuja la canalización. Seguí tocando para encadenar. Tocá el fondo para cortar. Para curvarlo, en Mover tocá el cable y arrastrá el punto blanco.',text:'Tocá el plano donde va el nombre del ambiente.'};
-function setMode(m){mode=m;cFrom=null;document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===m));$('ctype').style.display=m==='cable'?'':'none';$('hint').textContent=HINT[m];draw()}
+const HINT={sel:'Arrastrá un componente desde la barra hasta el plano (o tocalo y aparece en el centro). Tocá algo para editarlo; arrastralo para moverlo. Arrastrá el fondo para desplazarte; con dos dedos hacés zoom.',wall:'Apoyá el dedo donde empieza la pared y arrastrá hasta donde termina. Se alinea sola en horizontal o vertical y se engancha a las puntas de otras paredes.',cable:'Elegí el tipo de cable. Tocá un componente y después otro: se dibuja la canalización. Seguí tocando para encadenar. Tocá el fondo para cortar. Para curvarlo, en Mover tocá el cable y arrastrá el punto blanco.',text:'Tocá el plano donde va el nombre del ambiente.',sym:'Elegí un símbolo de la lista y tocá el plano donde va. Podés seguir tocando para poner varios iguales. Para moverlos o editarlos, volvé a Mover.'};
+function setMode(m){mode=m;cFrom=null;document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===m));$('ctype').style.display=m==='cable'?'':'none';$('symp').hidden=m!=='sym';$('hint').textContent=HINT[m];draw()}
 $('ctype').innerHTML=Object.entries(CT).map(([k,v])=>`<option value="${k}">${v.n}</option>`).join('');
 $('ctype').addEventListener('change',e=>{cType=e.target.value});
 const ico=(k,ex)=>{const it=Object.assign({k,x:0,y:0,r:0},JSON.parse(JSON.stringify(SYM[k].d)),ex||{});let sc=1,vb='-24 -24 48 42';if(k==='mueble'){sc=34/Math.max(it.w,it.hh);it.lab=''}if(k==='puerta')vb='-10 -90 100 100';if(k==='ventana')vb='-70 -40 140 80';return `<svg viewBox="${vb}"><g transform="scale(${sc})">${SYM[k].f(it)}</g></svg>`};
-$('pal').innerHTML=`<span class="gl">Arquitectura</span>`+['puerta','ventana'].map(k=>`<button data-add="${k}">${ico(k)}${SYM[k].n}</button>`).join('')+FURN.map((f,i)=>`<button data-furn="${i}">${ico('mueble',{w:f[1],hh:f[2]})}${f[0]}</button>`).join('')+`<span class="gl">Eléctrico</span>`+Object.keys(SYM).filter(k=>SYM[k].g==='ele').map(k=>`<button data-add="${k}">${ico(k)}${SYM[k].n.replace(/ \(.*\)/,'')}</button>`).join('');
+$('pal').innerHTML=`<span class="gl">Arquitectura</span>`+['puerta','ventana'].map(k=>`<button data-add="${k}">${ico(k)}${SYM[k].n}</button>`).join('')+FURN.map((f,i)=>`<button data-furn="${i}">${ico('mueble',{w:f[1],hh:f[2]})}${f[0]}</button>`).join('');
+const SYM_CURSO=['pilar','tpa','tpu','ll1','ll2','bocaT','bocaP','tomaS','tomaD','cajaACU','bomba','pat','clase2'],SYM_OTROS=['tomaE','timbre','puls','caja'];let symSel=null;
+$('symp').innerHTML=`<p class="sgt">Simbología del curso (IRAM 2010)</p>`+SYM_CURSO.map(k=>`<button data-sym="${k}" aria-pressed="false">${ico(k)}<span>${SYM[k].n}</span></button>`).join('')+`<p class="sgt">Otros</p>`+SYM_OTROS.map(k=>`<button data-sym="${k}" aria-pressed="false">${ico(k)}<span>${SYM[k].n}</span></button>`).join('')+`<p class="sgt">Alturas: <b style="color:#1f5fd1">1,10</b> en azul (iluminación y llaves) · <b style="color:#d1342b">0,40</b> en rojo (tomas). Se cambian al tocar el símbolo en Mover.</p>`;
+$('symp').addEventListener('click',e=>{const b=e.target.closest('[data-sym]');if(!b)return;symSel=b.dataset.sym;$('symp').querySelectorAll('[data-sym]').forEach(x=>x.setAttribute('aria-pressed',x===b));$('hint').textContent='Ahora tocá el plano donde va: '+SYM[symSel].n+'.'});
 function placeFromPal(btn,p){push();let it;if(btn.dataset.furn!=null){const f=FURN[+btn.dataset.furn];it=addItem('mueble',snap(p.x,5),snap(p.y,5),{w:f[1],hh:f[2],lab:f[0]})}else it=addItem(btn.dataset.add,snap(p.x,5),snap(p.y,5));selId=it.id;if(mode!=='sel')setMode('sel');draw();props();save()}
 let pd=null;
 $('pal').addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b)return;pd={b,sx:e.clientX,sy:e.clientY,moved:false,g:null}});
@@ -656,6 +910,7 @@ svg.addEventListener('pointerdown',e=>{try{svg.setPointerCapture(e.pointerId)}ca
  if(ptrs.size===2){const[a,b]=[...ptrs.values()];pinch={d:Math.hypot(a.x-b.x,a.y-b.y)||1,vb:{...VB},c:{x:(a.x+b.x)/2,y:(a.y+b.y)/2}};drag=null;draft=null;return}
  const p=wpt(e),tg=e.target.closest('[data-t]'),t=tg?tg.dataset.t:'bg',id=tg&&tg.dataset.id?+tg.dataset.id:null;
  if(mode==='wall'){const s=snapPt(p);draft={x1:s.x,y1:s.y,x2:s.x,y2:s.y};draw();return}
+ if(mode==='sym'){if(!symSel){$('hint').textContent='Primero elegí un símbolo de la lista.';return}push();const it=addItem(symSel,snap(p.x,5),snap(p.y,5));selId=it.id;draw();props();save();return}
  if(mode==='text'){push();const it=addItem('texto',snap(p.x),snap(p.y));selId=it.id;setMode('sel');props();save();return}
  if(mode==='cable'){if(t==='i'){if(cFrom==null)cFrom=id;else if(cFrom!==id){push();PL().cables.push({id:PL().nid++,a:cFrom,b:id,t:cType,bend:.25,l:CT[cType].l});cFrom=id;save()}}else cFrom=null;draw();return}
  if(t==='h'&&fc(selId)){drag={k:'bend',id:selId};return}
@@ -758,6 +1013,16 @@ function uniSVG(){const C=R.C||[],n=Math.max(1,C.length),sp=Math.min(190,Math.ma
  const xd=Math.max(busR,x0)+180;s+=L(x0,top+10,xd,top+10)+L(xd,top+10,xd,top+30)+SW(xd,top+30)+T(xd+20,top+62,'ITM 02  C2x25 A',15)+T(xd+20,top+82,'Icc 6000 A',14)+L(xd,top+92,xd,top+130)+`<rect x="${xd-12}" y="${top+130}" width="24" height="60" fill="#fff" stroke="#111" stroke-width="2.5"/>`+L(xd-12,top+180,xd+12,top+140)+T(xd+22,top+150,'DPS',15,'start','#111',700)+T(xd+22,top+170,'245 V – 40 kA',14)+L(xd,top+190,xd,bus+150,COL.pe,3)+`<rect x="${xd-50}" y="${bus+150}" width="100" height="16" fill="#fff" stroke="${COL.pe}" stroke-width="3"/>`+T(xd,bus+186,'Barra PE',14,'middle',COL.pe)+L(xd+50,bus+158,xd+120,bus+158,COL.pe,3)+L(xd+120,bus+158,xd+120,bus+200,COL.pe,3)+L(xd+100,bus+200,xd+140,bus+200,COL.pe,3)+L(xd+107,bus+208,xd+133,bus+208,COL.pe,3)+L(xd+114,bus+216,xd+126,bus+216,COL.pe,3)+T(xd+120,bus+242,'PAT IRAM 2309',14,'middle',COL.pe)+T(xd+120,bus+262,`PE ${R.sU||4} mm²`,14,'middle',COL.pe)+T(xd-40,bus+300,'Reserva no equipada 50 %',14,'middle');
  s+=BX(Math.min(busL,x0)-60,top,Math.max(busR,xd+150)-Math.min(busL,x0)+120,bus+330-top);
  const H=bus+350;return{s:`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="#fff"/>${s}</svg>`,W,H}}
+function uniSVGTri(){const C=(RT.C||[]).map(c=>({...c,d:{curva:c.curva,icc:c.icc,sec:c.sec}})),n=Math.max(1,C.length),sp=Math.min(190,Math.max(150,700/n)),W=Math.max(1060,140+n*sp+260),x0=300,L=(x1,y1,x2,y2,c='#111',w=2.5)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}"/>`,
+ SW=(x,y)=>L(x,y,x,y+16)+L(x,y+16,x+16,y+40)+L(x,y+46,x,y+62)+L(x-6,y+10,x+6,y+22,'#111',2),T=(x,y,t,s=17,a='start',c='#111',w=400)=>TX(x,y,s,t,c,a,w),BX=(x,y,w,h)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="10 6"/>`;
+ let s='';s+=`<rect x="${x0-50}" y="10" width="100" height="40" fill="#fff" stroke="#111" stroke-width="2.5"/>`+T(x0,38,'RDD',20,'middle','#111',700)+L(x0,50,x0,80)+`<rect x="${x0-10}" y="80" width="20" height="50" fill="#fff" stroke="#111" stroke-width="2.5"/>`+T(x0+24,110,'Fusible aéreo')+L(x0,130,x0,160)+`<rect x="${x0-44}" y="160" width="88" height="60" fill="#fff" stroke="#111" stroke-width="2.5"/>`+T(x0,185,'MEDIDOR',14,'middle','#111',700)+T(x0,208,'3F · kWh',15,'middle')+L(x0,220,x0,270)+T(x0+16,250,'4x4 mm² IRAM 247-3',16);
+ s+=BX(x0-230,270,460,110)+T(x0-220,295,'TPA',17,'start','#111',700)+SW(x0,285)+T(x0+30,315,`ITM 01  C4x${RT.In} A`,17)+T(x0+30,338,'Icc 6000 A',15)+L(x0,347,x0,440)+T(x0+16,410,`CS  4x${RT.sec} mm² IRAM 2178-1`,16);
+ const yb=440,top=yb,bus=600,busL=120,busR=busL+(n-1)*sp;
+ s+=T(x0-220,top+25,'TPU · IP41',17,'start','#111',700)+SW(x0,top+20)+`<rect x="${x0+20}" y="${top+30}" width="16" height="16" fill="none" stroke="#111" stroke-width="2"/>`+T(x0+46,top+48,`ID 01  4x${RT.ID} A  30 mA · barras 4x63 A`,17)+L(x0,top+82,x0,bus)+L(Math.min(busL,x0),bus,Math.max(busR,x0),bus,'#111',3)+T(Math.min(busL,x0),bus-10,'Puente peine',14);
+ C.forEach((c,i)=>{const x=busL+i*sp;s+=L(x,bus,x,bus+30)+SW(x,bus+30)+T(x+10,bus+118,`PIA 0${i+1}`,15,'start','#111',700)+T(x+10,bus+138,`${c.d.curva}${c.tri?4:2}x${c.In} A`,15)+T(x+10,bus+158,`Icc ${c.d.icc}`,14)+(c.tri?T(x+10,bus+178,`GM ${f1(c.gm,1)} A`,14,'start','#c2188f',700):'')+L(x,bus+92,x,bus+250)+T(x+8,bus+200,`${c.tri?4:2}x${sx(c.d.sec)}+Pe`,14)+`<path d="M${x-7},${bus+238} L${x},${bus+252} L${x+7},${bus+238}" fill="none" stroke="#111" stroke-width="2"/>`+T(x,bus+278,c.n,15,'middle','#111',700)+T(x,bus+298,c.tri?'L1+L2+L3+N':(c.ln||'L1')+'+N',14,'middle','#1f5fd1',700)});
+ const xd=Math.max(busR,x0)+180;s+=L(x0,top+10,xd,top+10)+L(xd,top+10,xd,top+30)+SW(xd,top+30)+T(xd+20,top+62,'ITM 02  C4x25 A',15)+T(xd+20,top+82,'Icc 6000 A',14)+L(xd,top+92,xd,top+130)+`<rect x="${xd-12}" y="${top+130}" width="24" height="60" fill="#fff" stroke="#111" stroke-width="2.5"/>`+L(xd-12,top+180,xd+12,top+140)+T(xd+22,top+150,'DPS',15,'start','#111',700)+T(xd+22,top+170,'420 V – 40 kA',14)+L(xd,top+190,xd,bus+150,COL.pe,3)+`<rect x="${xd-50}" y="${bus+150}" width="100" height="16" fill="#fff" stroke="${COL.pe}" stroke-width="3"/>`+T(xd,bus+186,'Barra PE',14,'middle',COL.pe)+L(xd+50,bus+158,xd+120,bus+158,COL.pe,3)+L(xd+120,bus+158,xd+120,bus+200,COL.pe,3)+L(xd+100,bus+200,xd+140,bus+200,COL.pe,3)+L(xd+107,bus+208,xd+133,bus+208,COL.pe,3)+L(xd+114,bus+216,xd+126,bus+216,COL.pe,3)+T(xd+120,bus+242,'PAT IRAM 2309',14,'middle',COL.pe)+T(xd+120,bus+262,'PE 10 mm²',14,'middle',COL.pe)+T(xd-40,bus+320,'Reserva no equipada 50 %',14,'middle');
+ s+=BX(Math.min(busL,x0)-60,top,Math.max(busR,xd+150)-Math.min(busL,x0)+120,bus+345-top);
+ const H=bus+370;return{s:`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="#fff"/>${s}</svg>`,W,H}}
 const svgImg=s=>new Promise((res,rej)=>{const u=URL.createObjectURL(new Blob([s],{type:'image/svg+xml'}));const im=new Image();im.onload=()=>{res(im);setTimeout(()=>URL.revokeObjectURL(u),1000)};im.onerror=()=>rej(new Error('svg'));im.src=u});
 const PX=1240,PY=1754,MG=90;
 class Doc{constructor(){this.pages=[];this.np()}
@@ -778,31 +1043,40 @@ class Doc{constructor(){this.pages=[];this.np()}
 }
 const bold=a=>(a._b=1,a);
 function materials(){const p=PL(),n=k=>p.items.filter(i=>i.k===k).length,C=R.C||[],L={};p.cables.forEach(c=>{const q=qb(c);if(q)L[c.t]=(L[c.t]||0)+qlen(q)/100});const m=v=>Math.ceil((v||0)*1.1);
- const rows=[];const a=(q,u,d)=>{if(q>0)rows.push([String(q),u,d])};
- rows.push(bold(['','','Circuito seccional y acometida']));a(1,'u.','Pilar / gabinete TPA según distribuidora');a(1,'u.',`ITM C2x${R.InCS} A Icc 6000 A (TPA)`);a(Math.ceil((+S.L||0)*1.1)+2,'m',`Cable subterráneo IRAM 2178-1 2x${R.sU} mm²`);if(S.can==='ent'){a(1,'u.','Cinta de peligro, ladrillos y arena para zanja')}
- rows.push(bold(['','','Tablero del usuario (TPU)']));a(1,'u.',`Gabinete TPU IP41 para ${Math.ceil((C.length+4)*1.5)} módulos (reserva 50 %)`);a(1,'u.',`Interruptor diferencial 2x${R.ID} A 30 mA`);C.forEach((c,i)=>a(1,'u.',`PIA 0${i+1} ${c.d.curva}2x${c.In} A Icc ${c.d.icc} A (${c.n})`));a(1,'u.','ITM C2x25 A + descargador de sobretensiones 245 V 40 kA');a(1,'u.','Bornera / barra de PE');
- rows.push(bold(['','','Puesta a tierra']));a(1,'u.','Jabalina de cobre IRAM 2309 con tomacable');a(1,'u.','Cámara de inspección');a(m(L.PAT)||3,'m',`Cable verde-amarillo IRAM NM 247-3 ${R.sU} mm²`);
+ const TRI=S.modo==='tri',CSx=TRI?`4x${RT.sec}`:`2x${R.sU}`,ITMx=TRI?`C4x${RT.In}`:`C2x${R.InCS}`,IDx=TRI?`4x${RT.ID}`:`2x${R.ID}`,PEx=TRI?10:R.sU,CL=TRI?RT.C:C;const rows=[];const a=(q,u,d)=>{if(q>0)rows.push([String(q),u,d])};
+ rows.push(bold(['','','Circuito seccional y acometida']));a(1,'u.','Pilar / gabinete TPA según distribuidora');a(1,'u.',`ITM ${ITMx} A Icc 6000 A (TPA)`);a(Math.ceil((+S.L||0)*1.1)+2,'m',`Cable subterráneo IRAM 2178-1 ${CSx} mm²`);if(S.can==='ent'){a(1,'u.','Cinta de peligro, ladrillos y arena para zanja')}
+ rows.push(bold(['','','Tablero del usuario (TPU)']));a(1,'u.',`Gabinete TPU IP41 para ${Math.ceil((CL.length*(TRI?2:1)+(TRI?8:4))*1.5)} módulos (reserva 50 %)`);a(1,'u.',`Interruptor diferencial ${IDx} A 30 mA`);if(TRI)a(1,'u.','Barras de distribución 4x63 A');if(TRI)CL.forEach((c,i)=>{a(1,'u.',c.tri?`PIA 0${i+1} C4x${c.In} A Icc 4500 A (${c.n})`:`PIA 0${i+1} ${c.curva}2x${c.In} A Icc ${c.icc} A (${c.n} · ${c.ln||'L1'})`);if(c.tri)a(1,'u.',`Guardamotor trifásico rango que incluya ${f1(c.gm,1)} A (${c.n})`)});else C.forEach((c,i)=>a(1,'u.',`PIA 0${i+1} ${c.d.curva}2x${c.In} A Icc ${c.d.icc} A (${c.n})`));a(1,'u.',TRI?'ITM C4x25 A + descargador de sobretensiones 420 V 40 kA':'ITM C2x25 A + descargador de sobretensiones 245 V 40 kA');a(1,'u.','Bornera / barra de PE');
+ rows.push(bold(['','','Puesta a tierra']));a(1,'u.','Jabalina de cobre IRAM 2309 con tomacable');a(1,'u.','Cámara de inspección');a(m(L.PAT)||3,'m',`Cable verde-amarillo IRAM NM 247-3 ${PEx} mm²`);
  rows.push(bold(['','','Bocas y elementos de conexión final (según plano)']));a(n('bocaT'),'u.','Boca de techo: caja octogonal + portalámparas');a(n('bocaP'),'u.','Boca de pared (aplique): caja + portalámparas');a(n('ll1'),'u.','Llave de 1 efecto (módulo + caja rectangular)');a(n('ll2'),'u.','Llave de 2 efectos');a(n('tomaS'),'u.','Tomacorriente simple 10 A 2P+T');a(n('tomaD'),'u.','Tomacorriente doble 10 A 2P+T');a(n('tomaE'),'u.','Tomacorriente especial 20 A 2P+T');a(n('timbre'),'u.','Timbre');a(n('puls'),'u.','Pulsador de timbre');a(n('caja'),'u.','Caja de paso');
- const cab={};const ad=(s,v)=>{if(v>0)cab[s]=(cab[s]||0)+v};ad('1,5 mm² (F y N)',2*(L.IUG||0));ad('2,5 mm² verde-amarillo (PE)',(L.IUG||0)+(L.TUG||0)+(L.ACU||0));ad('2,5 mm² (F y N)',2*((L.TUG||0)+(L.ACU||0)));ad('1 mm² (retornos)',L.RET||0);ad('1,5 mm² (retornos)',L.RET||0);ad('1 mm² (timbre)',2*(L.TIM||0));
+ const cab={};const ad=(s,v)=>{if(v>0)cab[s]=(cab[s]||0)+v};ad('1,5 mm² (F y N)',2*(L.IUG||0));ad('2,5 mm² verde-amarillo (PE)',(L.IUG||0)+(L.TUG||0)+(L.ACU||0));ad('2,5 mm² (F y N)',2*((L.TUG||0)+(TRI?0:(L.ACU||0))));if(TRI)ad('2,5 mm² (3 fases + N, ACU trifásico)',4*(L.ACU||0));ad('1 mm² (retornos)',L.RET||0);ad('1,5 mm² (retornos)',L.RET||0);ad('1 mm² (timbre)',2*(L.TIM||0));
  const canM=(L.IUG||0)+(L.TUG||0)+(L.ACU||0)+(L.RET||0)+(L.TIM||0);
  rows.push(bold(['','','Canalizaciones y cables (medido sobre el plano + 10 %)']));a(m(canM),'m','Caño corrugado / rígido (ver paso 10 para el diámetro)');Object.entries(cab).forEach(([k,v])=>a(m(v),'m','Cable IRAM NM 247-3 '+k));
  rows.push(bold(['','','Varios']));a(1,'u.','Cartel de riesgo eléctrico e identificadores de circuitos');
  return rows}
 async function buildPDF(){calc();await prog('Escribiendo la memoria de cálculo');const d=new Doc(),x=()=>d.x,g=R.g;
  const field=(l,v)=>d.table([{t:l,w:.35},{t:v||'—',w:.65}],[]);
- d.y=MG+40;d.font(54,700);d.x.fillStyle='#111';d.x.fillText('Proyecto de instalación eléctrica',MG,d.y+54);d.y+=80;d.font(30,400);d.x.fillStyle='#555';d.x.fillText('Vivienda unifamiliar · AEA 90364-7-770 · ERSeP Córdoba',MG,d.y+30);d.y+=60;d.x.fillStyle=COL.cs;d.x.fillRect(MG,d.y,PX-2*MG,6);d.y+=50;
+ d.y=MG+40;d.font(54,700);d.x.fillStyle='#111';d.x.fillText('Proyecto de instalación eléctrica',MG,d.y+54);d.y+=80;d.font(30,400);d.x.fillStyle='#555';d.x.fillText('Vivienda unifamiliar '+(S.modo==='tri'?'trifásica':'monofásica')+' · AEA 90364-7-770 · ERSeP Córdoba',MG,d.y+30);d.y+=60;d.x.fillStyle=COL.cs;d.x.fillRect(MG,d.y,PX-2*MG,6);d.y+=50;
  d.table([{t:'Dato',w:.35},{t:'Valor',w:.65}],[['Proyecto',S.nom||'—'],['Propietario',S.pProp||'—'],['Ubicación',S.pUbic||'—'],['Instalador',S.pInst||'—'],['Matrícula / categoría',S.pMat||'—'],['Fecha',S.pFecha||'—']]);
- d.h2('Datos principales');d.table([{t:'Concepto',w:.5},{t:'Valor',w:.5,al:'r'}],[['Superficie límite de aplicación (SLA)',R.sla+' m²'],['Grado de electrificación',g.n],['Cantidad de circuitos',String(R.C.length)],['DPMS',f1(R.dp,1)+' VA'],['Potencia activa (cos φ 0,85)',f1(R.kw,2)+' kW'],['Suministro','Monofásico 220 V'],['Protección general','ITM C2x'+R.InCS+' A · ID 2x'+R.ID+' A 30 mA']]);
+ const TRI=S.modo==='tri';d.h2('Datos principales');d.table([{t:'Concepto',w:.5},{t:'Valor',w:.5,al:'r'}],TRI?[['Superficie límite de aplicación (SLA)',R.sla+' m²'],['Grado de electrificación',g.n],['Cantidad de circuitos',String(RT.C.length)],['DPMS final',f1(RT.dpF,1)+' VA'],['Potencia activa (cos φ 0,85)',f1(RT.kw,2)+' kW'],['Suministro','Trifásico 3x380/220 V'],['Protección general','ITM C4x'+RT.In+' A · ID 4x'+RT.ID+' A 30 mA']]:[['Superficie límite de aplicación (SLA)',R.sla+' m²'],['Grado de electrificación',g.n],['Cantidad de circuitos',String(R.C.length)],['DPMS',f1(R.dp,1)+' VA'],['Potencia activa (cos φ 0,85)',f1(R.kw,2)+' kW'],['Suministro','Monofásico 220 V'],['Protección general','ITM C2x'+R.InCS+' A · ID 2x'+R.ID+' A 30 mA']]);
  d.np();d.h1('1. Memoria de cálculo');
  d.h2('1.1 Superficie límite de aplicación');d.table([{t:'Zona',w:.5},{t:'Medidas',w:.25},{t:'m²',w:.25,al:'r'}],S.z.map((z,i)=>[z.n,`${sx(z.l)} x ${sx(z.a)}${z.semi==1?' ÷ 2 (semicub.)':''}`,f1(R.zs[i],2)]).concat([bold(['Total (redondeado)','',R.sla+' m²'])]));
  d.h2('1.2 Grado de electrificación');d.p(`SLA ${R.sla} m² → grado ${g.n}. Circuitos mínimos: ${g.c}. Potencia activa de tabla: 10 kW (11,76 kVA).`);
  d.h2('1.3 Puntos mínimos de utilización');d.table([{t:'Ambiente',w:.34},{t:'Superficie',w:.18,al:'r'},{t:'IUG',w:.1,al:'r'},{t:'TUG',w:.1,al:'r'},{t:'Observaciones',w:.28}],S.am.map((a,i)=>[a.n,a.t==='coc'||a.t==='ban'?'—':f1(+a.m,2)+(a.t==='pas'||a.t==='bal'?' mL':' m²'),String(R.P[i][0]),String(R.P[i][1]),a.t==='coc'?cocNote(g):a.t==='bal'?'IUG IP44 mínimo':'']).concat(S.timbre?[['Timbre','—','1','0','Se suma a IUG']]:[]).concat([bold(['Total general','',String(R.tI),String(R.tT),''])]));
- d.h2('1.4 Circuitos, potencia y corriente');d.table([{t:'Circuito',w:.2},{t:'Bocas',w:.09,al:'r'},{t:'S (VA)',w:.13,al:'r'},{t:'I(B) A',w:.11,al:'r'},{t:'Cable F+N / PE',w:.17},{t:'I(Z) A',w:.1,al:'r'},{t:'PIA',w:.2}],R.C.map(c=>[c.n,String(c.b),f1(c.s,1),f1(c.ib,2),`${sx(c.d.sec)} / ${sx(c.d.pe)} mm²`,String(c.iz),`${c.d.curva}2x${c.In} A ${c.d.icc}`]));
+ if(TRI){const ln=c=>c.tri?'L1+L2+L3':(c.ln||'L1');const cn={ent:'directamente enterrado',cano:'dentro de cañería',aire:'bandeja / al aire'}[S.can];
+ d.h2('1.4 Circuitos de uso general');d.table([{t:'Circuito',w:.2},{t:'Línea',w:.08},{t:'Bocas',w:.08,al:'r'},{t:'S (VA)',w:.11,al:'r'},{t:'I(B) A',w:.1,al:'r'},{t:'Cable F+N / Pe',w:.16},{t:'I(Z) A',w:.09,al:'r'},{t:'PIA',w:.18}],RT.UG.map(c=>[c.n,ln(c),String(c.b),f1(c.s,0),f1(c.ib,2),`${sx(c.sec)} / ${sx(c.pe)} mm²`,String(c.iz),`${c.curva}2x${c.In} A ${c.icc}`]).concat([bold(['Potencia total parcial','','',f1(RT.par,0),'','','',''])]));
+ d.h2('1.5 Simultaneidad de uso general');d.table([{t:'Concepto',w:.6},{t:'Valor',w:.4,al:'r'}],[['Potencia total parcial',f1(RT.par,0)+' VA'],['Simultaneidad ('+RT.UG.length+' circuitos de uso general)',sx(RT.ks)],bold(['DPMS uso general',f1(RT.dpUG,1)+' VA'])]);
+ d.h2('1.6 Circuitos de uso específico (ACU)');if(RT.AC.length)d.table([{t:'Circuito',w:.24},{t:'P / S',w:.16,al:'r'},{t:'cos φ',w:.08,al:'r'},{t:'I(B)',w:.14,al:'r'},{t:'Cable',w:.16},{t:'I(Z)',w:.07,al:'r'},{t:'Protección',w:.15}],RT.AC.map(c=>c.tri?[c.n+' (trifásico)',f1(c.P,0)+' W / '+f1(c.s,0)+' VA',sx(c.cos),f1(c.ib,2)+' A/fase','4x2,5 mm² + Pe','18 A',`C4x${c.In} A 4500 + GM ${f1(c.gm,1)} A`]:[c.n+' ('+ln(c)+')',f1(c.s,0)+' VA','—',f1(c.ib,2)+' A','2x2,5 mm² + Pe',String(c.iz)+' A',`${c.curva}2x${c.In} A`]));else d.p('Sin circuitos ACU.');
+ d.p('Trifásico: S = P ÷ cos φ (sin dato, cos φ = 1) · I(B) = S ÷ (1,73 × 380 V) · 1 HP = 746 W.',17,'#555');
+ d.h2('1.7 DPMS final y potencia activa');d.table([{t:'Concepto',w:.6},{t:'Valor',w:.4,al:'r'}],[['DPMS uso general',f1(RT.dpUG,1)+' VA'],['S de los ACU',f1(RT.sAC,1)+' VA'],bold(['DPMS final',f1(RT.dpF,1)+' VA']),['Potencia activa P = DPMS × 0,85',f1(RT.kw,2)+' kW'],['Límite idóneo Categoría III','10 kW']]);
+ d.h2('1.8 Equilibrio de fases');d.table([{t:'Circuito',w:.4},{t:'L1 (A)',w:.2,al:'r'},{t:'L2 (A)',w:.2,al:'r'},{t:'L3 (A)',w:.2,al:'r'}],RT.C.map(c=>[c.n].concat(['L1','L2','L3'].map(l=>c.tri||(c.ln||'L1')===l?f1(c.ib,2):'0'))).concat([bold(['Total por línea',f1(RT.Lc.L1,2),f1(RT.Lc.L2,2),f1(RT.Lc.L3,2)])]));d.p('Desfasaje entre fases: '+f1(RT.des,1)+' % (máximo 30 %).',17,'#555');
+ d.h2('1.9 Circuito seccional trifásico, protecciones y PAT');d.table([{t:'Concepto',w:.55},{t:'Valor',w:.45,al:'r'}],[['I(B) del CS (mayor corriente de línea)',f1(RT.ib,2)+' A'],['Cable IRAM 2178-1 ('+cn+')','4x'+RT.sec+' mm²'],['I(Z)'+(S.r10?' (−10 % por tramos en caño)':''),f1(RT.iz,1)+' A'],['ITM en TPA','C4x'+RT.In+' A · 6000 A'],['Interruptor diferencial en TPU','4x'+RT.ID+' A · 30 mA'],['Barras TPU','4x63 A'],['Sobretensiones','ITM C4x25 A + DPS 420 V 40 kA'],['Conductor Pe TPU – jabalina','10 mm² verde-amarillo'],['Jabalina','Cobre 1/2" × 1,5 m IRAM 2309 con cámara']]);
+ d.p('Con alimentación trifásica cada circuito va por su propia canalización: no se mezclan fases en cajas, bocas ni caños.',17,'#555');
+ }else{ d.h2('1.4 Circuitos, potencia y corriente');d.table([{t:'Circuito',w:.2},{t:'Bocas',w:.09,al:'r'},{t:'S (VA)',w:.13,al:'r'},{t:'I(B) A',w:.11,al:'r'},{t:'Cable F+N / PE',w:.17},{t:'I(Z) A',w:.1,al:'r'},{t:'PIA',w:.2}],R.C.map(c=>[c.n,String(c.b),f1(c.s,1),f1(c.ib,2),`${sx(c.d.sec)} / ${sx(c.d.pe)} mm²`,String(c.iz),`${c.d.curva}2x${c.In} A ${c.d.icc}`]));
  d.p('IUG: bocas × 60 VA × 2/3. TUG: 2200 VA. TUE: 3300 VA. ACU: potencia del aparato. I(B) = S ÷ 220 V. Se verifica I(B) ≤ I(N) ≤ I(Z).',17,'#555');
  d.h2('1.5 DPMS y potencia activa');d.table([{t:'Concepto',w:.6},{t:'Valor',w:.4,al:'r'}],[['S total',f1(R.St,1)+' VA'],['Coeficiente de simultaneidad ('+R.C.length+' circuitos)',sx(R.ks)],bold(['DPMS',f1(R.dp,1)+' VA']),['Potencia activa P = DPMS × 0,85',f1(R.kw,2)+' kW'],['Límite idóneo Categoría III','10 kW']]);
  d.h2('1.6 Circuito seccional, protecciones y PAT');const cn={ent:'directamente enterrado',cano:'dentro de cañería',aire:'bandeja / al aire'}[S.can];
  d.table([{t:'Concepto',w:.55},{t:'Valor',w:.45,al:'r'}],[['I(B) = DPMS ÷ 220 V',f1(R.ibCS,2)+' A'],['Cable IRAM 2178-1 ('+cn+')','2x'+R.sU+' mm²'],['I(Z)'+(S.r10?' (−10 % por tramos en caño)':''),f1(R.izCS,1)+' A'],['Caída de tensión (L = '+sx(+S.L)+' m)',f1(R.du,2)+' V · '+f1(R.duP,2)+' %'],['ITM en TPA','C2x'+R.InCS+' A · 6000 A'],['Interruptor diferencial en TPU','2x'+R.ID+' A · 30 mA'],['Conductor PE TPU – jabalina',R.sU+' mm² verde-amarillo'],['Jabalina','Cobre IRAM 2309 con cámara de inspección']]);
- d.p('ΔU = 2 × L × I × ρ ÷ S con ρ = '+sx(+S.rho)+' Ω·mm²/m. Máximo 3 % para iluminación y 5 % para motores.',17,'#555');
+ d.p('ΔU = 2 × L × I × ρ ÷ S con ρ = '+sx(+S.rho)+' Ω·mm²/m. Máximo 3 % para iluminación y 5 % para motores.',17,'#555');}
  await prog('Dibujando el plano');const pr=printSVG(PY-2*60-400,PX-60-170);
  if(pr){d.np(true);d.x.fillStyle='#111';d.font(32,700);d.x.fillText('2. Plano de instalación eléctrica · vista en planta',60,70);d.x.fillStyle=COL.cs;d.x.fillRect(60,86,PY-120,4);
   const im=await svgImg(pr.s);d.x.drawImage(im,60,110,pr.W,pr.H);d.x.strokeStyle='#999';d.x.lineWidth=1.5;d.x.strokeRect(60,110,pr.W,pr.H);
@@ -810,7 +1084,7 @@ async function buildPDF(){calc();await prog('Escribiendo la memoria de cálculo'
   const lx=PY-60-380;const lg=legendSVG(380);d.x.font=`700 22px ${FONT}`;d.x.fillText('REFERENCIAS (IRAM 2010)',lx,130);const li=await svgImg(lg.s);const lh=Math.min(lg.H,PX-130-60-330);d.x.drawImage(li,0,0,lg.W,Math.min(lg.H,lh),lx,145,lg.W,Math.min(lg.H,lh));
   const ry=PX-60-300;d.x.strokeStyle='#111';d.x.lineWidth=2;d.x.strokeRect(lx,ry,380,300);const rr=[['Proyecto',S.nom],['Propietario',S.pProp],['Ubicación',S.pUbic],['Instalador',S.pInst+(S.pMat?' · '+S.pMat:'')],['SLA / GE',R.sla+' m² · '+g.n],['Potencia',f1(R.kw,2)+' kW · '+f1(R.dp,0)+' VA'],['Fecha',S.pFecha],['Escala','Gráfica (barra = 1 m)']];
   rr.forEach((r,i)=>{const yy=ry+i*37.5;if(i)d.x.beginPath(),d.x.moveTo(lx,yy),d.x.lineTo(lx+380,yy),d.x.stroke();d.x.font=`700 14px ${FONT}`;d.x.fillText(r[0],lx+10,yy+24);d.x.font=`400 15px ${FONT}`;let v=String(r[1]||'—');while(d.x.measureText(v).width>255&&v.length>3)v=v.slice(0,-2);d.x.fillText(v,lx+115,yy+24)})}
- await prog('Armando el diagrama unifilar');d.np();d.h1('3. Diagrama unifilar');const u=uniSVG();const ui=await svgImg(u.s);const uw=PX-2*MG,uh=Math.min(PY-2*MG-160,u.H*uw/u.W);d.img(ui,uh*u.W/u.H,uh);
+ await prog('Armando el diagrama unifilar');d.np();d.h1('3. Diagrama unifilar');const u=S.modo==='tri'?uniSVGTri():uniSVG();const ui=await svgImg(u.s);const uw=PX-2*MG,uh=Math.min(PY-2*MG-160,u.H*uw/u.W);d.img(ui,uh*u.W/u.H,uh);
  await prog('Listando materiales');d.np();d.h1('4. Listado de materiales');d.p('Todos los materiales con sello "S" de seguridad eléctrica y norma IRAM o IEC. Las cantidades de caños y cables se calculan sobre el plano dibujado más 10 %: verificalas en obra.',17,'#555');
  d.table([{t:'Cant.',w:.12,al:'r'},{t:'Unidad',w:.12},{t:'Descripción',w:.76}],materials());
  const N=d.pages.length;d.pages.forEach((pg,i)=>{const x=pg.c.getContext('2d');x.font=`400 15px ${FONT}`;x.fillStyle='#777';const t=`${S.nom||'Proyecto eléctrico'} · Página ${i+1} de ${N}`;x.fillText(t,pg.c.width-60-x.measureText(t).width,pg.c.height-30)});
@@ -865,8 +1139,21 @@ const pdfHref=id=>STANDALONE?(BURL[id]||'#'):'/_blob/'+id;
 /* ===================== CLIENTES ===================== */
 let DB=null,AS=null,CL=[],cliLoaded=false;
 const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
-function tab(n){$('vProy').hidden=n!=='proy';$('vCli').hidden=n!=='cli';$('tProy').setAttribute('aria-selected',n==='proy');$('tCli').setAttribute('aria-selected',n==='cli');window.scrollTo(0,0);if(n==='proy'&&$('dplano').open)requestAnimationFrame(draw);if(n==='cli')renderCli()}
-$('tProy').addEventListener('click',()=>tab('proy'));$('tCli').addEventListener('click',()=>tab('cli'));
+function tab(n){$('vProy').hidden=n!=='proy';$('vCli').hidden=n!=='cli';$('vMat').hidden=n!=='mat';$('vGlo').hidden=n!=='glo';$('tGlo').setAttribute('aria-selected',n==='glo');$('tProy').setAttribute('aria-selected',n==='proy');$('tCli').setAttribute('aria-selected',n==='cli');$('tMat').setAttribute('aria-selected',n==='mat');if(n==='mat')calc();window.scrollTo(0,0);if(n==='proy'&&$('dplano').open)requestAnimationFrame(draw);if(n==='cli')renderCli()}
+$('tProy').addEventListener('click',()=>tab('proy'));$('tMat').addEventListener('click',()=>tab('mat'));$('tGlo').addEventListener('click',()=>tab('glo'));
+$('gloT').tBodies[0].innerHTML=GLOS_ROWS;$('gq').addEventListener('input',()=>{const q=norm($('gq').value);[...$('gloT').tBodies[0].rows].forEach(r=>{r.hidden=!!q&&!norm(r.textContent).includes(q)})});
+$('matNav').innerHTML=MATG.map((g,i)=>`<a href="#mg${i}">${g[0]}</a>`).join('');
+$('matL').innerHTML=MATG.map((g,i)=>`<section class="matg" id="mg${i}"><h2>${g[0]}</h2><div class="refg">${g[1].map(k=>`<div id="mt-${k}">${REF[k]}</div>`).join('')}</div></section>`).join('');
+$('matNav').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+let shPushed=false,shKey=null;
+let shY=0;try{history.scrollRestoration='manual'}catch(_){}
+function openSheet(k){shKey=k;shY=scrollY;$('shT').textContent=REFT[k];$('shC').innerHTML=REF[k];$('sheet').hidden=false;document.body.style.overflow='hidden';calc();$('shX').focus();try{history.pushState({sheet:1},'');shPushed=true}catch(_){shPushed=false}}
+function closeSheet(fromPop){if($('sheet').hidden)return;$('sheet').hidden=true;$('shC').innerHTML='';document.body.style.overflow='';if(!fromPop&&shPushed){shPushed=false;try{history.back()}catch(_){}}shPushed=false;const y=shY;scrollTo(0,y);requestAnimationFrame(()=>scrollTo(0,y));setTimeout(()=>scrollTo(0,y),80)}
+window.addEventListener('popstate',()=>closeSheet(true));
+$('shX').addEventListener('click',()=>closeSheet());$('shbg').addEventListener('click',()=>closeSheet());
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('sheet').hidden)closeSheet()});
+$('shGo').addEventListener('click',()=>{const k=shKey;closeSheet();tab('mat');setTimeout(()=>{const t=$('mt-'+k);if(t)t.scrollIntoView()},60)});
+document.addEventListener('click',e=>{const b=e.target.closest('.tlink');if(b){e.preventDefault();openSheet(b.dataset.ref)}});$('tCli').addEventListener('click',()=>tab('cli'));
 (async()=>{try{if(STANDALONE){if(window.indexedDB){DB=LDB;AS=LAS}}else{const r=await Promise.all([claude.use('db'),claude.use('assets')]);DB=r[0];AS=r[1]}}catch(_){}
  if(!DB){$('cliSt').textContent='Clientes funciona con la app abierta en claude.ai (guarda los datos en tu cuenta). En esta vista no está disponible.';renderCli();return}
  $('cliSt').textContent='Cargando clientes…';const tm=setTimeout(()=>{if(!cliLoaded)$('cliSt').textContent='Todavía no se pudo conectar con la base de clientes.'},10000);
@@ -885,7 +1172,7 @@ function renderCli(){const n=CL.length;$('cliN').hidden=!n;$('cliN').textContent
  <div class="meta">${esc(c.fecha||'')} · ${esc(c.sla)} m² · GE ${esc(c.ge||'')} · ${esc(f1(+c.kw,2))} kW${c.id===S.cliId?' · <b>abierto ahora</b>':''}</div>
  <div class="acts">${pdf?`<a class="pri" href="${pdfHref(pdf)}" target="_blank" rel="noopener">Ver PDF</a><button data-cdl="${esc(c.id)}">Descargar</button>`:'<span class="meta">Sin PDF</span>'}${c.estado?`<button data-copen="${esc(c.id)}">Abrir en la app</button>`:''}<button data-cdel="${esc(c.id)}">Borrar</button></div></article>`}).join('')}
 $('q').addEventListener('input',renderCli);
-const blank=()=>Object.assign(JSON.parse(DEF),{nom:'',z:[{n:'Zona 1',l:0,a:0,semi:0}],am:[],timbre:0,c:[{t:'IUG',n:'C1 IUG',b:0,va:60},{t:'TUG',n:'C2 TUG',b:0,va:2200}],L:0,pProp:'',pUbic:'',pInst:S.pInst||'',pMat:S.pMat||'',pFecha:new Date().toLocaleDateString('es-AR'),plan:{items:[],walls:[],cables:[],nid:1},ck:{},cliId:null});
+const blank=()=>Object.assign(JSON.parse(DEF),{nom:'',z:[{n:'Zona 1',l:0,a:0,semi:0}],am:[],timbre:0,c:[{t:'IUG',n:'C1 IUG',b:0,va:60},{t:'TUG',n:'C2 TUG',b:0,va:2200}],L:0,pProp:'',pUbic:'',pInst:S.pInst||'',pMat:S.pMat||'',pFecha:new Date().toLocaleDateString('es-AR'),plan:{items:[],walls:[],cables:[],nid:1},ck:{},cliId:null,modo:S.modo||'mono',ct:[{t:'IUGT',n:'C1 IUG c/ toma',b:0,va:2200,ln:'L1'},{t:'TUG',n:'C2 TUG 1',b:0,va:2200,ln:'L2'},{t:'TUG',n:'C3 TUG 2',b:0,va:2200,ln:'L3'}]});
 function loadState(ns){S=ns;UNDO.length=0;selId=null;cFrom=null;all();renderIdx();props();draw();if($('dplano').open)fit();save()}
 $('bNew').addEventListener('click',()=>{loadState(blank());tab('proy');$('pdfst').textContent=''});
 let delArm=null;
@@ -918,7 +1205,80 @@ if(STANDALONE&&location.protocol!=='file:'){
  if(!isInstalled()&&!lsg('introSeen')){lss('introSeen','1');showIntro(true)}
  else{showIntro(true);$('cta').innerHTML='';$('cta').style.display='none';setTimeout(closeIntro,5000)}
 }
-renderIdx();all();openHash();setMode('sel');
+const GW=140,GH=46;
+const GAMES={
+mono:{W:800,H:870,title:'Unifilar monofásico · 2.º proyecto',
+ boxes:[[20,250,760,600,'TABLERO DE PROTECCIÓN DE ACOMETIDA (TPA) · IP41']],
+ lines:['M400,56 V360','M230,360 H700','M230,360 V510','M85,510 H535','M85,510 V760','M235,510 V760','M385,510 V760','M535,510 V760','M700,360 V600','M700,640 V680'],
+ txt:[[240,352,'Puente peine'],[95,502,'Puente peine'],[85,536,'PIA 01'],[235,536,'PIA 02'],[385,536,'PIA 03'],[535,536,'PIA 04'],[700,618,'Barra PE']],
+ bars:[[650,600,100,20]],
+ slots:[[400,10,'RDD'],[400,80,'Fusible aéreo'],[400,150,'Medidor monofásico kWh'],[555,200,'2x4 mm² IRAM 247-3'],[400,282,'ITM 01 C2x25A · 6000'],[230,380,'ID 01 2x25A · 30 mA'],[355,440,'2x4 mm² IRAM 247-3'],
+  [85,545,'B2x10A · 3000'],[235,545,'C2x15A · 4500'],[385,545,'C2x15A · 4500'],[535,545,'C2x15A · 4500'],
+  [85,625,'2x1,5 mm² + Pe'],[235,625,'2x2,5 mm² + Pe'],[385,625,'2x2,5 mm² + Pe'],[535,625,'2x2,5 mm² + Pe'],
+  [85,770,'C1 IUG'],[235,770,'C2 TUG 1'],[385,770,'C3 TUG 2'],[535,770,'C4 ACU'],
+  [700,380,'ITM 02 C2x25A · 6000'],[700,455,'Descargador 245 V – 40 kA'],[700,530,'Cu/PVC 10 mm² verde-amarillo'],[700,690,'PAT IRAM 2309'],[700,770,'Reserva no equipada 50 %']],
+ dist:['B2x15A · 3000','C2x10A · 4500','ID 01 2x40A · 30 mA','2x1,5 mm² IRAM 247-3','Descargador 420 V – 40 kA','4x2,5 mm² + Pe','Medidor trifásico kWh']},
+tri:{W:800,H:1040,title:'Unifilar trifásico · 4.º proyecto',
+ boxes:[[250,250,510,120,'TPA · IP549'],[20,440,760,580,'TABLERO DE PROTECCIÓN DEL USUARIO (TPU) · IP41']],
+ lines:['M400,56 V480','M230,480 H700','M230,480 V700','M85,700 H535','M85,700 V940','M235,700 V940','M385,700 V940','M535,700 V940','M700,480 V720','M700,760 V790'],
+ txt:[[240,472,'Puente peine'],[95,692,'Puente peine'],[85,726,'PIA 01'],[235,726,'PIA 02'],[385,726,'PIA 03'],[535,726,'PIA 04'],[700,738,'Barra PE']],
+ bars:[[650,720,100,20]],
+ slots:[[400,10,'RDD'],[400,80,'Fusible aéreo'],[400,150,'Medidor trifásico kWh'],[555,200,'4x4 mm² IRAM 247-3'],[400,285,'ITM 01 C4x20A · 6000'],[555,380,'CS 4x4 mm² IRAM 2178-1'],
+  [230,500,'ID 01 4x25A · 30 mA'],[230,565,'Barras 4x63 A'],[355,628,'4x4 mm² IRAM 247-3'],
+  [85,735,'C2x15A · 4500'],[235,735,'C2x15A · 4500'],[385,735,'C2x15A · 4500'],[535,735,'C4x6A · 4500'],[535,800,'GM1 (1–2 A) regulado 1,4 A'],
+  [85,865,'2x2,5 mm² + Pe'],[235,865,'2x2,5 mm² + Pe'],[385,865,'2x2,5 mm² + Pe'],[535,865,'4x2,5 mm² + Pe'],
+  [85,955,'C1 IUG C/Toma · L1+N'],[235,955,'C2 TUG 1 · L2+N'],[385,955,'C3 TUG 2 · L3+N'],[535,955,'C4 ACU · L1+L2+L3+N'],
+  [700,500,'ITM 02 C4x25A · 6000'],[700,575,'Descargador 420 V – 40 kA'],[700,650,'Cu/PVC 10 mm² verde-amarillo'],[700,800,'PAT IRAM 2309'],[700,880,'Reserva no equipada 50 %']],
+ dist:['ITM 01 C2x25A · 6000','ID 01 2x25A · 30 mA','C4x15A · 4500','Descargador 245 V – 40 kA','GM1 (4–6 A)','2x4 mm² IRAM 247-3','Medidor monofásico kWh']}};
+let GS=null,gZ=null,gLvl=0,gTimer=null;
+const gKey=()=>S.modo==='tri'?'tri':'mono';
+function gNew(){const G=GAMES[gKey()];let pcs=G.slots.map(s=>s[2]);if(gLvl)pcs=pcs.concat(G.dist);
+ for(let i=pcs.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pcs[i],pcs[j]]=[pcs[j],pcs[i]]}
+ GS={k:gKey(),tray:pcs.map((t,i)=>({id:i,t,used:false})),fill:G.slots.map(()=>null),sel:null,t0:null,t1:null,err:0,chk:false,done:false};$('gMsg').textContent='';gRender()}
+function gFit(){const w=$('gWrap').clientWidth||360,G=GAMES[gKey()];return Math.max(.8,Math.min(1,(w-4)/G.W))}
+function gRender(){if(!GS||GS.k!==gKey()){gNew();return}const G=GAMES[GS.k];if(gZ==null)gZ=gFit();
+ const L=G.lines.map(d=>`<path d="${d}" stroke="#111" stroke-width="2.5" fill="none"/>`).join('');
+ const B=G.boxes.map(b=>`<rect x="${b[0]}" y="${b[1]}" width="${b[2]}" height="${b[3]}" fill="none" stroke="#555" stroke-width="2" stroke-dasharray="10 6"/><text x="${b[0]+12}" y="${b[1]+22}" font-size="15" font-weight="700" fill="#333" font-family="Arial,sans-serif">${esc(b[4])}</text>`).join('');
+ const T=G.txt.map(t=>{const pia=t[2].startsWith('PIA');return `<text x="${pia?t[0]-8:t[0]}" y="${t[1]}" font-size="13" fill="#555" font-family="Arial,sans-serif" text-anchor="${pia?'end':t[2]==='Barra PE'?'middle':'start'}">${esc(t[2])}</text>`}).join('');
+ const BR=G.bars.map(b=>`<rect x="${b[0]}" y="${b[1]}" width="${b[2]}" height="${b[3]}" fill="#fff" stroke="#2b8a3e" stroke-width="3"/>`).join('');
+ const AR=G.slots.filter(s=>/^C\d/.test(s[2])).map(s=>`<path d="M${s[0]-7},${s[1]-22} L${s[0]},${s[1]-8} L${s[0]+7},${s[1]-22}" stroke="#111" stroke-width="2.5" fill="none"/>`).join('');
+ const SL=G.slots.map((s,i)=>{const f=GS.fill[i],p=f!=null?GS.tray[f]:null,cls=GS.chk&&p?(p.t===s[2]?'ok':'bad'):'';return `<button class="gs ${p?'full':''} ${cls}" data-gs="${i}" style="left:${s[0]-GW/2}px;top:${s[1]}px;width:${GW}px;height:${GH}px">${p?esc(p.t):'?'}</button>`}).join('');
+ $('gStage').innerHTML=`<div class="gin" style="width:${G.W}px;height:${G.H}px;transform:scale(${gZ})"><svg width="${G.W}" height="${G.H}" viewBox="0 0 ${G.W} ${G.H}" aria-hidden="true">${B}${L}${BR}${AR}${T}</svg>${SL}</div>`;
+ $('gStage').style.width=G.W*gZ+'px';$('gStage').style.height=G.H*gZ+'px';
+ $('gTray').innerHTML=GS.tray.filter(p=>!p.used).map(p=>`<button class="gp" data-gp="${p.id}" aria-pressed="${GS.sel===p.id}">${esc(p.t)}</button>`).join('')||'<span class="note">No quedan piezas. Tocá Verificar.</span>';
+ gStat()}
+const mmss=ms=>{const s=Math.floor(ms/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+function gBest(){try{return JSON.parse(localStorage.getItem('uniBest')||'{}')}catch(_){return{}}}
+function gStat(){if(!GS)return;const G=GAMES[GS.k],n=GS.fill.filter(x=>x!=null).length,el=GS.t0?((GS.t1||Date.now())-GS.t0):0,b=gBest()[GS.k+gLvl];
+ $('gStat').innerHTML=`<b>${G.title}</b> · Colocadas <b>${n}/${G.slots.length}</b> · Errores <b>${GS.err}</b> · Tiempo <b>${mmss(el)}</b>${b?` · Mejor: <b>${mmss(b)}</b>`:''}`}
+function gTick(){clearInterval(gTimer);gTimer=setInterval(()=>{if(GS&&GS.t0&&!GS.t1&&!$('djuego').hidden&&$('djuego').open)gStat()},1000)}
+document.addEventListener('click',e=>{
+ const lv=e.target.closest('[data-lvl]');if(lv){gLvl=+lv.dataset.lvl;document.querySelectorAll('[data-lvl]').forEach(b=>b.setAttribute('aria-pressed',b===lv));gNew();return}
+ const p=e.target.closest('[data-gp]');if(p&&GS){const id=+p.dataset.gp;GS.sel=GS.sel===id?null:id;gRender();return}
+ const s=e.target.closest('[data-gs]');if(s&&GS){if(GS.done)return;const i=+s.dataset.gs,cur=GS.fill[i];
+  if(GS.sel!=null){if(cur!=null)GS.tray[cur].used=false;GS.fill[i]=GS.sel;GS.tray[GS.sel].used=true;GS.sel=null;if(!GS.t0)GS.t0=Date.now();GS.chk=false}
+  else if(cur!=null){GS.tray[cur].used=false;GS.fill[i]=null;GS.chk=false}
+  else{$('gMsg').textContent='Primero elegí una pieza de la bandeja.';return}
+  $('gMsg').textContent='';gRender();return}
+ if(e.target.closest('#gChk')&&GS){const G=GAMES[GS.k];let okN=0,bad=0,empty=0;G.slots.forEach((sl,i)=>{const f=GS.fill[i];if(f==null)empty++;else if(GS.tray[f].t===sl[2])okN++;else bad++});GS.err+=bad;GS.chk=true;
+  if(okN===G.slots.length){GS.t1=Date.now();GS.done=true;const t=GS.t1-GS.t0,bs=gBest(),k=GS.k+gLvl,rec=!bs[k]||t<bs[k];if(rec){bs[k]=t;try{localStorage.setItem('uniBest',JSON.stringify(bs))}catch(_){}}$('gMsg').innerHTML=`<b class="okk">¡Unifilar completo!</b> Tiempo ${mmss(t)} con ${GS.err} error${GS.err===1?'':'es'}.${rec?' Nuevo récord.':''}`;$('gStage').classList.add('win');setTimeout(()=>$('gStage').classList.remove('win'),1800)}
+  else $('gMsg').innerHTML=`<span class="okk">${okN} bien</span> · <span class="bad">${bad} mal</span>${empty?` · ${empty} vacíos`:''}. Tocá los casilleros en rojo para devolver la pieza y probá de nuevo.`;
+  gRender();return}
+ if(e.target.closest('#gSol')&&GS){const G=GAMES[GS.k];GS.tray.forEach(p=>p.used=false);GS.fill=G.slots.map(sl=>{const p=GS.tray.find(q=>!q.used&&q.t===sl[2]);p.used=true;return p.id});GS.chk=true;GS.done=true;GS.t1=GS.t0?Date.now():null;$('gMsg').textContent='Esta es la solución. Tocá Reiniciar para jugar otra vez.';gRender();return}
+ if(e.target.closest('#gNew')){gNew();return}
+ if(e.target.closest('#gZi')){gZ=Math.min(1.4,(gZ||1)+.15);gRender();return}
+ if(e.target.closest('#gZo')){gZ=Math.max(.4,(gZ||1)-.15);gRender();return}
+});
+$('djuego').addEventListener('toggle',()=>{if($('djuego').open){if(!GS||GS.k!==gKey()){gZ=null;gNew()}else{if(gZ==null)gZ=gFit();gRender()}gTick()}});
+/* visor */
+let vZ=1;const vSrc=()=>S.modo==='tri'?'unifilar-tri.png':'unifilar-mono.png';
+function updUni(){$('vImg').src=vSrc();$('vOpen').href=vSrc();$('uniSub').textContent='Documento original del curso · '+(S.modo==='tri'?'trifásico (4.º proyecto)':'monofásico (2.º proyecto)');vZ=1;vApply();if(GS&&GS.k!==gKey()&&$('djuego').open){gZ=null;gNew()}}
+function vApply(){$('vImg').style.width=(vZ*100)+'%'}
+$('vZi').addEventListener('click',()=>{vZ=Math.min(4,vZ*1.3);vApply()});$('vZo').addEventListener('click',()=>{vZ=Math.max(1,vZ/1.3);vApply()});$('vFit').addEventListener('click',()=>{vZ=1;vApply();$('viewer').scrollTo(0,0)});
+$('vFull').addEventListener('click',()=>{const f=$('viewer').classList.toggle('full');$('vFull').textContent=f?'Salir de pantalla completa':'Pantalla completa';const bar=document.querySelector('.vbar');bar.classList.toggle('full',f);document.body.style.overflow=f?'hidden':''});
+{let dr=null;const v=$('viewer');v.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;dr={x:e.clientX,y:e.clientY,l:v.scrollLeft,t:v.scrollTop};v.setPointerCapture(e.pointerId)});v.addEventListener('pointermove',e=>{if(!dr)return;v.scrollLeft=dr.l-(e.clientX-dr.x);v.scrollTop=dr.t-(e.clientY-dr.y)});v.addEventListener('pointerup',()=>{dr=null});v.addEventListener('dblclick',e=>{vZ=vZ>1?1:2;vApply()})}
+
+renderSteps();renderIdx();all();openHash();setMode('sel');updUni();
 if(STANDALONE){const n=document.createElement('p');n.className='note';n.textContent='En esta instalación los clientes y sus PDF se guardan en este dispositivo y navegador. Para no perderlos, no borres los datos del navegador.';$('cliSt').after(n);if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('sw.js').catch(()=>{})}
 }
 </script>
