@@ -289,7 +289,6 @@ html{scroll-padding-top:72px}
   <text class="s" x="200" y="80">PE</text><line x1="240" y1="76" x2="300" y2="76" stroke="var(--pe)" stroke-width="3" stroke-dasharray="8 4"/>
  </svg>
 </div></div></details>
-  <div class="tools"><button class="btn l" id="openAll">Abrir todos</button><button class="btn l" id="closeAll">Cerrar todos</button></div>
 </div></header>
 
 <main class="band" style="padding-top:0"><div class="wrap" id="steps"></div></main>
@@ -821,8 +820,6 @@ document.addEventListener('click',e=>{
 document.addEventListener('click',e=>{const b=e.target.closest('#addz,#adda,#addc,#addct');if(!b)return;
  if(b.id==='addz')S.z.push({n:'Zona',l:0,a:0,semi:0});else if(b.id==='adda')S.am.push({t:'dor',n:'Ambiente',m:0});else if(b.id==='addc')S.c.push({t:'TUG',n:'Nuevo circuito',b:5,va:2200});else{S.ct=S.ct||[];S.ct.push({t:'TUG',n:'C'+(S.ct.length+1)+' TUG',b:5,va:2200,ln:['L1','L2','L3'][S.ct.length%3]})}all()});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-modo]');if(!b||S.modo===b.dataset.modo)return;S.modo=b.dataset.modo;renderSteps();all();renderIdx();save()});
-$('openAll').addEventListener('click',()=>document.querySelectorAll('details.step').forEach(d=>d.open=true));
-$('closeAll').addEventListener('click',()=>document.querySelectorAll('details.step').forEach(d=>d.open=false));
 $('copy').addEventListener('click',async()=>{const t=$('sumTxt').textContent;try{await navigator.clipboard.writeText(t);$('copied').textContent='Copiado'}catch(err){const p=$('sumTxt');p.hidden=false;const r=document.createRange();r.selectNodeContents(p);const s=getSelection();s.removeAllRanges();s.addRange(r);$('copied').textContent='Seleccionado: copialo con el menú'}});
 const openHash=()=>{if(location.hash){const t=document.querySelector(location.hash);if(t&&t.tagName==='DETAILS')t.open=true}};
 window.addEventListener('hashchange',openHash);
