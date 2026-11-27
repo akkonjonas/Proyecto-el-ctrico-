@@ -1,5 +1,5 @@
 // Proyecto eléctrico · service worker: funciona sin conexión
-const CACHE = 'proy-elec-v12';
+const CACHE = 'proy-elec-v13';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './unifilar-mono.png', './unifilar-tri.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
