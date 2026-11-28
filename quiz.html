@@ -329,6 +329,49 @@ li.k.n{border-left-color:#c58bff}li.k.n .kt{color:#c58bff}
 .opt.zapout{animation:zapout .45s ease forwards;pointer-events:none}
 @keyframes zapout{0%{transform:none}25%{transform:translateX(-4px);box-shadow:0 0 0 2px #ffd23f,0 0 14px rgba(255,210,63,.7)}100%{opacity:0;transform:scale(.92)}}
 .opt.gone{opacity:.28;text-decoration:line-through;pointer-events:none;animation:none}
+
+.stats.s4{grid-template-columns:repeat(4,1fr);gap:8px}
+.stats.s4 .stat{padding:10px 4px;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.stats.s4 .stat small{font-size:11px;line-height:1.15}
+.stat{position:relative;overflow:visible}
+.stat.zap{animation:ptsZap .9s ease-out}
+.stat .spark{position:absolute;left:50%;top:40%;width:3px;height:12px;margin:-6px 0 0 -1.5px;border-radius:2px;background:#ffd23f;box-shadow:0 0 6px #f5b301;opacity:0;animation:spark .7s ease-out forwards;pointer-events:none}
+.stat.rgo{gap:3px;padding-top:6px!important;padding-bottom:6px!important}
+.stat.rgo small{color:var(--txt);font-weight:700;font-size:10.5px!important;text-align:center}
+.stat.rgo .rfig{animation:rfIdle 3.5s ease-in-out infinite}
+@keyframes rfIdle{50%{transform:translateY(-2px)}}
+.stat.rgo.zap .rfig{animation:rfZap .65s ease-out}
+@keyframes rfZap{30%{transform:scale(1.25) rotate(-6deg);filter:drop-shadow(0 0 8px #ffd23f)}100%{transform:none}}
+.raura{animation:raura 2s linear infinite;transform-origin:32px 32px}@keyframes raura{to{transform:rotate(45deg)}}
+.rhero{text-align:center;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--rc);border-radius:var(--r);padding:18px 16px;margin-bottom:6px}
+.rfw{display:inline-block;animation:cpop .6s cubic-bezier(.2,1.6,.4,1) both;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--rc) 55%,transparent))}
+.rhero small{display:block;color:var(--mut);font-size:12px;margin-top:6px}
+.rhero h2{font-size:24px;margin:2px 0 6px;color:var(--txt)}
+.rhero p{color:var(--mut);font-size:14px;line-height:1.45;margin:0 0 12px}
+.rbar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin-bottom:6px}.rbar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),#ffd23f);border-radius:4px;animation:rbar 1s .3s ease-out both}
+@keyframes rbar{from{width:0}}
+.rnext span{font-size:13px;color:var(--mut)}.rnext b{color:var(--txt)}
+.rmet{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.rm{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 6px;text-align:center;animation:tribIn .4s ease both}
+.rm span{font-size:18px}.rm b{display:block;font-size:17px;color:var(--acc)}.rm small{font-size:11px;color:var(--mut);line-height:1.2;display:block}
+.rsrc{padding:12px}
+.rstack{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--line)}.rstack i{display:block;height:100%}
+.rleg{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:12px;color:var(--mut)}.rleg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}.rleg b{color:var(--txt)}
+.rgrp{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;margin-bottom:10px}
+.rgrp h4{font-size:14px;margin:0 0 6px}
+.rrow{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--line);font-size:13px}.rrow:first-of-type{border-top:0}
+.rrow .rn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rrow b{font-size:12px;padding:2px 8px;border-radius:999px}.rrow.ok b{background:rgba(47,191,113,.15);color:#2fbf71}.rrow.bad b{background:rgba(255,93,93,.14);color:#ff5d5d}
+.rtodo{font-size:13px;color:var(--mut);margin:0}
+.rlad{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.rstep{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 10px}
+.rstep span{flex:1;display:flex;flex-direction:column}.rstep span b{font-size:14px}.rstep span small{font-size:11px;color:var(--mut)}
+.rstep em{font-style:normal;font-size:12px;color:var(--mut)}
+.rstep.past em{color:#2fbf71;font-size:16px}
+.rstep.cur{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 0 16px rgba(245,179,1,.25)}.rstep.cur em{color:var(--acc);font-weight:700}
+.rstep.fut .rfig{filter:grayscale(1);opacity:.45}
+.cb .ce .rfig{display:block}
+@media(prefers-reduced-motion:reduce){.stat.rgo .rfig,.raura,.rfw,.rbar i{animation:none}}
 </style>
 </head>
 <body>
@@ -741,11 +784,12 @@ function screenHome(){
   app.innerHTML = `
   <div class="top"><div class="brand">Electro <span>Quiz</span></div>
     <button class="chip" onclick="logout()" style="cursor:pointer">👤 <b>${esc(db.current)}</b></button></div>
-  <div class="hello"><h2>Hola, ${esc(db.current)}</h2><p>Rango: <b>${titleFor(pts)}</b> · Todo está abierto: elegí por dónde seguir. Se aprueba con ${PASS}% o más.</p></div>
-  <div class="stats">
+  <div class="hello"><h2>Hola, ${esc(db.current)}</h2><p>Todo está abierto: elegí por dónde seguir. Se aprueba con ${PASS}% o más.</p></div>
+  <div class="stats s4">
+    <button class="stat rgo" onclick="statTap(this, screenRango)">${rankFig(rankIdx(pts), 34)}<small>${titleFor(pts)}</small></button>
     <button class="stat pts" onclick="ptsTap(this)"><b>${pts}</b><small>Puntos</small></button>
-    <button class="stat" onclick="goRank()"><b>#${pos}</b><small>Ranking</small></button>
-    <button class="stat bst" onclick="goBadges()"><b>${p.badges.length}</b><small>Premios</small>${p.badges.some(id=>!p.seenB.includes(id))?`<span class="bdot"></span>`:""}</button>
+    <button class="stat" onclick="statTap(this, goRank)"><b>#${pos}</b><small>Ranking</small></button>
+    <button class="stat bst" onclick="statTap(this, goBadges)"><b>${p.badges.length}</b><small>Premios</small>${p.badges.some(id=>!p.seenB.includes(id))?`<span class="bdot"></span>`:""}</button>
   </div>
   <div class="sec">Continuar donde dejé</div>
   ${contCards(p)}
@@ -836,7 +880,13 @@ function ptsTap(b){
   const tick = t => { const k = Math.min(1,(t-t0)/650); v.textContent = Math.round(end*(1-Math.pow(1-k,3))); if(k<1) requestAnimationFrame(tick); };
   requestAnimationFrame(tick);
   for(let i=0;i<8;i++){ const sp=document.createElement("i"); sp.className="spark"; sp.style.setProperty("--a",(i*45+Math.random()*20)+"deg"); b.appendChild(sp); }
-  setTimeout(()=>{ b.classList.remove("zap"); b.querySelectorAll(".spark").forEach(x=>x.remove()); goBadges(); }, 900);
+  setTimeout(()=>{ b.classList.remove("zap"); b.querySelectorAll(".spark").forEach(x=>x.remove()); }, 900);
+}
+function statTap(b, go){
+  if(b.classList.contains("zap")) return;
+  b.classList.add("zap");
+  for(let i=0;i<8;i++){ const sp=document.createElement("i"); sp.className="spark"; sp.style.setProperty("--a",(i*45+Math.random()*20)+"deg"); b.appendChild(sp); }
+  setTimeout(()=>{ b.classList.remove("zap"); b.querySelectorAll(".spark").forEach(x=>x.remove()); go(); }, 650);
 }
 /* Proyecto y Unifilar viven ahora en la app principal */
 function goProj(){ try{ parent.__goTab && parent.__goTab("proy"); }catch(_){} }
@@ -1759,12 +1809,112 @@ function cutTwo(){
   const b = document.querySelector(".hcut"); if(b){ b.disabled = true; b.innerHTML = `✂️ Ya descartaste 2 opciones<small>Esta pregunta vale la mitad de puntos</small>`; }
 }
 
+const RANKS = [
+  {t:"Aprendiz", c:"#cd7f32", d:"Recién arrancás: estás aprendiendo los conceptos básicos de la electricidad y cómo se estudia el curso.", sym:"📘"},
+  {t:"Ayudante", c:"#cd7f32", d:"Ya acompañás el trabajo: manejás las unidades, la Ley de Ohm y las herramientas básicas.", sym:"🧰"},
+  {t:"Medio oficial", c:"#aab7c4", d:"Resolvés cálculos simples de potencia y corriente y conocés los componentes de una instalación.", sym:"🔧"},
+  {t:"Oficial", c:"#aab7c4", d:"Entendés circuitos, protecciones y cables: podés seguir un proyecto con ayuda.", sym:"🪛"},
+  {t:"Instalador", c:"#aab7c4", d:"Sabés armar circuitos, elegir protecciones y calcular corrientes de trabajo.", sym:"⚡"},
+  {t:"Maestro instalador", c:"#f5b301", d:"Dominás proyectos de vivienda: grado de electrificación, circuitos, tableros y normas.", sym:"🎖️"},
+  {t:"Instalador experto", c:"#f5b301", d:"Resolvés casos completos mono y trifásicos, caída de tensión y puesta a tierra.", sym:"⭐"},
+  {t:"Categoría III", c:"#f5b301", d:"Estás al nivel del idóneo Categoría III del ERSeP: listo para el examen y para proyectar.", sym:"🏅"},
+  {t:"Leyenda del tablero", c:"#ffd23f", d:"Lo sabés todo: sos referencia para los demás del curso.", sym:"👑"}
+];
+function rankFig(i, size){
+  const R = RANKS[i] || RANKS[0], skin="#f2c9a0", hair="#3b2a20";
+  const shirt = ["#3d8bfd","#e8743b","#e8743b","#2f7d4f","#2f7d4f","#1f4e8c","#1f4e8c","#22262e","#22262e"][i];
+  const hat = [null,"cap","hard:#e8743b","hard:#ffd23f","hard:#ffd23f","hard:#f4f6f8","hard:#f4f6f8","hard:#f4f6f8","hard:#ffd23f"][i];
+  let s = `<svg class="rfig" viewBox="0 0 64 64" width="${size||40}" height="${size||40}" aria-hidden="true">`;
+  s += `<circle cx="32" cy="32" r="31" fill="${R.c}" opacity=".18"/><circle cx="32" cy="32" r="30.5" fill="none" stroke="${R.c}" stroke-width="1.5"/>`;
+  if(i>=8) s += `<g class="raura" stroke="#ffd23f" stroke-width="2.4" stroke-linecap="round">${[0,45,90,135,180,225,270,315].map(a=>`<path d="M32 3 V9" transform="rotate(${a} 32 32)"/>`).join("")}</g>`;
+  // body
+  s += `<path d="M10 62 C11 47 20 42 32 42 C44 42 53 47 54 62 Z" fill="${shirt}"/>`;
+  s += `<path d="M27 42 L32 49 L37 42" fill="#fff" opacity=".9"/>`;
+  if(i===1||i===2) s += `<path d="M18 50 L46 50 M17 55 L47 55" stroke="#ffe27a" stroke-width="2.2" opacity=".9"/>`;
+  if(i>=4 && i<=6) s += `<path d="M22 44 L22 62 M42 44 L42 62" stroke="#ffd23f" stroke-width="3"/>`;
+  // neck + head
+  s += `<rect x="28" y="36" width="8" height="8" rx="3" fill="${skin}"/>`;
+  s += `<ellipse cx="32" cy="27" rx="10.5" ry="12" fill="${skin}"/>`;
+  s += `<circle cx="21.5" cy="28" r="2.4" fill="${skin}"/><circle cx="42.5" cy="28" r="2.4" fill="${skin}"/>`;
+  if(!hat || hat==="cap") s += `<path d="M21.5 25 C21 13 43 13 42.5 25 C40 19 25 19 21.5 25 Z" fill="${hair}"/>`;
+  // eyes, smile
+  s += `<circle cx="28" cy="28" r="1.4" fill="#2b2b2b"/><circle cx="36" cy="28" r="1.4" fill="#2b2b2b"/>`;
+  s += `<path d="M28.5 33 Q32 36 35.5 33" stroke="#7a3e2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>`;
+  if(i===5||i===6||i===8) s += `<path d="M27 31.5 Q32 29.5 37 31.5 Q32 33 27 31.5 Z" fill="${hair}"/>`;
+  if(i===6||i===7) s += `<g fill="none" stroke="#1d1f24" stroke-width="1.4"><circle cx="28" cy="28" r="3.2"/><circle cx="36" cy="28" r="3.2"/><path d="M31.2 28 H32.8"/></g>`;
+  if(hat==="cap") s += `<path d="M21 23 C21 12 43 12 43 23 Z" fill="#5a6270"/><path d="M38 22 H50 Q49 25 43 24 Z" fill="#454c58"/>`;
+  if(hat && hat.startsWith("hard")){ const hc = hat.split(":")[1];
+    s += `<path d="M19.5 22 C19.5 9 44.5 9 44.5 22 Z" fill="${hc}"/><rect x="17" y="20.5" width="30" height="3.6" rx="1.8" fill="${hc}"/><path d="M32 10 V21" stroke="rgba(0,0,0,.18)" stroke-width="2.4"/>`;
+    if(i===7) s += `<rect x="17" y="20.5" width="30" height="3.6" rx="1.8" fill="#f5b301"/>`; }
+  // accessory badge
+  if(i===0) s += `<rect x="38" y="47" width="11" height="13" rx="1.5" fill="#fff" stroke="#3d8bfd" stroke-width="1.2"/><path d="M40.5 51 H46.5 M40.5 54 H46.5 M40.5 57 H44" stroke="#3d8bfd" stroke-width="1"/>`;
+  if(i===3) s += `<path d="M41 49 L48 60" stroke="#ffd23f" stroke-width="2.6" stroke-linecap="round"/><path d="M39 46 L42 51" stroke="#e33" stroke-width="3.4" stroke-linecap="round"/>`;
+  if(i===4) s += `<path d="M33.5 47 L29 54 H32.5 L31 60 L36 52.5 H32.5 Z" fill="#ffd23f"/>`;
+  if(i===5||i===6) s += `<path d="M38 48 l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#ffd23f" transform="translate(4 0)"/>`;
+  if(i===7) s += `<circle cx="32" cy="54" r="6" fill="#f5b301" stroke="#fff3c4" stroke-width="1.2"/><text x="32" y="56.8" font-size="7" font-weight="800" text-anchor="middle" fill="#3a2a00" font-family="system-ui">III</text>`;
+  if(i===8) s += `<path d="M33.5 46 L28 55 H32.5 L30.5 62 L37 52 H32.5 Z" fill="#ffd23f" stroke="#fff3c4" stroke-width=".6"/>`;
+  return s + `</svg>`;
+}
+
+
+const rankIdx = pts => { let k = 0; TITLES.forEach((x,i)=>{ if(pts >= x.min) k = i; }); return k; };
+function screenRango(){
+  if(needLogin()) return;
+  setNav("home");
+  const p = me(), pts = total(p), k = rankIdx(pts), R = RANKS[k], T = TITLES[k], N = TITLES[k+1];
+  const fr = N ? (pts - T.min) / (N.min - T.min) : 1;
+  const L = p.levels, lvs = LEVELS.filter(l=>L[l.id]), mods = MOD_ITEMS.filter(m=>L[m.id]);
+  const played = lvs.map(l=>({n:`Nivel ${lvPos(l.id)} · ${l.name}`, ic:l.icon, ...L[l.id]})).concat(mods.map(m=>({n:`Módulo ${m.n} · ${m.name}`, ic:m.icon, ...L[m.id]})));
+  const acc = played.length ? Math.round(played.reduce((a,x)=>a+x.pct,0)/played.length) : 0;
+  const ptsLv = lvs.reduce((a,l)=>a+L[l.id].score,0), ptsMod = mods.reduce((a,m)=>a+L[m.id].score,0), ptsF = L.F ? L.F.score : 0;
+  const good = played.filter(x=>x.pct>=PASS).sort((a,b)=>b.pct-a.pct).slice(0,4);
+  const weak = played.filter(x=>x.pct<PASS).sort((a,b)=>a.pct-b.pct).slice(0,4);
+  const todoL = LEVELS.filter(l=>!L[l.id]), todoM = MOD_ITEMS.filter(m=>!L[m.id]);
+  const read = MOD_ITEMS.filter(m=>p.studied[m.id]).length;
+  const nw = p.wrong.filter(t => POOL.some(x=>x.a[0]===t)).length;
+  const met = (ic, v, l) => `<div class="rm"><span>${ic}</span><b>${v}</b><small>${l}</small></div>`;
+  const row = (x, cls) => `<div class="rrow ${cls}"><span class="ri">${x.ic}</span><span class="rn">${esc(x.n)}</span><b>${x.pct}%</b></div>`;
+  const tot = Math.max(1, ptsLv+ptsMod+ptsF);
+  app.innerHTML = `
+  <div class="top"><button class="chip" onclick="screenHome()" style="cursor:pointer">‹ Inicio</button><div class="brand">Mi rango</div><div class="chip"><b>${pts}</b> pts</div></div>
+  <div class="rhero" style="--rc:${R.c}">
+    <div class="rfw">${rankFig(k, 112)}</div>
+    <small>Rango ${k+1} de ${TITLES.length}</small>
+    <h2>${T.t}</h2>
+    <p>${R.d}</p>
+    <div class="rnext">${N ? `<div class="rbar"><i style="width:${Math.round(fr*100)}%"></i></div><span>Te faltan <b>${N.min-pts} pts</b> para <b>${N.t}</b></span>` : `<span>¡Llegaste al rango máximo!</span>`}</div>
+  </div>
+  <div class="sec">Cómo llegaste hasta acá</div>
+  <div class="rmet">
+    ${met("🪜", `${doneCount(p)}/${LEVELS.length}`, "niveles aprobados")}
+    ${met("📚", `${modDone(p)}/${MOD_ITEMS.length}`, "módulos aprobados")}
+    ${met("📖", `${read}/${MOD_ITEMS.length}`, "módulos leídos")}
+    ${met("🎯", played.length?acc+"%":"–", "promedio de aciertos")}
+    ${met("🔥", p.bestStreak, "mejor racha")}
+    ${met("🏅", p.badges.filter(id=>BADGES.some(b=>b.id===id)).length, "premios")}
+  </div>
+  <div class="card rsrc">
+    <div class="rstack"><i style="width:${ptsLv/tot*100}%;background:var(--acc)"></i><i style="width:${ptsMod/tot*100}%;background:#3d8bfd"></i><i style="width:${ptsF/tot*100}%;background:#2fbf71"></i></div>
+    <div class="rleg"><span><i style="background:var(--acc)"></i>Niveles <b>${ptsLv}</b></span><span><i style="background:#3d8bfd"></i>Módulos <b>${ptsMod}</b></span><span><i style="background:#2fbf71"></i>Examen <b>${ptsF}</b></span></div>
+  </div>
+  <div class="sec">Dónde estás parado</div>
+  ${good.length ? `<div class="rgrp"><h4>💪 Lo que mejor sabés</h4>${good.map(x=>row(x,"ok")).join("")}</div>` : ""}
+  ${weak.length ? `<div class="rgrp"><h4>🛠️ Para reforzar</h4>${weak.map(x=>row(x,"bad")).join("")}</div>` : ""}
+  ${(todoL.length||todoM.length) ? `<div class="rgrp"><h4>🧭 Te falta empezar</h4><p class="rtodo">${todoL.length} nivel${todoL.length===1?"":"es"} y ${todoM.length} módulo${todoM.length===1?"":"s"} sin jugar${todoL[0]?`. Próximo nivel: <b>${esc(todoL[0].name)}</b>`:""}${todoM[0]?`; próximo módulo: <b>${esc(todoM[0].name)}</b>`:""}.</p></div>` : ""}
+  ${nw ? `<button class="lv hl" onclick="startSession('rev',0)"><div class="ico">🛠️</div><div class="t"><h3>Repasar errores</h3><p>${nw} pregunta${nw===1?"":"s"} que fallaste para reforzar</p></div><div class="arr">▶</div></button>` : ""}
+  ${!played.length ? `<p class="note">Todavía no jugaste niveles ni módulos. Empezá por el Nivel 1 o por el Módulo 1 y acá vas a ver tu avance.</p>` : ""}
+  <div class="sec">Escalera de rangos</div>
+  <div class="rlad">${TITLES.map((t,i)=>`<div class="rstep ${i<k?"past":i===k?"cur":"fut"}">${rankFig(i, 34)}<span><b>${t.t}</b><small>${t.min} pts</small></span>${i<k?"<em>✔</em>":i===k?"<em>Estás acá</em>":`<em>${t.min-pts} pts</em>`}</div>`).join("")}</div>
+  <button class="btn ghost" onclick="goRank()">Ver ranking</button>`;
+  window.scrollTo(0,0);
+}
+
 /* ---------- SUBIR DE RANKING / RANGO: misma animación que los premios ---------- */
 function rankSnap(){ try{ const r = ranking(); return {pos: r.findIndex(x=>x.n===db.current)+1, n: r.length, title: titleFor(total(me()))}; }catch(_){ return null; } }
 function rankCheck(a){
   const b = rankSnap(); if(!a || !b) return;
   const ups = [];
-  if(b.title !== a.title && TITLES.findIndex(x=>x.t===b.title) > TITLES.findIndex(x=>x.t===a.title)) ups.push({e:"🎖️", n:`Nuevo rango: ${b.title}`});
+  if(b.title !== a.title && TITLES.findIndex(x=>x.t===b.title) > TITLES.findIndex(x=>x.t===a.title)) ups.push({e:rankFig(TITLES.findIndex(x=>x.t===b.title), 40), n:`Nuevo rango: ${b.title}`});
   if(b.n > 1 && b.pos < a.pos) ups.push({e:"📈", n:`Subiste al puesto #${b.pos} del ranking`});
   if(ups.length) setTimeout(()=>celebrate(ups, ups.length>1 ? "¡Subiste de ranking y de rango!" : (ups[0].e==="📈" ? "¡Subiste de ranking!" : "¡Subiste de rango!")), 400);
 }
@@ -2110,7 +2260,7 @@ function showResult(){
 <script>
 /* ---------- BOTÓN ATRÁS: lo maneja la app principal (cada pantalla nueva suma un paso) ---------- */
 (function(){
-  const NAMES = ["screenHome","screenMods","screenLevels","screenModule","screenNormas","screenAsistente","screenRank","screenBadges"];
+  const NAMES = ["screenHome","screenMods","screenLevels","screenModule","screenNormas","screenAsistente","screenRank","screenBadges","screenRango"];
   const NAV = []; let busy = false;
   const same = (a,b) => a.n===b.n && JSON.stringify(a.a)===JSON.stringify(b.a);
   function record(n, a){
