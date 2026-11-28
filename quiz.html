@@ -302,6 +302,33 @@ li.k.n{border-left-color:#c58bff}li.k.n .kt{color:#c58bff}
 .trif{font:800 21px system-ui,sans-serif;color:var(--txt);margin:3px 0;opacity:0;animation:tlIn .4s 1.6s ease forwards}
 .trit em{display:block;font-style:normal;font-size:11px;color:var(--mut)}
 @media(prefers-reduced-motion:reduce){.trib,.tri-o,.tri-m,.tl,.tk,.trif{animation:none;opacity:1;stroke-dashoffset:0}.fing{animation:none;opacity:1}}
+
+.ayuda{margin:2px 0 14px}
+.ayuda summary{list-style:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:9px 12px;border:1px dashed var(--acc);border-radius:12px;color:var(--txt);font-size:14px;font-weight:600;background:color-mix(in srgb,var(--acc) 7%,transparent);user-select:none}
+.ayuda summary::-webkit-details-marker{display:none}
+.ayuda summary small{color:var(--mut);font-weight:400;font-size:12px}
+.ayuda summary .ar{margin-left:auto;color:var(--acc);font-size:20px;line-height:1;transition:transform .25s}
+.ayuda[open] summary .ar{transform:rotate(90deg)}
+.ayuda[open] summary{border-style:solid;border-radius:12px 12px 0 0;border-bottom:0}
+.ayuda .lb i{font-style:normal}.ayuda .lb .c,.ayuda[open] .lb .o{display:none}.ayuda[open] .lb .c{display:inline}
+.ayuda .ai{display:inline-block}.ayuda:not([open]) .ai{animation:aiBlink 2.6s infinite}
+@keyframes aiBlink{0%,60%,100%{transform:none;filter:none}65%{transform:scale(1.25) rotate(-8deg);filter:drop-shadow(0 0 6px #ffd23f)}72%{transform:none}}
+.ayuda .trib{margin:0;border-radius:0 0 var(--r) var(--r);border-color:var(--acc);border-top:0}
+
+.ayuda .hbody{border:1px solid var(--acc);border-top:0;border-radius:0 0 var(--r) var(--r);padding:10px;background:var(--card);animation:tribIn .35s ease both}
+.ayuda .hbody .trib{border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:12px;margin:0 0 10px}
+.hsec{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:2px 2px 6px}
+.hdoc{border:1px solid var(--line);border-radius:12px;padding:9px 11px;margin-bottom:8px;background:color-mix(in srgb,var(--acc) 4%,transparent)}
+.hdoc small{display:block;font-size:11px;color:var(--acc);font-weight:700;margin-bottom:3px}
+.hdoc b{display:block;font-size:14px}.hdoc p{margin:2px 0 0;font-size:13.5px;line-height:1.45;color:var(--txt)}
+.hdoc .hf{font:800 17px system-ui,sans-serif;margin:3px 0;color:var(--txt)}
+.hnone{font-size:13px;color:var(--mut);margin:0 2px 10px}
+.hcut{display:flex;flex-direction:column;align-items:center;width:100%;margin-top:4px;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--txt);font:inherit;font-weight:700;font-size:14px;cursor:pointer}
+.hcut small{font-weight:400;font-size:11.5px;color:var(--mut);margin-top:2px}
+.hcut:disabled{opacity:.7;cursor:default}
+.opt.zapout{animation:zapout .45s ease forwards;pointer-events:none}
+@keyframes zapout{0%{transform:none}25%{transform:translateX(-4px);box-shadow:0 0 0 2px #ffd23f,0 0 14px rgba(255,210,63,.7)}100%{opacity:0;transform:scale(.92)}}
+.opt.gone{opacity:.28;text-decoration:line-through;pointer-events:none;animation:none}
 </style>
 </head>
 <body>
@@ -960,8 +987,8 @@ function screenQuestion(){
   <div class="bar"><div style="width:${(S.i/S.qs.length)*100}%"></div></div>
   <div class="qhead"><span>Racha: ${S.streak} 🔥</span><span>${S.mode==="rev"?"Sin puntos":S.score+" pts"}</span></div>
   <h2 class="q">${esc(q.q)}</h2>
-  ${(()=>{ const r = triFor(q); return r ? triHTML(r) : ""; })()}
-  <div id="opts">${q.opts.map((o,i)=>`<button class="opt" onclick="answer(${i})">${esc(o.t)}</button>`).join("")}</div>
+  ${helpHTML(q)}
+  <div id="opts">${q.opts.map((o,i)=>`<button class="opt${q.cutIdx&&q.cutIdx.includes(i)?" gone":""}" ${q.cutIdx&&q.cutIdx.includes(i)?"disabled":""} onclick="answer(${i})">${esc(o.t)}</button>`).join("")}</div>
   <div id="fb"></div>
   ${needsCalc(q)?`<p class="qcalc">🧮 Este ejercicio se resuelve con cuentas: tenés la calculadora abajo a la derecha.</p>`:""}
   ${keep?`<p class="qsave">💾 Tu avance se guarda solo en cada respuesta</p>`:""}`;
@@ -981,7 +1008,7 @@ function answer(i){
   let gain = 0;
   if(good){
     S.ok++; S.streak++; S.maxStreak = Math.max(S.maxStreak, S.streak);
-    if(S.mode!=="rev"){ gain = 10 + (S.streak>=3 ? 5 : 0); S.score += gain; }
+    if(S.mode!=="rev"){ gain = 10 + (S.streak>=3 ? 5 : 0); if(q.cutIdx) gain = Math.ceil(gain/2); S.score += gain; }
     else p.fixed++;
     p.wrong = p.wrong.filter(t => t !== q.q);
   } else {
@@ -1680,6 +1707,56 @@ function triHTML(r){
       <div class="trif">${T.f[tg]}</div>
       <em>Arriba ÷ abajo · los de abajo se multiplican</em></div>
   </div>`;
+}
+
+
+/* ---------- AYUDA oculta en cada pregunta (material del curso + triángulo + descartar) ---------- */
+function helpDocs(q){
+  try{
+    const right = ((q.opts||[]).find(o=>o.ok)||{t:""}).t;
+    const qn = norm(q.q), rn = norm(right);
+    const ansNums = (right.match(/\d+(?:[.,]\d+)?/g)||[]).filter(n=>!qn.includes(norm(n)) && n.length>1);
+    const qT = new Set(toks(q.q)), wT = new Set((q.opts||[]).filter(o=>!o.ok).flatMap(o=>toks(o.t)));
+    const aT = [...new Set(toks(right))].filter(w => !qT.has(w) && !wT.has(w) && !/^\d+$/.test(w));
+    const leak = d => { const t = norm(d.text), dT = new Set(d.tk);
+      if(rn.length>6 && t.includes(rn)) return true;
+      if(aT.length && aT.filter(w=>dT.has(w)).length/aT.length >= .5) return true;
+      return ansNums.some(n => new RegExp("(^|[^0-9])"+norm(n).replace(/ /g," ")+"([^0-9]|$)").test(t)); };
+    const {res} = search(q.q, d => d.type==="item" || d.type==="form");
+    const sc = r => r.sc * (String(q.lv)===r.d.mod ? 1.6 : 1) * (r.d.type==="form" ? 1.15 : 1);
+    const top = res.slice(0,40).filter(r => r.hit>=2 && !leak(r.d)).sort((a,b)=>sc(b)-sc(a));
+    if(!top.length || sc(top[0]) < 5) return [];
+    const out = [], seen = new Set();
+    for(const r of top){ if(out.length>=2) break; const k = norm(r.d.text).slice(0,60); if(seen.has(k)) continue; seen.add(k); if(sc(r) < sc(top[0])*.55) break; out.push(r.d); }
+    return out;
+  }catch(e){ return []; }
+}
+function helpDocHTML(d){
+  const mod = d.mod ? (MOD_ITEMS.find(m=>m.id===d.mod)||{}) : {};
+  const src = mod.n ? `Módulo ${mod.n} · ${esc(mod.name)}` : "Material del curso";
+  if(d.type==="form"){ const f = d.f;
+    return `<div class="hdoc"><small>📘 ${src}</small><b>${esc(f.n)}</b><div class="hf">${esc(f.f)}</div><p>${esc(f.u)}</p></div>`; }
+  let t = String(d.text); if(t.length>260) t = t.slice(0,250).replace(/\s+\S*$/,"")+"…";
+  return `<div class="hdoc"><small>📘 ${src}${d.sec?" · "+esc(d.sec):""}</small><p>${esc(t)}</p></div>`;
+}
+function helpHTML(q){
+  const r = triFor(q), docs = helpDocs(q);
+  const what = [r?"triángulo":"", docs.length?"repaso":"", "descartar"].filter(Boolean).join(" · ");
+  return `<details class="ayuda" ${q.cutIdx?"open":""}><summary><span class="ai">💡</span><span class="lb"><i class="o">Ver ayuda</i><i class="c">Ocultar ayuda</i></span><small>${what}</small><span class="ar">›</span></summary>
+    <div class="hbody">
+      ${r ? triHTML(r) : ""}
+      ${docs.length ? `<div class="hsec">Para recordar</div>${docs.map(helpDocHTML).join("")}` : (r ? "" : `<p class="hnone">No hay una fórmula puntual para esta pregunta. Si dudás, descartá dos opciones.</p>`)}
+      <button class="hcut" ${q.cutIdx?"disabled":""} onclick="cutTwo()">${q.cutIdx?"✂️ Ya descartaste 2 opciones":"✂️ Descartar 2 opciones incorrectas"}<small>${q.cutIdx?"Esta pregunta vale la mitad de puntos":"Si acertás, sumás la mitad de puntos"}</small></button>
+    </div></details>`;
+}
+function cutTwo(){
+  const q = S.qs[S.i]; if(S.done || q.cutIdx) return;
+  const wrong = q.opts.map((o,i)=>o.ok?-1:i).filter(i=>i>=0);
+  for(let i=wrong.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [wrong[i],wrong[j]]=[wrong[j],wrong[i]]; }
+  q.cutIdx = wrong.slice(0,2); rSave();
+  const btns = document.querySelectorAll(".opt");
+  q.cutIdx.forEach((k,n) => setTimeout(()=>{ btns[k].classList.add("zapout"); setTimeout(()=>{ btns[k].classList.add("gone"); btns[k].disabled = true; }, 450); }, n*220));
+  const b = document.querySelector(".hcut"); if(b){ b.disabled = true; b.innerHTML = `✂️ Ya descartaste 2 opciones<small>Esta pregunta vale la mitad de puntos</small>`; }
 }
 
 /* ---------- SUBIR DE RANKING / RANGO: misma animación que los premios ---------- */
