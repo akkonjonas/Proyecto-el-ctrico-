@@ -260,19 +260,6 @@ footer{border-top:1px solid var(--ln);text-align:center;color:var(--mut);font-si
 @keyframes tpop{0%{transform:scale(.7)}100%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.vin-r,.vin-l{animation:fadeIn .15s}.tabs [role=tab][aria-selected=true] .ti,.tabs [role=tab][aria-selected=true] .tl{animation:none}.tabs{transition:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.prog{position:fixed;left:0;right:0;top:var(--tabsH,62px);z-index:19;height:5px;background:light-dark(rgba(20,25,30,.08),rgba(255,255,255,.08));transition:top .28s ease;pointer-events:none}
-.prog.up{top:0}.prog[hidden]{display:none}
-.pf{position:relative;height:100%;width:0;background:linear-gradient(90deg,#e8a400,#ffd23f 60%,#fff3b0);background-size:200% 100%;box-shadow:0 0 8px rgba(255,210,63,.65);transition:width .6s cubic-bezier(.2,.8,.2,1);animation:pflow 2.2s linear infinite;border-radius:0 3px 3px 0}
-.pf i{position:absolute;right:-3px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:#fffbe6;box-shadow:0 0 6px 2px #ffd23f,0 0 14px 4px rgba(255,210,63,.6);animation:spark 1.3s ease-in-out infinite}
-.prog.full100 .pf{background:linear-gradient(90deg,#2b8a3e,#69c47c 60%,#d3f9d8);box-shadow:0 0 8px rgba(105,196,124,.7)}
-.prog.full100 .pf i{background:#ebfbee;box-shadow:0 0 6px 2px #69c47c}
-.pc{position:absolute;right:8px;top:8px;font:700 11px Barlow,sans-serif;color:#111;background:#ffd23f;border-radius:999px;padding:1px 8px;opacity:0;transform:translateY(-4px)}
-.prog.bump .pc{animation:pcshow 2.4s ease-out}
-.prog.full100 .pc{background:#69c47c}
-@keyframes pcshow{0%{opacity:0;transform:translateY(-4px)}12%,75%{opacity:1;transform:none}100%{opacity:0}}
-@keyframes pflow{from{background-position:100% 0}to{background-position:-100% 0}}
-@keyframes spark{0%,100%{transform:scale(.8);opacity:.85}50%{transform:scale(1.25);opacity:1}}
-@media(prefers-reduced-motion:reduce){.pf,.pf i{animation:none}.pf{transition:none}}
 .clr{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:12px}
 .clr .btn{min-height:40px;padding:6px 14px;font-size:14px}
 .big{font-size:18px;min-height:56px;padding:12px 24px;width:100%;max-width:420px}
@@ -315,7 +302,6 @@ html{scroll-padding-top:72px}
 </head>
 <body>
 <nav class="tabs" role="tablist" aria-label="Secciones"><button role="tab" id="tProy" aria-selected="true" data-tab="proy"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span class="tl">Proyecto</span></button><button id="bInst" class="instb" hidden>⤓ Instalar</button><button role="tab" id="tGui" aria-selected="false" data-tab="gui"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></svg><span class="tl">Guía</span></button><button role="tab" id="tMat" aria-selected="false" data-tab="mat"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 4v16"/></svg><span class="tl">Material</span></button><button role="tab" id="tGlo" aria-selected="false" data-tab="glo"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19 8.5 6h1L14 19M5.6 15h6.8"/><path d="M15 9h5l-5 9h5"/></svg><span class="tl">Glosario</span></button><button role="tab" id="tCli" aria-selected="false" data-tab="cli"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.4 3-5.5 6-5.5s5.4 2.1 6 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M15.8 14.6c2.4.2 4.3 2.1 4.9 5"/></svg><span class="tl">Clientes</span><span class="cnt" id="cliN" hidden></span></button><button id="bTheme" class="thb" aria-label="Cambiar a modo oscuro" title="Modo claro / oscuro"><svg class="ti sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><svg class="ti moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button></nav>
-<div class="prog" id="prog" aria-hidden="true"><div class="pf" id="progF"><i></i></div><span class="pc" id="progC"></span></div>
 <div id="vProy">
 <header class="band" style="padding-bottom:0"><div class="wrap">
 <details class="step" id="dintro"><summary><span class="n">i</span><span class="t"><h2>Proyecto eléctrico, paso a paso</h2><small>Cómo usar la guía y esquema general de la instalación</small></span><span class="ar">›</span></summary><div class="body"><div class="hero" style="padding-top:14px">
@@ -775,8 +761,7 @@ function renderSteps(){const T=S.modo==='tri',L=curSteps(),P_=T?PHT:PH.slice(0,5
 
 
 const renderIdx=()=>{ curSteps().forEach(s=>$(s.id).classList.toggle('done',!!S.ck['done_'+s.id]));updProg()};
-let progLast=-1;function updProg(){const L=curSteps(),n=L.filter(s=>S.ck['done_'+s.id]).length,t=L.length,pc=t?n/t*100:0;$('progF').style.width=pc+'%';$('progC').textContent=`${n} de ${t} pasos`+(n===t&&t?' · ¡completo!':'');$('prog').classList.toggle('full100',n===t&&t>0);
- if(progLast>=0&&n!==progLast){const pr=$('prog');pr.classList.remove('bump');void pr.offsetWidth;pr.classList.add('bump')}progLast=n}
+function updProg(){}
 
 const sel=(opts,v,attr)=>`<select ${attr}>${opts.map(o=>`<option value="${o[0]}" ${String(o[0])===String(v)?'selected':''}>${o[1]}</option>`).join('')}</select>`;
 function renderZ(){$('zlist').innerHTML=S.z.map((z,i)=>`<div class="crow" data-g="z" data-i="${i}"><div class="w2"><label>Zona</label><input data-f="n" type="text" value="${esc(z.n)}"></div><div><label>Largo m</label><input data-f="l" type="number" step="any" inputmode="decimal" value="${z.l}"></div><div><label>Ancho m</label><input data-f="a" type="number" step="any" inputmode="decimal" value="${z.a}"></div><div><label>Tipo</label>${sel([[0,'Cubierta'],[1,'Semicub.']],z.semi,'data-f="semi"')}</div><div><button class="btn l x" data-del="z" data-i="${i}" aria-label="Quitar zona">✕</button></div></div>`).join('')}
@@ -1389,9 +1374,6 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-gm]');if(b
 document.addEventListener('click',e=>{const sm=e.target.closest('details.step>summary');if(!sm)return;const d=sm.parentElement;
  setTimeout(()=>{if(!d.open)return;requestAnimationFrame(()=>{const r=d.getBoundingClientRect(),bar=document.querySelector('.tabs'),up=r.top<0,off=up?(bar?bar.offsetHeight:0)+8:8;const top=Math.max(0,scrollY+r.top-off);if(Math.abs(r.top-off)<6)return;
   if(up&&bar)bar.classList.remove('hid');window.scrollTo({top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})})},0)});
-{const bar=document.querySelector('.tabs'),pr=$('prog');const sync=()=>{document.documentElement.style.setProperty('--tabsH',bar.offsetHeight+'px');pr.classList.toggle('up',bar.classList.contains('hid'))};
- new MutationObserver(sync).observe(bar,{attributes:true,attributeFilter:['class']});new ResizeObserver(sync).observe(bar);sync();
- const vis=()=>{pr.hidden=$('vProy').hidden||!$('intro').hidden};new MutationObserver(vis).observe($('vProy'),{attributes:true,attributeFilter:['hidden']});new MutationObserver(vis).observe($('intro'),{attributes:true,attributeFilter:['hidden']});vis()}
 let clrArm=0;document.addEventListener('click',e=>{const b=e.target.closest('#bClr');if(!b)return;
  if(!clrArm){clrArm=1;b.textContent='¿Seguro? Tocá otra vez';setTimeout(()=>{clrArm=0;const x=$('bClr');if(x)x.textContent='Limpiar proyecto'},3500);return}
  clrArm=0;b.textContent='Limpiar proyecto';curSteps().forEach(s=>{delete S.ck['done_'+s.id]});fill();renderIdx();save();toast('Listo: todos los pasos quedaron sin terminar')});
