@@ -1,6 +1,6 @@
 // Proyecto eléctrico · service worker: funciona sin conexión
-const CACHE = 'proy-elec-v36';
-const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './unifilar-mono.png', './unifilar-tri.png', './quiz.html', './preguntas.js'];
+const CACHE = 'proy-elec-v37';
+const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './unifilar-mono.png', './unifilar-tri.png', './quiz.html', './preguntas.js', './admin.html', './admin.webmanifest', './admin-icon-192.png', './admin-icon-512.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
 });
@@ -14,7 +14,7 @@ self.addEventListener('fetch', e => {
   // La app: primero la red (para recibir actualizaciones), si no hay conexión, la copia guardada
   if (url.origin === location.origin) {
     e.respondWith(fetch(req).then(r => { const c = r.clone(); caches.open(CACHE).then(ca => ca.put(req, c)); return r; })
-      .catch(() => caches.match(req).then(r => r || caches.match('./index.html'))));
+      .catch(() => caches.match(req).then(r => r || caches.match(/admin\.html/.test(url.pathname) ? './admin.html' : './index.html'))));
     return;
   }
   // Tipografías de Google: guardadas al primer uso
