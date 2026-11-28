@@ -12,10 +12,13 @@ App web instalable (PWA) con la guía de proyecto eléctrico del curso Categorí
 | `manifest.webmanifest` | Nombre, colores e íconos para instalarla en el celular |
 | `sw.js` | Service worker: deja usar la app sin conexión |
 | `icon-192.png`, `icon-512.png` | Íconos de la app |
+| `unifilar-mono.png`, `unifilar-tri.png` | Unifilares de ejemplo |
+| `og-image.jpg` | Imagen de la vista previa al compartir el link |
+| `quiz.html`, `preguntas.js` | Electro Quiz (pestaña Quiz) y su banco de preguntas |
 
 ## Cómo subirla
 
-1. Subí los cinco archivos **juntos, en la misma carpeta** del servidor (por ejemplo un repositorio nuevo en GitHub Pages).
+1. Subí todos los archivos **juntos, en la misma carpeta** del servidor (por ejemplo un repositorio nuevo en GitHub Pages).
 2. El servidor tiene que usar **https** (GitHub Pages ya lo hace). Sin https el celular no la deja instalar ni usar sin conexión.
 3. Abrí la dirección en Chrome del celular → menú ⋮ → **Agregar a la pantalla principal** / **Instalar app**.
 
