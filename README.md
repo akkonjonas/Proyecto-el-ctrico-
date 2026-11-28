@@ -1,4 +1,4 @@
-# Proyecto eléctrico paso a paso
+# Electro JS
 
 App web instalable (PWA) con la guía de proyecto eléctrico del curso Categoría III (ERSeP Córdoba, AEA 90364-7-770): 19 pasos con calculadoras, planilla de PMU, editor de plano con simbología IRAM 2010, PDF del proyecto para entregar y base de clientes.
 

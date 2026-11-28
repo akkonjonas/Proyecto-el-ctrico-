@@ -248,6 +248,60 @@ li.k.n{border-left-color:#c58bff}li.k.n .kt{color:#c58bff}
 @keyframes bdot{70%{box-shadow:0 0 0 8px rgba(255,93,93,0)}100%{box-shadow:0 0 0 0 rgba(255,93,93,0)}}
 .cb{border-color:var(--tc,#f5b301)!important;box-shadow:0 0 18px color-mix(in srgb,var(--tc,#f5b301) 45%,transparent)!important}.cbt{display:flex;flex-direction:column;text-align:left}.cbt small{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tc,#f5b301)}
 @media(prefers-reduced-motion:reduce){.bd.on::after,.bd.on .e,.bnew,.bdot{animation:none}}
+
+.qcalc{text-align:center;color:var(--acc);font-size:12.5px;margin-top:12px}
+#calcFab{position:fixed;right:16px;bottom:84px;z-index:60;width:62px;height:62px;border-radius:50%;border:0;cursor:pointer;background:radial-gradient(circle at 35% 30%,#2a2f3a,#0f1115);box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 0 2px #f5b301,0 0 18px rgba(245,179,1,.45);display:none;place-items:center;padding:0;transition:transform .2s}
+#calcFab.on{display:grid;animation:fabIn .55s cubic-bezier(.2,1.6,.4,1)}#calcFab:not(.hot){width:50px;height:50px;opacity:.85;box-shadow:0 4px 12px rgba(0,0,0,.3),0 0 0 1.5px #f5b301}#calcFab:not(.hot) svg{width:27px;height:27px}#calcFab.on.hot{animation:fabIn .55s cubic-bezier(.2,1.6,.4,1),fabGlow 2.6s 1s infinite}
+#calcFab svg{width:34px;height:34px}#calcFab circle{fill:none;stroke:#f5b301;stroke-width:1.2}#calcFab path{fill:#ffd23f;animation:zap 2.6s infinite}
+#calcFab span{position:absolute;right:-4px;bottom:-4px;background:#f5b301;color:#111;font:800 11px/1 system-ui;padding:4px 5px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+#calcFab.open{transform:rotate(-12deg) scale(.92)}
+#calcFab:active{transform:scale(.9)}
+@keyframes fabIn{0%{transform:scale(0) rotate(-90deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes fabGlow{0%,60%,100%{box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 0 2px #f5b301,0 0 18px rgba(245,179,1,.45)}65%{box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 0 3px #ffd23f,0 0 32px rgba(255,210,63,.9)}}
+#calcBox{position:fixed;right:12px;bottom:156px;z-index:61;width:min(300px,calc(100vw - 24px));background:#12151b;color:#eef1f4;border:1px solid #f5b301;border-radius:20px;padding:12px;box-shadow:0 18px 40px rgba(0,0,0,.5),0 0 24px rgba(245,179,1,.25);transform-origin:calc(100% - 30px) calc(100% + 40px);animation:calcIn .35s cubic-bezier(.2,1.3,.4,1)}
+#calcBox.out{animation:calcOut .22s ease-in forwards}
+@keyframes calcIn{from{transform:scale(.2);opacity:0}}@keyframes calcOut{to{transform:scale(.2);opacity:0}}
+#calcBox .ch{display:flex;align-items:center;gap:8px;margin-bottom:8px;cursor:grab;touch-action:none;user-select:none}#calcBox .ch .grip{width:34px;height:4px;border-radius:2px;background:#2c323d;margin:0 auto}
+#calcBox .ch svg{width:24px;height:24px}#calcBox .ch circle{fill:none;stroke:#f5b301;stroke-width:1.3}#calcBox .ch path{fill:#ffd23f;animation:zap 2.6s infinite}
+#calcBox .ch b{font-size:15px;letter-spacing:.02em}#calcBox .ch b i{font-style:normal;color:#f5b301}
+#calcBox .cx{margin-left:auto;background:#1e232c;border:1px solid #2c323d;color:#9aa3b2;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px}
+#calcBox .cd{background:#0b0d11;border:1px solid #232833;border-radius:14px;padding:10px 12px;text-align:right;margin-bottom:10px;overflow:hidden;position:relative}
+#calcBox .ce{min-height:18px;font-size:13px;color:#8a93a3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#calcBox .cr{font:700 30px/1.25 system-ui,sans-serif;color:#fff;white-space:nowrap;overflow-x:auto;scrollbar-width:none}#calcBox .cr.sm{font-size:21px}
+#calcBox.zap .cd{animation:cdZap .6s ease-out}#calcBox.zap .cr{animation:crZap .6s ease-out}
+@keyframes cdZap{0%{box-shadow:inset 0 0 0 1px #f5b301,0 0 0 rgba(245,179,1,0)}30%{box-shadow:inset 0 0 0 2px #ffd23f,0 0 22px rgba(255,210,63,.7)}100%{box-shadow:none}}
+@keyframes crZap{0%{color:#fff}25%{color:#ffd23f;text-shadow:0 0 12px #f5b301}100%{color:#fff;text-shadow:none}}
+#calcBox.shake{animation:cshake .35s}@keyframes cshake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+#calcBox .ck{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+#calcBox .ck button{position:relative;overflow:hidden;height:48px;border-radius:13px;border:1px solid #262b35;background:#1b1f27;color:#eef1f4;font:600 20px system-ui,sans-serif;cursor:pointer;transition:transform .08s}
+#calcBox .ck button:active{transform:scale(.92)}
+#calcBox .ck .k-o{color:#ffd23f;background:#221f14;border-color:#3a3218}
+#calcBox .ck .k-c{color:#9aa3b2;font-size:15px}
+#calcBox .ck .k-eq{background:linear-gradient(135deg,#ffd23f,#f5b301);color:#111;border:0;font-weight:800}
+#calcBox .ck button.hit::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(255,210,63,.55),transparent 65%);animation:khit .4s ease-out forwards}
+@keyframes khit{from{opacity:1;transform:scale(.3)}to{opacity:0;transform:scale(1.6)}}
+@media(prefers-reduced-motion:reduce){#calcFab.on,#calcBox,#calcBox.zap .cd,#calcBox.zap .cr,#calcFab path,#calcBox .ch path{animation:none}}
+
+.trib{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:var(--r);padding:10px 12px;margin:4px 0 14px;animation:tribIn .5s ease both}
+@keyframes tribIn{from{opacity:0;transform:translateY(8px)}}
+.tri{width:118px;flex:none;overflow:visible}
+.tri-o{fill:color-mix(in srgb,var(--acc) 10%,transparent);stroke:var(--acc);stroke-width:3;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;animation:triDraw .9s .1s ease-out forwards}
+.tri-m{stroke:var(--acc);stroke-width:2.2;stroke-dasharray:110;stroke-dashoffset:110;animation:triDraw .5s .8s ease-out forwards}
+@keyframes triDraw{to{stroke-dashoffset:0}}
+.tl{font:800 30px system-ui,sans-serif;fill:var(--txt);text-anchor:middle;opacity:0;animation:tlIn .35s 1s ease forwards}
+.tl.cov{fill:var(--acc)}
+.tk{font:700 15px system-ui,sans-serif;fill:var(--acc);text-anchor:middle;opacity:0;animation:tlIn .35s 1.1s ease forwards}
+@keyframes tlIn{to{opacity:1}}
+.fing{opacity:0;transform-box:fill-box;transform-origin:center;animation:fing 2.8s 1.4s ease-in-out infinite}
+.fing circle{fill:var(--acc);opacity:.92;filter:drop-shadow(0 0 6px rgba(245,179,1,.7))}
+.fing text{font-size:18px;text-anchor:middle}
+@keyframes fing{0%{opacity:0;transform:scale(.4)}12%{opacity:1;transform:scale(1)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+.trit{flex:1;min-width:0}
+.trit small{display:block;font-size:11px;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.trit p{font-size:13px;color:var(--mut);margin:0}
+.trif{font:800 21px system-ui,sans-serif;color:var(--txt);margin:3px 0;opacity:0;animation:tlIn .4s 1.6s ease forwards}
+.trit em{display:block;font-style:normal;font-size:11px;color:var(--mut)}
+@media(prefers-reduced-motion:reduce){.trib,.tri-o,.tri-m,.tl,.tk,.trif{animation:none;opacity:1;stroke-dashoffset:0}.fing{animation:none;opacity:1}}
 </style>
 </head>
 <body>
@@ -455,7 +509,7 @@ let LMODE = "in", LFORM = false;
 /* --- candado de la app principal: la misma huella abre Proyecto y Quiz --- */
 const GATED = () => { try { return window.parent !== window && !!window.parent.__gating; } catch(_){ return false; } };
 const introOn = () => { try { const i = window.parent.document.getElementById("intro"); return !!(i && !i.hidden); } catch(_){ return false; } };
-const loginTitle = () => GATED() ? `Proyecto <span style="color:var(--acc)">Eléctrico</span>` : `Electro <span style="color:var(--acc)">Quiz</span>`;
+const loginTitle = () => GATED() ? `Electro <span style="color:var(--acc)">JS</span>` : `Electro <span style="color:var(--acc)">Quiz</span>`;
 window.__gateGo = () => { if(document.getElementById("go") && knownName() && !LFORM && LMODE==="in" && webauthnOK()) doLoginSrv(); };
 function rememberCred(name, rawId, rpId){ try{ localStorage.setItem("electro_cred", JSON.stringify({name, id:b64u(rawId), rpId: rpId || location.hostname})); }catch(_){} }
 async function offlineLogin(name){
@@ -607,6 +661,7 @@ function ranking(){
     .sort((a,b)=>b.pts-a.pts || b.st-a.st || a.n.localeCompare(b.n));
 }
 function setNav(id){
+  calcFab(false);
   clearTimeout(readT); readSave(); CURMOD = null;
   $("#nav").style.display = id ? "block" : "none";
   document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.id === "n-"+id));
@@ -905,10 +960,13 @@ function screenQuestion(){
   <div class="bar"><div style="width:${(S.i/S.qs.length)*100}%"></div></div>
   <div class="qhead"><span>Racha: ${S.streak} 🔥</span><span>${S.mode==="rev"?"Sin puntos":S.score+" pts"}</span></div>
   <h2 class="q">${esc(q.q)}</h2>
+  ${(()=>{ const r = triFor(q); return r ? triHTML(r) : ""; })()}
   <div id="opts">${q.opts.map((o,i)=>`<button class="opt" onclick="answer(${i})">${esc(o.t)}</button>`).join("")}</div>
   <div id="fb"></div>
+  ${needsCalc(q)?`<p class="qcalc">🧮 Este ejercicio se resuelve con cuentas: tenés la calculadora abajo a la derecha.</p>`:""}
   ${keep?`<p class="qsave">💾 Tu avance se guarda solo en cada respuesta</p>`:""}`;
   window.scrollTo(0,0);
+  calcFab(true, needsCalc(q));
 }
 function answer(i){
   if(S.done) return;
@@ -1473,6 +1531,157 @@ document.getElementById("nav").addEventListener("click", e=>{
   S=null;
 }, true);
 
+
+/* ---------- CALCULADORA flotante para ejercicios con cuentas ---------- */
+const CALC_LV = ["4","5","6","7"];
+function needsCalc(q){
+  if(S && S.mode==="lv" && CALC_LV.includes(String(S.id))) return true;
+  if(S && CALC_LV.includes(String(q.lv))) return true;
+  const t = String(q.q), n = (t.match(/\d+(?:[.,]\d+)?/g)||[]).length;
+  const right = ((q.opts||[]).find(o=>o.ok)||{t:""}).t.trim();
+  const ansNum = /^[~≈]?\s*(aprox\w*\s*)?[$]?\s*\d/i.test(right) || /^(Aproximadamente|Unos?)\s+\d/i.test(right);
+  const ask = /calcul|porcentaje|redonde|cuánt|resulta|se suman|sumando|suma|total|regla de tres|¿(qué|cuál)[^?]{0,45}(corriente|potencia|tensión|resistencia|caída|sección|valor|porcentaje|frecuencia|superficie|área|consumo|energía|costo|IB|I\(B\)|DPMS|S total)/i;
+  if(n>=2 && ask.test(t) && ansNum) return true;
+  if(n>=1 && ansNum && ask.test(t) && /\d\s*(V|A|W|kW|kWh|VA|Hp|Ω|ohm|m2|m²|mm2|mm²|m|%|kg|\$)\b/i.test(t)) return true;
+  return n>=2 && /calcul|regla de tres|se suman|cuánto (da|vale|resulta|consume|sale)/i.test(t);
+}
+const CALC = {expr:"", res:"", ans:null};
+function calcFab(on, hot){
+  let f = document.getElementById("calcFab");
+  if(!on){ if(f) f.classList.remove("on"); calcClose(); return; }
+  if(!f){
+    f = document.createElement("button"); f.id = "calcFab"; f.setAttribute("aria-label","Abrir calculadora");
+    f.innerHTML = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.2"/><path d="M13.4 4.6 7.9 13h3.8l-1.3 6.4 5.6-8.6h-3.8z"/></svg><span>÷×</span>`;
+    f.onclick = () => document.getElementById("calcBox") ? calcClose() : calcOpen();
+    document.body.appendChild(f);
+  }
+  const was = f.classList.contains("on") && f.classList.contains("hot") === !!hot;
+  f.classList.toggle("hot", !!hot);
+  if(!was){ f.classList.remove("on"); void f.offsetWidth; f.classList.add("on"); }
+}
+function calcOpen(){
+  if(document.getElementById("calcBox")) return;
+  const keys = [["C","k-c"],["⌫","k-c"],["%","k-o"],["÷","k-o"],["7"],["8"],["9"],["×","k-o"],["4"],["5"],["6"],["−","k-o"],["1"],["2"],["3"],["+","k-o"],["ANS","k-c"],["0"],[",",""],["=","k-eq"]];
+  const b = document.createElement("div"); b.id = "calcBox";
+  b.innerHTML = `<div class="ch"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.2"/><path d="M13.4 4.6 7.9 13h3.8l-1.3 6.4 5.6-8.6h-3.8z"/></svg><b>Calcu<i>lectro</i></b><span class="grip"></span><button class="cx" aria-label="Cerrar">✕</button></div>
+    <div class="cd"><div class="ce" id="cE"></div><div class="cr" id="cR">0</div></div>
+    <div class="ck">${keys.map(([k,c])=>`<button class="${c||""}" data-k="${k}">${k}</button>`).join("")}</div>`;
+  document.body.appendChild(b);
+  b.querySelector(".cx").onclick = calcClose;
+  const h = b.querySelector(".ch"); let d = null;
+  h.addEventListener("pointerdown", e => { if(e.target.closest(".cx")) return; const r = b.getBoundingClientRect(); d = {x:e.clientX-r.left, y:e.clientY-r.top}; h.setPointerCapture(e.pointerId); });
+  h.addEventListener("pointermove", e => { if(!d) return; const W = b.offsetWidth, H = b.offsetHeight;
+    b.style.left = Math.max(4, Math.min(innerWidth-W-4, e.clientX-d.x))+"px"; b.style.top = Math.max(4, Math.min(innerHeight-H-4, e.clientY-d.y))+"px"; b.style.right = "auto"; b.style.bottom = "auto"; });
+  h.addEventListener("pointerup", () => { d = null; });
+  b.querySelectorAll(".ck button").forEach(x => x.addEventListener("click", e => { calcPress(x.dataset.k); x.classList.remove("hit"); void x.offsetWidth; x.classList.add("hit"); }));
+  document.getElementById("calcFab").classList.add("open");
+  calcShow();
+}
+function calcClose(){
+  const b = document.getElementById("calcBox"); if(!b) return;
+  b.classList.add("out"); setTimeout(()=>b.remove(), 220);
+  const f = document.getElementById("calcFab"); if(f) f.classList.remove("open");
+}
+const calcOps = "+−×÷";
+function calcPress(k){
+  let e = CALC.expr;
+  if(k==="C"){ CALC.expr=""; CALC.res=""; return calcShow(); }
+  if(k==="⌫"){ CALC.expr = e.slice(0,-1); CALC.res=""; return calcShow(); }
+  if(k==="="){
+    const r = calcEval(e);
+    if(r===null){ calcShake(); return; }
+    CALC.res = calcFmt(r); CALC.ans = r; CALC.done = true; calcShow(true); return;
+  }
+  if(CALC.done){ CALC.done = false; if(!calcOps.includes(k) && k!=="%") e = ""; else e = String(CALC.ans).replace(".",","); CALC.res = ""; }
+  if(k==="ANS"){ if(CALC.ans===null) return; k = String(+CALC.ans.toFixed(10)).replace(".",","); }
+  if(calcOps.includes(k)){
+    if(!e && k!=="−") return;
+    if(calcOps.includes(e.slice(-1))) e = e.slice(0,-1);
+  }
+  if(k===","){ const last = e.split(/[+−×÷]/).pop(); if(last.includes(",")) return; if(!last) k = "0,"; }
+  if(k==="%" && (!e || calcOps.includes(e.slice(-1)) || e.slice(-1)==="%")) return;
+  CALC.expr = e + k; CALC.res = ""; calcShow();
+}
+function calcEval(e){
+  if(!e) return null;
+  const t = e.match(/\d+(?:,\d*)?%?|[+−×÷]/g); if(!t || t.join("")!==e) return null;
+  const vals = [], ops = [];
+  const prec = o => (o==="×"||o==="÷") ? 2 : 1;
+  const apply = () => { const o = ops.pop(), b = vals.pop(), a = vals.pop(); if(a===undefined||b===undefined) throw 0;
+    vals.push(o==="+"?a+b : o==="−"?a-b : o==="×"?a*b : a/b); };
+  try {
+    let expectNum = true, neg = false;
+    for(const x of t){
+      if(expectNum){
+        if(x==="−"){ neg = !neg; continue; }
+        if(calcOps.includes(x)) return null;
+        let v = parseFloat(x.replace(",",".").replace("%","")); if(x.endsWith("%")) v /= 100;
+        vals.push(neg ? -v : v); neg = false; expectNum = false;
+      } else {
+        while(ops.length && prec(ops[ops.length-1]) >= prec(x)) apply();
+        ops.push(x); expectNum = true;
+      }
+    }
+    if(expectNum) return null;
+    while(ops.length) apply();
+  } catch(_){ return null; }
+  const r = vals[0]; return isFinite(r) ? r : null;
+}
+function calcFmt(r){
+  const v = Math.round(r*1e6)/1e6;
+  const [i, d] = String(Math.abs(v)).split(".");
+  return (v<0?"−":"") + i.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + (d ? ","+d : "");
+}
+function calcShow(eq){
+  const E = document.getElementById("cE"), Rr = document.getElementById("cR"); if(!E) return;
+  if(eq){ E.textContent = CALC.expr + " ="; Rr.textContent = CALC.res; const box = document.getElementById("calcBox"); box.classList.remove("zap"); void box.offsetWidth; box.classList.add("zap"); }
+  else { E.textContent = CALC.res ? "" : (CALC.ans!==null && !CALC.expr ? "ANS = "+calcFmt(CALC.ans) : ""); Rr.textContent = CALC.expr || "0"; }
+  Rr.classList.toggle("sm", Rr.textContent.length > 12);
+}
+function calcShake(){ const b = document.getElementById("calcBox"); if(!b) return; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); }
+
+function triFor(q){
+  const t = String(q.q), right = ((q.opts||[]).find(o=>o.ok)||{t:""}).t;
+  if(/(cos\s*(φ|phi|fi)|coseno de phi|coseno)[^.?]{0,20}\d/i.test(t)) return null;
+  const m = right.match(/^[^\d]{0,20}?[\d.,]+\s*(kVA|VA|kW|W|mA|A|V|Ω|ohm)(?![a-zA-Z])/i);
+  const tgt = m ? ({kva:"S", va:"S", kw:"P", w:"P", ma:"I", a:"I", v:"V", "ω":"R", ohm:"R"})[m[1].toLowerCase()] : null;
+  if(!tgt) return null;
+  const has = {V:/\d\s*V(?![A-Za-z])/.test(t), I:/\d\s*m?A(?![A-Za-z])/.test(t), R:/\d\s*(Ω|ohm)/i.test(t), P:/\d\s*k?W(?![A-Za-z])/.test(t), S:/\d\s*k?VA(?![A-Za-z])/.test(t)};
+  const two = keys => keys.filter(k=>k!==tgt && has[k]).length >= 2;
+  if(["V","I","R"].includes(tgt) && two(["V","I","R"]) && (has.R || tgt==="R")) return {k:"ohm", t:tgt};
+  const tri = /trifás|1,73|√3|380\s*V/i.test(t);
+  if(["S","V","I"].includes(tgt) && two(["S","V","I"])) return {k: tri?"s3":"s1", t:tgt};
+  if(["P","V","I"].includes(tgt) && two(["P","V","I"])) return {k: tri?"s3":"p", t: tri&&tgt==="P"?"S":tgt};
+  return null;
+}
+
+
+const TRIS = {
+  ohm:{n:"Triángulo de la Ley de Ohm", top:"V", bot:["I","R"], f:{V:"V = I × R", I:"I = V ÷ R", R:"R = V ÷ I"}, u:{V:"Volt", I:"Ampere", R:"Ohm"}},
+  p:{n:"Triángulo de potencia", top:"P", bot:["V","I"], f:{P:"P = V × I", V:"V = P ÷ I", I:"I = P ÷ V"}, u:{P:"Watt", V:"Volt", I:"Ampere"}},
+  s1:{n:"Triángulo de potencia aparente · monofásica", top:"S", bot:["V","I"], f:{S:"S = V × I", V:"V = S ÷ I", I:"I = S ÷ V"}, u:{S:"VA", V:"Volt", I:"Ampere"}},
+  s3:{n:"Triángulo de potencia aparente · trifásica", top:"S", bot:["V","I"], k:"1,73", f:{S:"S = 1,73 × V × I", V:"V = S ÷ (I × 1,73)", I:"I = S ÷ (V × 1,73)"}, u:{S:"VA", V:"Volt", I:"Ampere"}}
+};
+function triHTML(r){
+  const T = TRIS[r.k], tg = r.t, cov = l => l===tg ? "cov" : "";
+  const bx = [62,118];
+  return `<div class="trib" style="--d:0s">
+    <svg class="tri" viewBox="0 0 180 ${T.k?172:150}" aria-hidden="true">
+      <path class="tri-o" d="M90 8 L172 142 H8 Z"/>
+      <path class="tri-m" d="M37 92 H143"/><path class="tri-m" d="M90 92 V142"/>
+      <text x="90" y="74" class="tl ${cov(T.top)}">${T.top}</text>
+      <text x="${bx[0]}" y="128" class="tl ${cov(T.bot[0])}">${T.bot[0]}</text>
+      <text x="${bx[1]}" y="128" class="tl ${cov(T.bot[1])}">${T.bot[1]}</text>
+      ${T.k?`<text x="90" y="166" class="tk">abajo × 1,73</text>`:""}
+      <g transform="translate(${tg===T.top?90:(tg===T.bot[0]?bx[0]:bx[1])} ${tg===T.top?64:118})"><g class="fing"><circle r="17"/><text y="6">☝</text></g></g>
+    </svg>
+    <div class="trit"><small>📐 ${T.n}</small>
+      <p>Buscás <b>${tg}</b> (${T.u[tg]}): tapala con el dedo y queda</p>
+      <div class="trif">${T.f[tg]}</div>
+      <em>Arriba ÷ abajo · los de abajo se multiplican</em></div>
+  </div>`;
+}
+
 /* ---------- SUBIR DE RANKING / RANGO: misma animación que los premios ---------- */
 function rankSnap(){ try{ const r = ranking(); return {pos: r.findIndex(x=>x.n===db.current)+1, n: r.length, title: titleFor(total(me()))}; }catch(_){ return null; } }
 function rankCheck(a){
@@ -1485,6 +1694,7 @@ function rankCheck(a){
 { const f0 = finish; finish = function(){ try{ const p=me(), d=new Date().toISOString().slice(0,10); if(!p.days.includes(d)) p.days.push(d); }catch(_){} const a = rankSnap(); const r = f0.apply(this, arguments); rankCheck(a); return r; }; }
 
 /* ============ INICIO ============ */
+if(!SRV){ try{ window.parent!==window && window.parent.__authed && window.parent.__authed(); }catch(_){} }
 if(db.current && db.players[db.current] && (!SRV || (SESS && SESS.name===db.current))){ screenHome(); if(SRV) pullAndMerge().then(()=>{ if(!S && document.querySelector('.hello h2')) screenHome(); }).catch(e=>{ if(e.status===401){ setSession(null); screenLogin(); } }); }
 else screenLogin();
 
